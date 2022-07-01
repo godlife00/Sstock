@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+@import url('base.css?pp=010'); /* 기본설정 */
+@import url('layout.css?pp=019'); /* 사이트 레이아웃설정 */
+
+
+body { height: 100%; line-height: 14px; font-size: 12px; 	font-family: "malgun gothic", "맑은 고딕", "nanum gothic", "나눔 고딕", "Apple SD Gothic Neo", "apple gothic", dotum, "돋움", sans-serif;
+ color: #000; 	background-color:#e2e1e1;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p { margin: 0px; padding:0px; -webkit-text-size-adjust:none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+fieldset, img, abbr, acronym { border: 0px; }
+legend { position: absolute; *margin-left: -7px; height: 0; line-height: 0; font-size: 0; overflow: hidden; }
+address, caption, cite, code, dfn, em, var { font-style: normal; font-weight: normal; }
+ol,ul { list-style: none; }
+caption { height: 0; line-height: 0; font-size: 0; overflow: hidden; text-indent: -10000px; }
+q:before, q:after { content:''; }
+a { color: inherit; text-decoration: none; }
+hr { display: none; }
+button { padding: 0; border: 0 none; background: none; }
+label { cursor: pointer; }
+
+header, footer, article, section, aside, details, figure, figcaption, nav, hgroup { display: block; margin: 0; padding: 0; }
+audio[controls], canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+button, input, select, textarea { margin: 0; font-size: 100%; vertical-align: baseline; *vertical-align: middle; }
+button, input { line-height: normal; *overflow: visible; }
+table button, table input { *overflow: auto; }
+button, html input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
+input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+textarea { overflow: auto; vertical-align: top; }
+
+#skip_nav { width: 100%; height: 0; text-align: center; overflow: hidden; }
+#skip_nav a { color: #005aab; line-height: 20px; font-size: 14px; font-weight: bold; float: left; }
+#skip_nav a:focus, 
+#skip_nav a:hover, 
+#skip_nav a:active { position: absolute; top: 0; left: 0; width: 100%; height: 20px; text-decoration: underline; background: #fff; overflow: visible; z-index: 100; }
+
+
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-container-android .swiper-slide {
+    padding: 20px 0 60px;
+}
+.swiper-pagination {
+    background-color: #646464;    
+    padding: 20px 0;
+}
+.swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: 0 !important;
+}
+.swiper-pagination .swiper-pagination-bullet {
+    background-color: #fff;            
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #000;
+}
+
+
