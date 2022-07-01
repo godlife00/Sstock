@@ -319,9 +319,7 @@ button span,
 
 .index_section ul.list_li li a .logo_img{
 	float: left;
-	display:block;	
-	background-image: url("/itoozamenu/sic/cominfo/empty_logo.jpg");
-    background-size: 50px 50px;
+	display:block;		
 	width: 50px;
 	height: 50px;
 	margin-left: 12px;
@@ -455,9 +453,7 @@ ul.list_li2 li a{
 
 ul.list_li2 li a .logo_img{
 	float: left;
-	display:block;	
-	background-image: url("/itoozamenu/sic/cominfo/empty_logo.jpg");
-    background-size: 50px 50px;
+	display:block;		
 	width: 50px;
 	height: 50px;
 	margin-left: 12px;
@@ -518,9 +514,9 @@ ul.list_li2 li p.gap_rate {
 .list_wrap .tbl_theme tbody td{
 	padding: 8px;
 	font-size: 13px;
-	background-image: url(http://menu.itooza.com/minwise/t-sst/images/line_tbl_theme_td.png) ;	
+	/* background-image: url(http://menu.itooza.com/minwise/t-sst/images/line_tbl_theme_td.png) ;	
 	background-position: right 50%;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 	border-bottom: 1px dotted #DCDCDC;
 }
 .list_wrap .tbl_theme tbody td.a{
@@ -608,9 +604,9 @@ ul.list_li2 li p.gap_rate {
 .index_section .tbl_theme_thum tbody td{
 	padding: 15px 0;
 	font-size: 13px;
-	background-image: url(http://menu.itooza.com/minwise/t-sst/index/line_tbl_theme_td.png) ;	
+	/* background-image: url(http://menu.itooza.com/minwise/t-sst/index/line_tbl_theme_td.png) ;	
 	background-position: right 50%;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 	border-bottom: 1px dotted #DCDCDC;
 	text-align:center;
 }
@@ -877,9 +873,9 @@ ul.list_li2 li p.gap_rate {
 	border-bottom: 2px solid #D01A1D;
 	border-right: 1px dotted #D1D1D1;
 	color:#000;
-	/*background-image: url("../images/line_tbl_theme_td.png");*/
+	/* background-image: url("../images/line_tbl_theme_td.png");
     background-position: right 50%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 }
 .cont_wrap #article-body .body .tbl_ainfo01 td{
 	padding: 10px 15px;
@@ -894,9 +890,9 @@ ul.list_li2 li p.gap_rate {
 	border-bottom: 2px solid #D01A1D;
 	padding: 10px 0;
 	color:#000;
-	background-image: url("../images/line_tbl_theme_td.png");
+	/* background-image: url("../images/line_tbl_theme_td.png");
     background-position: right 50%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 }
 .cont_wrap #article-body .body .tbl_ainfo02 tbody th{
 	border-bottom: 1px solid #D1D1D1;
