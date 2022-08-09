@@ -1817,3 +1817,410 @@ ul.list_li2 li p.gap_rate {
 #ss_wrap .intro-wrap .intro-manual .m-cont img {
 	width: 95%;
 }
+
+.blind {
+	visibility: hidden;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0
+}
+
+.rcv {
+	display: inline-block;
+	position: relative;
+	float: left;
+	width: 100%;
+	text-align: left;
+	background: #FECD57 !important;
+}
+
+.rcv .input_txt {
+	float: left;
+	width: 100%;
+	height: 42px;
+	margin-top: 2px;
+	border: 1px solid #FECD57;
+	color: #999;
+	font-size: 15px;
+}
+
+.rcv .search_select+.input_txt_fcs {
+	width: calc(100% - 156px);
+}
+
+.rcv .input_txt_end {
+	color: #333
+}
+
+.rcv::after {
+	content: '';
+	dispaly: table;
+	clear: both
+}
+
+.rcv {
+	background: #fff;
+}
+
+.rcv h1.logo_title {
+	font-family: 'Lato', 'Noto Sans KR', 'notosans';
+	font-size: 1.2rem;
+	line-height: 50px;
+	font-weight: 500;
+}
+
+.rcv .input_txt_fcs {
+	background: #ffffff;
+	color: #333;
+	border: 3px solid #FECD57;
+	width: calc(100% - 46px);
+	margin-left: 0;
+	padding: 5px 40px 5px 15px;
+	box-sizing: border-box;
+}
+
+.rcv .btn_thome {
+	display: none;
+}
+
+.rcv .btn_hback {
+	display: none;
+}
+
+.sub_menu {
+	clear: both;
+}
+
+.sub_menu::after {
+	content: '';
+	dispaly: table;
+	clear: both
+}
+
+#ss_wrap {
+	clear: both;
+}
+
+#ss_wrap::after {
+	content: '';
+	dispaly: table;
+	clear: both
+}
+
+.rcv .ctg {
+	position: relative;
+	width: 100%;
+	height: 23px
+}
+
+.ly_rcv {
+	position: absolute;
+	width: 100%;
+	max-height: 389px;
+	top: 45px;
+	left: 0;
+	z-index: 999;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #D6AA41;
+	overflow: auto;
+	display: none;
+}
+
+.ly_rcv li {
+	position: relative;
+	width: 100%;
+	border-top: 1px solid #E8E9EA;
+	line-height: 14px;
+	vertical-align: top
+}
+
+.ly_rcv li input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%
+}
+
+.ly_rcv li label {
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	background: #f7f8f9;
+	color: #333;
+	cursor: pointer
+}
+
+.ly_rcv li.fst {
+	border: none
+}
+
+.ly_rcv li.over,
+.ly_rcv li.over label {}
+
+.ly_rcv .sch_clse {
+	background: #F7F7F7;
+	padding: 10px 10px;
+	box-sizing: border-box;
+	text-align: right;
+}
+
+.ly_rcv .sch_clse .clse {
+	color: #000;
+}
+
+.lst_ctt {
+	background: #fff;
+}
+
+.lst_ctt li {
+	display: inline-block;
+	width: 100%;
+}
+
+.lst_ctt li a {
+	padding: 12px 10px;
+	width: 100%;
+	box-sizing: border-box;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.lst_ctt li input {
+	height: 43px
+}
+
+.lst_ctt li label {
+	width: 166px;
+	height: 42px;
+	padding: 4px 0 0 4px
+}
+
+.lst_ctt li label:after {
+	display: block;
+	clear: both;
+	content: ''
+}
+
+.lst_ctt li .thmb {
+	float: left;
+	margin-right: 5px
+}
+
+.lst_ctt li .cont {
+	display: block;
+	float: left;
+	margin-top: 3px;
+	font-size: 11px;
+	color: #999
+}
+
+.lst_ctt li .cont strong {
+	font-weight: 400;
+	color: #333
+}
+
+.lst_ctt li .cont em {
+	font-weight: 700;
+	color: #333;
+	text-decoration: underline
+}
+
+.lst_ctt li .cont strong,
+.lst_ctt li .cont span {
+	display: block;
+	overflow: hidden;
+	width: 120px
+}
+
+.lst_ctt li .schCode {
+	color: #999;
+	width: 50px;
+	display: inline-block;
+	padding-left: 7px;
+	box-sizing: border-box;
+}
+
+.lst_ctt li .schList {
+	color: #333;
+}
+
+.lst_ctt li .schList strong {
+	color: #006DDE;
+}
+
+.rcv .searchBtn {
+	width: 46px;
+	padding: 13px;
+	box-sizing: border-box;
+}
+
+.rcv .search_select {
+	width: 110px;
+	height: 42px;
+	margin-top: 1px;
+	font-size: 15px;
+	color: #333;
+	display: inline-block;
+	border: none;
+	outline: none;
+	float: left;
+	background: #fff;
+	color: #333;
+	border: 3px solid #FECD57;
+	padding: 5px 10px;
+	box-sizing: border-box;
+}
+
+/* 검색결과 다수일때 */
+.tsst_ver .box {
+	background: #fff;
+	margin: 10px 0px 10px;
+	box-sizing: border-box;
+	padding: 10px 0;
+}
+
+.tsst_ver .box .sch_title {
+	color: #000;
+	font-size: 17px;
+	font-weight: bold;
+	padding: 0 10px 10px;
+	display: inline-block;
+	width: calc(100% - 96px);
+}
+
+.tsst_ver .box .sch_title i {
+	font-style: normal;
+	color: #f84c50;
+	font-size: 14px;
+}
+
+.tsst_ver .box .more {
+	display: none;
+	width: 60px;
+	margin-bottom: 3px;
+	vertical-align: middle;
+	text-align: right;
+	color: #bababa;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.tsst_ver .box .lst_ctt {
+	border-top: 1px solid #f3f3f3;
+	overflow: hidden;
+}
+
+.tsst_ver .box .lst_ctt li .total {
+	display: inline-block;
+	vertical-align: top;
+	color: #bababa;
+	padding: 12px 10px;
+}
+
+.tsst_ver .box .lst_ctt li .score {
+	display: inline-block;
+	vertical-align: top;
+	color: #3ca57c;
+	padding: 12px 0;
+	position: relative;
+}
+
+.tsst_ver .box .lst_ctt li .score.increase {
+	color: #fa1508;
+}
+
+.tsst_ver .box .lst_ctt li .score.decrease {
+	color: #0033ff;
+}
+
+.tsst_ver .box .lst_ctt li .score.increase .arrow {
+	position: absolute;
+	top: 12px;
+	left: 0;
+	border-color: transparent transparent #f8665d transparent;
+	border-width: 5px;
+	border-style: solid;
+	width: 0px;
+	height: 0px;
+}
+
+.tsst_ver .box .lst_ctt li .score.decrease .arrow {
+	position: absolute;
+	top: 17px;
+	left: 0;
+	border-color: #599cf7 transparent transparent transparent;
+	border-width: 5px;
+	border-style: solid;
+	width: 0px;
+	height: 0px;
+}
+
+.tsst_ver .box .lst_ctt li a {
+	display: inline-block;
+}
+
+.tsst_ver .box_top {
+	margin: 50px 0px 10px;
+}
+
+.tsst_ver .box_top .lst_ctt li.result a {
+	width: calc(100% - 87px);
+}
+
+.tsst_ver .box_mid .lst_ctt li.result a {
+	width: calc(100% - 142px);
+}
+
+.tsst_ver .box_mid .lst_ctt li .score {
+	padding: 12px 0 12px 16px;
+}
+
+input[type=text]:-ms-clear {
+	display: none;
+}
+
+.searchclear {
+	display: none;
+	position: absolute;
+	right: 69px;
+	top: -8px;
+	bottom: 0;
+	width: 10px;
+	height: 14px;
+	margin: auto;
+	font-size: 12px;
+	cursor: pointer;
+	color: #ccc;
+	background-color: #fff;
+}
+
+.searchclear img {
+	width: 20px;
+}
+
+#ss_wrap .ainfo_com {
+	margin: 0 10px 10px;
+	background-color: #EBEBEB;
+}
+#ss_wrap .outline_style.outline_style {
+	height: 280px;
+	width: 100%;
+}
+
+.outline_style .highcharts-point-up {
+	fill: #d30000;
+	stroke: #d30000;
+}
+
+.outline_style .highcharts-point-down,
+.outline_style .highcharts-point-down-bearish-up {
+	fill: #0062ff;
+	stroke: #0062ff;
+}
