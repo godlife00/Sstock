@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+</head>
+
+<body>
+
+	<body oncontextmenu="return false;">
+		<div class="wrapper" id="topwrpperID">
+			<!--헤더/gnb 영역-->
+			<div class="top-wrap">
+				<!--헤더-->
+
+				<!-- 191111 검색기능 추가 -->
+				<div class="rcv">
+					<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+					<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+					<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+						<input type="hidden" id="seCode" name="cn" value="">
+						<fieldset>
+							<input type="text" onkeydown="hitEnterKey(event);"
+								onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+								placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+								id="seName" name="sn" class="input_txt input_txt_fcs"
+								onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+								onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+							<span class="searchclear" style="display: none;"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+									alt="검색어지우기"></span>
+							<a href="javascript:SearchIt(document.sch_form, '1');"
+								onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png"
+									alt="검색" class="searchBtn"></a>
+						</fieldset>
+					</form>
+					<div style="display: none;" id="schdispDIV" class="ly_rcv">
+						<ul id="schdispUL" class="lst_ctt">
+						</ul>
+						<div class="sch_clse">
+							<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+						</div>
+					</div>
+				</div>
+				<!-- // 191111 검색기능 추가 끝 -->
+
+				<div id="menu">
+					<nav class="gnb">
+						<ul class="gnb_li">
+							<li><a href="https://m.itooza.com/minsstockbot/m_index.php" title="HOME">HOME</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" title="종목추천">종목추천</a>
+							</li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1"
+									title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2"
+									title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+							<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+									title="업종/테마">업종/테마</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<!--메뉴-->
+
+				<!--네비게이션-->
+				<div class="sub_menu">
+					<nav class="nav">
+						<h2><span class="item">삼성전자</span></h2>
+						<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
+					</nav>
+				</div>
+			</div>
+			<div id="ss_wrap">
+				<!--기사 영역-->
+				<div class="cont_wrap">
+					<div class="item_wrap">
+						<p class="desc">반도체·스마트폰·가전제품·디스플레이를 만드는 우리나라 대표 글로벌 기업</p>
+						<div class="price_wrap">
+							<p class="stock_price"> <span>61,600</span> 원</p>
+							<div class="gap_wrap">
+								<p class="gap_price increase mgr_5"><span class="en">▲ 1,100</span></p>
+								<p class="gap_rate increase"><span class="en">▲ 1.82%</span></p>
+							</div>
+							<p class="total_price">시총 : <span>3,611,718억원</span></p>
+							<p class="time">07/21 14:48 현재</p>
+						</div>
+						<!--투자매력도
+						<div class="inbox score_charm_wrap">
+							<div class="left">
+								<h1><img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/tit_score_charm.png" alt="투자 매력도" /></h1>
+								<p> <span class="txt">상위</span><span class="num increase">29.7</span><span class="per">%</span> </p>
+							</div>
+							<div class="right">
+		<img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/txt_search_comment_02.png" alt="분할 매수를 검토할 시점입니다." /> 
+							</div>
+						</div>-->
+						<!--종합분석결과-->
+						<div class="inbox score_wrap">
+							<h5 style="padding-left: 5px;"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/minwise/t-sst/cont/h4_tit_stobot.png"
+									style=" height: 36px !important;" alt="스토봇 종합 분석 결과"></h5>
+							<p class="total_score"
+								style="background:url('//menu.itooza.com/stobot/mobile/index/img_score_flag2.png') no-repeat scroll 10px 0 / 115px auto">
+								<span class="score" style="margin-left:55px;">65</span><span class="txt">점</span> </p>
+							<ul class="instrument_wrap">
+								<li>
+									<p class="tit"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/txt_score_type3.png"
+											alt="수급분석"></p>
+									<img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/score/img_score_instrument_026.png"
+										class="img_instrument" alt="점수이미지">
+									<p class="score"><span>26</span>점</p>
+								</li>
+								<li>
+									<p class="tit"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/txt_score_type2.png"
+											alt="밸류에이션"></p>
+									<img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/score/img_score_instrument_090.png"
+										class="img_instrument" alt="점수이미지">
+									<p class="score"><span>90</span>점</p>
+								</li>
+								<li>
+									<p class="tit"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/txt_score_type1.png"
+											alt="펀더멘탈"></p>
+									<img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/score/img_score_instrument_080.png"
+										class="img_instrument" alt="점수이미지">
+									<p class="score"><span>80</span>점</p>
+								</li>
+							</ul>
+							<p class="clear"
+								style="background-color: #eee; margin:10px 5px 0 ; padding: 10px 0; text-align: center;">
+								<img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/txt_search_bot_info.png"
+									alt="종합점수(100점 만점) = 기업분석 + 수급분석" style="height:18px; "></p>
+						</div>
+
+						<!-- 이미지차트   -->
+						<!-- <div class="ainfo_com" style="padding:10px;">
+				  <img src="/cmpg.png?md=0&cd=005930" alt="005930" style=" width: 100%; height:auto;" />
+			   </div> -->
+						<style>
+							.canvasjs-chart-credit {
+								display: none;
+							}
+
+							.canvasjs-chart-toolbar {
+								display: none;
+							}
+
+							.canvasjs-chart-tooltip div {
+								background: rgba(255, 255, 255, 0.9) none repeat scroll 0 0 !important;
+								border: 2px solid #dd3853 !important;
+								border-radius: 0 !important;
+								color: #333 !important;
+								font-family: "malgun gothic", "맑은 고딕", "nanum gothic", "나눔 고딕", "apple gothic", dotum, "돋움", sans-serif !important;
+								font-size: 12px !important;
+								font-weight: normal !important;
+								font-style: normal !important;
+								height: auto !important;
+								margin: 0 !important;
+								min-width: 50px !important;
+								padding: 5px !important;
+								text-align: left !important;
+								text-indent: 0 !important;
+								text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) !important;
+								white-space: nowrap !important;
+								width: auto !important;
+							}
+
+							hr {
+								display: block;
+							}
+						</style>						
+						<div id="containeroutline1_2" class="outline_style"></div>
+						<script
+							src="https://nimaqe002.commutil.kr/itoozamobile/jquery/jquery.number.js?pp=001"></script>
+						<script src="https://nimaqe002.commutil.kr/itoozamobile/chartjs/canvasjs.min.js"></script>
+						<script type="text/javascript">
+							$(document).ready(function () {
+								var chart = new CanvasJS.Chart("chartContainer",
+									{
+										/*
+										title:{
+											text: "삼성전자 주가차트와 MVP 비교",
+											enable: false
+										},
+										*/
+										toolTip: {
+											shared: "true",
+											contentFormatter: function (e) {
+												var str = "";
+												for (var i = 0; i < e.entries.length; i++) {
+													var temp = '';
+													if (e.entries[i].dataPoint.title == 'sic') {
+														temp = e.entries[i].dataSeries.name + ": <strong style='color: #cd0100;'>" + e.entries[i].dataPoint.y + "</strong> <br/>";
+													}
+													else {
+														temp = e.entries[i].dataPoint.datelab + "<hr />";
+														var nNumbF0 = $.number(e.entries[i].dataPoint.y[0]);
+														var nNumbF1 = $.number(e.entries[i].dataPoint.y[1]);
+														var nNumbF2 = $.number(e.entries[i].dataPoint.y[2]);
+														var nNumbF3 = $.number(e.entries[i].dataPoint.y[3])
+														temp += "시가 : <strong>" + nNumbF0 + "</strong>원<br/>";
+														temp += "고가 : <strong>" + nNumbF1 + "</strong>원<br/>";
+														temp += "저가 : <strong>" + nNumbF2 + "</strong>원<br/>";
+														temp += "종가 : <strong>" + nNumbF3 + "</strong>원<hr />";
+													}
+													str = str.concat(temp);
+												}
+												return (str);
+											}
+										},
+										//exportEnabled: true,
+										axisY: {
+											includeZero: false,
+											//title: "주가",
+											prefix: ""
+										},
+										axisY2: {
+											includeZero: false,
+											//title: "MVP점수",
+											interval: 10,
+											prefix: ""
+										},
+										axisX: {
+											intervalType: "month",
+										},
+										data: [
+											{
+												type: "candlestick",
+												name: "주가",
+												color: "#4d8acd",
+												risingColor: "#dd3853",
+												downColor: "#3886dd",
+												dataPoints: [{ label: CanvasJS.formatDate(new Date(2022, 3, 22), "MM-DD"), y: [67200, 67300, 66700, 67000], "datelab": "2022-04-22", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 3, 25), "MM-DD"), y: [66500, 66700, 66300, 66300], "datelab": "2022-04-25", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 3, 26), "MM-DD"), y: [66400, 66700, 66100, 66100], "datelab": "2022-04-26", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 3, 27), "MM-DD"), y: [65400, 65500, 64900, 65000], "datelab": "2022-04-27", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 3, 28), "MM-DD"), y: [65400, 65500, 64500, 64800], "datelab": "2022-04-28", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 3, 29), "MM-DD"), y: [65100, 67600, 65000, 67400], "datelab": "2022-04-29", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 2), "MM-DD"), y: [66600, 67600, 66500, 67300], "datelab": "2022-05-02", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 3), "MM-DD"), y: [67400, 68400, 67300, 67500], "datelab": "2022-05-03", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 4), "MM-DD"), y: [68000, 68400, 67500, 67900], "datelab": "2022-05-04", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 6), "MM-DD"), y: [67000, 67100, 66500, 66500], "datelab": "2022-05-06", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 9), "MM-DD"), y: [66300, 66900, 66100, 66100], "datelab": "2022-05-09", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 10), "MM-DD"), y: [65900, 66300, 65300, 65700], "datelab": "2022-05-10", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 11), "MM-DD"), y: [65500, 66300, 65200, 65700], "datelab": "2022-05-11", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 12), "MM-DD"), y: [65200, 65500, 64900, 64900], "datelab": "2022-05-12", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 13), "MM-DD"), y: [65300, 66700, 65200, 66500], "datelab": "2022-05-13", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 16), "MM-DD"), y: [67100, 67400, 66100, 66300], "datelab": "2022-05-16", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 17), "MM-DD"), y: [66600, 67900, 66600, 67600], "datelab": "2022-05-17", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 18), "MM-DD"), y: [68300, 68700, 67600, 68100], "datelab": "2022-05-18", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 19), "MM-DD"), y: [66500, 67600, 66500, 67500], "datelab": "2022-05-19", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 20), "MM-DD"), y: [67800, 68400, 67700, 68000], "datelab": "2022-05-20", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 23), "MM-DD"), y: [68800, 68800, 67600, 67900], "datelab": "2022-05-23", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 24), "MM-DD"), y: [67500, 67700, 66500, 66500], "datelab": "2022-05-24", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 26), "MM-DD"), y: [66300, 67200, 65500, 65900], "datelab": "2022-05-26", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 27), "MM-DD"), y: [66700, 66900, 66200, 66500], "datelab": "2022-05-27", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 4, 30), "MM-DD"), y: [67500, 67800, 66900, 67700], "datelab": "2022-05-30", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 4, 31), "MM-DD"), y: [67500, 67500, 66700, 67400], "datelab": "2022-05-31", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 2), "MM-DD"), y: [66600, 67000, 66400, 66700], "datelab": "2022-06-02", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 5, 3), "MM-DD"), y: [67200, 67300, 66800, 66800], "datelab": "2022-06-03", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 7), "MM-DD"), y: [66200, 66400, 65400, 65500], "datelab": "2022-06-07", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 8), "MM-DD"), y: [65400, 65700, 65300, 65300], "datelab": "2022-06-08", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 9), "MM-DD"), y: [65100, 65200, 64500, 65200], "datelab": "2022-06-09", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 5, 10), "MM-DD"), y: [64000, 64400, 63800, 63800], "datelab": "2022-06-10", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 13), "MM-DD"), y: [62400, 62800, 62100, 62100], "datelab": "2022-06-13", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 14), "MM-DD"), y: [61200, 62200, 61100, 61900], "datelab": "2022-06-14", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 5, 15), "MM-DD"), y: [61300, 61500, 60200, 60700], "datelab": "2022-06-15", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 16), "MM-DD"), y: [61300, 61800, 60500, 60900], "datelab": "2022-06-16", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 17), "MM-DD"), y: [59400, 59900, 59400, 59800], "datelab": "2022-06-17", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 5, 20), "MM-DD"), y: [59800, 59900, 58100, 58700], "datelab": "2022-06-20", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 21), "MM-DD"), y: [58700, 59200, 58200, 58500], "datelab": "2022-06-21", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 22), "MM-DD"), y: [59000, 59100, 57600, 57600], "datelab": "2022-06-22", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 23), "MM-DD"), y: [57700, 58000, 56800, 57400], "datelab": "2022-06-23", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 24), "MM-DD"), y: [57900, 59100, 57700, 58400], "datelab": "2022-06-24", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 5, 27), "MM-DD"), y: [59000, 59900, 58300, 58800], "datelab": "2022-06-27", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 28), "MM-DD"), y: [59200, 59500, 58700, 59400], "datelab": "2022-06-28", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 5, 29), "MM-DD"), y: [58500, 58800, 58000, 58000], "datelab": "2022-06-29", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 5, 30), "MM-DD"), y: [57200, 57600, 57000, 57000], "datelab": "2022-06-30", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 1), "MM-DD"), y: [56900, 57500, 55900, 56200], "datelab": "2022-07-01", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 4), "MM-DD"), y: [56100, 57400, 55700, 57100], "datelab": "2022-07-04", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 6, 5), "MM-DD"), y: [57600, 58200, 57200, 57200], "datelab": "2022-07-05", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 6), "MM-DD"), y: [57300, 57300, 56400, 56400], "datelab": "2022-07-06", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 7), "MM-DD"), y: [56400, 58700, 56300, 58200], "datelab": "2022-07-07", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 6, 8), "MM-DD"), y: [58600, 59300, 58200, 58700], "datelab": "2022-07-08", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 6, 11), "MM-DD"), y: [59300, 59600, 58700, 58800], "datelab": "2022-07-11", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 12), "MM-DD"), y: [58600, 58700, 58100, 58100], "datelab": "2022-07-12", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 13), "MM-DD"), y: [58300, 58600, 58000, 58000], "datelab": "2022-07-13", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 14), "MM-DD"), y: [57500, 58200, 57400, 57500], "datelab": "2022-07-14", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 15), "MM-DD"), y: [58400, 60000, 58100, 60000], "datelab": "2022-07-15", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 6, 18), "MM-DD"), y: [60600, 62000, 60500, 61900], "datelab": "2022-07-18", "color": "#ff0100" }, { label: CanvasJS.formatDate(new Date(2022, 6, 19), "MM-DD"), y: [61400, 61500, 60200, 60900], "datelab": "2022-07-19", "color": "#0048ff" }, { label: CanvasJS.formatDate(new Date(2022, 6, 20), "MM-DD"), y: [61800, 62100, 60500, 60500], "datelab": "2022-07-20", "color": "#0048ff" }]
+											}
+											, {
+												type: "line",
+												name: "MVP점수",
+												color: "#5d5d5d",
+												markerType: "circle",
+												axisYType: "secondary",
+												dataPoints: [{ "title": "sic", label: CanvasJS.formatDate(new Date(2022, 3, 22), "MM-DD"), y: 53 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 3, 25), "MM-DD"), y: 53 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 3, 26), "MM-DD"), y: 58 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 3, 27), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 3, 28), "MM-DD"), y: 56 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 3, 29), "MM-DD"), y: 67 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 2), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 3), "MM-DD"), y: 60 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 4), "MM-DD"), y: 58 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 6), "MM-DD"), y: 58 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 9), "MM-DD"), y: 53 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 10), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 11), "MM-DD"), y: 54 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 12), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 13), "MM-DD"), y: 63 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 16), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 17), "MM-DD"), y: 70 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 18), "MM-DD"), y: 65 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 19), "MM-DD"), y: 68 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 20), "MM-DD"), y: 71 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 23), "MM-DD"), y: 67 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 24), "MM-DD"), y: 58 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 26), "MM-DD"), y: 58 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 27), "MM-DD"), y: 64 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 30), "MM-DD"), y: 70 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 4, 31), "MM-DD"), y: 62 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 2), "MM-DD"), y: 56 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 3), "MM-DD"), y: 63 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 7), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 8), "MM-DD"), y: 56 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 9), "MM-DD"), y: 61 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 10), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 13), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 14), "MM-DD"), y: 61 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 15), "MM-DD"), y: 61 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 16), "MM-DD"), y: 57 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 17), "MM-DD"), y: 66 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 20), "MM-DD"), y: 67 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 21), "MM-DD"), y: 67 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 22), "MM-DD"), y: 63 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 23), "MM-DD"), y: 69 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 24), "MM-DD"), y: 69 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 27), "MM-DD"), y: 66 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 28), "MM-DD"), y: 65 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 29), "MM-DD"), y: 61 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 5, 30), "MM-DD"), y: 56 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 1), "MM-DD"), y: 62 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 4), "MM-DD"), y: 64 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 5), "MM-DD"), y: 63 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 6), "MM-DD"), y: 63 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 7), "MM-DD"), y: 74 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 8), "MM-DD"), y: 67 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 11), "MM-DD"), y: 66 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 12), "MM-DD"), y: 69 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 13), "MM-DD"), y: 74 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 14), "MM-DD"), y: 69 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 15), "MM-DD"), y: 71 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 18), "MM-DD"), y: 66 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 19), "MM-DD"), y: 61 }, { "title": "sic", label: CanvasJS.formatDate(new Date(2022, 6, 20), "MM-DD"), y: 65 }]
+											}
+										]
+									});
+
+								function assignRisingColorToDataPoints(chart) {
+									for (var i = 0; i < chart.options.data[0].dataPoints.length; i++) {
+										if (chart.options.data[0].dataPoints[i].y[3] > chart.options.data[0].dataPoints[i].y[0])
+											chart.options.data[0].dataPoints[i].color = chart.options.data[0].risingColor;
+										else
+											chart.options.data[0].dataPoints[i].color = chart.options.data[0].downColor;
+									}
+								}
+								assignRisingColorToDataPoints(chart);
+								chart.render();
+
+							});
+							$(document).on("click", ".canvasjs-chart-tooltip", function () {
+								$(this).hide();
+							});
+						</script>
+
+						<div class="ss_wrap" style="background-color: #E8E8E8; padding-top:16px;">
+							<div class="sch_ss_wrap">
+								<div class="box">
+									<h4><span class="name">삼성전자</span>종목분석</h4>
+									<div class="analysis"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/sch_analysis_empty.png"
+											alt="6개월내 종목추천 내역이 없습니다." style="width: 160px ; height:auto;"></div>
+								</div>
+								<div class="box" style="overflow:hidden; float:left;">
+									<h4>오늘의 추천주</h4>
+									<div class="analysis"><a
+											href="https://m.itooza.com/minsstockbot/ss_view.php?scv=SVRPT1pCQVNFPSZzYz0wMjMxNjAmc3Q9MiZzZHQ9MjAyMjA3MjExNDQ4MTY%3D">
+											<p class="logo"><img alt="삼성전자"
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A023160.jpg">
+											</p>
+											<p class="date">07/21</p>
+											<p style="height: 49px;overflow:hidden;" class="tit">태광, 수익성 상승+저평가+연기금 매수
+											</p>
+											<ul class="analysis_type">
+												<li class="li01 ">우량주</li>
+												<li class="li02 ">성장주</li>
+												<li class="li03  on">턴</li>
+											</ul>
+											<p class="target"><span>13,600</span>원</p>
+										</a></div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="head">
+							<h3>주요 투자지표</h3>
+						</div>
+						<ul class="total_info">
+							<li>
+								<p class="title">EPS<span>주당순이익</span></p>
+								<p class="data"><span>6,372</span>원</p>
+							</li>
+							<li>
+								<p class="title">BPS<span>주당순자산</span></p>
+								<p class="data"><span>45,106</span>원</p>
+							</li>
+							<li>
+								<p class="title">시가배당률<span></span></p>
+								<p class="data"><span>1.84%</span></p>
+							</li>
+							<li>
+								<p class="title">PER<br><span>주가수익배수</span></p>
+								<p class="data"><span>8.34</span>배</p>
+							</li>
+							<li>
+								<p class="title">PBR<br><span>주가순자산배수</span></p>
+								<p class="data"><span>1.18</span>배</p>
+							</li>
+							<li>
+								<p class="title">ROE<br><span>자기자본이익률</span></p>
+								<p class="data"><span>14.13</span>%</p>
+							</li>
+						</ul>
+					</div>
+					<div id="article-body">
+						<div class="ainfo_com">
+							<div class="head">
+								<h3>최근 분석 보고서</h3>
+							</div>
+							<ul class="li_article">
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022070708421219010"><span
+											class="tit">삼성전자, 2Q 연결 영업이익 14조..기대치 ...</span><span class="date">07/07
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022051618482244860"><span
+											class="tit">삼성전자, 1Q 영업이익 14조1214억원.. PER...</span><span class="date">05/16
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022042808395317407"><span
+											class="tit">삼성전자, 1Q 영업이익 14.12조원...3분기 ...</span><span class="date">04/28
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022042809234888959"><span
+											class="tit">삼성전자, 주당 361원 분기 배당...시가배당...</span><span class="date">04/28
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022041803373824077"><span
+											class="tit">[투자 키워드] ‘자사주 매입’이 주가를 끌...</span><span class="date">04/18
+										</span></a></li>
+							</ul>
+						</div>
+						<!---->
+						<!-- 투자 체크 포인트(기업개요) -->
+						<div class="ainfo_com" style="margin: 0 auto 20px auto;">
+							<div class="head">
+								<h3><span class="sname">[삼성전자]</span> 투자 체크 포인트</h3>
+							</div>
+							<div class="body">
+								<table border="0" class="tbl_ainfo01">
+									<colgroup>
+										<col width="25%">
+										<col width="*">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row">기업개요</th>
+											<td>반도체·스마트폰·가전제품·디스플레이를 만드는 우리나라 대표 글로벌 기업</td>
+										</tr>
+										<tr>
+											<th scope="row">사업환경</th>
+											<td>가정 내 종합 엔터테인먼트 센터 기기로써 스마트TV시장이 확대됨 <br>모바일 결제서비스을 비롯한 사물인터넷 분야에 대한 투자가
+												지속적으로 이어질 전망<br>10인치 이하 중소형 디스플레이 시장에서 OLED의 채용이 급속히 증가함</td>
+										</tr>
+										<tr>
+											<th scope="row">경기변동</th>
+											<td>경기에 따라 실적 영향을 받음</td>
+										</tr>
+										<tr>
+											<th scope="row">주요제품</th>
+											<td>IM 39.07%<br>반도체 33.68%<br>CE 19.97%<br>DP 11.34%<br>Harman 3.59%<br>*
+												수치는 매출 비중</td>
+										</tr>
+										<tr>
+											<th scope="row">원재료</th>
+											<td>CE<br>- 디스플레이 패널 (20.5%) : 화상 신호기<br>IM<br>- Camera Module (13.8%) :
+												휴대폰용 카메라. 삼성전기 등에서 구입<br>- Base Band Chip (8.2%) :CPU<br>- 모바일용 디스플레이 패널
+												(6.3%)<br>DS<br>- Window (7.6%) : 강화유리<br>- POL (6.6%) : 편광판<br>- FPCA
+												(9.3%) : 구동회로<br>- Wafer (7%) : 반도체원판<br>Harma<br>- 메모리 (20.6%) : 자동차용
+												제품<br>- 시스템온칩 (19.9%) : 자동차용 제품<br>-기타(59.4%) <br>* 괄호 안은 매입 비중</td>
+										</tr>
+										<tr>
+											<th scope="row">실적변수</th>
+											<td>보급형 스마트폰 시장에 적극적으로 대응하여 시장지배력을 높여나갈 계획<br>서버 등 정보 저장 기기의 고용량화로 메모리 시장의
+												지속적인 성장 전망<br>환율 상승시 수혜</td>
+										</tr>
+										<tr>
+											<th scope="row">리스크</th>
+											<td>재무건전성 ★★★★★<br>- 부채비율 39.34%<br>- 유동비율 256.86%<br>- 당좌비율 202.26%<br>-
+												이자보상배율 94.63%<br>- 금융비용부담률 0.19%<br>- 자본유보율 34,110.56%</td>
+										</tr>
+										<tr>
+											<th scope="row">신규사업</th>
+											<td></td>
+										</tr>
+									</tbody>
+									<!-- 재무분석 항목은 투자지표로 따로 보여줌 -->
+								</table>
+								<div class="update">
+									<p>삼성전자의 정보는 <strong>2022년 06월 30일</strong>에 최종 업데이트 됐습니다.</p>
+									<p class="pdt_10">(자료 : 아이투자 www.itooza.com)</p>
+								</div>
+							</div>
+						</div>
+						<!-- // 투자 체크 포인트(기업개요) -->
+						<!-- 한 눈에 보는 투자지표 -->
+						<div class="ainfo_invest" style="margin:20px auto;">
+							<div class="head">
+								<h3><span class="sname">[삼성전자]</span> 한 눈에 보는 투자지표</h3>
+							</div>
+							<div class="body">
+								<table border="0" class="tbl_ainfo02">
+									<colgroup>
+										<col width="25%">
+										<col width="25%">
+										<col width="25%">
+										<col width="25%">
+									</colgroup>
+									<caption style="font-size:11px;color:#666;margin:0 0 1px;text-align:right;">
+										(단위: 억원)
+									</caption>
+									<thead>
+										<tr>
+											<th scope="col">손익계산서</th>
+											<th scope="col">2022.3</th>
+											<th scope="col">2021.12</th>
+											<th scope="col" class="end">2020.12</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">매출액</th>
+											<td>567,243</td>
+											<td>1,997,447</td>
+											<td class="end">1,663,112</td>
+										</tr>
+										<tr>
+											<th scope="row">영업이익</th>
+											<td>91,518</td>
+											<td>319,932</td>
+											<td class="end">205,190</td>
+										</tr>
+										<tr>
+											<th scope="row">영업이익률<span>(%)</span></th>
+											<td>16.1%</td>
+											<td>16%</td>
+											<td class="end">12.3%</td>
+										</tr>
+										<tr>
+											<th scope="row">순이익<span>(연결지배)</span></th>
+											<td>111,291</td>
+											<td>392,438</td>
+											<td class="end">260,908</td>
+										</tr>
+										<tr>
+											<th scope="row">순이익률<span>(%)</span></th>
+											<td>19.6%</td>
+											<td>19.6%</td>
+											<td class="end">15.7%</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="update">
+									<p>(자료 : 매출액,영업이익은 K-IFRS 개별, 순이익은 K-IFRS 연결지배)</p>
+								</div>
+							</div>
+						</div>
+						<!-- 한 눈에 보는 투자지표 -->
+					</div>
+				</div>
+			</div>
+			<div style="margin:0;padding:0;">
+				<iframe src="https://m.itooza.com/minsstockbot/foot_iframe.php" scrolling="no" frameborder="0"
+					style="border:none; overflow:hidden; width:100%; height:auto;min-height:270px;"
+					allowtransparency="true"></iframe>
+			</div>
+			<iframe src="https://super.stockn.kr/stock/itooza/auto_size?aaa=1&amp;height=3102&amp;width=425"
+				id="autoIframeHeightID" scrolling="no" frameborder="0" style="display:none;" width="1" height="1"
+				allowtransparency="true"></iframe>
+			<script language="javascript">
+				var strIframeURL = "https://super.stockn.kr/stock/itooza/auto_size";
+				function fnAutoResize() {
+					var nWidth = $(window).width();
+					var objIFrmaeBody = $('#topwrpperID');
+					var nHeight = objIFrmaeBody.height(); //$('#wrap').height();
+					var strUrl = strIframeURL + '?aaa=1&height=' + nHeight + '&width=' + nWidth;
+
+					$("#autoIframeHeightID").attr("src", strUrl);
+				}
+				function fnAutoWidthResizeOne() {
+					/*
+					var nWidth = $(window).width();
+					var nObjOneList = $(".li_wrap");
+					if( $(".li_wrap").length > 0 )
+					{
+						nObjOneList.css("width", nWidth + "px");
+					}
+					*/
+				}
+				$(document).ready(function () {
+					fnAutoResize();
+					setTimeout("fnAutoResize()", 1000);
+					fnAutoWidthResizeOne();
+				});
+				fnAutoWidthResizeOne();
+			</script>
+		</div>
+
+		<a href="#" id="toTop" style="display: none;"><span id="toTopHover"></span>To Top</a><span
+			style="position: absolute; left: 0px; top: -20000px; padding: 0px; margin: 0px; border: none; white-space: pre; line-height: normal; font-family: Calibri, Optima, Candara, Verdana, Geneva, sans-serif; font-size: 11px; font-weight: normal; display: none;">Mpgyi</span>
+	</body>
+</body>
+
+</html>

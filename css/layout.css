@@ -2209,9 +2209,13 @@ input[type=text]:-ms-clear {
 	margin: 0 10px 10px;
 	background-color: #EBEBEB;
 }
-#ss_wrap .outline_style.outline_style {
+#ss_wrap .outline_style {
 	height: 280px;
 	width: 100%;
+}
+
+#ss_wrap .outline_style .highcharts-title {	
+	font-weight: bold !important;
 }
 
 .outline_style .highcharts-point-up {

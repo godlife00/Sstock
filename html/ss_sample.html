@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+</head>
+
+<body oncontextmenu="return false;">
+	<div class="wrapper" id="topwrpperID">
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+			<!--헤더-->
+
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="https://m.itooza.com/minsstockbot/m_index.php" title="HOME">HOME</a></li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" class="on"
+								title="종목추천">종목추천</a></li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1" title="슈퍼스탁 1호">슈퍼스탁1호</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2" title="슈퍼스탁 2호">슈퍼스탁2호</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+								title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<!--메뉴-->
+
+			<!--2depth 메뉴-->
+			<div class="sub_menu">
+				<nav class="nav">
+					<h2><span class="item">적중! 수익실현 종목</span></h2>
+					<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
+				</nav>
+			</div>
+		</div>
+		<div id="ss_wrap" class="tsst_ver">
+			<div class="cont_top_wrap">
+				<div style="position: relative;">
+					<div class="item">
+						<p class="logo"><a href="https://m.itooza.com/minsstockbot/search_itz.php?sn=004690"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A004690.jpg" alt="회사로고"
+									onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;"></a>
+						</p>
+						<p class="name" style="width: 150px;"><a
+								href="https://m.itooza.com/minsstockbot/search_itz.php?sn=004690">삼천리</a></p>
+					</div>
+					<p class="desc">인천·경기도 지역 도시가스 공급업체</p>
+				</div>
+				<div class="tbl_wrap02">
+					<table cellpadding="0" cellspacing="0" class="tbl_target">
+						<colgroup>
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="th01"><img
+										src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/add/txt_target_tbl_01.png"
+										class="pdl_10" alt="추천가"></th>
+								<th class="th02"><img
+										src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/add/txt_target_tbl_02.png"
+										class="pdl_10" alt="현재가"></th>
+								<th class="th03"><img
+										src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/add/txt_target_tbl_03.png"
+										class="pdl_10" alt="수익률"></th>
+								<th class="th04"><img
+										src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/add/txt_target_tbl_04.png"
+										class="pdl_15" alt="보유기간"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="td01"><span class=" price2">94,500</span><span class="mgr_5">원</span></td>
+								<td class="td02"><span class=" price2">108,000</span><span class="mgr_5">원</span></td>
+								<td class="td03 txt"><span class="f22 increase">96.0</span><span>%</span></td>
+								<td class="td04 txt nonebg"><span class="f16">111</span>일</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="cont_bottom_wrap">
+				<div class="group1 dpb" style="min-height: 0 !important;">
+
+					<!--타이틀-->
+					<div class="inbox">
+						<div class="ainfo_com" style="padding:10px;">
+							<div id="containeroutline1_1" class="outline_style"></div>
+						</div>
+						<div class="tit_wrap">
+							삼천리, 소매 요금 인상으로 실적 개선 </div>
+					</div>
+					<!--투자포인트-->
+					<div class="inbox">
+						<h5><img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/h4_tit_06.png"
+								alt="추천 당시 투자 포인트"></h5>
+						<ul class="investment_point">
+							<li>인천·경기도 지역 도시가스 공급업체</li>
+							<li>전력도매가(SMP) 꾸준히 상승</li>
+							<li>4분기 예상 매출액 1조1114억(전년비 +36%)</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<style>
+			/* PAGER */
+			#ss_wrap .cont_bottom_wrap nav {
+				background-color: #646464;
+				padding-top: 20px;
+				height: 30px;
+				text-align: center;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav ul {
+				width: 60px;
+				margin: 0 auto;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav li {
+				display: block;
+				float: left;
+				width: 15px;
+				height: 15px;
+				background: url(https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/bullet_slide_0.png) no-repeat 0 0 / 15px auto;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav li a {
+				display: block;
+				width: 15px;
+				height: 15px;
+				margin-right: 5px;
+				font-size: 0;
+				text-indent: -5000px;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav li.on {
+				background: url(https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/bullet_slide_1.png) no-repeat 0 0 / 15px auto;
+			}
+
+			.bx-wrapper {
+				background-color: #fff;
+			}
+
+			.bx-wrapper .bx-viewport {
+				padding-top: 0;
+			}
+
+			.bx-wrapper .bx-pager {
+				background-color: #646464;
+				padding-top: 20px;
+				height: 30px;
+				text-align: center;
+			}
+
+			.bx-wrapper .bx-pager .bx-pager-item,
+			.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+				display: inline-block;
+			}
+
+			.bx-wrapper .bx-pager.bx-default-pager a {
+				background: #000;
+				text-indent: -9999px;
+				display: block;
+				width: 10px;
+				height: 10px;
+				margin: 0 4px;
+				outline: 0;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+			}
+
+			.bx-wrapper .bx-pager.bx-default-pager a:hover,
+			.bx-wrapper .bx-pager.bx-default-pager a.active {
+				background: #fff;
+			}
+
+			.bx-wrapper .bx-prev {
+				display: none;
+			}
+
+			.bx-wrapper .bx-next {
+				display: none;
+			}
+
+			.bx-wrapper .bx-controls-direction a {
+				position: absolute;
+				top: 50%;
+				margin-top: -50px;
+				outline: 0;
+				width: 40px;
+				height: 60px;
+				text-indent: -9999px;
+				z-index: 99;
+				background-size: 120px
+			}
+
+			.bx-wrapper .bx-controls-direction a.disabled {}
+		</style>
+		<script src="https://nimaqe002.commutil.kr/itoozamobile/bxslider/jquery.bxslider.js"></script>
+		<script type="text/javascript">
+			$('.bxslider1').bxSlider({
+				infiniteLoop: true,
+				hideControlOnEnd: true,
+				controls: false,
+				pager: true
+			});
+		</script>
+		<div style="margin:0;padding:0;">
+			<iframe src="https://m.itooza.com/minsstockbot/foot_iframe.php" scrolling="no" frameborder="0"
+				style="border:none; overflow:hidden; width:100%; height:auto;min-height:270px;"
+				allowtransparency="true"></iframe>
+		</div>
+		<iframe src="https://super.stockn.kr/stock/itooza/auto_size?aaa=1&amp;height=1162&amp;width=425"
+			id="autoIframeHeightID" scrolling="no" frameborder="0" style="display:none;" width="1" height="1"
+			allowtransparency="true"></iframe>
+		<script language="javascript">
+			var strIframeURL = "https://super.stockn.kr/stock/itooza/auto_size";
+			function fnAutoResize() {
+				var nWidth = $(window).width();
+				var objIFrmaeBody = $('#topwrpperID');
+				var nHeight = objIFrmaeBody.height(); //$('#wrap').height();
+				var strUrl = strIframeURL + '?aaa=1&height=' + nHeight + '&width=' + nWidth;
+
+				$("#autoIframeHeightID").attr("src", strUrl);
+			}
+			function fnAutoWidthResizeOne() {
+				/*
+				var nWidth = $(window).width();
+				var nObjOneList = $(".li_wrap");
+				if( $(".li_wrap").length > 0 )
+				{
+					nObjOneList.css("width", nWidth + "px");
+				}
+				*/
+			}
+			$(document).ready(function () {
+				fnAutoResize();
+				setTimeout("fnAutoResize()", 1000);
+				fnAutoWidthResizeOne();
+			});
+			fnAutoWidthResizeOne();
+		</script>
+	</div>
+
+
+	<a href="#" id="toTop" style="display: block;"><span id="toTopHover"></span>To Top</a>
+</body>
+
+</html>
