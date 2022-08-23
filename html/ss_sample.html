@@ -32,11 +32,26 @@
 	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
 	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
 	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
 	<!-- js -->
 	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper('.maingameSwiper', {
+				autoHeight: true,
+				slidesPerView: "auto",
+				pagination: {
+					el: ".swiper-pagination",
+				},
+			});
+		});
+	</script>
 </head>
 
 <body oncontextmenu="return false;">

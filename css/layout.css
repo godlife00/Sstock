@@ -2213,18 +2213,32 @@ input[type=text]:-ms-clear {
 	height: 280px;
 	width: 100%;
 }
-
 #ss_wrap .outline_style .highcharts-title {	
 	font-weight: bold !important;
 }
 
-.outline_style .highcharts-point-up {
+#ss_wrap .outline_style .highcharts-point-up {
 	fill: #d30000;
 	stroke: #d30000;
 }
 
-.outline_style .highcharts-point-down,
-.outline_style .highcharts-point-down-bearish-up {
+#ss_wrap .outline_style .highcharts-point-down,
+#ss_wrap .outline_style .highcharts-point-down-bearish-up {
 	fill: #0062ff;
 	stroke: #0062ff;
+}
+
+#ss_wrap .outline_styleSL {
+	height: 280px;
+	width: 100%;
+}
+#ss_wrap .outline_styleSL .highcharts-title {	
+	font-weight: bold !important;
+	font-size: 14px !important;	
+	color: #2a3b83 !important;    
+    fill: #2a3b83 !important
+}
+#ss_wrap .outline_styleSL .highcharts-title tspan {	
+	color: #333 !important;    
+    fill: #333 !important
 }

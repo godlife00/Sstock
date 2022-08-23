@@ -201,24 +201,13 @@ $(document).ready(function () {
             },
 
             tooltip: {
-                followTouchMove: false,
-                useHTML: true,
-                backgroundColor: '#1f3143',
-                borderWidth: 0,
-                borderRadius: 10,
-                style: {
-                    fontWeight: 'normal',
-                    fontSize: '12px',
-                    color: '#fff',
-                    fontFamily: "'Spoqa Han Sans Neo', 'Malgun gothic'"
-                },
-                shadow: false,
-                split: false,
-                shared: true,
-                // rosshairs: true,
+                shared: true,                
+                useHTML: true,               
+                borderColor: "#e41c39",                
                 xDateFormat: '%Y.%m.%d',
-                
             },
+
+            colors: ['#333'],
             
             xAxis: [{                
                 type: 'datetime',                
@@ -243,8 +232,7 @@ $(document).ready(function () {
                         color: '#333',
                         fontSize : 13,
                     }
-                },
-                opposite: true
+                },                
             }, {// 2
                 title: {
                     text: null
@@ -255,23 +243,36 @@ $(document).ready(function () {
                         color: '#333',
                         fontSize : 13,
                     }
-                },                
+                },        
+                opposite: true        
             }],
 
             series: [{
                 type: 'candlestick',
                 name: '일봉',                
-                data: value,                
-                showInLegend: false,
-                yAxis: 1,                
+                data: value,                                
+                yAxis: 1,                            
+                tooltip: {                    
+                    useHTML: true,
+                    valueSuffix: '원',
+                    headerFormat: '<span style="display: block; border-bottom: 1px solid #c8c8c8; padding-bottom: 3px; margin-bottom: 5px;"><b>{point.key} </b></span>',
+                    pointFormat: '<b>시가: {point.open}<br/> 고가: {point.high}<br/> 저가: {point.low}<br/> 종가: {point.close}<br/></b>',                    
+                },
+                
             }, {
                 type: 'line',
                 name: 'MVP 점수',
-                data: valueMVP,                 
+                data: valueMVP,          
+                tooltip: {                    
+                    useHTML: true,
+                    valueSuffix: '원',                    
+                    headerFormat: '',
+                    pointFormat: '<b> <span style="display: block; padding: 5px 0; border-top: 1px solid #c8c8c8;"> {series.name} : <span style="color: #e41c39;"> {point.y} </span></b></span>',                         
+                }       
             }],          
             
             plotOptions: {
-                series: {
+                series: {   
                     marker: {
                         enabled: false,
                         states: {
@@ -280,6 +281,141 @@ $(document).ready(function () {
                             }
                         }
                     }
+                },
+            },
+
+        });
+    }
+
+    // 검색결과 일봉 + 선3개 차트
+    if ($('#containeroutline1_3').length) {
+        var valueColumn = [
+            [1597066200000, 124.73], [1597152600000, 131.38], [1597239000000, 124.01], [1597325400000, 126.01], [1597411800000, 127.91], [1597671000000, 126.61], [1597757400000, 125.56], [1597843800000, 137.71],
+        ];                
+        var value5 = [
+            [1597066200000, 133.73], [1597152600000, 120.38], [1597239000000, 125.01], [1597325400000, 127.01], [1597411800000, 126.91], [1597671000000, 125.61], [1597757400000, 125.56], [1597843800000, 126.71],
+        ];
+        var value20 = [
+            [1597066200000, 133.73], [1597152600000, 120.38], [1597239000000, 125.01], [1597325400000, 127.01], [1597411800000, 126.91], [1597671000000, 125.61], [1597757400000, 125.56], [1597843800000, 126.71],
+        ];
+
+        Highcharts.chart('containeroutline1_3', {
+            chart: {                
+                // borderColor: '#333',
+                // borderWidth: 1,
+            },
+            // 하단 네비게이션 제거
+            navigator: {
+                enabled: false
+            },
+
+            // 스크롤바 제거
+            scrollbar: {
+                enabled: false
+            },
+
+            // 기간범위선택 
+            rangeSelector: {
+                enabled: false,      
+            },
+
+            title: {
+                text: '매출액&영업이악&순이익<br><span>삼성물산(028260)</span>',
+            },
+
+            credits: {
+                enabled: false
+            },
+
+            credits: {
+                enabled: false
+            },
+
+            lang: {
+                noData: "해당 데이터가 없습니다",
+            },
+
+            legend: {                
+                align: 'left',                
+            },
+
+            exporting: {
+                enabled: false
+            },
+
+            tooltip: {       
+                enabled: false,    
+            },
+
+            colors: ['#dc3912', '#54a40d', '#ff9602'],
+
+            xAxis: [{                
+                type: 'datetime',                
+                labels: {
+                    formatter: function () {
+                        return Highcharts.dateFormat('%m.%d', this.value);
+                    },
+                    style: {
+                        color: '#333',
+                        fontSize : 13,
+                    },
+                    step: 1
+                },                
+            }],
+
+            yAxis: [{// 1
+                title: {
+                    text: null
+                },                
+                labels: {
+                    format: '{value}',                                        
+                    style: {
+                        color: '#333',
+                        fontSize : 13,
+                    }
+                },
+                opposite: true
+            }, {// 2
+                title: {
+                    text: null
+                },
+                gridLineWidth: 0,
+                labels: {
+                    format: '{value}',                    
+                    style: {
+                        color: '#333',
+                        fontSize : 13,
+                    }
+                },
+                
+            }],
+
+            series: [{
+                type: 'column',
+                name: '매출액(좌)',                
+                data: valueColumn,                
+                // showInLegend: false,
+                yAxis: 1,                
+            }, {
+                type: 'line',
+                name: '영업이익(우)',
+                data: value5,                 
+            },{
+                type: 'line',
+                name: '순이익(우)',
+                data: value20, 
+            }],          
+            
+            plotOptions: {
+                series: {
+                    // marker: {
+                    //     enabled: false,
+                    //     states: {
+                    //         hover: {
+                    //             enabled: false
+                    //         }
+                    //     }
+                    // }
                 },
             },
 
