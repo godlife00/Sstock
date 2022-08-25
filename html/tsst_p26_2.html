@@ -56,12 +56,37 @@
 		<div class="top-wrap">
 
 			<!--헤더-->
-			<header id="header">
-				<div class="top">
-					<h1><a href="http://m.itooza.com"><img src="../images/common/logo_tsst.png" alt="T슈퍼스탁"></a></h1>
-					<button class="btn_thome" type="button" onClick=""> <span>T인증 바로가기</span> </button>
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
 				</div>
-			</header>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
 
 			<!--메뉴-->
 			<div id="menu">
@@ -282,21 +307,11 @@
 			</div>
 		</div>
 		<!--푸터-->
-		<footer id="footer">
-			<div style="background: #fff; padding: 15px 0;">
-				<p style=" width: 290px; margin: 0 auto; color: #000; text-align: center; line-height: 18px;">T슈퍼스탁이
-					제공하는 정보는 투자 참고사항 일뿐,<br />
-					투자권유 또는 주식거래를 목적으로 하지 않습니다.<br />
-					투자판단의 최종 책임은 이용자에게 있습니다.</p>
-			</div>
-			<div class="wrap">
-				<p class="center f12">본 서비스는 민앤지가 아이투자와 제휴하여<br />
-					제공하는 프리미엄 주식서비스 입니다.</p>
-				<p class="cs_txt"><span><img src="../images/common/tit_footer_customer_center.png" alt="고객센터"
-							class="vam" style="height: 22px;"></span><span
-						class="bold pdt_5 f14 pdl_5">1599-7416</span><span class=" pdt_5 pdl_5">평일 09시~18시</span></p>
-			</div>
-		</footer>
+		<div style="margin:0;padding:0;">
+			<iframe src="https://m.itooza.com/minsstockbot/foot_iframe.php" scrolling="no" frameborder="0"
+				style="border:none; overflow:hidden; width:100%; height:auto;min-height:270px;"
+				allowtransparency="true"></iframe>
+		</div>
 	</div>
 </body>
 

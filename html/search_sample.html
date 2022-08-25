@@ -531,46 +531,14 @@
 					</div>
 				</div>
 			</div>
-			<div style="margin:0;padding:0;">
-				<iframe src="https://m.itooza.com/minsstockbot/foot_iframe.php" scrolling="no" frameborder="0"
-					style="border:none; overflow:hidden; width:100%; height:auto;min-height:270px;"
-					allowtransparency="true"></iframe>
-			</div>
-			<iframe src="https://super.stockn.kr/stock/itooza/auto_size?aaa=1&amp;height=3102&amp;width=425"
-				id="autoIframeHeightID" scrolling="no" frameborder="0" style="display:none;" width="1" height="1"
-				allowtransparency="true"></iframe>
-			<script language="javascript">
-				var strIframeURL = "https://super.stockn.kr/stock/itooza/auto_size";
-				function fnAutoResize() {
-					var nWidth = $(window).width();
-					var objIFrmaeBody = $('#topwrpperID');
-					var nHeight = objIFrmaeBody.height(); //$('#wrap').height();
-					var strUrl = strIframeURL + '?aaa=1&height=' + nHeight + '&width=' + nWidth;
-
-					$("#autoIframeHeightID").attr("src", strUrl);
-				}
-				function fnAutoWidthResizeOne() {
-					/*
-					var nWidth = $(window).width();
-					var nObjOneList = $(".li_wrap");
-					if( $(".li_wrap").length > 0 )
-					{
-						nObjOneList.css("width", nWidth + "px");
-					}
-					*/
-				}
-				$(document).ready(function () {
-					fnAutoResize();
-					setTimeout("fnAutoResize()", 1000);
-					fnAutoWidthResizeOne();
-				});
-				fnAutoWidthResizeOne();
-			</script>
-		</div>
-
-		<a href="#" id="toTop" style="display: none;"><span id="toTopHover"></span>To Top</a><span
-			style="position: absolute; left: 0px; top: -20000px; padding: 0px; margin: 0px; border: none; white-space: pre; line-height: normal; font-family: Calibri, Optima, Candara, Verdana, Geneva, sans-serif; font-size: 11px; font-weight: normal; display: none;">Mpgyi</span>
-	</body>
+			
+			<!--푸터-->
+<div style="margin:0;padding:0;">
+    <iframe src="https://m.itooza.com/minsstockbot/foot_iframe.php" scrolling="no" frameborder="0"
+        style="border:none; overflow:hidden; width:100%; height:auto;min-height:270px;"
+        allowtransparency="true"></iframe>
+</div>
+</div>
 </body>
 
 </html>

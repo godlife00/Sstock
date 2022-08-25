@@ -27,6 +27,11 @@
 	<!-- jquery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
 	<!-- Swiper -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
@@ -49,39 +54,61 @@
 	</script>
 </head>
 
-<body>
+<body oncontextmenu="return false;">
 	<div class="wrapper" id="topwrpperID">
 		<!--헤더/gnb 영역-->
 		<div class="top-wrap">
-
 			<!--헤더-->
-			<header id="header">
-				<div class="top">
-					<h1><a href="http://m.itooza.com"><img src="../images/common/logo_tsst.png" alt="T슈퍼스탁"></a></h1>
-					<button class="btn_thome" type="button" onClick=""> <span>T인증 바로가기</span> </button>
-				</div>
-			</header>
 
-			<!--메뉴-->
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
 			<div id="menu">
 				<nav class="gnb">
 					<ul class="gnb_li">
-						<li><a href="tsst_p23.html" class="on" title="HOME">HOME</a></li>
-						<li><a href="tsst_p26_1.html" title="종목추천">종목추천</a></li>
-						<li><a href="tsst_p28_1.html" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
-						<li><a href="tsst_p30_1.html" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
-						<li><a href="#" title="투자점수">투자점수</a></li>
-						<li style="padding-right: 30px;"><a href="#" title="업종/테마">업종/테마</a></li>
+						<li><a href="https://m.itooza.com/minsstockbot/m_index.php" class="on" title="HOME">HOME</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" title="종목추천">종목추천</a></li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1" title="슈퍼스탁 1호">슈퍼스탁1호</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2" title="슈퍼스탁 2호">슈퍼스탁2호</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+								title="업종/테마">업종/테마</a></li>
 					</ul>
 				</nav>
 			</div>
-
-			<!--2depth 메뉴>
-		<div class="sub_menu">
-			<nav class="nav">
-				<h2><span class="item">투자점수 TOP 10</span></h2>
-			</nav>
-		</div-->
+			<!--메뉴-->
 		</div>
 		<style>
 			#ss_wrap .index_section .li_wrap ul.type02 li {
@@ -121,8 +148,9 @@
 								</ul>
 								<p class="target"><span>2,800</span>원</p>
 							</a></li>
-						<li><a href="javascript:ClickAlertServiceNoMember();">								
-								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt="" onerror='this.src="../images/common//empty_logo.jpg";' /></p>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/17금</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 증가 & 저평가 & 배당 증...</p>
 								<ul class="analysis_type">
@@ -134,8 +162,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/17금</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 실적 성장 + 배당 매력</p>
@@ -148,8 +175,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/16목</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 성장 지속 & 수익성 대비...</p>
@@ -162,8 +188,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/16목</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 구조조정+육계 가격 상승 효과</p>
@@ -176,8 +201,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/15수</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 성장 지속 & 여유 현금 ...</p>
@@ -190,8 +214,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/15수</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 신규 어선 도입+어가 상승 기대</p>
@@ -204,8 +227,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/14화</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘자산가치 대비 저평가 & 실적...</p>
@@ -218,8 +240,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/14화</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 환율 안정으로 실적 턴어라운드</p>
@@ -232,8 +253,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/13월</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 전방산업 증설에 실적성장</p>
@@ -246,8 +266,7 @@
 										src="../images/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
 							</a></li>
 						<li><a href="javascript:ClickAlertServiceNoMember();">
-								<p class="logo"><img
-										src="../images/common/logo_empty_mts.png" alt=""
+								<p class="logo"><img src="../images/common/logo_empty_mts.png" alt=""
 										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<p class="date">03/13월</p>
 								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 개선 & 현금 풍부 & 배당...</p>
@@ -269,8 +288,9 @@
 				<div class="li_wrap" data-key="3" data-addkey="0" data-page="1" data-end="0" data-onewidth="150"
 					data-maxwidth="1500" data-limit="10" style=" -webkit-overflow-scrolling:touch;">
 					<ul class="type01 scrollul" style="width: 1500px;">
-						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=003230&st=3&sdt=20170316134045">								
-								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/003230.jpg" alt="" onerror='this.src="../images/common//empty_logo.jpg";' /></p>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=003230&st=3&sdt=20170316134045">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/003230.jpg" alt=""
+										onerror='this.src="../images/common//empty_logo.jpg";' /></p>
 								<span
 									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">삼양식품</span>
 								<p class="date" style="left: 0 !important;">03/16목</p>
@@ -606,7 +626,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>								
+							<tr>
 								<td class="num"><img alt="1" src="../images/index/ico_num_01.png">
 								</td>
 								<td class="name"><a href="/minsstockbot/search_itz.php?sn=005880">대한해운</a></td>
@@ -666,8 +686,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/066910.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/066910.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">손오공</p>
 									<p class="price">5,950원</p>
 								</div>
@@ -698,8 +718,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/086960.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/086960.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">MDS테크</p>
 									<p class="price">22,700원</p>
 								</div>
@@ -730,8 +750,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/123690.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/123690.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">한국화장품</p>
 									<p class="price">15,050원</p>
 								</div>
@@ -762,8 +782,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/004170.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/004170.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">신세계</p>
 									<p class="price">184,000원</p>
 								</div>
@@ -794,8 +814,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/048770.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/048770.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">TPC</p>
 									<p class="price">9,470원</p>
 								</div>
@@ -826,8 +846,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/051500.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/051500.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">CJ프레시웨</p>
 									<p class="price">32,300원</p>
 								</div>
@@ -858,8 +878,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/086960.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/086960.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">MDS테크</p>
 									<p class="price">22,700원</p>
 								</div>
@@ -890,8 +910,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/010820.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/010820.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">퍼스텍</p>
 									<p class="price">4,015원</p>
 								</div>
@@ -922,8 +942,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/106520.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/106520.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">디지탈옵틱</p>
 									<p class="price">3,715원</p>
 								</div>
@@ -954,8 +974,8 @@
 								</div>
 								<div class="item">
 									<p class="logo"><img
-											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;"
-											alt="" src="https://kimg.choicestock.co.kr/img/logo/079160.jpg"></p>
+											onerror="this.src=&quot;../images/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/079160.jpg"></p>
 									<p class="name" style="overflow:hidden;height:16px;">CJ CGV</p>
 									<p class="price">73,100원</p>
 								</div>
@@ -991,7 +1011,8 @@
 						<p class="gap_rate nochange"><span class="en">0.00%</span></p>
 					</li>
 					<li><a href="/minsstockbot/view.php?ud=2022060709445388346">
-							<p class="logo_img"><img src="https://kimg.choicestock.co.kr/img/logo/058470.jpg" alt="logo" onerror="this.src=&quot;../images/common/empty_logo.jpg;;">							
+							<p class="logo_img"><img src="https://kimg.choicestock.co.kr/img/logo/058470.jpg" alt="logo"
+									onerror="this.src=&quot;../images/common/empty_logo.jpg;;">
 							</p>
 							<!--리스트 제목은 최대 2줄까지만 노출됩니다.-->
 							<p class="title">[52주 최저가] 리노공업 2.9%↓, 14개 종목 장중 신저가</p>
@@ -1002,22 +1023,13 @@
 				</ul>
 			</div>
 		</div>
+
 		<!--푸터-->
-		<footer id="footer">
-			<div style="background: #fff; padding: 15px 0;">
-				<p style=" width: 290px; margin: 0 auto; color: #000; text-align: center; line-height: 18px;">T슈퍼스탁이
-					제공하는 정보는 투자 참고사항 일뿐,<br />
-					투자권유 또는 주식거래를 목적으로 하지 않습니다.<br />
-					투자판단의 최종 책임은 이용자에게 있습니다.</p>
-			</div>
-			<div class="wrap">
-				<p class="center f12">본 서비스는 민앤지가 아이투자와 제휴하여<br />
-					제공하는 프리미엄 주식서비스 입니다.</p>
-				<p class="cs_txt"><span><img src="../images/common/tit_footer_customer_center.png" alt="고객센터"
-							class="vam" style="height: 22px;"></span><span
-						class="bold pdt_5 f14 pdl_5">1599-7416</span><span class=" pdt_5 pdl_5">평일 09시~18시</span></p>
-			</div>
-		</footer>
+		<div style="margin:0;padding:0;">
+			<iframe src="https://m.itooza.com/minsstockbot/foot_iframe.php" scrolling="no" frameborder="0"
+				style="border:none; overflow:hidden; width:100%; height:auto;min-height:270px;"
+				allowtransparency="true"></iframe>
+		</div>
 	</div>
 </body>
 
