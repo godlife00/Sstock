@@ -1158,8 +1158,20 @@ ul.list_li2 li p.gap_rate {
 	padding: 10px 15px;
 	border-bottom: 1px solid #ccc;
 	font-size: 14px;
-	line-height: 17px;
-	background-color: blanchedalmond;
+	line-height: 17px;	
+}
+.cont_wrap .item_wrap p.desc span {	
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    line-height: 17px;
+    height: 34px;
+}
+#ss_wrap .cont_top_wrap .desc {	
+	background-color: blanchedalmond;	
 }
 
 .cont_wrap .item_wrap .price_wrap {
