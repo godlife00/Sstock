@@ -388,7 +388,7 @@
 }
 
 #ss_wrap .index_section .li_wrap ul.type01 li p.date {
-	background: url("../img/index/bg_date.png") no-repeat scroll 0 0;
+	background: url("/img/index/bg_date.png") no-repeat scroll 0 0;
 	background-size: auto 25px;
 	bottom: -1px;
 	color: #fff;
@@ -497,9 +497,12 @@
 
 #ss_wrap .index_section .btn_more01 {
 	position: absolute;
-	top: -35px;
+	top: -28px;
 	right: 0;
-	width: 25px;
+	width: 55px;
+	color: #454545;    
+    font-size: 14px;    
+	font-weight: bold;
 }
 
 #ss_wrap .index_section .btn_more02 {
@@ -511,10 +514,25 @@
 
 #ss_wrap .index_section .btn_more {
 	position: absolute;
-	top: 10px;
+	top: 17px;
 	right: 10px;
-	width: 25px;
+	width: 55px;
+	/* border: 2px solid blue; */
+	color: #454545;    
+    font-size: 14px;    
+	font-weight: bold;
 }
+/* #ss_wrap .index_section .btn_more::before,
+#ss_wrap .index_section .btn_more01::before {
+	content: '더보기 +';
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	width: 35px;
+	color: #454545;    
+    font-size: 12px;    
+	font-weight: bold;
+} */
 
 #ss_wrap .index_section .btn_more01 img,
 #ss_wrap .index_section .btn_more02 img,
@@ -616,14 +634,14 @@
 	font-weight: bold;
 	font-size: 22px;
 	color: #000;	
-	background: url("../img/cont/ico_theme_flag_w.png") no-repeat 0 0;
+	background: url("/img/cont/ico_theme_flag_w.png") no-repeat 0 0;
 	background-size: 40px auto;
 	text-align: center;
 	padding-top: 13px;
 }
 
 #ss_wrap .index_section .li_wrap ul.theme_card li a p.count.top3 {
-	background: url("../img/cont/ico_theme_flag_r.png") no-repeat 0 0;
+	background: url("/img/cont/ico_theme_flag_r.png") no-repeat 0 0;
 	color: #fff;
 	background-size: 40px auto;
 }
@@ -756,7 +774,7 @@
 	display: block;
 	height: 35px;
 	float: left;
-	background: url("../img/cont/tab_line.png") #7a87b9 no-repeat right 7px;
+	background: url("/img/cont/tab_line.png") #7a87b9 no-repeat right 7px;
 	background-size: 2px auto;
 }
 
@@ -781,92 +799,92 @@
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li01 a {
-	background: url("../img/cont/tab01_1_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab01_1_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li01.focus a {
-	background: url("../img/cont/tab01_1_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab01_1_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li02 a {
-	background: url("../img/cont/tab01_2_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab01_2_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li02.focus a {
-	background: url("../img/cont/tab01_2_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab01_2_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li03 a {
-	background: url("../img/cont/tab01_3_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab01_3_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li03.focus a {
-	background: url("../img/cont/tab01_3_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab01_3_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li04 a {
-	background: url("../img/cont/tab01_4_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab01_4_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab01 li.li04.focus a {
-	background: url("../img/cont/tab01_4_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab01_4_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab02 li.li01 a {
-	background: url("../img/cont/tab02_1_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab02_1_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab02 li.li01.focus a {
-	background: url("../img/cont/tab02_1_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab02_1_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab02 li.li02 a {
-	background: url("../img/cont/tab02_2_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab02_2_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab02 li.li02.focus a {
-	background: url("../img/cont/tab02_2_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab02_2_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab02 li.li03 a {
-	background: url("../img/cont/tab02_3_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab02_3_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab02 li.li03.focus a {
-	background: url("../img/cont/tab02_3_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab02_3_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab03 li.li01 a {
-	background: url("../img/cont/tab03_1_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab03_1_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab03 li.li01.focus a {
-	background: url("../img/cont/tab03_1_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab03_1_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab03 li.li02 a {
-	background: url("../img/cont/tab03_2_0.png") no-repeat 50% 50%;
+	background: url("/img/cont/tab03_2_0.png") no-repeat 50% 50%;
 	background-size: auto 14px;
 }
 
 #ss_wrap .sub_wrap .tab_menu.tab03 li.li02.focus a {
-	background: url("../img/cont/tab03_2_1.png") #fff no-repeat 50% 50%;
+	background: url("/img/cont/tab03_2_1.png") #fff no-repeat 50% 50%;
 	background-size: auto 15px;
 }
 
@@ -899,7 +917,7 @@
 	margin-bottom: 8px;
 	padding-top: 3px;
 	padding-left: 15px;
-	background: url("../img/cont/bullet_rule_port.png") #fff no-repeat left 5px;
+	background: url("/img/cont/bullet_rule_port.png") #fff no-repeat left 5px;
 	background-size: auto 10px;
 }
 
@@ -997,7 +1015,7 @@
 
 /*건별결제시*/
 #ss_wrap .index_section .li_wrap ul.type02 li.buy p.date {
-	background: url("../img/index/ico_date_clock.png") no-repeat scroll 0 3px;
+	background: url("/img/index/ico_date_clock.png") no-repeat scroll 0 3px;
 	background-size: 17px auto;
 	color: #333;
 	font-size: 12px;
@@ -1025,14 +1043,14 @@
 }
 
 #ss_wrap .index_section .li_wrap ul.type02 li.buy p.price.lock {
-	background: rgba(0, 0, 0, 0) url("../img/index/ico_price_lock.png") no-repeat scroll 0 0;
+	background: rgba(0, 0, 0, 0) url("/img/index/ico_price_lock.png") no-repeat scroll 0 0;
 	background-size: 20px auto;
 	left: 112px;
 	top: 9px;
 }
 
 #ss_wrap .index_section .li_wrap ul.type02 li p.price.unlock {
-	background: rgba(0, 0, 0, 0) url("../img/index/ico_price_unlock.png") no-repeat scroll 0 0;
+	background: rgba(0, 0, 0, 0) url("/img/index/ico_price_unlock.png") no-repeat scroll 0 0;
 	background-size: 20px auto;
 	left: 117px;
 	top: 9px;
@@ -1445,7 +1463,7 @@
 }
 
 .inbox.score_wrap .total_score {
-	background: url("../img/cont/img_score_flag.png") no-repeat 10px 0;
+	background: url("/img/cont/img_score_flag.png") no-repeat 10px 0;
 	background-size: 115px auto;
 	height: 63px;
 	padding-top: 10px;
@@ -1516,7 +1534,7 @@
 .score_wrap_notice {
 	height: 245px;
 	z-index: 10;
-	background: url("../img/cont/bg_opacity.png") repeat scroll 0 0;
+	background: url("/img/cont/bg_opacity.png") repeat scroll 0 0;
 	display: block;
 	left: 0;
 	position: absolute;
