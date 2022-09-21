@@ -27,14 +27,50 @@
 	<!-- jquery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
 	<!-- js -->
 	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		// 포트폴리오 매매전략 스크롤
+		$(document).ready(function () {			
+			var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);					
+			var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;	
+			console.log(scrollWidth);
+			$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
+
+			function showGradient() {
+				if ($(this).scrollLeft() == 0) {
+					// 시작
+				} else if (Math.ceil($(this).scrollLeft() + $(this).width()) == $('.scrollcontent').width()) {
+					//스크롤이 끝에 왔을 때
+					console.log("오른쪽끝");					
+					// $('#ss_wrap .index_section .li_wrap ul').css('width', scrollWidth)
+					// $('#ss_wrap .index_section .li_wrap ul li').clone().appendTo('#ss_wrap .index_section .li_wrap ul');
+				} else {
+					// 중간
+				}
+			}
+
+			$(function () {
+				showGradient();
+				$('.scrollwrap').on('scroll', showGradient);
+			});
+		});
+	</script>
 </head>
 
-<body>
+<body oncontextmenu="return false;">
 	<div class="wrapper" id="topwrpperID">
 		<!--헤더/gnb 영역-->
 		<div class="top-wrap">
@@ -106,95 +142,100 @@
 				</div>
 
 				<!--매매전략-->
-				<div class="cont_box">
-					<h5><img src="../img/cont/h5_port01.png" alt="매매전략 (월 1회 매매)" /></h5>
-					<div class="li_wrap" data-key="mm" data-addkey="" data-page="1" data-end="0" data-onewidth="302"
-						data-maxwidth="3020" data-limit="10"
-						style="-webkit-overflow-scrolling:touch; margin:0 10px;  overflow-x: auto;">
-						<ul class="list_li2 scrollul" style="width: 3020px;">
-							<li><a href="/stockbot/mm_view.php?ud=16">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">2017년 3월 매매 진행예정...누적 116% 수익률</p>
-								</a>
-								<p class="time">03/07 19:00</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=15">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">2017년 2월 매매 진행예정...누적 109% 수익률</p>
-								</a>
-								<p class="time">02/07 19:20</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=14">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">2017년 1월 매매 진행예정...누적 113% 수익률</p>
-								</a>
-								<p class="time">01/10 18:34</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=13">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">올해 마지막 12월 매매 진행예정...누적 101% 수익률</p>
-								</a>
-								<p class="time">12/06 19:21</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=12">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">11월 수익실현 및 신규매수 진행...누적수익률 110%</p>
-								</a>
-								<p class="time">11/08 19:15</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=11">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">10월 수익실현 및 신규매수 진행...누적수익률 127%</p>
-								</a>
-								<p class="time">10/11 17:39</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=10">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">포트구성, 20개 종목 매수하세요</p>
-								</a>
-								<p class="time">09/07 10:41</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=8">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">8월 수익실현 및 신규매수 진행...누적수익률 134%</p>
-								</a>
-								<p class="time">08/11 23:56</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=1">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">7월 2종목 나란히 50% 수익..누적수익률 126%</p>
-								</a>
-								<p class="time">07/14 08:25</p>
-							</li>
-							<li><a href="/stockbot/mm_view.php?ud=7">
-									<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-											alt="logo" src="../img/cont/ico_port1.jpg">
-									</p>
-									<p class="title" style="height: 42px;">6월 엘디티 47% 최종실현...포트 누적수익률 112%</p>
-								</a>
-								<p class="time">06/16 08:24</p>
-							</li>
-						</ul>
-					</div>
+				<div class="scrollwrap cont_box index_section">
+					<h5><img src="../img/cont/h5_port01.png" alt="매매전략 (월 1회 매매)" /></h5>					
+					<div class="scrollwrap">
+						<div class="scrollcontent">					
+							<div class="li_wrap">
+								<ul class="list_li2 scrollul">
+									<li><a href="/stockbot/mm_view.php?ud=16">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">2017년 3월 매매 진행예정...누적 116% 수익률</p>
+										</a>
+										<p class="time">03/07 19:00</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=15">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">2017년 2월 매매 진행예정...누적 109% 수익률</p>
+										</a>
+										<p class="time">02/07 19:20</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=14">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">2017년 1월 매매 진행예정...누적 113% 수익률</p>
+										</a>
+										<p class="time">01/10 18:34</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=13">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">올해 마지막 12월 매매 진행예정...누적 101% 수익률</p>
+										</a>
+										<p class="time">12/06 19:21</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=12">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">11월 수익실현 및 신규매수 진행...누적수익률 110%</p>
+										</a>
+										<p class="time">11/08 19:15</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=11">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">10월 수익실현 및 신규매수 진행...누적수익률 127%</p>
+										</a>
+										<p class="time">10/11 17:39</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=10">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">포트구성, 20개 종목 매수하세요</p>
+										</a>
+										<p class="time">09/07 10:41</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=8">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">8월 수익실현 및 신규매수 진행...누적수익률 134%</p>
+										</a>
+										<p class="time">08/11 23:56</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=1">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">7월 2종목 나란히 50% 수익..누적수익률 126%</p>
+										</a>
+										<p class="time">07/14 08:25</p>
+									</li>
+									<li><a href="/stockbot/mm_view.php?ud=7">
+											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
+													alt="logo" src="../img/cont/ico_port1.jpg">
+											</p>
+											<p class="title" style="height: 42px;">6월 엘디티 47% 최종실현...포트 누적수익률 112%</p>
+										</a>
+										<p class="time">06/16 08:24</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //scrollcontent -->
+					</div>					
 				</div>
+				<!-- //scrollwrap -->
+				
 				<!-- 탭메뉴 : 선택된 메뉴 li에 클래스 focus 부여-->
 				<div class="tab_menu tab02">
 					<ul>
