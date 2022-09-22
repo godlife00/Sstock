@@ -2363,11 +2363,11 @@ input[type=text]:-ms-clear {
 	display: block;
 	width: 100%;
 	overflow-x: auto;						
-	padding-left: 15px;
+	padding-left: 15px;	
 }
 
 .scrollcontent {	
-	width: 1500px;
+	width: 3500px;
 	/* display: flex; */	
 }
 .ul_li {

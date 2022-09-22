@@ -46,17 +46,21 @@
 		$(document).ready(function () {			
 			var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);					
 			var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;	
-			console.log(scrollWidth);
+			console.log(scrollWidth * scrolllength);
 			$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
 
 			function showGradient() {
 				if ($(this).scrollLeft() == 0) {
-					// 시작
-				} else if (Math.ceil($(this).scrollLeft() + $(this).width()) == $('.scrollcontent').width()) {
+					// 시작				
+				} else if (Math.ceil($(this).scrollLeft() + $(this).width()) >= $('.scrollcontent').width() - 200) {
 					//스크롤이 끝에 왔을 때
 					console.log("오른쪽끝");					
-					// $('#ss_wrap .index_section .li_wrap ul').css('width', scrollWidth)
-					// $('#ss_wrap .index_section .li_wrap ul li').clone().appendTo('#ss_wrap .index_section .li_wrap ul');
+					$('#ss_wrap .index_section .li_wrap ul li').clone().appendTo('#ss_wrap .index_section .li_wrap ul');
+
+					var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);					
+					var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;	
+					console.log(scrollWidth * scrolllength);
+					$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
 				} else {
 					// 중간
 				}
