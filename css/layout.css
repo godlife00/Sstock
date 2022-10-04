@@ -2240,6 +2240,7 @@ input[type=text]:-ms-clear {
 }
 
 #ss_wrap .outline_style .highcharts-point-up {
+	width: 12px !important;
 	fill: #d30000;
 	stroke: #d30000;
 }
