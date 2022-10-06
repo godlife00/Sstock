@@ -207,23 +207,6 @@ $(document).ready(function () {
                 },                                                             
             }],
 
-            // yAxis: {// 1
-            //     title: {
-            //         text: null
-            //     },
-            //     gridLineWidth: 1,
-            //     offset: 15,                                    
-            //     labels: {   
-            //         reserveSpace: true,
-            //         y: -15,
-            //         // format: '{value}',                                        
-            //         style: {
-            //             color: '#333',
-            //             fontSize : 13,
-            //         }
-            //     },
-            // },
-
             yAxis: [{// 1
                 title: {
                     text: null
