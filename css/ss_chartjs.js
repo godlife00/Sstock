@@ -179,7 +179,26 @@ $(document).ready(function () {
                 shared: true,                
                 borderColor: "#e41c39",                
                 xDateFormat: '%Y.%m.%d',
+
+                // formatter: function () {
+                //     var s = '<b>' + Highcharts.dateFormat('%Y/%m/%d', this.x) + '</b>' // 일자 포맷
+                //     $.each(this.points, function (i, point) {
+                //         for (i = 0; i < value.length; i++) {
+                //             if (value[i][0] == point.x) {
+                //                 s += (
+                //                     '<br/><span style="color: ' + this.series.color + ';">시가 </span><span>' + value[i][1] + '</span>'
+                //                     + '<span style="color: ' + this.series.color + '; padding-left:7px">고가 </span><span>' + value[i][2] + '</span>'
+                //                     + '<span style="color: ' + this.series.color + '; padding-left:7px">저가 </span><span>' + value[i][3] + '</span>'
+                //                     + '<span style="color: ' + this.series.color + '; padding-left:7px">종가 </span><span>' + value[i][4] + '</span>'
+                //                 );
+                //                 break;
+                //             };
+                //         }
+                //     });
+                //     return s;
+                // }
             },
+            
 
             colors: ['#333'],
 
@@ -224,8 +243,8 @@ $(document).ready(function () {
                 tooltip: {                    
                     useHTML: true,
                     valueSuffix: '원',
-                    headerFormat: '<span style="display: block; border-bottom: 1px solid #c8c8c8; padding-bottom: 3px; margin-bottom: 5px;"><b>{point.key} </b></span>',
-                    pointFormat: '<b>시가: {point.open}<br/> 고가: {point.high}<br/> 저가: {point.low}<br/> 종가: {point.close}<br/></b>',                    
+                    headerFormat: '<span style="display: block; border-bottom: 1px solid #c8c8c8; padding-bottom: 3px; margin-bottom: 5px;"><b>{point.key} </b></span> </br>',
+                    pointFormat: '<b>시가: {point.open}<br/>고가: {point.high}<br/>저가: {point.low}<br/>종가: {point.close}<br/></b>',                                        
                 },                
             }, {
                 type: 'line',
@@ -235,15 +254,12 @@ $(document).ready(function () {
                     useHTML: true,
                     valueSuffix: '원',                    
                     headerFormat: '',
-                    pointFormat: '<b> <span style="display: block; padding: 5px 0; border-top: 1px solid #c8c8c8;"> {series.name} : <span style="color: #e41c39;"> {point.y} </span></b></span>',                         
+                    pointFormat: '</br></br><b> <span style="display: block; padding: 5px 0; border-top: 1px solid #c8c8c8;"> {series.name} : <span style="color: #e41c39;"> {point.y} </span></b></span>',                         
                 }       
             }],            
             
             plotOptions: {
-                series: {
-                    label: {
-                        enabled: false,
-                    },
+                series: {                    
                     marker: {
                         enabled: false,
                         states: {
