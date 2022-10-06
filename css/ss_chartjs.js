@@ -201,12 +201,28 @@ $(document).ready(function () {
                 },                                                             
             }],
 
-            yAxis: {// 1
+            // yAxis: {// 1
+            //     title: {
+            //         text: null
+            //     },
+            //     gridLineWidth: 1,
+            //     offset: 15,                                    
+            //     labels: {   
+            //         reserveSpace: true,
+            //         y: -15,
+            //         // format: '{value}',                                        
+            //         style: {
+            //             color: '#333',
+            //             fontSize : 13,
+            //         }
+            //     },
+            // },
+
+            yAxis: [{// 1
                 title: {
                     text: null
-                },
-                gridLineWidth: 1,
-                offset: 15,                                    
+                },   
+                             
                 labels: {   
                     reserveSpace: true,
                     y: -15,
@@ -215,8 +231,21 @@ $(document).ready(function () {
                         color: '#333',
                         fontSize : 13,
                     }
+                },              
+            }, {// 2
+                title: {
+                    text: null
                 },
-            },
+                gridLineWidth: 0,
+                labels: {              
+                    style: {
+                        color: '#333',
+                        fontSize : 13,
+                    }
+                },        
+                opposite: true        
+            }],
+
 
             series: [{
                 type: 'candlestick',
