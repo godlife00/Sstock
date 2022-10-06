@@ -149,6 +149,14 @@ $(document).ready(function () {
                 enabled: false
             },
 
+            title: {
+                text: null
+            },
+
+            credits: {
+                enabled: false
+            },
+
             credits: {
                 enabled: false
             },
@@ -157,19 +165,23 @@ $(document).ready(function () {
                 noData: "해당 데이터가 없습니다",
             },
 
-            exporting: {
-                enabled: false
+            legend: {          
+                enabled: false,
             },
 
-            legend: {             
-                enabled: true,   
-                align: 'left',
-                verticalAlign: 'top',                                                                
+            exporting: {
+                enabled: false,
             },
-        
-            tooltip: {       
-                enabled: false,    
+
+            tooltip: {
+                shadow: false,
+                split: false,
+                shared: true,                
+                borderColor: "#e41c39",                
+                xDateFormat: '%Y.%m.%d',
             },
+
+            colors: ['#333'],
 
             xAxis: [{
                 title: {
