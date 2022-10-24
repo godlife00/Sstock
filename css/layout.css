@@ -1304,6 +1304,11 @@ ul.list_li2 li p.gap_rate {
 .cont_wrap #article-body .li_article li a span.tit {
 	padding-left: 5px;
 	color: #133479;
+	width: calc(100% - 50px);	
+	display: inline-block;		
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 
 }
 
@@ -2373,4 +2378,9 @@ input[type=text]:-ms-clear {
 }
 .ul_li {
 	display: inline-block;
+}
+
+/* 뉴스 뷰페이지 */
+#ss_wrap .ainfo_com.bg_fff {	
+	background-color: #fff;	
 }

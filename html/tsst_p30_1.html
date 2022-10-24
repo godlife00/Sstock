@@ -43,9 +43,9 @@
 	<!-- //swiper -->
 	<script>
 		// 포트폴리오 매매전략 스크롤
-		$(document).ready(function () {			
-			var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);					
-			var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;	
+		$(document).ready(function () {
+			var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);
+			var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;
 			console.log(scrollWidth * scrolllength);
 			$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
 
@@ -54,11 +54,11 @@
 					// 시작				
 				} else if (Math.ceil($(this).scrollLeft() + $(this).width()) >= $('.scrollcontent').width() - 200) {
 					//스크롤이 끝에 왔을 때
-					console.log("오른쪽끝");					
+					console.log("오른쪽끝");
 					$('#ss_wrap .index_section .li_wrap ul li').clone().appendTo('#ss_wrap .index_section .li_wrap ul');
 
-					var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);					
-					var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;	
+					var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);
+					var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;
 					console.log(scrollWidth * scrolllength);
 					$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
 				} else {
@@ -78,7 +78,7 @@
 	<div class="wrapper" id="topwrpperID">
 		<!--헤더/gnb 영역-->
 		<div class="top-wrap">
-			
+
 			<!--헤더-->
 			<!-- 191111 검색기능 추가 -->
 			<div class="rcv">
@@ -141,105 +141,92 @@
 						<p class="clear pdt_5"><img src="../img/cont/txt_img_port1_date.png" alt="12년 6월 7일 이후"
 								style="height: 19px;"></p>
 					</div>
-					<p class="port_info"><img src="../img/cont/txt_img_port1_info.png" alt="적극 수익 추구형 투자자를 위한 최선의 포트폴리오
-"> </p>
+					<p class="port_info"><img src="../img/cont/txt_img_port1_info.png" alt="적극 수익 추구형 투자자를 위한 최선의 포트폴리오"> </p>
 				</div>
 
 				<!--매매전략-->
 				<div class="scrollwrap cont_box index_section">
-					<h5><img src="../img/cont/h5_port01.png" alt="매매전략 (월 1회 매매)" /></h5>					
+					<h5><img src="/img/cont/h5_port01.png" alt="매매전략 (월 1회 매매)"></h5>
 					<div class="scrollwrap">
-						<div class="scrollcontent">					
+						<div class="scrollcontent">
 							<div class="li_wrap">
-								<ul class="list_li2 scrollul">
-									<li><a href="/stockbot/mm_view.php?ud=16">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">2017년 3월 매매 진행예정...누적 116% 수익률</p>
+								<ul id="trade_list" class="list_li2 scrollul">
+									<li><a href="/stock/trade_view/688">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 8월 매매</p>
 										</a>
-										<p class="time">03/07 19:00</p>
+										<p class="time">09/21 14:45</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=15">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">2017년 2월 매매 진행예정...누적 109% 수익률</p>
+									<li><a href="/stock/trade_view/678">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 7월 매매</p>
 										</a>
-										<p class="time">02/07 19:20</p>
+										<p class="time">07/08 19:09</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=14">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">2017년 1월 매매 진행예정...누적 113% 수익률</p>
+									<li><a href="/stock/trade_view/667">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 6월 매매</p>
 										</a>
-										<p class="time">01/10 18:34</p>
+										<p class="time">06/09 18:47</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=13">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">올해 마지막 12월 매매 진행예정...누적 101% 수익률</p>
+									<li><a href="/stock/trade_view/656">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 5월 매매</p>
 										</a>
-										<p class="time">12/06 19:21</p>
+										<p class="time">05/09 19:28</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=12">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">11월 수익실현 및 신규매수 진행...누적수익률 110%</p>
+									<li><a href="/stock/trade_view/646">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 4월 매매</p>
 										</a>
-										<p class="time">11/08 19:15</p>
+										<p class="time">04/08 18:53</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=11">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">10월 수익실현 및 신규매수 진행...누적수익률 127%</p>
+									<li><a href="/stock/trade_view/628">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 2월 매매</p>
 										</a>
-										<p class="time">10/11 17:39</p>
+										<p class="time">02/09 19:15</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=10">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">포트구성, 20개 종목 매수하세요</p>
+									<li><a href="/stock/trade_view/618">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 1월 매매</p>
 										</a>
-										<p class="time">09/07 10:41</p>
+										<p class="time">01/07 20:04</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=8">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">8월 수익실현 및 신규매수 진행...누적수익률 134%</p>
+									<li><a href="/stock/trade_view/607">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2021년 12월 매매</p>
 										</a>
-										<p class="time">08/11 23:56</p>
+										<p class="time">12/09 19:50</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=1">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">7월 2종목 나란히 50% 수익..누적수익률 126%</p>
+									<li><a href="/stock/trade_view/596">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2021년 11월 매매</p>
 										</a>
-										<p class="time">07/14 08:25</p>
+										<p class="time">11/09 19:27</p>
 									</li>
-									<li><a href="/stockbot/mm_view.php?ud=7">
-											<p class="logo_img"><img onerror="this.src='../img/common//empty_logo.jpg';"
-													alt="logo" src="../img/cont/ico_port1.jpg">
-											</p>
-											<p class="title" style="height: 42px;">6월 엘디티 47% 최종실현...포트 누적수익률 112%</p>
+									<li><a href="/stock/trade_view/586">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2021년 10월 매매 예정</p>
 										</a>
-										<p class="time">06/16 08:24</p>
+										<p class="time">10/08 19:26</p>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<!-- //scrollcontent -->
-					</div>					
+					</div>
 				</div>
-				<!-- //scrollwrap -->
-				
+
 				<!-- 탭메뉴 : 선택된 메뉴 li에 클래스 focus 부여-->
 				<div class="tab_menu tab02">
 					<ul>
@@ -409,15 +396,17 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--푸터-->
-		<footer id="footer">	
+		<footer id="footer">
 			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
 			<div class="cs">
 				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
 			</div>
 			<address>
-				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+				12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+				Hecto Innovation. All rights reserved.
 			</address>
 		</footer>
 	</div>

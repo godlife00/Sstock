@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/series-label.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper('.maingameSwiper', {
+				autoHeight: true,
+				slidesPerView: "auto",
+				pagination: {
+					el: ".swiper-pagination",
+				},
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+	<body oncontextmenu="return false;">
+		<div class="wrapper" id="topwrpperID">
+			<!--헤더/gnb 영역-->
+			<div class="top-wrap">
+				<!--헤더-->
+
+				<!-- 191111 검색기능 추가 -->
+				<div class="rcv">
+					<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+					<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+					<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+						<input type="hidden" id="seCode" name="cn" value="">
+						<fieldset>
+							<input type="text" onkeydown="hitEnterKey(event);"
+								onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+								placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+								id="seName" name="sn" class="input_txt input_txt_fcs"
+								onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+								onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+							<span class="searchclear" style="display: none;"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+									alt="검색어지우기"></span>
+							<a href="javascript:SearchIt(document.sch_form, '1');"
+								onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png"
+									alt="검색" class="searchBtn"></a>
+						</fieldset>
+					</form>
+					<div style="display: none;" id="schdispDIV" class="ly_rcv">
+						<ul id="schdispUL" class="lst_ctt">
+						</ul>
+						<div class="sch_clse">
+							<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+						</div>
+					</div>
+				</div>
+				<!-- // 191111 검색기능 추가 끝 -->
+
+				<div id="menu">
+					<nav class="gnb">
+						<ul class="gnb_li">
+							<li><a href="https://m.itooza.com/minsstockbot/m_index.php" title="HOME">HOME</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" title="종목추천">종목추천</a>
+							</li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1"
+									title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2"
+									title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+							<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+									title="업종/테마">업종/테마</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<!--메뉴-->
+
+				<!--네비게이션-->
+				<div class="sub_menu">
+					<nav class="nav">
+						<h2><span class="item">스몰캡 종목 뉴스</span></h2>
+						<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
+					</nav>
+				</div>
+			</div>
+			<div id="ss_wrap">
+				<!--기사 영역-->
+				<div class="cont_wrap">
+					<div class="cont_header">
+						<div id="article-head">
+							<h1>포트 1호, 2022년 9월 매매</h1>
+						</div>
+						<div class="article-option">
+							<div id="btn_fontsize"> <a href="Javascript:resize(-0.1)" class="btn_font_s"
+									title="작게">-</a> <a href="Javascript:resize(0.1)" class="btn_font_b"
+									title="크게">+</a>
+								<!--<a href="Javascript:resize(1)" title="reset">reset</a>-->
+							</div>
+							<div class="article-info acover">
+								<div class="meta al"><span class="date">09/08 18:51 </span><span class="author">|
+										스톡봇</span></div>
+							</div>
+						</div>
+					</div>
+					<div id="article-body">
+						<div id="article">
+							※ 아래 내용은 포트 1호를 추종하는 고객만을 위한 안내입니다. 포트 1호는 체질이 개선되는 ‘턴어라운드 기업’에 집중 투자하는 전략입니다. 장기적으로 성과가
+							좋으나, 매월 1회 정해진 로직에 따라 기계적으로 매매하기 때문에 시기에 따라 월간 수익률 변동성이 매우 클 수 있습니다. 따라서 월간 수익률에 일희일비하지 않고
+							장기 관점에서 꾸준히 투자할 수 있는 투자자에게만 적합함을 꼭 '유의'하시기 바랍니다. <br>
+							<br>
+							※ 특징주<br>
+							TKG휴켐스, 한 달간 17%↑<br>
+							<br>
+							<div style="float:left;width:96.666666666667px;margin:5px 10px 5px 0px;"><img
+									src="https://menu.itooza.com/cmsupload/2022/09/08/20220908184109__0_fd_image_58_229_183_1_9691.png"
+									style="width:96.666666666667px;"></div><br>
+							<br>
+							<div style="float:left;width:96.666666666667px;margin:5px 10px 5px 0px;"><img
+									src="https://menu.itooza.com/cmsupload/2022/09/08/20220908184109__1_fd_image_58_229_183_1_6502.png"
+									style="width:96.666666666667px;"></div><br>
+							<br>
+							<div style="float:left;width:96.666666666667px;margin:5px 10px 5px 0px;"><img
+									src="https://menu.itooza.com/cmsupload/2022/09/08/20220908184109__2_fd_image_58_229_183_1_6358.png"
+									style="width:96.666666666667px;"></div> <br>
+							<br>
+							[매매 일정]<br>
+							- 이번 매매일: 9월 13일(다음주 화요일)<br>
+							<br>
+							[전량매도] - 18종목<br>
+							GS, 이건홀딩스, 이구산업, 루트로닉, 동원산업, 팬스타엔터프라이즈, 한솔로지스틱스, 이상네트웍스, 한국전자홀딩스, 하이비젼시스템, KG스틸, 바텍,
+							영원무역홀딩스, 피델릭스, CJ, 진양폴리, 인탑스, 두산테스나<br>
+							<br>
+							[신규매수] - 18종목<br>
+							LS전선아시아, 비츠로시스, 강원랜드, 이랜텍, 에치에프알, 현대에너지솔루션, SIMPAC, 제이엠아이, 태웅로직스, 세아홀딩스, 코스모화학, 대한항공, 팬오션,
+							태경비케이, ES큐브, 제일기획, 디아이티, 성창기업지주<br>
+							<br>
+							전량매도한 금액을 신규매수 종목에 고르게 나눠 매수하십시오.<br>
+							<br>
+							매매가: 9/13(화) 시초가<br>
+							(개장 전에 '시장가'로 매매 주문을 넣으면 시초가에 체결됩니다. 개장 이후 매매할 경우 13일 시초가 대비 -3% ~ +3% 사이에 매매하시면 됩니다. )<br>
+							<br>
+							※ 처음 시작하시는 분<br>
+							아래 20개 종목을 각각 투자금의 5%로 13일 시초가에 매수하시면 됩니다. <br>
+							<br>
+							[포트 1호 포트폴리오]<br>
+							LS전선아시아, 비츠로시스, 강원랜드, 주성엔지니어링, 이랜텍, 에치에프알, 현대에너지솔루션, SIMPAC, 제이엠아이, 태웅로직스, 세아홀딩스, 코스모화학,
+							대한항공, TKG휴켐스, 팬오션, 태경비케이, ES큐브, 제일기획, 디아이티, 성창기업지주<br>
+							<br>
+							매매가 끝나면?<br>
+							→ 다음 매매일(10/11)까지 보유<br>
+							<br>
+							감사합니다.<br>
+							<br>
+							<div><img
+									src="https://menu.itooza.com/cmsupload/2022/09/08/20220908184051__0_fd_image_58_229_183_1_1440.png"
+									style="width:96.666666666667px;"></div> <br>							
+						</div>
+						<p style="padding: 13px; font-size:15px; line-height:18px;">&lt;저작권자 ⓒ아이투자(<a
+								href="http://www.itooza.com" target="_blank">www.itooza.com</a>) 무단전재 및 재배포 금지&gt;</p>
+					</div>
+				</div>
+			</div>
+
+			<!--푸터-->
+			<footer id="footer">
+				<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+				<div class="cs">
+					<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+				</div>
+				<address>
+					㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6
+					태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright ©
+					2022 Hecto Innovation. All rights reserved.
+				</address>
+			</footer>
+		</div>
+	</body>
+
+</html>
