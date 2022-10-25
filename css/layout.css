@@ -1160,7 +1160,7 @@ ul.list_li2 li p.gap_rate {
 	font-size: 14px;
 	line-height: 17px;	
 }
-.cont_wrap .item_wrap p.desc span {	
+/* .cont_wrap .item_wrap p.desc span {	
 	overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -1169,8 +1169,8 @@ ul.list_li2 li p.gap_rate {
     word-wrap:break-word; 
     line-height: 17px;
     max-height: 34px;
-}
-#ss_wrap .cont_top_wrap .desc {	
+} */
+/* #ss_wrap .cont_top_wrap .desc {	
 	overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -1179,7 +1179,7 @@ ul.list_li2 li p.gap_rate {
     word-wrap:break-word; 
     line-height: 17px;
     max-height: 46px;	
-}
+} */
 
 .cont_wrap .item_wrap .price_wrap {
 	padding: 15px;
@@ -2384,3 +2384,94 @@ input[type=text]:-ms-clear {
 #ss_wrap .ainfo_com.bg_fff {	
 	background-color: #fff;	
 }
+
+.cont_wrap #article-body #article {
+	position: relative;	
+	padding: 15px 16px 25px;
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	word-break: break-all;
+	word-wrap: break-word;
+	/* cms 폰트 기본 스타일 적용 */
+  }
+  
+  .cont_wrap #article-body #article address,
+  .cont_wrap #article-body #article caption,
+  .cont_wrap #article-body #article em,
+  .cont_wrap #article-body #article var {
+	font-style: italic;
+  }
+  
+  .cont_wrap #article-body #article ol {
+	list-style: decimal;
+	padding-left: 15px;
+  }
+  
+  .cont_wrap #article-body #article ol li {
+	list-style: list-item;
+  }
+  
+  .cont_wrap #article-body #article blockquote:before,
+  .cont_wrap #article-body #article blockquote:after,
+  .cont_wrap #article-body #article q:before,
+  .cont_wrap #article-body #article q:after {
+	content: '';
+  }
+  
+  .cont_wrap #article-body #article blockquote {
+	margin: 20px 0 20px 15px;
+	padding: 5px 15px;
+	border-left: 3px solid #ccc;
+  }
+  
+  .cont_wrap #article-body #article a {
+	color: #126fbe;
+	text-decoration: underline;
+  }
+  
+  .cont_wrap #article-body #article ul li {
+	font-size: 0.875rem;
+	padding-left: 13px;
+	line-height: 22px;
+	position: relative;
+  }
+  
+  .cont_wrap #article-body #article ul li::before {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 9px;
+	display: inline-block;
+	width: 3px;
+	height: 3px;
+	background: #fff;
+	border-radius: 50%;
+  }
+  
+  .cont_wrap #article-body #article p,
+  .cont_wrap #article-body #article div {
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	word-break: break-all;
+	word-wrap: break-word;
+  }
+  
+  .cont_wrap #article-body #article img {
+	display: inline-block;
+	width: 100%;
+	margin: 15px 0;
+  }
+  
+  .cont_wrap #article-body #article .iframe_video {
+	margin: 15px auto 0;
+	position: relative;
+	width: 100%;
+	padding-bottom: 56.25%;
+  }
+  
+  .cont_wrap #article-body #article .iframe_video iframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+  }
+  
