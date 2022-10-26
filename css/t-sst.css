@@ -1443,6 +1443,13 @@
 	position: relative;
 	padding-bottom: 17px;
 }
+#ss_wrap .maingameSwiper .swiper-pagination {
+	position: sticky;	
+	bottom: 5px !important;
+}
+#ss_wrap .maingameSwiper .swiper-slide {
+	padding-bottom: 0;
+}
 
 /*컨텐츠 내 점수 측정기*/
 .inbox.score_wrap {

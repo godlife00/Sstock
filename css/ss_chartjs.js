@@ -275,74 +275,103 @@ $(document).ready(function () {
 
     // 검색결과 일봉 + 선3개 차트
     if ($('#containeroutline1_3').length) {
+        Highcharts.chart('containeroutline1_3', {           
 
-        Highcharts.chart('containeroutline1_3', {
             chart: {                
-                type: 'line',
-                zoomType: 'xy',
-                backgroundColor: {
-                    stops: [
-                        [0, '#ffffff'],
-                        [1, '#ffffff']
-                    ]
-                },
-                style: {
-                    fontFamily: "'Spoqa Han Sans Neo','Malgun gothic', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'"
-                },
-                marginTop: 100,
-                marginBottom: 90,
-                plotBorderColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,                
+                type: 'column',                
             },
 
-            colors: ["#DBDFED", "#3655D6", "#37C60C", "#FC4F4F", "#F7C51E", "#AA79E2", "#626262"],
+            // 하단 네비게이션 제거
+            navigator: {
+                enabled: false,                     
+            },
+
+            // 스크롤바 제거
+            scrollbar: {
+                enabled: false
+            },
+
+            // 기간범위선택 
+            rangeSelector: {
+                enabled: false
+            },
 
             title: {
-                text: '매출액 & 영업이익 & 순이익<br><span>삼성전자 (005930)</span>',
-                y: 30,
+                text: null
             },
+
+            credits: {
+                enabled: false
+            },
+
+            credits: {
+                enabled: false
+            },
+
+            lang: {
+                noData: "해당 데이터가 없습니다",
+            },
+
+            legend: {          
+                enabled: false,
+            },
+
+            exporting: {
+                enabled: false,
+            },
+
+            colors: ["#e57828", "#fcc983", "#ccd1d5"],
 
             tooltip: {
                 shared: true,
+                crosshairs: true,
+                pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.3f}억원</b><br/>'
             },
 
-            xAxis: [{    
-                categories: ['12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03','12-03'],  
-                type: 'datetime',                
+            xAxis: [{
+                categories: ['2017', '2018', '2019'],
+                crosshair: true,
                 labels: {
-                    // formatter: function() {
-                    //     return Highcharts.dateFormat('%y', this.value);
-                    // },
-                    step: 2
-                },                
-                crosshair: true        
+                    style: {
+                        color: '#939393',
+                        fontSize: '0.85rem'
+                    }
+                }
             }],
 
-
-            yAxis: [{// 1
+            yAxis: {
                 title: {
-                    text: null,
+                    text: null
                 },
+                lineColor: null,
+                minorGridLineWidth: 1,
+                gridLineWidth: 0,
+                lineWidth: 1,
+                plotLines: [{
+                    color: '#c8c8c8',
+                    width: 1,
+                    value: 0
+                }],
+                alternateGridColor: null,
+                showFirstLabel: false,
+                breaks: [{
+                    from: 0,
+                    to: 100
+                }],
                 labels: {
-                    format: '{value}억',
-                    style: {
-                        color: ["#656d7e"],
-                    }
-                },
-            }, {// 2
-                title: {
-                    text: null,
-                },
-                labels: {
-                    format: '{value}억',
-                    style: {
-                        color: ["#656d7e"],
-                    }
-                },
-                opposite: true
-            }],
+                    enabled: false
+                }
+            },
 
+            title: {
+                style: {
+                    'font-weight': "bold",
+                    color: '#E0E0E3',
+                    textTransform: 'uppercase',
+                    fontSize: '0',
+                },
+                text: ''
+            },
 
             credits: {
                 enabled: false
@@ -352,35 +381,37 @@ $(document).ready(function () {
                 enabled: false
             },
 
+            legend: {
+                enabled: false,
+            },
+
             series: [{
-                name: '매출액(좌)',
-                type: 'column',
-                data: [42, 52, 57, 69, 97, 11, 42, 52, 57, 69, 97, 11],
-                tooltip: {
-                    pointFormat: '<span style="color:#656d7e">{series.name} : <b>{point.y:,.0f}억원</b><br/>'
-                },
+                name: '매출액',
+                data: [97.988, 45.988, 75.988]
             }, {
-                name: '영업이익(우)',
-                type: 'line',
-                yAxis: 1,
-                data: [142, 152, 157, 169, 197, 111, 142, 152, 157, 169, 197, 111],
+                name: '영업이익',
+                data: [85.988, 24.988, 42.988]
             }, {
                 name: '순이익',
-                type: 'line',
-                yAxis: 1,
-                data: [242, 252, 257, 269, 297, 211, 242, 252, 257, 269, 297, 211],
+                data: [64.988, 34.988, 24.988]
             }],
 
             plotOptions: {
                 series: {
                     marker: {
-                        enabled: true,
-                        fillColor: '#FFFFFF',
-                        lineWidth: 1,
-                        lineColor: null,
-                        radius: 3
+                        enabled: false,
                     }
-                },                
+                },
+                column: {
+                    minPointLength: 5,
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        color: '#939393',
+                        overflow: 'none',
+                        format: '{point.y:,.2f}',
+                    }
+                }
             },
         });
     }
