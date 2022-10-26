@@ -51,6 +51,23 @@
 					el: ".swiper-pagination",
 				},
 			});
+
+			//재무제표 연간,분기 탭메뉴			
+			$('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(1)').on('click', function () {
+				$(this).parent('div').children('span').removeClass("active");
+				$("ul.tabs li").removeClass("active");
+				$(this).addClass("active");
+				$(".tableetabs_wrap .tabletabs_content").hide();
+				$('.tabletabs_content.tabs_01').fadeIn();
+			});
+
+			$('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(2)').on('click', function () {
+				$(this).parent('div').children('span').removeClass("active");
+				$("ul.tabs li").removeClass("active");
+				$(this).addClass("active");
+				$(".tableetabs_wrap .tabletabs_content").hide();
+				$('.tabletabs_content.tabs_02').fadeIn();
+			});
 		});
 	</script>
 </head>
@@ -261,30 +278,81 @@
 
 						<!--v차트 분석 (특허출원)-->
 						<div class="inbox">
-							<div class="chart_box">
-								<div id="containerfinancials1_1" class="outline_styleSL"></div>
-								<ul class="chart_legend">
-									<li><span><i></i>매출액</span></li>
-									<li><span><i></i>영업이익</span></li>
-									<li><span><i></i>지배순이익</span></li>
-								</ul>
+							<div class="bdr_title">
+								<h4 class="title">재무제표</h4>
+								<div class="tabs_menu">
+									<span class="active">연간</span>
+									<span>분기</span>
+									<strong class="unit">* 기준 : 억원</strong>
+								</div>
+								<!-- //tabs_menu -->
 							</div>
-							<div class="chart_box">
-								<div id="containerfinancials1_2" class="outline_styleSL"></div>
-								<ul class="chart_legend">
-									<li><span><i></i>자산총계</span></li>
-									<li><span><i></i>부채총계</span></li>
-									<li><span><i></i>자본총계</span></li>
-								</ul>
+			
+							<div class="tableetabs_wrap">
+			
+								<!-- 재무제표 > 연간 -->
+								<div class="tabletabs_content tabs_01">
+									<div class="chart_box">
+										<div id="containerfinancials1_1" class="outline_styleSL"></div>
+										<ul class="chart_legend">
+											<li><span><i></i>매출액</span></li>
+											<li><span><i></i>영업이익</span></li>
+											<li><span><i></i>지배순이익</span></li>
+										</ul>
+									</div>
+									<div class="chart_box">
+										<div id="containerfinancials1_2" class="outline_styleSL"></div>
+										<ul class="chart_legend">
+											<li><span><i></i>자산총계</span></li>
+											<li><span><i></i>부채총계</span></li>
+											<li><span><i></i>자본총계</span></li>
+										</ul>
+									</div>
+									<div class="chart_box">
+										<div id="containerfinancials1_3" class="outline_styleSL"></div>
+										<ul class="chart_legend">
+											<li><span><i></i>영업활동</span></li>
+											<li><span><i></i>투자활동</span></li>
+											<li><span><i></i>재무활동</span></li>
+										</ul>
+									</div>
+								</div>
+								<!-- //tabletabs_content -->
+			
+								<!-- 재무제표 > 분기 -->
+								<div class="tabletabs_content tabs_02" style="display: none;">									
+									<div class="chart_box">
+										<div id="containerfinancials2_1" class="outline_styleSL"></div>
+										<ul class="chart_legend">
+											<li><span><i></i>매출액</span></li>
+											<li><span><i></i>영업이익</span></li>
+											<li><span><i></i>지배순이익</span></li>
+										</ul>
+									</div>
+									<div class="chart_box">
+										<div id="containerfinancials2_2" class="outline_styleSL"></div>
+										<ul class="chart_legend">
+											<li><span><i></i>자산총계</span></li>
+											<li><span><i></i>부채총계</span></li>
+											<li><span><i></i>자본총계</span></li>
+										</ul>
+									</div>
+									<div class="chart_box">
+										<div id="containerfinancials2_3" class="outline_styleSL"></div>
+										<ul class="chart_legend">
+											<li><span><i></i>영업활동</span></li>
+											<li><span><i></i>투자활동</span></li>
+											<li><span><i></i>재무활동</span></li>
+										</ul>
+									</div>
+								</div>
+			
 							</div>
-							<div class="chart_box">
-								<div id="containerfinancials1_3" class="outline_styleSL"></div>
-								<ul class="chart_legend">
-									<li><span><i></i>영업활동</span></li>
-									<li><span><i></i>투자활동</span></li>
-									<li><span><i></i>재무활동</span></li>
-								</ul>
-							</div>
+							<!-- //tabletabs_wrap -->
+
+
+
+							
 						</div>
 					</div>
 					<div class="group3 dpb swiper-slide">
