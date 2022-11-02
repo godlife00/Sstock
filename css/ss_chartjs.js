@@ -260,17 +260,11 @@ $(document).ready(function () {
             plotOptions: {
                 series: {                    
                     marker: {
-                        // enabled: false,
-                        enabled: true,                        
-                        fillColor: '#FFFFFF',
-                        lineWidth: 1,
-                        lineColor: null,
-                        states: {
-                            hover: {
-                                enabled: false
-                            }
-                        }
-                    }
+                        enabled: true,
+                        symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)',
+                        width: 4,
+                        height: 4
+                    },
                 },
             },
 
