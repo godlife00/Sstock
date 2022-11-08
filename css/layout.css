@@ -2260,6 +2260,7 @@ input[type=text]:-ms-clear {
 #ss_wrap .outline_styleSL {
 	height: 180px;
 	width: 100%;
+	margin-top: 20px;
 }
 
 #ss_wrap .outline_styleSL .highcharts-title {
