@@ -1637,7 +1637,21 @@
 	margin: 0 10px;
 	font-size: 16px;
 	font-weight: bold;
-	line-height: normal;
+	line-height: normal;	
+}
+#ss_wrap .cont_bottom_wrap .inbox.ofh {
+	position: relative;	
+	padding-top: 34px;
+}
+#ss_wrap .cont_bottom_wrap .inbox.ofh::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 10px;
+	display: block;
+	height: 2px;
+	width: 100%;	
+	background-color: #ccc;		
 }
 
 #ss_wrap .cont_bottom_wrap .investment_point li {
