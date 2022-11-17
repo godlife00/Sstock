@@ -705,6 +705,17 @@
 	color: #333333;
 }
 
+#ss_wrap .index_section .li_wrap ul.theme_card li a .no_relevantBox {
+
+}
+#ss_wrap .index_section .li_wrap ul.theme_card li a .no_relevantBox .relevant {
+	text-align: center;
+	font-weight: bold;    
+    font-size: 12px;
+    padding-top: 18px;    
+}
+
+
 #ss_wrap .index_section .li_wrap ul.theme_card li .item p.logo {
 	margin: 0 4px;
 	width: 31px;
@@ -1219,6 +1230,13 @@
 	font-size: 18px !important;
 	line-height: 20px;
 	font-weight: bold;
+}
+
+#ss_wrap .cont_wrap .no_relevantBox {
+	text-align: center;
+	font-weight: bold;    
+    font-size: 16px;
+	padding: 20px 0;
 }
 
 #ss_wrap .cont_top_wrap .type {
