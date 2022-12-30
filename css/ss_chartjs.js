@@ -134,7 +134,7 @@ $(document).ready(function () {
                 thousandsSep: ','
             }    
         });
-        Highcharts.chart('containeroutline1_2', {
+        Highcharts.stockChart('containeroutline1_2', {
             
             chart: {                
                 borderColor: '#333',                                
