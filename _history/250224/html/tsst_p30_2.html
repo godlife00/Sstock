@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		// 포트폴리오 매매전략 스크롤
+		$(document).ready(function () {
+			var scrollWidth = $('#ss_wrap .index_section .li_wrap ul.type01 li').outerWidth(true);					
+			var scrolllength = $('#ss_wrap .index_section .li_wrap ul.type01 li').length;	
+			console.log(scrollWidth * scrolllength);
+			$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
+
+			function showGradient() {								
+				if ($(this).scrollLeft() == 0) {
+					// 시작
+				} else if (Math.ceil($(this).scrollLeft() + $(this).width()) >= $('.scrollcontent').width() - 200) {
+					//스크롤이 끝에 왔을 때
+					console.log("오른쪽끝");
+					// var scrollWidth = $('.scrollcontent').innerWidth();					
+					// $('#ss_wrap .index_section .li_wrap ul').css('width', scrollWidth * 2) // 추가된 리스트 수만큼 width값 증가 해야함 (ex : scrollWidth * 2) 
+					$('#ss_wrap .index_section .li_wrap ul li').clone().appendTo('#ss_wrap .index_section .li_wrap ul');
+					var scrollWidth = $('#ss_wrap .index_section .li_wrap ul.type01 li').outerWidth(true);					
+					var scrolllength = $('#ss_wrap .index_section .li_wrap ul.type01 li').length;	
+					console.log(scrollWidth * scrolllength);
+					$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
+				} else {
+					// 중간
+				}
+			}
+
+			$(function () {
+				showGradient();
+				$('.scrollwrap').on('scroll', showGradient);
+			});
+		});
+	</script>
+</head>
+
+<body oncontextmenu="return false;">
+	<div class="wrapper" id="topwrpperID">
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+
+			<!--헤더-->
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<!--메뉴-->
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="tsst_p23.html" title="HOME">HOME</a></li>
+						<li><a href="tsst_p26_1.html" title="종목추천">종목추천</a></li>
+						<li><a href="tsst_p28_1.html" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+						<li><a href="tsst_p30_1.html" class="on" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+						<li><a href="#" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="#" title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div id="ss_wrap" class="tsst_ver">
+			<!--추천 포트폴리오-->
+			<div class="sub_wrap" style="position:relative;">
+				<!--포트메뉴 : 선택된 메뉴 a에 클래스 focus 부여-->
+				<div class="port_box">
+					<h2 class="port_tit"> <img src="../img/cont/tit_img_port2.png" alt="슈퍼스탁 2호 - 일평균 1회 매매"> </h2>
+					<div class="port_data">
+						<p class="floatleft txt_right" style="width: 35%;"><img src="../img/cont/tit_port_rate2.png"
+								alt="수익률" style="height: 18px; padding-top: 2px;"></p>
+						<p class="floatleft bold txt_center" style="width: 65%;"><span class="num increase"
+								style="line-height: 26px; font-size: 26px;">110.2</span><span>%</span></p>
+						<p class="clear pdt_5"><img src="../img/cont/txt_img_port2_date.png" alt="16년 7월 11일 이후"
+								style="height: 19px;"></p>
+					</div>
+					<p class="port_info"><img src="../img/cont/txt_img_port2_info.png" alt="수급+벨류+펀더멘탈 최적의 3박자 포트폴리오">
+					</p>
+				</div>
+
+				<!--매매전략-->
+				<div class="cont_box index_section">
+					<h5><img src="../img/cont/h5_port02_2.png" alt="포트폴리오 매매전략" /></h5>
+					<div class="scrollwrap">
+						<div class="scrollcontent">
+							<div class="li_wrap">
+								<ul class="type01 scrollul">
+									<li class="li02"><a
+											href="/minsstockbot/ss_view.php?sc=025540&amp;st=1&amp;sdt=20220916144350">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A025540.jpg"
+													alt="025540"
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">한국단자</span>
+											<p class="date">09/16금</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_02.png"
+																alt="매수가"></th>
+														<td class="num"><span>64,500</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_02_th_02.png"
+																alt="목표가"></th>
+														<td class="num"><span>77,500</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_03.png"
+																alt="비중"></th>
+														<td class="num"><span>0.0</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="increase bold">4.0</span><span
+																class="increase bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_02_tit_buy.png"
+													alt="신규매수"></p>
+										</a></li>
+									<li class="li04"><a
+											href="/minsstockbot/ss_view.php?sc=002380&amp;st=1&amp;sdt=20220916144218">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A002380.jpg"
+													alt=""
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">KCC</span>
+											<p class="date">09/16금</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_01.png"
+																alt="현재가"></th>
+														<td class="num"><span>271,000</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_02.png"
+																alt="목표가"></th>
+														<td class="num increase"><span>36.1</span><span>%</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_03.png"
+																alt="매수가"></th>
+														<td class="num"><span>4.7</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="decrease bold">0.0</span><span
+																class="decrease bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_04_tit_sell.png"
+													alt="전량매도"></p>
+										</a></li>
+									<li class="li02"><a
+											href="/minsstockbot/ss_view.php?sc=004560&amp;st=1&amp;sdt=20220916104936">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A004560.jpg"
+													alt="004560"
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">현대비앤지스틸</span>
+											<p class="date">09/16금</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_02.png"
+																alt="매수가"></th>
+														<td class="num"><span>14,900</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_02_th_02.png"
+																alt="목표가"></th>
+														<td class="num"><span>17,900</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_03.png"
+																alt="비중"></th>
+														<td class="num"><span>0.0</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="increase bold">4.0</span><span
+																class="increase bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_02_tit_buy.png"
+													alt="신규매수"></p>
+										</a></li>
+									<li class="li04"><a
+											href="/minsstockbot/ss_view.php?sc=028260&amp;st=1&amp;sdt=20220916104751">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A028260.jpg"
+													alt=""
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">삼성물산</span>
+											<p class="date">09/16금</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_01.png"
+																alt="현재가"></th>
+														<td class="num"><span>114,000</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_02.png"
+																alt="목표가"></th>
+														<td class="num "><span>-6.5</span><span>%</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_03.png"
+																alt="매수가"></th>
+														<td class="num"><span>3.8</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="decrease bold">0.0</span><span
+																class="decrease bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_04_tit_sell.png"
+													alt="전량매도"></p>
+										</a></li>
+									<li class="li02"><a
+											href="/minsstockbot/ss_view.php?sc=014830&amp;st=1&amp;sdt=20220908122238">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A014830.jpg"
+													alt="014830"
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">유니드</span>
+											<p class="date">09/08목</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_02.png"
+																alt="매수가"></th>
+														<td class="num"><span>104,000</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_02_th_02.png"
+																alt="목표가"></th>
+														<td class="num"><span>125,000</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_03.png"
+																alt="비중"></th>
+														<td class="num"><span>0.0</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="increase bold">4.0</span><span
+																class="increase bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_02_tit_buy.png"
+													alt="신규매수"></p>
+										</a></li>
+									<li class="li03"><a
+											href="/minsstockbot/ss_view.php?sc=079550&amp;st=1&amp;sdt=20220908122044">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A079550.jpg"
+													alt=""
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">LIG넥스원</span>
+											<p class="date">09/08목</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_03_th_01.png"
+																alt="현재가"></th>
+														<td class="num"><span>104,000</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_03_th_02.png"
+																alt="목표가"></th>
+														<td class="num increase"><span>138.0</span><span>%</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_03_th_03.png"
+																alt="매수가"></th>
+														<td class="num"><span>4.3</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="decrease bold">2.8</span><span
+																class="decrease bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_03_tit_weight_reduction.png"
+													alt="비중축소"></p>
+										</a></li>
+									<li class="li04"><a
+											href="/minsstockbot/ss_view.php?sc=074600&amp;st=1&amp;sdt=20220908121856">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A074600.jpg"
+													alt=""
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">원익QnC</span>
+											<p class="date">09/08목</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_01.png"
+																alt="현재가"></th>
+														<td class="num"><span>25,200</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_02.png"
+																alt="목표가"></th>
+														<td class="num "><span>-13.0</span><span>%</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_03.png"
+																alt="매수가"></th>
+														<td class="num"><span>3.3</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="decrease bold">0.0</span><span
+																class="decrease bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_04_tit_sell.png"
+													alt="전량매도"></p>
+										</a></li>
+									<li class="li02"><a
+											href="/minsstockbot/ss_view.php?sc=200880&amp;st=1&amp;sdt=20220908111701">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A200880.jpg"
+													alt="200880"
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">서연이화</span>
+											<p class="date">09/08목</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_02.png"
+																alt="매수가"></th>
+														<td class="num"><span>8,900</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_02_th_02.png"
+																alt="목표가"></th>
+														<td class="num"><span>10,700</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_03.png"
+																alt="비중"></th>
+														<td class="num"><span>0.0</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="increase bold">4.0</span><span
+																class="increase bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_02_tit_buy.png"
+													alt="신규매수"></p>
+										</a></li>
+									<li class="li04"><a
+											href="/minsstockbot/ss_view.php?sc=093320&amp;st=1&amp;sdt=20220908111510">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A093320.jpg"
+													alt=""
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">케이아이엔엑스</span>
+											<p class="date">09/08목</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_01.png"
+																alt="현재가"></th>
+														<td class="num"><span>51,600</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_02.png"
+																alt="목표가"></th>
+														<td class="num "><span>-4.0</span><span>%</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_th_03.png"
+																alt="매수가"></th>
+														<td class="num"><span>4.0</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_04_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="decrease bold">0.0</span><span
+																class="decrease bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_04_tit_sell.png"
+													alt="전량매도"></p>
+										</a></li>
+									<li class="li02"><a
+											href="/minsstockbot/ss_view.php?sc=085370&amp;st=1&amp;sdt=20220906122143">
+											<p class="logo"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A085370.jpg"
+													alt="085370"
+													onerror="this.src=&quot;https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/empty_logo.jpg&quot;;">
+											</p>
+											<span
+												style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">루트로닉</span>
+											<p class="date">09/06화</p>
+											<table cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_02.png"
+																alt="매수가"></th>
+														<td class="num"><span>18,800</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_02_th_02.png"
+																alt="목표가"></th>
+														<td class="num"><span>22,500</span><span>원</span></td>
+													</tr>
+													<tr>
+														<th><img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_th_03.png"
+																alt="비중"></th>
+														<td class="num"><span>0.0</span><span>%</span><img
+																src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/index/box_01_arrow.png"
+																class="arrow" alt="arrow"><span
+																class="increase bold">4.0</span><span
+																class="increase bold">%</span></td>
+													</tr>
+												</tbody>
+											</table>
+											<p class="type"><img
+													src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/index/box_02_tit_buy.png" alt="신규매수"></p>
+										</a></li>
+										<div class="ul_li">
+											<!-- 포트폴리오 매매전략 추가되는 영역 -->
+										</div>
+								</ul>
+								
+							</div>
+							<!-- //li_wrap -->
+						</div>
+						<!-- //scrollcontent -->
+					</div>					
+				</div>
+				<!-- //scrollwrap -->
+
+
+
+				<!-- 탭메뉴 : 선택된 메뉴 li에 클래스 focus 부여-->
+				<div class="tab_menu tab02">
+					<ul>
+						<li class="t3 li01 focus"><a href="javascript:ClickTab( 'li01' );">포트폴리오</a></li>
+						<li class="t3 li02"><a href="javascript:ClickTab( 'li02' );">수익률</a></li>
+						<li class="t3 li03"><a href="javascript:ClickTab( 'li03' );">운영원칙</a></li>
+					</ul>
+				</div>
+
+				<!--포트폴리오-->
+				<!--선택된 메뉴의 컨텐츠 경우 display: none; 제거-->
+				<div id="id_li01" style="margin: 10px 15px;">
+					<div style="position:relative; margin-bottom:10px;">
+						<p><img src="../img/cont/tit_port2.png" alt="스토봇 포트 2호" style="height:22px;" /></p>
+					</div>
+					<div class="tbl_wrap" style="border:none; clear:left;">
+						<table cellspacing="0" cellpadding="0" style="width:100%; margin-bottom: 60px;">
+							<colgroup>
+								<col width="10%">
+								<col width="25%">
+								<col width="25%">
+								<col width="15%">
+								<col width="15%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="nonebg"><img alt="번호" src="../img/index/th_index_tbl_01.png"></th>
+									<th><img alt="종목명" src="../img/index/th_index_tbl_02.png"></th>
+									<th><img alt="현재가" src="../img/index/th_index_tbl_03.png"></th>
+									<th><img alt="비중" src="../img/index/th_index_tbl_04.png"></th>
+									<th><img alt="수익률" src="../img/index/th_index_tbl_05.png"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="num"><img alt="0" src="../img/index/ico_num_01.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=078340">컴투스</a></td>
+									<td class="price">112,400</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">30.7%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="1" src="../img/index/ico_num_02.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=214180">민앤지</a></td>
+									<td class="price">37,200</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">26.1%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="2" src="../img/index/ico_num_03.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=028150">GS홈쇼핑</a></td>
+									<td class="price">210,900</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">24.1%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="3" src="../img/index/ico_num_04.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=083930">아바코</a></td>
+									<td class="price">7,230</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">16.1%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="4" src="../img/index/ico_num_05.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=030190">NICE평가정보</a></td>
+									<td class="price">7,660</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">14.0%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="5" src="../img/index/ico_num_06.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=192530">광주은행</a></td>
+									<td class="price">11,100</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">11.9%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="6" src="../img/index/ico_num_07.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=013030">하이록코리아</a></td>
+									<td class="price">22,250</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">8.0%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="7" src="../img/index/ico_num_08.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=096770">SK이노베이션</a></td>
+									<td class="price">168,000</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">5.0%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="8" src="../img/index/ico_num_09.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=023410">유진기업</a></td>
+									<td class="price">5,300</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">4.5%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="9" src="../img/index/ico_num_10.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=010120">LS산전</a></td>
+									<td class="price">46,000</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">1.8%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="10" src="../img/index/ico_num_11.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=119860">다나와</a></td>
+									<td class="price">6,590</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">1.4%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="11" src="../img/index/ico_num_12.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=131030">디에이치피코리아</a></td>
+									<td class="price">8,970</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">0.2%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="12" src="../img/index/ico_num_13.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=023150">MH에탄올</a></td>
+									<td class="price">7,800</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 nochange">0.0%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="13" src="../img/index/ico_num_14.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=039340">한국경제TV</a></td>
+									<td class="price">4,135</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-0.4%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="14" src="../img/index/ico_num_15.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=019210">와이지-원</a></td>
+									<td class="price">10,450</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-0.5%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="15" src="../img/index/ico_num_16.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=002810">삼영무역</a></td>
+									<td class="price">18,550</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-1.3%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="16" src="../img/index/ico_num_17.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=071050">한국금융지주</a></td>
+									<td class="price">48,300</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-1.4%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="17" src="../img/index/ico_num_18.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=004560">현대비앤지스틸</a></td>
+									<td class="price">13,300</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-1.5%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="18" src="../img/index/ico_num_19.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=123890">한국자산신탁</a></td>
+									<td class="price">8,500</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-3.1%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="19" src="../img/index/ico_num_20.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=023910">대한약품</a></td>
+									<td class="price">27,650</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-7.2%</td>
+								</tr>
+								<tr>
+									<td style="background-color: #737fae; color: #fff; padding: 10px 0;" colspan="2">
+										현금보유비중</td>
+									<td colspan="3" style="background-color: #f5f4e2;">0.0%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!--수익률-->
+				<!--선택된 메뉴의 컨텐츠 경우 display: none; 제거-->
+				<div id="id_li02" class="port_rate" style="display: none;">
+					<ul>
+						<li> <span class="img"><img src="../img/cont/tit_port2_02.png"
+									style="width: 140px; border:none; margin-top: 10px;" alt="스톡봇 2호" /></span> <span
+								class="txt"><img src="../img/cont/img_port2.png" style="width: 140px;"
+									alt="안정수익추구형" /></span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_rate.png" alt="누적수익률" /></span> <span
+								class="num increase">27.7%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_3m.png" alt="최근 3개월" /></span> <span
+								class="num increase">8.1%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_6m.png" alt="최근 6개월" /></span> <span
+								class="num increase">9.0%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_9m.png" alt="최근 9개월" /></span> <span
+								class="num nochange">0.0%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_1y.png" alt="최근 1년" /></span> <span
+								class="num nochange">0.0%</span> </li>
+					</ul>
+				</div>
+
+				<!--운영원칙-->
+				<!--선택된 메뉴의 컨텐츠 경우 display: none; 제거-->
+				<div id="id_li03" class="rule_wrap" style="margin: 10px 15px; display: none;">
+					<p class="tit"><img src="../img/cont/txt_rule_port2.png" alt="펀더멘탈+밸류에이션+수급 3박자 갖춘 기업에 투자" /></p>
+					<div>
+						<h5><img src="../img/cont/tit_rule_port_1.png" alt="포트폴리오 특징" />
+						</h5>
+						<ul>
+							<li>기업의 수익성 대비 저평가 된 기업에 투자</li>
+							<li>외국인, 기관 등 수급이 호전되는 초기에 투자</li>
+							<li>퀀트 분석에 근거해 우량주를 골라낸 후, 담당 연구원이 분석 후, 최고의 종목을 선별해 투자</li>
+						</ul>
+					</div>
+					<div>
+						<h5><img src="../img/cont/tit_rule_port_2.png" alt="포트 운영 원칙" />
+						</h5>
+						<ul>
+							<li>평균 하루에 한 종목을 매매합니다.</li>
+							<li>종목발굴이 어려운 초보 투자자에게 적합합니다.</li>
+							<li>포트는 20개 종목, 동일 비중(5%)으로 투자합니다.</li>
+							<li>신규 종목추천 및 포트편입은 오전 9시~10시 사이에 제공합니다. </li>
+							<li>연평균 15~20% 수익률을 목표로 합니다.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--푸터-->
+		<footer id="footer">
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+				12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+				Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
+	</div>
+</body>
+
+</html>

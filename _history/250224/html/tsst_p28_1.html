@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+</head>
+
+<body>
+	<div class="wrapper" id="topwrpperID">
+
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+
+			<!--헤더-->
+			
+			<!--2depth 메뉴-->
+			<div class="sub_menu">
+				<nav class="nav">
+					<h2><span class="item">적중! 수익실현 종목</span></h2>
+					<button class="btn_back" type="button" onclick="history.back();"> <span>뒤로</span> </button>
+				</nav>
+			</div>
+
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<!--메뉴-->
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="tsst_p23.html" title="HOME">HOME</a></li>
+						<li><a href="tsst_p26_1.html" title="종목추천">종목추천</a></li>
+						<li><a href="tsst_p28_1.html" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+						<li><a href="tsst_p30_1.html" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+						<li><a href="#" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="#" title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			
+		</div>
+		
+		<div id="ss_wrap" class="tsst_ver">
+			<div class="index_section sub_wrap">
+				<!--적중 종목 리스트-->
+				<div class="li_wrap oneliWrapCl" data-key="2" data-addkey="" data-page="1" data-end="0"
+					data-onewidth="-1" data-maxwidth="-1" data-limit="20" style="overflow-x: auto;">
+					<ul class="type01 scrollul basic">
+						<li class="li_overweight"><a href="tsst_p28_2.html">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/003230.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">삼양식품</span>
+								<p class="date" style="left: 0 !important;">03/16목</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>41,450</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>64,600</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>55.9</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=214180&st=3&sdt=20170316133834">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/214180.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">민앤지</span>
+								<p class="date" style="left: 0 !important;">03/16목</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>30,000</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>38,550</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>28.5</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=043610&st=3&sdt=20170316133605">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/043610.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">KT뮤직</span>
+								<p class="date" style="left: 0 !important;">03/16목</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>3,680</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>4,700</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>27.7</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=011370&st=3&sdt=20170315142727">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/011370.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">서한</span>
+								<p class="date" style="left: 0 !important;">03/15수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>2,290</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>2,745</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>19.9</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=004380&st=3&sdt=20170315142617">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/004380.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">삼익THK</span>
+								<p class="date" style="left: 0 !important;">03/15수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>10,900</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>13,750</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>26.1</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=030190&st=3&sdt=20170315110401">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/030190.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">NICE평가정보</span>
+								<p class="date" style="left: 0 !important;">03/15수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>6,790</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>7,980</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>17.5</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=008060&st=3&sdt=20170313110558">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/008060.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">대덕전자</span>
+								<p class="date" style="left: 0 !important;">03/13월</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>8,100</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>9,240</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>14.1</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=007700&st=3&sdt=20170308133852">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/007700.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">F&F</span>
+								<p class="date" style="left: 0 !important;">03/08수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>13,500</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>26,450</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>96.0</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=043370&st=3&sdt=20170308133259">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/043370.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">평화정공</span>
+								<p class="date" style="left: 0 !important;">03/08수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>13,400</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>15,500</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>15.7</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=013030&st=3&sdt=20170308132910">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/013030.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">하이록코리아</span>
+								<p class="date" style="left: 0 !important;">03/08수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png"
+													alt="추천가" /></th>
+											<td class="num"><span>20,450</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png"
+													alt="현재가" /></th>
+											<td class="num"><span>22,800</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png"
+													alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>11.5</span><span>%</span></td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img
+										src="../img/index/box_tit_05_target.png"
+										alt="적중! 수익률 달성" /></p>
+							</a></li>
+					</ul>
+				</div>
+				<style>
+					
+					</style>
+				<div class="li1d_btn">
+					<a href="javascript:fnOnCardListAdd();" class="b1">
+						<span>더보기</span>
+					</a>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!--푸터-->
+		<footer id="footer">	
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
+	</div>
+</body>
+
+</html>

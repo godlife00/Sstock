@@ -202,7 +202,7 @@ button span,
 }
 
 .gnb ul.gnb_li {
-	width: 524px;
+	width: 416px;
 	padding-right: 20px;
 }
 
@@ -2260,7 +2260,6 @@ input[type=text]:-ms-clear {
 #ss_wrap .outline_styleSL {
 	height: 180px;
 	width: 100%;
-	margin-top: 20px;
 }
 
 #ss_wrap .outline_styleSL .highcharts-title {

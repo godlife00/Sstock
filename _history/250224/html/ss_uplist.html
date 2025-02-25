@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+</head>
+
+<body>
+	<div class="wrapper" id="topwrpperID">
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+
+			<!--헤더-->
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off"
+							maxlength="255" id="seName" name="sn" class="input_txt input_txt_fcs">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="#"><img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png"
+								alt="검색" class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<!--메뉴-->
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="tsst_p23.html" title="HOME">HOME</a></li>
+						<li><a href="tsst_p26_1.html" title="종목추천">종목추천</a></li>
+						<li><a href="tsst_p28_1.html" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+						<li><a href="tsst_p30_1.html" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+						<li><a href="#" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="#" class="on" title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div id="ss_wrap" class="tsst_ver">
+			<!--추천 포트폴리오-->
+			<div id="ss_wrap" class="tsst_ver">
+				<!--업종/테마분석-->
+				<div class="index_section sub_wrap">
+					<!-- 탭메뉴 : 선택된 메뉴 li에 클래스 focus 부여-->
+					<div class="tab_menu tab03">
+						<ul>
+							<li class="t2 li01"><a href="ss_tmlist.html">업종/테마</a></li>
+							<li class="t2 li02 focus"><a href="ss_uplist.html">급등주분석</a></li>
+						</ul>
+					</div>
+					<div data-limit="20" data-maxwidth="0" data-onewidth="0" data-end="0" data-page="1" data-addkey=""
+						data-key="up" class="oneliWrapCl">
+						<ul class="list_li_02 scrollul" style="margin-top:0;">
+
+							<li><a href="/minsstockbot/search.php?sn=092600">
+									<p class="title">앤씨앤</p>
+									<p class="value2">2,610<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲600</span></p>
+									<p class="gap_rate increase"><span class="en">▲29.9%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=008420">
+									<p class="title">문배철강</p>
+									<p class="value2">4,800<span>원</span></p>
+									<p class="gap_price decrease"><span class="en">▼1,045</span></p>
+									<p class="gap_rate decrease"><span class="en">▼27.8%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=192410">
+									<p class="title">휴림네트웍스</p>
+									<p class="value2">1,305<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲250</span></p>
+									<p class="gap_rate increase"><span class="en">▲23.7%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=005160">
+									<p class="title">동국산업</p>
+									<p class="value2">6,450<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲1,060</span></p>
+									<p class="gap_rate increase"><span class="en">▲19.7%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=026940">
+									<p class="title">부국철강</p>
+									<p class="value2">4,105<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲605</span></p>
+									<p class="gap_rate increase"><span class="en">▲17.3%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=045970">
+									<p class="title">코아시아</p>
+									<p class="value2">8,140<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲1,170</span></p>
+									<p class="gap_rate increase"><span class="en">▲16.8%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=064520">
+									<p class="title">바른전자</p>
+									<p class="value2">7,040<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲950</span></p>
+									<p class="gap_rate increase"><span class="en">▲15.6%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=039240">
+									<p class="title">경남스틸</p>
+									<p class="value2">3,870<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲510</span></p>
+									<p class="gap_rate increase"><span class="en">▲15.2%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=025620">
+									<p class="title">제이준코스메틱</p>
+									<p class="value2">866<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲110</span></p>
+									<p class="gap_rate increase"><span class="en">▲14.6%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=263700">
+									<p class="title">케어랩스</p>
+									<p class="value2">6,230<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲690</span></p>
+									<p class="gap_rate increase"><span class="en">▲12.5%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=006220">
+									<p class="title">제주은행</p>
+									<p class="value2">8,870<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲860</span></p>
+									<p class="gap_rate increase"><span class="en">▲10.7%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=053260">
+									<p class="title">금강철강</p>
+									<p class="value2">10,350<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲980</span></p>
+									<p class="gap_rate increase"><span class="en">▲10.5%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=200710">
+									<p class="title">에이디테크놀로지</p>
+									<p class="value2">14,500<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲1,300</span></p>
+									<p class="gap_rate increase"><span class="en">▲9.9%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=040300">
+									<p class="title">YTN</p>
+									<p class="value2">7,210<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲620</span></p>
+									<p class="gap_rate increase"><span class="en">▲9.4%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=117670">
+									<p class="title">알파홀딩스</p>
+									<p class="value2">1,370<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲110</span></p>
+									<p class="gap_rate increase"><span class="en">▲8.7%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=071090">
+									<p class="title">하이스틸</p>
+									<p class="value2">4,795<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲385</span></p>
+									<p class="gap_rate increase"><span class="en">▲8.7%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=204630">
+									<p class="title">스튜디오산타클로스</p>
+									<p class="value2">7,690<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲570</span></p>
+									<p class="gap_rate increase"><span class="en">▲8.0%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=004690">
+									<p class="title">삼천리</p>
+									<p class="value2">259,000<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲18,500</span></p>
+									<p class="gap_rate increase"><span class="en">▲7.7%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=008260">
+									<p class="title">NI스틸</p>
+									<p class="value2">4,525<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲315</span></p>
+									<p class="gap_rate increase"><span class="en">▲7.5%</span></p>
+								</a> </li>
+
+							<li><a href="/minsstockbot/search.php?sn=037760">
+									<p class="title">쎄니트</p>
+									<p class="value2">2,065<span>원</span></p>
+									<p class="gap_price increase"><span class="en">▲135</span></p>
+									<p class="gap_rate increase"><span class="en">▲7.0%</span></p>
+								</a> </li>
+						</ul>
+					</div>
+					<style>
+						.li1d_btn {
+							padding: 10px 12px;
+						}
+
+						.li1d_btn:after {
+							content: "";
+							display: block;
+							clear: both;
+						}
+
+						.li1d_btn .b1 {
+							background: #ffffff;
+							width: 100%;
+							display: block;
+							box-sizing: border-box;
+							border: 1px solid #eae5e5;
+							text-align: center;
+							height: 29px;
+							float: left;
+						}
+
+						.li1d_btn .b1 span {
+							line-height: 27px;
+							color: #2b2b2b;
+							font-size: 14px;
+							font-weight: 700;
+							display: inline-block;
+							letter-spacing: -0.5px;
+							padding-left: 15px;
+						}
+					</style>
+					<div class="li1d_btn">
+						<a href="javascript:fnOnListAdd();" class="b1">
+							<span>더보기</span>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--푸터-->
+		<footer id="footer">
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+				12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+				Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
+	</div>
+</body>
+
+</html>
