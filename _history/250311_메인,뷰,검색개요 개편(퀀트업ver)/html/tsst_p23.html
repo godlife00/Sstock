@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper('.maingameSwiper', {
+				autoHeight: true,
+				slidesPerView: "auto",
+				pagination: {
+					el: ".swiper-pagination",
+				},
+			});
+		});
+	</script>
+</head>
+
+<body oncontextmenu="return false;">
+	<div class="wrapper" id="topwrpperID">
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+			<!--헤더-->
+
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="https://m.itooza.com/minsstockbot/m_index.php" class="on" title="HOME">HOME</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" title="종목추천">종목추천</a></li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1" title="슈퍼스탁 1호">슈퍼스탁1호</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2" title="슈퍼스탁 2호">슈퍼스탁2호</a>
+						</li>
+						<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+								title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+			<!--메뉴-->
+		</div>
+		<style>
+			#ss_wrap .index_section .li_wrap ul.type02 li {
+				margin-bottom: 0 !important;
+			}
+		</style>
+		<div id="ss_wrap" class="tsst_ver">
+			<div class="tsst_visual"><a href="#" title="서비스 바로가기"><img src="../img/index/img_index_visual.png"
+						alt="T슈퍼스탁 로봇엔진이 분석한 최고의 주식정보를 제공 합니다." /></a> </div>
+			<div class="index_section">
+				<h3><a href="tsst_p26_1.html"><img src="../img/index/tit_index_01_01.png" alt="종목 추천" /></a></h3>
+				<p class="btn_more"><a href="#">더보기 +</a></p>
+				<div class="li_wrap" data-key="2" data-addkey="" data-page="1" data-end="0" data-onewidth="172"
+					data-maxwidth="2064" data-limit="10" style=" -webkit-overflow-scrolling:touch;">
+					<ul class="type02 scrollul" style="width: 2064px;">
+						<li><a href="/stockbot/ss_view.php?sc=032560&st=2&sdt=20170306090322">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/032560.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/06월</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">황금에스티, ‘실적 개선 & 자산가치 대비...</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02">성장주</li>
+									<li class="li03 on">턴</li>
+								</ul>
+								<p class="target"><span>11,500</span>원</p>
+							</a></li>
+						<li><a href="/stockbot/ss_view.php?sc=011370&st=2&sdt=20170217085912">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/011370.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">02/17금</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">서한, ‘실적 성장 & 수익가치 대비 저평가...</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02 on">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target"><span>2,800</span>원</p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/17금</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 증가 & 저평가 & 배당 증...</p>
+								<ul class="analysis_type">
+									<li class="li01 on">우량주</li>
+									<li class="li02">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/17금</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 실적 성장 + 배당 매력</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02 on">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/16목</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 성장 지속 & 수익성 대비...</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02 on">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/16목</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 구조조정+육계 가격 상승 효과</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02">성장주</li>
+									<li class="li03 on">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/15수</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 성장 지속 & 여유 현금 ...</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02 on">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/15수</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 신규 어선 도입+어가 상승 기대</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02 on">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/14화</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘자산가치 대비 저평가 & 실적...</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02">성장주</li>
+									<li class="li03 on">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/14화</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 환율 안정으로 실적 턴어라운드</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02">성장주</li>
+									<li class="li03 on">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/13월</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, 전방산업 증설에 실적성장</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02 on">성장주</li>
+									<li class="li03">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+						<li><a href="javascript:ClickAlertServiceNoMember();">
+								<p class="logo"><img src="../img/common/logo_empty_mts.png" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<p class="date">03/13월</p>
+								<p class="tit" style="height: 49px;overflow:hidden;">○○○○, ‘실적 개선 & 현금 풍부 & 배당...</p>
+								<ul class="analysis_type">
+									<li class="li01">우량주</li>
+									<li class="li02">성장주</li>
+									<li class="li03 on">턴</li>
+								</ul>
+								<p class="target" style="padding-top:4px;"><img
+										src="../img/cont/img_sch_sst_question.png" style="width: 82px;" /></p>
+							</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="index_section">
+				<h3><a href="tsst_p28_1.html"><img src="../img/index/tit_index_02.png" alt="적중! 수익실현 종목" /></a></h3>
+				<p class="btn_more"><a href="tsst_p28_1.html"><a href="#">더보기 +</a></a>
+				</p>
+				<div class="li_wrap" data-key="3" data-addkey="0" data-page="1" data-end="0" data-onewidth="150"
+					data-maxwidth="1500" data-limit="10" style=" -webkit-overflow-scrolling:touch;">
+					<ul class="type01 scrollul" style="width: 1500px;">
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=003230&st=3&sdt=20170316134045">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/003230.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">삼양식품</span>
+								<p class="date" style="left: 0 !important;">03/16목</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>41,450</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>64,600</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>55.9</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=214180&st=3&sdt=20170316133834">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/214180.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">민앤지</span>
+								<p class="date" style="left: 0 !important;">03/16목</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>30,000</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>38,550</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>28.5</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=043610&st=3&sdt=20170316133605">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/043610.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">KT뮤직</span>
+								<p class="date" style="left: 0 !important;">03/16목</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>3,680</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>4,700</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>27.7</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=011370&st=3&sdt=20170315142727">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/011370.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">서한</span>
+								<p class="date" style="left: 0 !important;">03/15수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>2,290</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>2,745</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>19.9</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=004380&st=3&sdt=20170315142617">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/004380.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">삼익THK</span>
+								<p class="date" style="left: 0 !important;">03/15수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>10,900</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>13,750</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>26.1</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=030190&st=3&sdt=20170315110401">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/030190.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">NICE평가정보</span>
+								<p class="date" style="left: 0 !important;">03/15수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>6,790</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>7,980</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>17.5</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=008060&st=3&sdt=20170313110558">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/008060.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">대덕전자</span>
+								<p class="date" style="left: 0 !important;">03/13월</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>8,100</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>9,240</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>14.1</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=007700&st=3&sdt=20170308133852">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/007700.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">F&F</span>
+								<p class="date" style="left: 0 !important;">03/08수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>13,500</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>26,450</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>96.0</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=043370&st=3&sdt=20170308133259">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/043370.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">평화정공</span>
+								<p class="date" style="left: 0 !important;">03/08수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>13,400</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>15,500</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>15.7</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+						<li class="li_overweight"><a href="/stockbot/ss_view.php?sc=013030&st=3&sdt=20170308132910">
+								<p class="logo"><img src="https://kimg.choicestock.co.kr/img/logo/013030.jpg" alt=""
+										onerror='this.src="../img/common//empty_logo.jpg";' /></p>
+								<span
+									style="position: absolute; font-weight: bold; font-size: 13px; top: 9px; right:6px;width:78px;height:17px;line-height:17px;overflow:hidden;text-align: right;">하이록코리아</span>
+								<p class="date" style="left: 0 !important;">03/08수</p>
+								<table cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<th><img src="../img/index/box_05_th_01.png" alt="추천가" /></th>
+											<td class="num"><span>20,450</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_01_th_01.png" alt="현재가" /></th>
+											<td class="num"><span>22,800</span><span>원</span></td>
+										</tr>
+										<tr>
+											<th><img src="../img/index/box_05_th_02.png" alt="수익률" /></th>
+											<td class="num increase" style="font-weight:bold;">
+												<span>11.5</span><span>%</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<p class="type2"><img src="../img/index/box_tit_05_target.png" alt="적중! 수익률 달성" />
+								</p>
+							</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="index_section">
+				<!--추천 포트폴리오-->
+				<h3><a href="/stockbot/ss_portmng.php?no=1"><img alt="포트폴리오 서비스"
+							src="../img/index/tit_index_03.png"></a></h3>
+				<div class="port_wrap">
+					<!--포트1호-->
+					<div class="port_1"> <a href="#">
+							<h1><img src="../img/index/img_port_no1.png" alt="슈퍼스탁 1호">
+							</h1>
+							<p class="txt_center pdt_10 pdb_10"><img src="../img/index/txt_port1_info.png"
+									style="height: 30px;" alt="턴 어라운드 기업 발굴 포트폴리오 구성"></p>
+							<div class="yield">
+								<p class="date mgb_5"> <span class="pdr_5"><img src="../img/index/tit_port_rate.png"
+											style="height: 17px;" alt="수익률"></span><span
+										class="increase num">126.1</span><span class="f16 bold">%</span> </p>
+								<p><img src="../img/index/txt_port1_date.png" style="height: 15px;" alt="12년6월7일이후">
+								</p>
+							</div>
+						</a> </div>
+					<!--포트2호-->
+					<div class="port_2"> <a href="#">
+							<h1><img src="../img/index/img_port_no2.png" alt="슈퍼스탁 2호">
+							</h1>
+							<p class="txt_center pdt_10 pdb_10"><img src="../img/index/txt_port2_info.png"
+									style="height: 30px;" alt="턴 어라운드 기업 발굴 포트폴리오 구성"></p>
+							<div class="yield">
+								<p class="date mgb_5"> <span class="pdr_5"><img src="../img/index/tit_port_rate.png"
+											style="height: 17px;" alt="수익률"></span><span
+										class="increase num">126.1</span><span class="f16 bold">%</span> </p>
+								<p><img src="../img/index/txt_port2_date.png" style="height: 15px;" alt="12년6월7일이후">
+								</p>
+							</div>
+						</a> </div>
+				</div>
+			</div>
+			<!--스톡봇 전종목 투자매력도 순위-->
+			<div class="index_section">
+				<h3><a href="/stockbot/m_invgood.php"><img alt="종목 점수 (투자 매력도 상위 종목)"
+							src="../img/index/tit_index_09.png"></a></h3>
+				<div class="tbl_wrap" style="border:none;">
+					<p class="btn_more01"><a href="#">더보기 +</a></p>
+					<table cellspacing="0" cellpadding="0" style="width:100%;">
+						<colgroup>
+							<col width="10%">
+							<col width="25%">
+							<col width="20%">
+							<col width="20%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="nonebg"><img src="../img/cont/th_rank_tbl_01.png" alt="순위">
+								</th>
+								<th><img src="../img/cont/th_rank_tbl_02.png" alt="종목명">
+								</th>
+								<th><img src="../img/cont/th_rank_tbl_03.png" alt="mvp점수">
+								</th>
+								<th><img src="../img/cont/th_rank_tbl_04.png" alt="주가">
+								</th>
+								<th><img src="../img/cont/th_rank_tbl_05.png" alt="등락률">
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="num"><img alt="1" src="../img/index/ico_num_01.png">
+								</td>
+								<td class="name"><a href="/minsstockbot/search_itz.php?sn=005880">대한해운</a></td>
+								<td class="price" style="text-align:center;">96</td>
+								<td class="price" style="padding-right: 4px;">3,130</td>
+								<td class="per2 increase">0.5%</td>
+							</tr>
+							<tr>
+								<td class="num"><img alt="2" src="../img/index/ico_num_02.png"></td>
+								<td class="name"><a href="javascript:ClickAlertServiceNoMember();">○○○○</a></td>
+								<td class="price" style="text-align:center;">92</td>
+								<td class="price" style="padding-right: 4px;">7,500</td>
+								<td class="per2 nochange">0.0%</td>
+							</tr>
+							<tr>
+								<td class="num"><img alt="3" src="../img/index/ico_num_03.png"></td>
+								<td class="name"><a href="javascript:ClickAlertServiceNoMember();">○○○○</a></td>
+								<td class="price" style="text-align:center;">91</td>
+								<td class="price" style="padding-right: 4px;">11,100</td>
+								<td class="per2 decrease">1.3%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<style>
+				#ss_wrap .index_section .li_wrap ul.type03 li {
+					margin-bottom: 0 !important;
+				}
+			</style>
+			<!--테마 급등주 분석-->
+			<div class="index_section">
+				<h3><a href="/stockbot/ss_tmlist.php"><img alt="업종/테마" src="../img/index/tit_index_04.png"></a></h3>
+				<p class="btn_more"><a href="#">더보기 +</a></p>
+				<div style=" -webkit-overflow-scrolling:touch;" data-limit="10" data-maxwidth="1950" data-onewidth="195"
+					data-end="0" data-page="1" data-addkey="" data-key="tm" class="li_wrap">
+					<ul style="width: 1950px;" class="theme_card scrollul">
+						<li> <a href="/stockbot/tm_view.php?ud=186">
+								<p class="count top3">1</p>
+								<p class="tit">리츠</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">4</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">1.9</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲3</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼1</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">0</span></p>
+								</div>
+								<!-- 테마에 해당하는 기업이 없는 경우 -->
+								<div class="no_relevantBox">
+									<p class="relevant">해당하는 기업이 없습니다.</p>
+								</div>									
+								<!-- //no_relevantBox  -->
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=128">
+								<p class="count top3">2</p>
+								<p class="tit">우주항공과 국방 관련기업</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">4</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">1.5</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲4</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼0</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">0</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/086960.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">MDS테크</p>
+									<p class="price">22,700원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲1,000원</span><span class="increase">▲4.6%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=181">
+								<p class="count top3">3</p>
+								<p class="tit">화장품 업계</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">18</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">1.4</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲18</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼0</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">0</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/123690.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">한국화장품</p>
+									<p class="price">15,050원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲400원</span><span class="increase">▲2.7%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=121">
+								<p class="count">4</p>
+								<p class="tit">백화점 업계</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">7</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">1.3</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲6</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼0</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">1</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/004170.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">신세계</p>
+									<p class="price">184,000원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲5,000원</span><span class="increase">▲2.8%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=297">
+								<p class="count">5</p>
+								<p class="tit">3D프린터 관련기업</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">14</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">1.3</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲5</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼8</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">1</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/048770.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">TPC</p>
+									<p class="price">9,470원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲920원</span><span class="increase">▲10.8%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=96">
+								<p class="count">6</p>
+								<p class="tit">식자재 유통업</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">6</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">1.0</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲5</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼1</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">0</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/051500.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">CJ프레시웨</p>
+									<p class="price">32,300원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲600원</span><span class="increase">▲1.9%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=218">
+								<p class="count">7</p>
+								<p class="tit">자동차 전장품 관련</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">6</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">0.9</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲3</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼3</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">0</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/086960.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">MDS테크</p>
+									<p class="price">22,700원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲1,000원</span><span class="increase">▲4.6%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=127">
+								<p class="count">8</p>
+								<p class="tit">지능형 로봇 산업</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">9</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">0.8</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲3</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼4</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">2</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/010820.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">퍼스텍</p>
+									<p class="price">4,015원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲200원</span><span class="increase">▲5.2%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=274">
+								<p class="count">9</p>
+								<p class="tit">스마트폰 카메라 부품 기업</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">16</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">0.7</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲9</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼4</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">3</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/106520.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">디지탈옵틱</p>
+									<p class="price">3,715원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲270원</span><span class="increase">▲7.8%</span>
+								</p>
+							</a> </li>
+						<li> <a href="/stockbot/tm_view.php?ud=111">
+								<p class="count">10</p>
+								<p class="tit">영화업계</p>
+								<p class="pdl_5 mgb_5"><img src="../img/cont/tit_theme_count.png"
+										style="height: 14px; vertical-align: middle; margin-right: 5px;" alt="기업수"><span
+										style="font-weight:bold; font-size:14px">4</span></p>
+								<div style="position:relative;">
+									<p class="pdl_5"><img src="../img/cont/tit_theme_average.png" alt="평균 등락률"
+											style="height: 18px;" /></p>
+									<p class="per"><span class="increase">0.7</span><span>%</span></p>
+								</div>
+								<div class="data">
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_01.png"
+												alt="상승" /></span><span class="num increase">▲3</span></p>
+									<p style=" background-color:#D5D5D5;"><span style="width:48%;"><img
+												src="../img/cont/tit_theme_s_02.png" alt="하락" /></span><span
+											class="num decrease">▼1</span></p>
+									<p><span style="width:48%;"><img src="../img/cont/tit_theme_s_03.png"
+												alt="보합" /></span><span class="num ">0</span></p>
+								</div>
+								<div class="item">
+									<p class="logo"><img
+											onerror="this.src=&quot;../img/common//empty_logo.jpg&quot;;" alt=""
+											src="https://kimg.choicestock.co.kr/img/logo/079160.jpg"></p>
+									<p class="name" style="overflow:hidden;height:16px;">CJ CGV</p>
+									<p class="price">73,100원</p>
+								</div>
+								<p
+									style="position:absolute; bottom:3px; padding: 3px 0 ; text-align: right; width:97%;">
+									<span class="increase mgr_10">▲1,800원</span><span class="increase">▲2.5%</span>
+								</p>
+							</a> </li>
+					</ul>
+				</div>
+			</div>			
+		</div>
+
+		<!--푸터-->
+		<footer id="footer">	
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
+	</div>
+</body>
+
+</html>

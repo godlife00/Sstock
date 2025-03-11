@@ -1,0 +1,526 @@
+// 서비스 소개
+#wrap #container.sub_service {
+    background-color: $colfff;
+
+    .top {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 40px 16px 270px;
+        box-sizing: border-box;
+        background: linear-gradient(to bottom, rgba(77, 110, 228, 0), rgba(77, 110, 228, 0.25) 200%, #4d6ee4), url('/img/service/s_top_bg.png') no-repeat center bottom;
+        background-size: 400px auto;
+
+        .title_box {
+
+            h1 {
+                font-size: 30px;
+                font-weight: $f_sizeB;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.4;
+                letter-spacing: normal;
+                text-align: center;
+                color: $col181;
+
+                span {
+                    font-weight: $f_sizeB;
+                    color: $col4D6;
+                }
+            }
+        }
+
+        div.box {
+            background-color: #fff;
+            width: 100%;
+            padding: 24px 16px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            border: 1px solid rgba(77, 110, 228, 0.1);
+            box-shadow: 0 0 10px 0 rgba(77, 110, 228, 0.1);
+
+            &.box_quant {
+                margin-top: 12px;
+            }
+
+            .in_box {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                padding-left: 80px;
+
+                .txt {
+                    font-size: $font15;
+                    font-weight: normal;
+                    line-height: 1.4;
+                    color: $col6A7;
+
+                }
+
+                .title {
+                    font-size: $font16;
+                    font-weight: $f_sizeB;
+                    line-height: 1.19;
+                    color: $col363;
+
+                }
+            }
+
+            &.box_quant .in_box {
+                background: url('/img/service/in_box_01.svg') no-repeat 20px center;
+            }
+
+            &.box_dia .in_box {
+                background: url('/img/service/in_box_02.svg') no-repeat 20px center;
+            }
+
+            &.box_hot .in_box {
+                background: url('/img/service/in_box_03.svg') no-repeat 20px center;
+            }
+        }
+
+    }
+
+    .mid_phone {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 100px 32px 50px;
+
+        &:nth-of-type(3) {
+            padding-bottom: 100px;
+        }
+
+        .title_box {
+            h1 {
+                font-size: 30px;
+                font-weight: $f_sizeB;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.4;
+                letter-spacing: normal;
+                text-align: left;
+                color: $col181;
+
+                @media (min-width: 426px) {
+                    text-align: center;
+                }
+
+                span {
+                    font-weight: $f_sizeB;
+                    color: $col4D6;
+                }
+            }
+        }
+
+        .sum_txt {
+            p {
+                font-size: $font16;
+                font-weight: 500;
+                line-height: 1.5;
+                color: $col363;
+
+                @media (min-width: 426px) {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    div.box {
+        .n_box {
+            margin: 0 auto 10px;
+            max-width: 420px;
+
+            .no_boxImg {
+                display: inline-block;
+                width: 100%;
+            }
+        }
+
+        // phone_wrap
+        .phone_wrap {
+            position: relative;
+            width: 100%;
+            margin: 0 auto 0;
+            max-width: 420px;
+
+            .phone_bg {
+                width: 100%;
+                position: relative;
+                z-index: 100;
+                // opacity: 0;
+            }
+
+            .img_list {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+
+                ul {
+                    // width: 100%;
+                    // height: 100%;                   
+                    position: relative;
+                    overflow: hidden;
+                    margin: 0 auto;
+                    width: 56%;
+                    height: 83%;
+                    left: 0;
+                    top: 5.4%;
+
+                    li {
+                        width: 100%;
+                        height: 100%;
+
+                        img {
+                            position: relative;
+                            display: inline-block;
+                            width: 100%;
+                            top: 0%;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mid {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 20px;
+        box-sizing: border-box;
+        padding: 100px 32px 80px;
+
+        .title_box {
+            h1 {
+                font-size: 30px;
+                font-weight: $f_sizeB;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.4;
+                letter-spacing: normal;
+                text-align: left;
+                color: $col181;
+
+                @media (min-width: 426px) {
+                    text-align: center;
+                }
+
+                span {
+                    font-weight: $f_sizeB;
+                    color: $col4D6;
+                }
+            }
+        }
+
+        .sum_txt {
+            font-size: $font16;
+            font-weight: 500;
+            line-height: 1.5;
+            color: $col363;
+
+            strong {
+                color: $col363;
+            }
+
+            @media (min-width: 426px) {
+                text-align: center;
+            }
+        }
+
+    }
+
+    .mid_diagnosis {
+        background-color: $colF5F;
+
+        .tabsArea {
+            margin: 60px auto 0;
+            max-width: 420px;
+
+            .diagnosis_tabs {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                border: none;
+                padding: 0;
+
+                li {
+                    font-size: $font17;
+                    font-weight: $f_sizeB;
+                    line-height: 1.35;
+                    color: $colC7C;
+
+                    &.active {
+                        font-weight: $f_sizeB;
+                        color: $col363;
+                    }
+                }
+
+            }
+
+            .tab_container {
+                padding: 16px 0;
+
+                .tab_content {}
+
+                .img {
+                    display: inline-block;
+                    width: 100%;
+                }
+            }
+        }
+
+
+    }
+
+    .mid_market {
+        .img {
+            display: inline-block;
+            margin: 20px auto 0;
+            max-width: 420px;
+            width: 100%;
+        }
+    }
+
+    .mid_hot {
+        background: $colF5F;
+
+        .hot_list {
+            max-width: 420px;
+            width: 100%;
+            margin: 20px auto;
+            overflow: auto;
+            background: url('/img/service/service_hot_temp.png') no-repeat center bottom;
+            background-size: 340px auto;
+            padding-bottom: 420px;
+
+            .serviceHotSwiper .swiper-slide {
+                display: block;
+                width: auto;
+            }
+
+            .serviceHotSwiper .swiper-slide>div {
+                width: 134px;
+            }
+
+        }
+
+        .img {
+            display: inline-block;
+            margin: 20px auto 0;
+            max-width: 420px;
+            width: 100%;
+        }
+    }
+
+    .mid_alarm {
+        padding-bottom: 32px;
+
+        .img {
+            display: inline-block;
+            margin: 20px auto 0;
+            max-width: 420px;
+            width: 100%;
+        }
+    }
+
+    // 패럴렉스 스크롤
+
+    /* Add sticky positioning to the content */
+    .pararex_box {
+        .title_box {
+            position: sticky;
+            top: 54px;
+        }
+
+        .box {
+            position: sticky;
+            top: 130px;
+            background-color: #fff;
+            padding: 16px 0;
+            height: 600px;
+
+            @media (min-width: 424px) {
+                height: 660px;
+            }
+
+            box-sizing: border-box;
+        }
+
+        // padding-top: 100px;
+        box-sizing: border-box;
+        background-color: #fff;
+    }
+}
+
+
+// 튜토리얼
+.튜토리얼 {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    // display: block;    
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 98;
+
+    .swiper-pagination-bullet {
+        background-color: #d2dcff;
+    }
+    .swiper-pagination-bullet-active {
+        background: #4d6ee4;
+    }
+    .tutorial_wrap {                
+        max-width: 480px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;        
+    }
+
+    .head {
+        margin-bottom: 10%;
+        padding: 15px 16px;
+        box-sizing: border-box;
+        position: fixed;        
+        top: 10px;
+        max-width: 420px;
+        width: 100%;
+
+    }
+
+    .ttl_clse {
+        cursor: pointer;
+        position: relative;
+        display: block;
+        text-indent: -999px;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 0;
+            height: 18px;
+            width: 2px;
+            background-color: #fff;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+        }
+
+    }
+
+    .mid {
+        width: 100%;
+        padding: 0 5%;
+        box-sizing: border-box;
+
+        .title {
+            font-size: $font18;
+            @media (max-width: 375px) {
+                font-size: $font16;
+            }
+            font-weight: $f_sizeN;
+            line-height: 1.44;
+            text-align: center;
+            padding: 0 5%;
+            color: $colfff;
+
+            strong {
+                color: $colfff;
+            }
+        }
+
+        .txt {
+            position: relative;
+            padding: 0 15%;
+            font-size: $font14;
+            @media (max-width: 375px) {                
+                font-size: $font12;
+            }
+            font-weight: $f_sizeN;
+            line-height: 1.36;
+            color: #d2dcff;
+
+            &.txt_L {
+                text-align: left;
+            }
+
+            &.txt_R {
+                text-align: right;
+            }
+        }
+
+        .guide_arrow {
+            display: inline-block;
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            @media (max-width: 375px) {                
+                height: 50px;
+            }
+            background: url('/img/tutorial/guide_arrow.svg') no-repeat 0 0;
+            background-size: 100% 100%;
+            font-size: 0;
+
+            &.arrow_down {
+                left: 10%;
+                top: 30%;
+            }
+
+            &.arrow_up {
+                transform: scaleX(-1) scaleY(-1);                
+            }
+            &.arrow_w {
+                background: url('/img/tutorial/guide_arrow_w.svg') no-repeat 0 0;
+            }
+        }
+
+        .img_box {
+            padding: 40px 0;
+            text-align: center;
+            img {
+                display: inline-block;                
+                width: calc(100% - 16%); 
+                margin: 15px auto;
+            }
+        }
+    }
+}
+
+// 튜토리얼 보기
+.tutorial_view {
+    display: flex;
+    gap: 0 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: normal;        
+    color: $col4D6;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('/img/txt_guide_view.svg') no-repeat 0 0;
+    }
+}

@@ -1,0 +1,614 @@
+/* 그리드 grid */
+html {
+    background-color: var(--background-base);    
+    max-width: 766px;
+    // max-width: 480px;
+    margin: 0 auto;
+}
+
+body, #wrap {
+	display: flex;
+	flex-direction: column;
+	min-height: -webkit-fill-available;
+	min-height: 100vh;	
+}
+
+#wrap {
+    @include pad(0);
+    // display: flex;
+    // flex-direction: column;    
+}
+
+#header {
+    @include pad(0);
+
+}
+
+#container {
+    flex: 1;
+    @include pad(0);
+    position: relative;
+    min-height: 420px;
+
+    &::after {
+        content: "";
+        display: table;
+        table-layout: fixed;
+        clear: both;
+    }
+
+    .mainBox {
+        position: relative;
+        padding: 0 16px;
+    }
+}
+
+#footer {    
+    padding: 40px 16px 25px;
+}
+
+
+// input
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number] {
+     border: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+input.input_txt {
+    box-sizing: border-box;
+    padding: 2px 3px;
+    border-radius: 3px;
+    // border: 1px solid #b2b9c9;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input[type='checkbox'] + label::after {
+    border-radius: 50%;
+}
+
+input.chk_label {
+    display: none;
+}
+input.chk_label + label::after {
+    content: "";
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    color: $colfff;            
+    font-size: 14px;
+    text-align: center;        
+    width: 24px;    
+    height: 24px;    
+    box-sizing: border-box;
+    font-family: Verdana;
+    background: #d9dcdf url('/img/chk_label.png') no-repeat center center;
+    background-size: 12px auto;
+}
+input.chk_label:checked + label:after {    
+    background-color: $col4D6;        
+}
+
+a {
+    cursor: pointer;
+    outline: none;
+}
+
+a:active {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    opacity: 0.7;
+}
+
+#wrap #container .mainBox.today .bg_box .data_opinion,
+#wrap #container .mainBox.area_recom .list_area .area,
+#wrap #container .mainBox.area_hit100 .signal_list ul,
+#wrap #container .mainBox.area_fist .signal_list ul,
+#wrap #container .mainBox.area_theme .tabsArea .theme_list ul,
+#wrap #container.sub_stock .recom_chartList .list,
+#wrap #container.sub_stock .hit_chartList .list,
+#wrap #container.sub_search .schBox.area_hot .signal_list ul,
+#wrap #container.sub_stock .fist_chartList .list,
+#wrap #container.sub_stock .theme_List .list,
+#wrap #container .mainBox.area_note .note_list ul,
+#wrap #container.sub_stock .note_list ul,
+#wrap #container .mainBox.area_market .market_list .list,
+#wrap #container.sub_search .mainBox.financials .area_note .note_list ul,
+#wrap #container.sub_stock .market_view .market_list .list {
+    &:active {
+        opacity: 0.95;
+        background-color: var(--collink);
+    }
+
+    a:active {
+        top: 0;
+        left: 0;
+        opacity: 1;
+    }
+}
+
+
+// 페이지 슬라이드 속도 data-transition speed
+.slide {
+
+    &.in,
+    &.out {
+        animation-timing-function: ease-in-out;
+        animation-duration: 200ms;
+    }
+}
+
+.zt-skill-bar * {
+    -webkit-transition: all 1.5s ease;
+    transition: all 1.5s ease;
+}
+
+.zt-skill-bar div {
+    width: 0;
+}
+
+/* 별점 */
+.star_area {
+    .starRev {
+        font-size: 0;
+        vertical-align: top;
+    }
+
+    .starR {
+        background: url('/img/ico_review.svg') no-repeat -21px 0;
+        background-size: auto 100%;
+        display: inline-block;
+        text-indent: -9999px;
+        cursor: pointer;
+        margin: 0 1px;
+        width: 14px;
+        height: 14px;
+
+        &.on {
+            background-position: 0 0;
+        }
+
+        &.half {
+            background-position: right 0 !important;
+        }
+    }
+
+    &.w12 {
+        .starR {
+            background-position: -18px 0;
+            background-size: auto 12px;
+            width: 12px;
+            height: 12px;
+
+            &.on {
+                background-position: 0 0;
+            }
+
+            &.half {
+                background-position: right 0 !important;
+            }
+        }
+    }
+}
+
+// 비회원 로고 필터
+#btn_free {
+    .logo {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border-radius: 50%;
+        background-color: var(--collogobg);
+        position: relative;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 38px;
+            height: 38px;
+            opacity: 0.67;
+            border-radius: 50%;
+            background-color: var(--cold9e);
+            background: url('/img/logo_lock.svg') no-repeat center center;
+            background-size: 50% 50%;
+            filter: brightness(0.4);
+        }
+    }
+}
+
+//달력
+.ui-widget {
+    @include font-family;
+}
+.hasDatepicker {
+    cursor: pointer;
+}
+.ui-datepicker-trigger {
+    position: relative;
+    border: none;
+    background-color: transparent;
+    width: 9px;
+    height: 18px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        border-top: 2px solid var(--coldae);
+        border-right: 2px solid var(--coldae);
+        transform: rotate(135deg);
+    }
+}
+
+.ui-datepicker-next:active {
+    left: auto;
+}
+.ui-datepicker-next:active {
+    left: auto;
+}
+
+.ui-widget-header {
+    border: 0px solid #dddddd;
+    background: #fff;
+}
+
+.ui-datepicker-calendar>thead>tr>th {
+    font-size: $font13 !important;
+}
+
+.ui-datepicker .ui-datepicker-header {
+    position: relative;
+    padding: 20px 0;   
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: $colF5F;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default {
+    margin: 10px auto 0;
+    border: 0px solid #c5c5c5;
+    background-color: transparent;
+    font-weight: $f_sizeN;
+    color: $col363;
+    text-align: center;
+    line-height: 26px;
+    margin: 0 auto 10px !important;
+}
+
+.ui-widget-content {
+    border: none;    
+}
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+    display: none;
+}
+.ui-datepicker .ui-datepicker-buttonpane button {
+    position: absolute;
+    right: 13px !important;
+    top: 13px !important;    
+    cursor: pointer;
+    position: absolute;
+    display: inline-block;
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+    right: 4px;
+    top: 10px;    
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button::before,
+.ui-datepicker .ui-datepicker-buttonpane button::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 0;
+    height: 24px;
+    width: 2px;
+    background-color: $col181;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button::before {
+    transform: rotate(45deg);
+}
+
+.ui-datepicker .ui-datepicker-buttonpane button::after {
+    transform: rotate(-45deg);
+}
+
+
+
+
+
+
+
+.ui-datepicker-current-day .ui-state-active,
+.ui-datepicker-today .ui-state-active {
+    text-align: center;    
+    color: $colfff;
+    background-color: $col4D6;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+}
+
+.ui-datepicker .ui-datepicker-title {
+    margin: 0 0em;
+    line-height: 16px;
+    text-align: center;
+    font-size: $font20;
+    padding: 0px;
+    font-weight: $f_sizeB;
+}
+.ui-datepicker .ui-datepicker-title span {
+    font-size: $font20;    
+    font-weight: $f_sizeB;    
+}
+
+.ui-datepicker {        
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    margin-left: 3%;
+    z-index: 99 !important;
+    width: 94%;
+    max-width: 380px;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: #fff;
+    border-radius: 15px;    
+    padding: 0 16px;
+    padding-bottom: 10px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.44);
+    &::before {
+        content: '기준 날짜 선택';
+        display: block;
+        padding: 24px 0;
+        font-size: 20px;
+        font-weight: $f_sizeB;        
+        line-height: 1.2;        
+        text-align: center;
+        color: $col181;
+    }
+    &::after {
+        content: '최대 3개월까지 날짜별 종목을 조회할 수 있어요.';
+        display: block;
+        padding: 10px 0;
+        font-size: 13px;        
+        line-height: 1.46;
+        letter-spacing: -0.33px !important;
+        text-align: center;
+        color: #6a727b;
+
+    }
+}
+
+.ui-widget.ui-widget-content {
+    border: 1px solid #eee;
+}
+
+#datepicker:focus>.ui-datepicker {
+    display: block;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+    cursor: pointer;
+    top: 16px !important;
+}
+
+.ui-datepicker-prev {
+    left: 10px !important;    
+}
+.ui-datepicker-next {
+    float: right;
+    right: 10px !important;
+}
+
+.ui-state-disabled {
+    cursor: auto;
+    color: hsla(0, 0%, 80%, 1);
+}
+
+.ui-datepicker-title {
+    text-align: center;
+    padding: 10px;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.ui-datepicker-calendar {
+    width: 100%;    
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: $colF5F;
+}
+
+.ui-datepicker-calendar>thead>tr>th {
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.ui-datepicker-calendar>tbody>tr>td>a {
+    font-weight: $f_sizeN;
+    color: $col363;
+    font-size: $font15 !important;    
+    text-decoration: none;
+}
+
+.ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover {
+    cursor: auto;
+    background-color: #fff;
+}
+
+.ui-datepicker-calendar>tbody>tr>td {
+    border-radius: 100%;
+    width: 60px;
+    height: 40px;
+    vertical-align: middle;
+    cursor: pointer;    
+    text-align: center;    
+}
+
+.ui-datepicker-calendar>tbody>tr>td:hover {
+    background-color: transparent;
+    opacity: 0.6;
+}
+
+
+.ui-widget-header .ui-icon {
+    background: none;    
+    width: 20px;
+    height: 20px;
+}
+.ui-datepicker .ui-datepicker-prev span {    
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #C7CCD1;
+    border-right: 2px solid #C7CCD1;
+    transform: rotate(-135deg);
+    border-color: var(--cold9e) !important;    
+}
+.ui-datepicker .ui-datepicker-next span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid #C7CCD1;
+    border-right: 2px solid #C7CCD1;
+    transform: rotate(45deg);
+    border-color: var(--cold9e) !important;    
+
+}
+.ui-icon-circle-triangle-e {
+    background-position: -20px 0px;
+    background-size: 36px;
+}
+
+.ui-icon-circle-triangle-w {
+    background-position: -0px -0px;
+    background-size: 36px;
+}
+
+.ui-datepicker-calendar>tbody>tr>td:first-child a {
+    color: $colup !important;
+}
+
+.ui-datepicker-calendar>tbody>tr>td:last-child a {
+    color: $coldown !important;
+}
+
+.ui-datepicker-calendar>thead>tr>th:first-child,
+.ui-datepicker-calendar>thead>tr>th:first-child span {
+    color: $colup !important;
+}
+
+.ui-datepicker-calendar>thead>tr>th:last-child,
+.ui-datepicker-calendar>thead>tr>th:last-child span {
+    color: $coldown !important;
+}
+
+
+
+.inp {
+    padding: 10px 10px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    border: 0px;
+}
+
+.inp:focus {
+    outline: none;
+    background-color: #eee;
+}
+
+// gnb
+.gnb {    
+    position: fixed;
+    max-width: 766px;    
+    margin: 0 auto;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $colfff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;    
+    gap: 10px;
+    box-shadow: 0 -5px 10px 0 rgba(0, 0, 0, 0.03);    
+    z-index: 97;
+
+    a, span {
+        cursor: pointer;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        gap: 2px;
+        font-size: $font12;              
+        font-weight: $f_sizeN;  
+        line-height: 1.45;        
+        color: $col969;
+        padding: 10px 0 5px;
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }        
+        &.active {
+            color: $col4D6;                        
+            &::before  {
+                background-position: bottom center !important;
+            }                
+        }        
+        &.home {
+            &::before  {
+                background: url('/img/gnb_home.svg') no-repeat top center;            
+            }
+        } 
+        &.sch {
+            &::before  {
+                background: url('/img/gnb_sch.svg') no-repeat top center;            
+            }
+        } 
+        &.quant {
+            &::before  {
+                background: url('/img/gnb_quant.svg') no-repeat top center;            
+            }
+        } 
+        &.menu {
+            &::before  {
+                background: url('/img/gnb_menu.svg') no-repeat top center;            
+            }
+        } 
+    }
+}
+
+@media screen and (max-height: 100%) {
+    #wrap {
+        min-height: 100vh;
+        background-color: red !important;
+    }
+}

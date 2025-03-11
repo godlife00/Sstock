@@ -1,0 +1,760 @@
+// 변수들
+//color
+$col4D6: #4D6EE4;
+$colD2D: #D2DCFF;
+$col181: #181f29;
+$col363: #363F4B;
+$col6A7: #6A727B;
+$col969: #969EA7;
+$colC7C: #C7CCD1;
+$colup: #dd5257;
+$coldown: #404fc3;
+$colF5F: #F5F5F9;
+$colF5F5F5: #F5F5F5;
+$colEDE: #EDEEEF;
+
+
+
+$col333: #333;
+$colpry: #4D6EE4;
+$cold9e: #d9e0eb;
+$colfff: #fff;
+$col7f8: #7f8ca3;
+$col898: #898989;
+$colc22: #c22e06;
+$cold3d: #d3d3d3;
+$col829: #82929F;
+$colccd: #ccd1d5;
+$cold64: #d64763;
+$cole6e : #e6e7f4;
+$colboxbgopacity : rgba(64, 79, 195, 0.8);
+$cold6d : #d6d6d6;
+
+
+@mixin themeLight { //라이트테마 칼라
+    --background-base: #F4F4F5;
+    --signalbuy : #FF4500;    
+    --signalhold : #008000;    
+    --signalsell : #1E90FF;    
+    --signalwaitting : #a1a1a1;    
+    --cold9e: #333;
+    --colbbginput: #ececef;
+    --colbar: #F4F4F5;    
+    --colpry: #f4f4f5;
+    --col1a1: #fff;
+    --col1f3: #fff;
+    --col445: #939393;
+    --col7f8: #939393;
+    --col284: #333;
+    --col295: #fff;
+    --coldae: #7f8ca3;
+    --col374: #fff;
+    --colfff: #333;
+    --col343: #ececef;
+    --col526: #fff;
+    --col6AA: #2a42fd99;
+    --col326: #404FC3;
+    --col324: #E0E4E9;
+    --col2f3: #ccd6eb;
+    --col748: #E0E4E9;
+    --collink: #EAEAEF;
+    --colViewLink: #06c;
+    --col113: #113c67;
+    --col040: #E0E4E9;
+    --col464: #fff;
+    --colbtnbg: #404fc3;
+    --colgray: #ececef;
+    --colrgb01: rgba(6, 6, 10, 0.65);
+    --colrgb02: #414141;
+    --coltabbg: #ececef ;
+    --coltabat: #fff;
+    --collogobg: #e6e7f5;
+}
+
+@mixin themeDark { //다크테마 칼라
+
+}
+
+
+//=================== 다크 모드 선언 시작 ===================  //
+//다크모드 등 테마에 변경되는 color css 변수로 지정
+
+:root {
+   @include themeLight;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include themeDark;
+    }
+}
+[data-theme='light'] {
+    @include themeLight;
+}
+[data-theme='dark'] {
+    @include themeDark;
+}
+
+//=================== 다크 모드 선언 끝 ===================  //
+
+//txt
+$f_sizeS:300;
+$f_sizeN:400;
+$f_sizeB:700;
+$f_sizeBB:900;
+$font12: 0.75rem;
+$font13: 0.8125rem;
+$font14: 0.875rem;
+$font15: 0.9375rem;
+$font16: 1rem;
+$font17: 1.0625rem;
+$font18: 1.125rem;
+$font20: 1.25rem;
+
+// Set a default value
+$default-padding: 0px;
+$default-margin: 0px;
+$default-fontfamily:  "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+@mixin font-family {
+    font-family: $default-fontfamily;
+    line-height: normal;
+}
+
+@mixin pad($n: $default-padding) {
+    padding: $n;
+}
+
+@mixin mar($n: $default-margin) {
+    padding: $n;
+}
+
+@mixin white-space {
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 좌측 화살표
+@mixin go_back {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid $colC7C;
+    border-right: 2px solid $colC7C;
+    transform: rotate(-135deg);
+}
+
+@mixin go_back_arow {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: calc(50% - 1px);
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    border-top: 2px solid $cold9e;
+}
+
+// 버튼 css
+@mixin one_btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 18px 0;
+    box-sizing: border-box;    
+    border-radius: 8px;    
+    text-align: center;
+    font-size: $font16;
+    font-weight: $f_sizeB;    
+    color: $colfff;
+
+    b {
+        color: $colfff;
+        font-weight: $f_sizeB;
+    }
+}
+
+@mixin two_btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+    .btn {
+        flex: 1;
+        padding: 16px 0;
+        box-sizing: border-box;
+        border-radius: 5px;
+        background-color: $colc22;
+        font-size: 18px;
+        font-weight: $f_sizeB;
+        
+        text-align: center;
+        color: $colfff;
+
+        &:first-child {
+            border: solid 1px $cold3d;
+            background-color: $colfff;
+            color: $col898;
+        }
+    }
+}
+
+@mixin listswiper {
+    .list_area .list .title a {
+        @include white-space;
+        font-size: $font16;
+        font-weight: $f_sizeB;
+        
+        color: $col222;
+    }
+
+    .list_area .list .detail {
+        padding-top: 4px;
+        line-height: 0.85;
+
+        span {
+            font-size: $font12;
+            
+            color: $col898;
+        }
+    }
+
+    .list_area .list .num {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .list_area .list .num .th {
+        display: block;
+        font-size: $font12;
+        line-height: 1.5;
+        
+        color: $col898;
+    }
+
+    .list_area .list .num .td {
+        font-size: $font16;
+        line-height: 1.5;
+        
+        color: $col222;
+    }
+
+    .list_area .list .num .td b {
+        font-weight: $f_sizeB;
+    }
+
+    .list_area .list .num .trans {
+        display: inline-block;
+        text-align: center;
+        border-radius: 3px;
+        font-size: 10px;
+        line-height: 1.5;
+        
+        color: $colfff;
+        min-width: 38px;
+        padding: 3px 5px 2px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        margin-left: 3px;
+
+        &.nice {
+            background-color: #c22c06;
+        }
+
+        &.gro {
+            background-color: #63bcb9;
+        }
+
+        &.turn {
+            background-color: #e6a01c;
+        }
+
+    }
+
+}
+
+// 검색바, 검색 자동완성
+@mixin searchArea {
+    .main_searching .searchArea {
+        margin: 0 auto;
+        position: relative;
+        text-align: right;
+    }
+
+    .main_searching .searchArea.keydown form {
+        margin-left: 0;
+    }
+
+    .main_searching .searchArea.keydown .searchInput {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .main_searching .searchArea .sch_title {
+        color: #333;
+        font-size: 1.25rem;
+        font-weight: $f_sizeB;
+        text-align: left;
+        display: inline-block;
+        width: 45px;
+        line-height: 33px;
+    }
+
+    .main_searching .searchArea .sch_title.keydown {
+        display: none;
+    }
+
+    .main_searching .searchArea .searchInput {
+        width: 100%;
+        padding: 13px 16px 12px 40px;
+        border: 1px solid $colEDE;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;        
+        outline: none;
+        border-radius: 8px;
+        background-color: $colfff;              
+        font-size: $font16;
+        // font-weight: $f_sizeB;
+        line-height: 1.05;
+        color: $col181;        
+        &::placeholder {
+            color: $colC7C;
+            font-size: $font16;
+        }
+        &:hover, &:focus {
+            border-color: $col4D6;
+        }
+    }
+
+    .main_searching .searchArea .searchInput.keydown {
+        width: 100%;
+        padding: 0 16px 0 34px;
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border: 1px solid #EDEEEF;
+    }
+
+    .main_searching .searchArea .searchBtn {
+        display: inline-block;
+        width: 18px;
+        height: auto;
+        position: absolute;
+        left: 13px;
+        top: 16px;
+    }
+
+    .main_searching .sch_autocomplete {        
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;        
+        // display: none;
+        opacity: 0;
+        height: 0;
+        overflow: auto;
+        // height: 100%;
+        margin: 0 auto;
+        background-color: $colfff;
+    }
+
+    .main_searching .sch_autocomplete.focus_on {
+        // display: block;
+        opacity: 1;
+        height: auto;
+        transition: all 0.3s;
+    }
+
+    .main_searching .sch_autocomplete._show {
+        // display: block;
+        opacity: 1;
+        height: auto;
+        transition: all 0.3s;
+    }
+
+    .main_searching .sch_autocomplete ul {
+        border-top: 0;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    .main_searching .sch_autocomplete ul li {
+        padding: 4px 16px;
+        border: 1px solid $col4D6;
+        border-top: none;
+        border-bottom: none;
+        &:first-child {
+            padding-top: 15px;
+        }
+    }
+
+    .main_searching .sch_autocomplete ul li:last-child {
+        padding-bottom: 15px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom: 1px solid $col4D6;
+    }
+
+    .main_searching .sch_autocomplete ul li a {        
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: $font20;
+        font-weight: $f_sizeB;
+        line-height: 1.05;
+        color: $col181;
+    }
+
+    .main_searching .sch_autocomplete ul li a._on {
+        border: none;
+        padding: 0;
+    }
+
+    .main_searching .sch_autocomplete ul li a .schCode {
+        width: 65px;
+        font-size: $font14;
+        font-weight: $f_sizeB;        
+        
+    }
+
+    .main_searching .sch_autocomplete ul li a .schList {
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: $font14;                
+    }
+
+    .main_searching .sch_autocomplete ul li a .schList strong {        
+        font-weight: $f_sizeB;
+    }
+
+    .main_searching .no_result {
+        border: 1px solid $col4D6;
+        border-top: none;
+        padding: 30px 15px;
+        text-align: center;
+    }
+
+    .main_searching .no_result p,
+    .main_searching .no_result p strong {
+        color: #939393;
+    }
+
+}
+
+// 더보기
+@mixin btn_more {
+    .btn_more {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+        border: 1px solid #edeeef;
+        text-align: center;
+        border-radius: 8px;
+        background-color: var(--col1a1);
+        b {
+            font-size: $font15;            
+            color: $col7f8;
+        }
+        a {
+            display: block;
+            padding: 11px 0;
+            font-size: $font15;            
+            line-height: 1.2;            
+            color: $col6A7;
+        }
+        &:active {
+            opacity: 0.95;
+            background-color: var(--col040);
+        }
+        a:active {            
+            top: 0;
+            left: 0;
+            opacity: 1;
+        }        
+    }
+}
+
+// 탭메뉴
+@mixin tabsArea {
+    .tabs {
+        display: flex;
+        justify-content: space-between;        
+        width: 100%;
+        box-sizing: border-box;    
+        border-radius: 0;
+        border: none;
+        padding: 0;
+        border-bottom: 1px solid $colEDE;        
+        li {
+            flex: 1;
+            padding: 5px 0 12px;
+            box-sizing: border-box;
+            flex: 2;
+            text-align: center;
+            position: relative;
+            top: 1px;
+            cursor: pointer;
+
+            span {
+                font-size: $font16;
+                font-weight: $f_sizeN;                
+                color: $col6A7;
+                padding: 5px 10px 10px;
+            }
+
+            &.active {
+                span {                    
+                    font-weight: $f_sizeB;                    
+                    color: $col363;
+                    border-bottom: 2px solid $col363;
+                }
+            }
+        }
+    }
+
+    .tab_container {
+        // padding: 24px 15px 0;
+        padding: 24px 0 0;
+    }
+
+}
+
+// 관심종목 하트
+@mixin attention {    
+    $w: 14px;
+    $h: 14px;
+    cursor: pointer;
+    background-color: $colccd;
+    position: absolute;
+    margin: auto;
+    top: 4px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width:  $w;
+    height:  $h;    
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);    
+    animation-name: beat;    
+    animation-duration: 1s;    
+    animation-iteration-count: infinite;
+
+    &:after {
+        background-color: $colccd;
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        width:  $w;
+        height:  $h;    
+        top: 0px;
+        left: calc($w / 2);
+    }
+
+    &:before {
+        background-color: $colccd;
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        width:  $w;
+        height:  $h;    
+        top: calc($w / 2 * -1);
+        left: 0px;
+    }
+
+    &.on {
+        background-color: $colup;
+        &:after, &:before {
+            background-color: $colup;
+        }
+    }
+}
+
+/* 텍스트 필터 */
+.btn_free {
+    display: flex !important;    
+}
+
+.remark {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding-left: 7px;
+}
+
+.remark i {
+    width: 11px;
+    height: 11px;
+    opacity: 0.67;
+    border-radius: 50%;
+    background-color: $col6A7;
+}
+
+// 테이블 기본
+@mixin table {    
+    border: 0;        
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    th, td {
+        padding: 8px 3px;
+    }
+    thead {
+        th, td {
+            font-size: $font15;            
+            
+            text-align: center;
+            color: $col7f8;
+        }        
+        tr {
+            border-bottom: 2px solid var(--col324);
+        }
+    }
+    tbody {
+        th, td {
+            font-size: $font15;                        
+                        
+            text-align: center;
+            color: var(--cold9e);
+        }
+    }
+
+}
+
+// 퀀트 전략 박스
+@mixin quantbox {
+    background-color: $colfff;
+    border-radius: 16px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+}
+
+// 퀀드 전략 생성 중 로딩 이미지
+#loading-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;    
+    // display: none;
+    z-index: 98;
+    // opacity: 0;
+
+    .lodingSwiper {
+        width: 100%;
+        padding-bottom: 32px;
+    }
+
+    #animationWindow {
+        width: auto;
+        height: 200px;
+    }
+
+    .loading_txt {        
+        position: relative;                
+    }
+    
+    .dot_animation {
+        position: relative;
+        display: inline-block;
+        left: 6px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: $col181;
+        animation-name: dot;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;                
+      }
+      
+      .dot_animation:nth-child(1) {
+        left: 6px;
+        animation-delay: 0.6s;
+      }
+      
+      .dot_animation:nth-child(2) {
+        left: 12px;
+        animation-delay: 0.8s;
+      }
+      
+      .dot_animation:nth-child(3) {
+        left: 18px;
+        animation-delay: 1s;
+      }
+      
+      @keyframes dot {
+        0% {
+          opacity: 0.3;
+          transform: translateX(-10%) scale(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(0%) scale(1);
+        }
+        100% {
+          opacity: 0.3;
+          transform: translateX(0%) scale(0);
+        }
+      }
+      
+
+    .loading_txt {
+        font-size: $font18;
+        font-weight: $f_sizeB;        
+        line-height: 1.28;        
+        color: $col181;
+    }
+    .box {
+        width: 80%;        
+        margin: 24px auto;
+        padding: 24px 20px 0;
+        border: 1px solid $colEDE;
+        border-radius: 16px;
+
+        .title {
+            display: inline-flex;
+            background-color: #f1f1f8;
+            padding: 3px 7px;
+            border-radius: 100px;        
+            font-size: $font12;
+            font-weight: $f_sizeS;        
+            line-height: 1.17;
+            letter-spacing: -0.3px !important;
+            text-align: center;
+            color: #656b71;                
+        }
+        .saying {
+            margin-top: 20px;
+            font-size: $font16;
+            font-weight: $f_sizeB;        
+            line-height: 1.31;        
+            color: $col363;
+        }
+        .name {
+            display: block;
+            margin-top: 8px;
+            width: 100%;
+            box-sizing: border-box;        
+            font-size: 13px;        
+            line-height: 1.46;        
+            text-align: left;
+            color: $col6A7;
+        }
+
+    }
+    
+}

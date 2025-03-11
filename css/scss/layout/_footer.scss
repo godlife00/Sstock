@@ -1,0 +1,150 @@
+/***** footer *****/
+#footer.f_main {
+    position: sticky;    
+    background-color: var(--background-base);
+    .f_logo a {
+        font-size: $font16;
+        font-weight: $f_sizeB;                
+        letter-spacing: -0.4px !important;
+        color: $col969;
+    }
+
+    .call_border{
+        color: inherit;     
+        border-right: 1px solid #8c9199;
+        padding-right: 8px;
+        margin-right: 8px;
+    }
+
+    .service_info {
+        margin-top: 15px;
+        p {
+            font-size: 11px;            
+            line-height: 1.45;
+            letter-spacing: -0.28px !important;            
+            color: $colC7C;
+        }        
+    }    
+    .terms_list {
+        margin-top: 25px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 8px;
+        &:nth-of-type(2) {
+            margin-top: 10px;
+            li a {
+                color: #fff;
+            }
+        }
+        li {
+            position: relative;
+            border-right: 1px solid #8c9199;
+            padding-right: 8px;
+            line-height: 1;
+            a {
+                font-size: $font13;      
+                font-weight: normal;          
+                line-height: 1.31;                
+                color: #8e939b;
+            } 
+            &:nth-of-type(2) {
+                a {
+                    font-weight: $f_sizeB;
+                }
+            }           
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+
+    .compliance {
+        margin-bottom: 3px;
+        display: flex;
+        justify-content: flex-start;
+        flex-flow: row wrap;
+        align-items: center;
+        li {
+            font-weight: 300;
+            margin: 5px 5px 5px 0;
+            font-size: 11px;
+            color: #969ea7;
+            i {
+                display: inline-block;                
+                width: 1px;
+                height: 8px;
+                padding-right: 3px;
+                margin-right: 3px;
+                display: inline-block;
+                border-right: 1px solid $colC7C;
+            }
+        }
+        li a {
+            font-size: 11px;
+            color: $col969;                
+            font-weight: $f_sizeB;
+            
+        }        
+        li strong {
+            font-size: 12px;
+            font-weight: bold;
+            color: $col363;
+        }
+        
+        li.last {
+            width: 100% !important
+        }
+    }
+
+    .foot_info {
+        margin-top: 30px;                
+
+        .company {            
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 6px;
+            font-size: 11px;            
+            font-weight: $f_sizeN;
+            line-height: 1.55;
+            letter-spacing: -0.28px !important;            
+            color: $col969;
+            
+            a {                
+                color: $col969;                
+                font-weight: $f_sizeB;
+            }
+
+            strong {
+                font-weight: $f_sizeB;            
+                color: $col969;                
+            }
+            i {
+                display: inline-block;                
+                width: 1px;
+                height: 8px;
+                display: inline-block;
+                border-right: 1px solid $colC7C;
+            }
+        }
+        .copyright {            
+            font-size: 11px;            
+            line-height: 1.55;
+            letter-spacing: -0.28px !important;            
+            color: $col969;
+            padding-bottom: 8px;
+            
+            a {
+                display: inline-block;
+                padding-right: 8px;
+                color: $col969;
+                &:first-child {
+                    border-right: 1px solid #8c9199;
+                    padding-right: 8px;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}
