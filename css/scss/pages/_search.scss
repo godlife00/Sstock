@@ -284,7 +284,7 @@
 
             .recom_company {
                 position: relative;
-                padding: 16px 16px;
+                padding: 16px 16px 34px;
                 background-color: $colfff;
 
                 &::after {
@@ -334,6 +334,7 @@
                 .detail {
                     margin-top: 4.5px;
                     display: flex;
+                    flex-wrap: wrap;
                     gap: 4px 4px;
                     align-items: center;
 
@@ -396,6 +397,7 @@
 
                     .num {
                         font-size: 34px;
+                        width: 100%;
 
                         span {
                             font-size: 30px;
@@ -409,8 +411,8 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: flex-end;
-                        gap: 4px;
-                        margin-top: 4px;
+                        gap: 4px;                      
+                        width: 100%;  
 
                         .increase,
                         .decrease,
@@ -445,8 +447,11 @@
                             flex: 4;
                             text-align: right;
                             font-size: $font12;
+                            font-weight: $f_sizeN;                            
                             line-height: 1.42;
+                            letter-spacing: normal;                            
                             color: $col969;
+                            margin-left: auto;
                         }
                     }
                 }
@@ -875,7 +880,7 @@
 
         // outline 
         &.outline {
-            padding-top: 16px;
+            padding-top: 24px;            
             background-color: $colfff;
 
             .title {
@@ -1021,7 +1026,7 @@
             .bg_box {
                 box-sizing: border-box;
                 border-radius: 16px;
-                background-color: $colF5F;
+                background-color: #f4f4f5;
 
 
                 .data_opinion {
@@ -1047,7 +1052,7 @@
                         .td {
                             margin-top: 5px;
                             position: relative;
-                            font-size: $font15;
+                            font-size: $font16;
                             font-weight: $f_sizeB;
                             letter-spacing: -0.02rem !important;
                             line-height: 1.19;
@@ -1062,7 +1067,7 @@
                                 display: block;
                                 font-size: 10px;
                                 line-height: 1.7;
-                                color: $col969;
+                                color: #c7ccd1;
 
                             }
 
@@ -1078,7 +1083,7 @@
                                 border-radius: 16px;
 
                                 &.str {
-                                    background-color: $colup;
+                                    background-color: #e41c39;
                                 }
 
                                 &.bas {
@@ -1086,37 +1091,37 @@
                                 }
 
                                 &.weak {
-                                    background-color: $coldown;
+                                    background-color: #404fc3;
                                 }
 
                             }
 
                             .increase {
-                                font-weight: $f_sizeS;
+                                font-weight: $f_sizeN;
                                 color: $colup;
 
                                 b {
-                                    font-weight: $f_sizeS;
+                                    font-weight: $f_sizeN;
                                     color: $colup;
                                 }
                             }
 
                             .decrease {
-                                font-weight: $f_sizeS;
+                                font-weight: $f_sizeN;
                                 color: $coldown;
 
                                 b {
-                                    font-weight: $f_sizeS;
+                                    font-weight: $f_sizeN;
                                     color: $coldown;
                                 }
                             }
 
                             .same {
-                                font-weight: $f_sizeS;
+                                font-weight: $f_sizeN;
                                 color: $col363;
 
                                 b {
-                                    font-weight: $f_sizeS;
+                                    font-weight: $f_sizeN;
                                     color: $col363;
                                 }
                             }
@@ -1155,11 +1160,12 @@
             .summary {
                 position: relative;
                 width: 100%;
+                margin-top: 25px;
                 margin-left: -16px;
                 margin-right: -16px;
                 // margin-top: 30px;
                 padding: 24px 16px;
-                background-color: $colF5F;
+                background-color: #f4f4f5;
 
                 .view_box {
                     display: flex;
@@ -1170,9 +1176,15 @@
                 p {
                     word-break: break-all;
                     width: 100%;
-                    font-size: $font14;
+                    font-size: $font14;                    
+                    color: $col6A7;                    
+                    font-weight: normal;                    
                     line-height: 1.36;
-                    color: $col6A7;
+                    letter-spacing: normal;                    
+                    strong {
+                        color: #363f4b;
+                        font-weight: bold;
+                    }
                 }
 
                 &.active {
@@ -1313,7 +1325,7 @@
         // 증권사 투자의견
         &.inve_opinion {
             background-color: $colfff;
-            padding: 32px 16px;
+            padding: 48px 16px 22px;
 
             &::after {
                 content: "";
@@ -1329,8 +1341,8 @@
             }
 
             .l_box {
-                display: flex;
-                align-items: flex-end;
+                display: flex;                
+                align-items: center;
                 align-content: center;
                 justify-content: flex-start;
                 gap: 7px;
@@ -1341,7 +1353,7 @@
                 align-items: flex-end;
                 justify-content: space-between;
                 margin-top: 32px;
-                padding-top: 32px;
+                padding-top: 38px;
                 border-top: 1px solid $colF5F5F5;
 
                 .s_title {
@@ -1360,10 +1372,10 @@
             }
 
             .bg_box {
-                margin-top: 16px;
+                margin-top: 14px;
                 box-sizing: border-box;
                 border-radius: 16px;
-                background-color: $colF5F;
+                background-color: #f4f4f5;
 
                 .data_opinion {
                     display: flex;
@@ -1375,7 +1387,7 @@
                     .line {
                         display: flex;
                         flex-direction: column;
-                        gap: 2px 2px;
+                        gap: 0 2px;
 
                         &:first-child {
                             .td {
@@ -1422,17 +1434,19 @@
                 font-weight: $f_sizeB;
                 line-height: 1.2;
                 color: $col181;
-
                 strong {
                     color: $col969;
                 }
+            }
+            .signal_guide {                
+                display: inline-flex;                
             }
 
             .signal {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                padding: 5px 10px;
+                padding: 6.5px 12px;
                 margin-left: 10px;
                 border-radius: 8px;
                 font-size: $font13;
@@ -1440,7 +1454,7 @@
                 color: $colfff;
 
                 &.buy {
-                    background-color: $colup;
+                    background-color: #e41c39;
                 }
 
                 &.hold {
@@ -1448,7 +1462,7 @@
                 }
 
                 &.sell {
-                    background-color: $coldown;
+                    background-color: #404fc3;
                 }
 
                 &.waitting {
@@ -1679,7 +1693,7 @@
         // 매출액, 영업이익, 주당순이익(EPS) 막대 차트
         &.financials {
             background-color: $colfff;
-            padding: 32px 16px;
+            padding: 40px 16px;
 
             &::after {
                 content: "";
@@ -1835,22 +1849,24 @@
             }
 
             .dataBox {
-                margin-bottom: 38px;
+                margin-bottom: 32px;
 
                 .reg_day {
                     display: block;
                     font-size: $font12;
-                    font-weight: 400;
+                    font-weight: 500;
+                    font-stretch: normal;
+                    font-style: normal;
                     line-height: 1.75;
                     color: $col969;
                     text-align: right;
                 }
 
                 .bg_box {
-                    margin-top: 5px;
+                    margin-top: 7px;
                     box-sizing: border-box;
                     border-radius: 16px;
-                    background-color: $colF5F;
+                    background-color: #f4f4f5;
 
                     .data_opinion {
                         display: flex;
@@ -1867,7 +1883,7 @@
                             }
 
                             .td {
-                                margin-top: 5px;
+                                // margin-top: 5px;
                                 font-size: $font16;
                                 line-height: 1.19;
                                 color: $col363;
@@ -1885,11 +1901,11 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
-                align-items: flex-end;
+                align-items: center;
                 gap: 0 12px;
                 border-bottom: 1px solid $colF5F5F5;
                 padding-bottom: 15px;
-                margin-bottom: 30px;
+                margin-bottom: 32px;
 
                 &:last-of-type {
                     border-bottom: none;
@@ -1903,11 +1919,15 @@
                     line-height: 1.2;
                     color: $col181;
                 }
+                .signal_guide {
+                    display: inline-flex;
+                }
 
                 .unit {
                     font-size: $font12;
-                    line-height: 1.75;
-                    font-weight: 400;
+                    font-weight: 500;                    
+                    line-height: 1.42;
+                    letter-spacing: normal;                   
                     color: $col969;
                     margin-left: auto;
                 }
@@ -1961,9 +1981,9 @@
                     }
 
                     .highcharts-axis-labels text {
-                        font-size: 12px !important;
-                        color: $col969 !important;
-                        fill: $col969 !important;
+                        font-size: 14px !important;
+                        color: #6a727b !important;
+                        fill: #6a727b !important;
                         font-weight: 400 !important;
                     }
 

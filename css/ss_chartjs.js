@@ -8,7 +8,7 @@ $(document).ready(function () {
         Highcharts.stockChart('containeroutline1_1', {
             chart: {                
                 borderColor: '#333',
-                borderWidth: 1, 
+                borderWidth: 1,                 
             },
 
             // 하단 네비게이션 제거

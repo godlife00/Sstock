@@ -27,24 +27,30 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <!-- highstock -->
-    <script src="https://code.highcharts.com/stock/10.0/highstock.js"></script>
-    <script src="https://code.highcharts.com/stock/10.0/modules/data.js"></script>
-    <script src="https://code.highcharts.com/stock/10.0/modules/hollowcandlestick.js"></script>
-    <script src="https://code.highcharts.com/stock/10.0/modules/no-data-to-display.js"></script>
-    <script src="https://code.highcharts.com/stock/10.0/modules/treemap.js"></script>
-    <script src="https://code.highcharts.com/stock/10.0/highcharts-more.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/highstock.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/data.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/hollowcandlestick.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/no-data-to-display.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/treemap.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/highcharts-more.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/exporting.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/export-data.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/accessibility.js"></script>
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
     <!-- css -->
+    <link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/scss/super_stock.css?v=1323" />
+    <link rel="stylesheet" type="text/css" href="../css/scss/super_stock.css?v=1323" />    
     <!-- <link rel="canonical" href="현재주소"> canonical 는 스크립트 canonicalURL로 생성 -->
     <!-- js -->
-    <script src="../js/quantup.js"></script>
-    <script src="../js/chartjs_quant.js"></script>
+    <script src="../css/ss_chartjs.js"></script>
+    <script src="../css/chartjs_quant.js"></script>    
+    <script src="../css/quantup.js"></script>
     <!-- 이 아래는 로컬에서만 사용되는 파일 -->
-    <script src="../js/local.js"></script>
+    <script src="../css/local.js"></script>
     <!-- 로컬에서만 사용되는 파일 종료  -->
 </head>
 
@@ -90,10 +96,7 @@
                 <div class="recom_company">
                     <ul class="list">
                         <li class="ticker">AAPL</li>
-                        <li class="company_nm">마이크로소프트마이크로소프트</li>
-                        <li class="att"><i class="attention on" style="left:-50px"></i></li>
-                        <li class="att"><i class="attention attention_pop"></i></li>
-                        <!-- 관심종목 최초 지정 시 관심종목 안내 팝업 노출 : class = attention_pop 있는 경우-->
+                        <li class="company_nm">마이크로소프트마이크로소프트</li>                        
                         
                         <!-- 정규장 -->
                         <li class="detail">
@@ -106,243 +109,11 @@
                                 <!-- increase 증가, decrease 감소, 보합은 same -->
                                 <span class="day">1/23, 장마감</span>
                             </div>
-                        </li>
-                        <!-- 애프터마켓 -->
-                        <li class="detail market_status">
-                            <div class="after_market">
-                                애프터마켓
-                            </div>
-                            <div class="num">
-                                <span><b>898.</b>00</span>
-                            </div>
-                            <div class="per">
-                                <span class="increase"><b>+89.</b>89</span>
-                                <span class="increase">(<b>+89.</b>89%)</span>
-                                <!-- increase 증가, decrease 감소, 보합은 same -->
-                                <span class="day">04:35, USD</span>
-                            </div>
-                        </li>
-                        <!-- 프리마켓 -->
-                        <li class="detail market_status">
-                            <div class="pre_market">
-                                프리마켓
-                            </div>
-                            <div class="num">
-                                <span><b>898.</b>00</span>
-                            </div>
-                            <div class="per">
-                                <span class="decrease"><b>-89.</b>89</span>
-                                <span class="decrease">(<b>-89.</b>89%)</span>
-                                <!-- increase 증가, decrease 감소, 보합은 same -->
-                                <span class="day">11:35, USD</span>
-                            </div>
-                        </li>  
+                        </li>                        
                     </ul>
                 </div>
                 <!-- //recom_company -->
 
-                <!--퀀트 종목분석 -->
-                <div class="mainBox attr">
-                    <div class="adequateArea">
-                        <h2 class="title">퀀트 종목분석</h2>
-                        <div class="listWrap">
-                            <div class="list">
-                                <!-- 벨류 점수 -->
-                                <div class="mid">
-                                    <div class="charm_num">
-                                        <span class="signal hold">보유</span>                                        
-                                        <span class="signal_guide"><img src="../img/txt_guide_gray.svg" alt="가이드보기"></span>
-                                    </div>
-                                    <!-- //charm_num -->
-                                    <div class="num_bar">
-                                        <div class="line">
-                                            <div class="th">스마트 스코어</div>
-                                            <div class="barArea">
-                                                <div class="barline zt-skill-bar">
-                                                    <div class="position" data-width="10"></div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>10</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">밸류에이션</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="50"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>50</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">수급분석</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>90</b> 점</div>
-                                        </div>
-                                        <!-- //line -->
-                                    </div>
-                                    <!-- //num_bar -->
-                                </div>
-                                <!-- //mid -->
-                                <div class="mid">
-                                    <div class="charm_num">
-                                        <span class="signal buy">매수</span>
-                                        <span class="signal_guide"><img src="../img/txt_guide_gray.svg"
-                                                alt="가이드보기"></span>
-                                    </div>
-                                    <!-- //charm_num -->
-                                    <div class="num_bar">
-                                        <div class="line">
-                                            <div class="th">스마트 스코어</div>
-                                            <div class="barArea">
-                                                <div class="barline zt-skill-bar">
-                                                    <div class="position" data-width="10"></div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>10</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">밸류에이션</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="50"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>50</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">수급분석</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>90</b> 점</div>
-                                        </div>
-                                        <!-- //line -->
-                                    </div>
-                                    <!-- //num_bar -->
-                                </div>
-                                <!-- //mid -->
-                                <div class="mid">
-                                    <div class="charm_num">
-                                        <span class="signal sell">매도</span>
-                                        <span class="signal_guide"><img src="../img/txt_guide_gray.svg"
-                                                alt="가이드보기"></span>
-                                    </div>
-                                    <!-- //charm_num -->
-                                    <div class="num_bar">
-                                        <div class="line">
-                                            <div class="th">스마트 스코어</div>
-                                            <div class="barArea">
-                                                <div class="barline zt-skill-bar">
-                                                    <div class="position" data-width="10"></div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>10</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">밸류에이션</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="50"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>50</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">수급분석</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>90</b> 점</div>
-                                        </div>
-                                        <!-- //line -->
-                                    </div>
-                                    <!-- //num_bar -->
-                                </div>
-                                <!-- //mid -->
-                                <div class="mid">
-                                    <div class="charm_num">
-                                        <span class="signal waitting">관망</span>
-                                        <span class="signal_guide"><img src="../img/txt_guide_gray.svg"
-                                                alt="가이드보기"></span>
-                                    </div>
-                                    <!-- //charm_num -->
-                                    <div class="num_bar">
-                                        <div class="line">
-                                            <div class="th">스마트 스코어</div>
-                                            <div class="barArea">
-                                                <div class="barline zt-skill-bar">
-                                                    <div class="position" data-width="10"></div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>10</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">밸류에이션</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="50"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>50</b> 점</div>
-                                        </div>
-                                        <div class="line">
-                                            <div class="th">수급분석</div>
-                                            <div class="barArea">
-                                                <div class="barline">
-                                                    <div class="barline zt-skill-bar">
-                                                        <div class="position" data-width="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- //barArea -->
-                                            <div class="td"><b>90</b> 점</div>
-                                        </div>
-                                        <!-- //line -->
-                                    </div>
-                                    <!-- //num_bar -->
-                                </div>
-                                <!-- //mid -->
-                            </div>
-                            <!-- //list -->
-                        </div>
-                        <!-- //listWrap -->
-                    </div>
-                    <!-- //adequateArea -->
-                </div>
-                <!-- //bg_box -->
 
                 <!-- outline -->
                 <div class="mainBox outline">
@@ -371,8 +142,8 @@
                                 <div class="th">3개월 추세</div>
                                 <div class="td">
                                     <span class="ibox str">강세</span>
-                                    <span class="ibox bas">횡보</span>
-                                    <span class="ibox weak">약세</span>
+                                    <!-- <span class="ibox bas">횡보</span> -->
+                                    <!-- <span class="ibox weak">약세</span> -->
                                 </div>
                             </div>
                         </div>
@@ -392,31 +163,12 @@
                 </div>
                 <!-- //outline -->
 
-                <!-- 스파이더 차트 -->
-                <div class="mainBox investCharm_area">
-                    <div class="l_box">
-                        <h2 class="title">스마트스코어</h2>
-                        <span class="signal_guide"><img src="../img/txt_guide.svg" alt="가이드보기"></span>
-                    </div>
-                    <!-- //l_box -->
-                    <div class="tab_diagnosis_area">
-                        <div id="containercharm1_1" class="containercharm1"></div>
-                        <div class="charm_num">
-                            <span class="exce">상위 00.16%</span>
-                            <span class="total">5,587 평가 기업 중</span>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- //investCharm_area -->
-
-
                 <!-- 증권사 투자의견 -->
                 <div class="mainBox inve_opinion">
                     <div class="l_box">
                         <h3 class="title">증권사 투자의견</h3>
                         <span class="total">총 <strong>34</strong>건</span>
-                        <span class="signal_guide"><img src="../img/txt_guide.svg" alt="가이드보기"></span>
+                        <span class="signal_guide"><img src="../img/txt_guide_w.svg" alt="가이드보기"></span>
                         <span class="signal buy">매수</span>
                     </div>
                     <!-- 매수 매도 보유 관망 버튼 확인용. 실 서비스에선 삭제 -->
@@ -468,160 +220,8 @@
                 </div>
                 <!-- //inve_opinion -->
 
-                <!-- 이 종목의 퀀트전략 -->
-                <div class="mainBox area_allo">
-                    <h2 class="title">이 종목이 포함된 추천 퀀트전략</h2>
-
-                    <div class="swiper-container maingameSwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="list_area">
-                                    <div class="area" OnClick="location.href ='stock/allo.html'"
-                                        style="cursor:pointer;">
-                                        기업가치 성장주
-                                    </div>
-                                    <p class="allo_txt">
-                                        <strong>수익률</strong> <span class="increase">+394.56%</span>
-                                        <br>
-                                        샤프비율 <span class="increase">+1.56% </span>
-                                    </p>
-                                </div>
-                                <!-- //list_area -->
-                            </div>
-                            <!-- //swiper-slide -->
-                            <div class="swiper-slide">
-                                <div class="list_area">
-                                    <div class="area" OnClick="location.href ='stock/allo.html'"
-                                        style="cursor:pointer;">
-                                        현금흐름 가치주
-                                    </div>
-                                    <p class="allo_txt">
-                                        <strong>수익률</strong> <span class="decrease">-34.56%</span>
-                                        <br>
-                                        샤프비율 <span class="decrease">-1.56% </span>
-                                    </p>
-                                </div>
-                                <!-- //list_area -->
-
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="list_area">
-                                    <div class="area" OnClick="location.href ='stock/allo.html'"
-                                        style="cursor:pointer;">
-                                        안전성장 현금흐름
-                                    </div>
-                                    <p class="allo_txt">
-                                        <strong>수익률</strong> <span class="same">0.00%</span>
-                                        <br>
-                                        샤프비율 <span class="same">0.00%</span>
-                                    </p>
-                                </div>
-                                <!-- //list_area -->
-                            </div>
-                            <!-- //swiper-slide -->
-                            <div class="swiper-slide">
-                                <div class="list_area">
-                                    <div class="area" OnClick="location.href ='stock/allo.html'"
-                                        style="cursor:pointer;">
-                                        S&P1500 가치주
-                                    </div>
-                                    <p class="allo_txt">
-                                        <strong>수익률</strong> <span class="same">0.00%</span>
-                                        <br>
-                                        샤프비율 <span class="same">0.00%</span>
-                                    </p>
-                                </div>
-                                <!-- //list_area -->
-                            </div>
-                            <!-- //swiper-slide -->
-                            <div class="swiper-slide">
-                                <div class="list_area">
-                                    <div class="area" OnClick="location.href ='stock/allo.html'"
-                                        style="cursor:pointer;">
-                                        S&P1500 가치주
-                                    </div>
-                                    <p class="allo_txt">
-                                        <strong>수익률</strong> <span class="same">0.00%</span>
-                                        <br>
-                                        샤프비율 <span class="same">0.00%</span>
-                                    </p>
-                                </div>
-                                <!-- //list_area -->
-                            </div>
-                            <!-- //swiper-slide -->
-                        </div>
-                        <!-- //swiper-wrapper -->
-                    </div>
-                    <!-- //swiper-container -->
-
-                    <div class="no_data">
-                        <p>
-                            해당 종목의 퀀트 전략이 없습니다. <br>
-                            <a href="../stock/quant_basic.html" class="link_basic">퀀트업만의 추천 퀀트전략 살펴보기</a>
-                        </p>
-
-                    </div>
-                </div>
-                <!-- //퀀트전략 -->
-
-                <!-- 투자노트 -->
-                <div class="mainBox financials">
-                    <div class="area_note">
-                        <h3 class="title">투자노트</h3>
-
-                        <div class="note_list">
-                            <ul OnClick="location.href ='../stock/note_view.html'" style="cursor:pointer;">
-                                <li class="note_nm">
-                                    <a href="../stock/note_view.html">
-                                        애플, 위성통신 접속 기능 탑재한 아이폰14 시리즈 공개애플
-                                    </a>
-                                    <p class="day">2022. 8/12</p>
-                                </li>
-                                <!-- 이미지 없는 경우 아래 li 제거 -->
-                                <li class="sume_img">
-                                    <a href="../stock/note_view.html"><img src="../img/premiumLock_area_ch.jpg"
-                                            alt="노트 썸네일" class="img"></a>
-                                </li>
-                            </ul>
-                            <ul OnClick="location.href ='../stock/note_view.html'" style="cursor:pointer;">
-                                <li class="note_nm">
-                                    <a href="../stock/note_view.html"> 애플, 위성통신 접속 기능 탑재한 아이폰14 시리즈 공개애플애플, 위성통신 접속 기능
-                                        탑재한 아이폰14 시리즈 공개애플
-                                    </a>
-                                    <p class="day">2022. 8/12</p>
-                                </li>
-                            </ul>
-                            <ul OnClick="location.href ='../stock/note_view.html'" style="cursor:pointer;">
-                                <li class="note_nm">
-                                    <a href="../stock/note_view.html">
-                                        애플, 위성통신 접속 기능 탑재한 아이폰14 시리즈 공개애플
-                                    </a>
-                                    <p class="day">2022. 8/12</p>
-                                </li>
-                            </ul>
-
-                            <div class="btn_more">
-                                <a href="../stock/note_searchList.html" class="">더보기</a>
-                            </div>
-                        </div>
-                        <!-- //note_list -->
-
-                        <!-- 투자노트 콘텐츠가 없는 경우 -->
-                        <div class="no_data">
-                            <p>
-                                종목의 투자노트 콘텐츠가 없습니다.<br>
-                                <a href="../stock/quant_basic.html" class="link_basic">발빠른 미국시장 콘텐츠 살펴보기</a>
-                            </p>
-                        </div>
-                        <!-- //투자노트 콘텐츠가 없는 경우 -->
-
-                    </div>
-                    <!-- //area_note  -->
-                </div>
-
                 <!-- 매출액, 영업이익, 주당순이익(EPS) 막대 차트 -->
                 <div class="mainBox financials">
-
                     <div class="dataBox">
                         <span class="reg_day">*기준 : 22 01/22</span>
                         <div class="bg_box">
@@ -672,7 +272,7 @@
                     </div>
                     <div class="chart_box">
                         <h3 class="c_title">주가&EPS</h3>
-                        <span class="signal_guide"><img src="../img/txt_guide.svg" alt="가이드보기"></span>
+                        <span class="signal_guide"><img src="../img/txt_guide_w.svg" alt="가이드보기"></span>
                         <span class="unit">* 단위 : 달러</span>
                         <div id="containerfinancials2_1" class="financialsLine_style"></div>
                     </div>
@@ -691,24 +291,15 @@
         </div>
         <!-- //container -->
 
-        <!-- footer  -->
-        <div id="footer" class="f_main">
-            <div class="notice">
-                <h3 class="f_logo"><a href="">퀀트업</a></h3>
-                <div class="service_info">
-                    <p>퀀트업은 (주)데이터히어로와 제휴하여 브이피(주)가 제공하는 프리미엄 미국주식 정보서비스입니다. 본 서비스는 투자판단에 참고용으로만 사용하실 수 있으며, 모든 투자판 단은
-                        투자자 본인의 책임으로 당사는 그 결과에 대해 법적인 일체의 책임을 지지 않습니다.</p>
-                </div>
-
-                <div class="foot_info">
-                    <p class="company"><strong>브이피(주)</strong> <i></i> 대표이사 김진국</p>
-                    <p class="copyright">서울특별시 중구 을지로 170 을지로트윈타워 <br> 사업자등록번호 220-81-89229</p>
-                </div>
-                <!-- //foot_info -->
-            </div>
-            <!-- //notice -->
-        </div>
-        <!-- //footer -->
+        <footer id="footer">	
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
 
         <!-- modal 팝업 뭉치. 전페이지 공통으로 들어갑니다. -->
         <div class="modalBox">
