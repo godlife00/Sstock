@@ -1,5 +1,9 @@
 // 검색결과
-#wrap #container.sub_search {
+#wrap #container.sub_search {        
+    * {
+        font-family: var(--Title, Pretendard);
+    }  
+    
     .searching {
         margin-top: 0;
         padding: 24px 16px;

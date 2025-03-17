@@ -1,6 +1,12 @@
 // 모달팝업
-
+@mixin font-family {
+    font-family: $default-fontfamily;
+    line-height: normal;
+}
 .modal {
+    * {
+        @include font-family;              
+    }  
     @at-root .blocker {
         position: fixed;
         top: 0;

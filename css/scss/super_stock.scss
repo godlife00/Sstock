@@ -1,6 +1,6 @@
-@import "base/reset"; // 리셋
+// @import "base/reset"; // 리셋
 @import "helpers/mixins"; // mixin
-@import "helpers/functions"; // functions
+// @import "helpers/functions"; // functions
 
 @import "layout/grid"; // 그리드
 @import "layout/header"; // 헤더
@@ -14,7 +14,5 @@
 // @import "layout/themes"; //라이트, 다크모드 테마 적용
 
 // Typography
-body, .ui-mobile-viewport, .ui-overlay-a {
-    @include font-family;              
-}  
+
 
