@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
 .wrapper {
 	position: relative;
@@ -210,16 +211,18 @@ button span,
 	float: left;
 	padding: 0 10px;
 	text-align: center;
+	vertical-align: middle;
 }
 
 .gnb ul.gnb_li li a {
-	color: #454545;
-	display: block;
-	font-size: 15px;
-	height: 27px;
-	margin: 0 auto;
-	letter-spacing: -1px;
-	padding-top: 15px;
+	color: var(--Font-primary-title, #1F242B);
+	/* Global Styles/Body/Medium */
+	font-family: var(--Body, Pretendard);
+	font-size: var(--Size-md-15, 15px);
+	font-style: normal;
+	font-weight: var(--Weight-400, 400);
+	line-height: var(--Line-height-lg, 21px); /* 140% */
+	letter-spacing: var(--Tracking-md, -0.2px);
 }
 
 .gnb.on ul.gnb_li li a,
