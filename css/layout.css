@@ -162,92 +162,98 @@ button span,
 	z-index: 4900;
 }
 
-.menu {
+.wrapper #header .menu {
 	position: absolute;
 	width: 100%;
 	margin-top: 50px;
 }
 
-.menu.fixed {
+.wrapper #header .menu.fixed {
 	position: fixed;
 	top: 0;
 	z-index: 90000;
 }
 
-#menu_ss.fixed {
+.wrapper #header #menu_ss.fixed {
 	position: fixed;
 	top: 0;
 	z-index: 2;
 }
 
 
-#menu {
+.wrapper #header #menu {
 	position: relative;
 	overflow: hidden;
 	width: 100%;
 }
 
-.gnb {
+.wrapper .gnb {
 	padding: 0 0 0 10px;
 	position: relative;
-	height: 42px;
+	height: 50px;
 	background-color: #fff;
 	border-bottom: 1px solid #D8D8D8;
 	width: 100%;
 	overflow-x: scroll;
 }
 
-.gnb.on {
+.wrapper .gnb.on {
 	background-color: #ce3030;
 	border-bottom: 4px solid #ce3030;
 }
 
-.gnb ul.gnb_li {
-	width: 500px;
+.wrapper .gnb ul.gnb_li {
+	display: flex;
+	align-items: center;
+	gap: 10px 16px;
+	width: 446px;
+	padding-left: 10px;
 	padding-right: 20px;
+	margin-top: 10px;
 }
 
-.gnb ul.gnb_li li {
-	float: left;
+.wrapper .gnb ul.gnb_li li {
+	/* float: left;
 	padding: 0 10px;
 	text-align: center;
-	vertical-align: middle;
+	vertical-align: middle; */
 }
 
-.gnb ul.gnb_li li a {
+.wrapper .gnb ul.gnb_li li a {
 	color: var(--Font-primary-title, #1F242B);
 	/* Global Styles/Body/Medium */
 	font-family: var(--Body, Pretendard);
 	font-size: var(--Size-md-15, 15px);
 	font-style: normal;
-	font-weight: var(--Weight-400, 400);
+	font-weight: var(--Weight-500, 500);
 	line-height: var(--Line-height-lg, 21px); /* 140% */
 	letter-spacing: var(--Tracking-md, -0.2px);
 }
 
-.gnb.on ul.gnb_li li a,
-.gnb.on ul.gnb_li li a:hover {
+.wrapper .gnb.on ul.gnb_li li a,
+.wrapper .gnb.on ul.gnb_li li a:hover {
 	color: #fff !important;
 }
 
-.gnb.on ul.gnb_li li a.on p {
+.wrapper .gnb.on ul.gnb_li li a.on p {
 	color: #FFF389 !important;
 	background-color: #7F0000 !important;
+	font-weight: var(--Weight-700, 700);
 	border-radius: 20px;
 }
 
 
-.gnb ul.gnb_li li a:hover {
+.wrapper .gnb ul.gnb_li li a:hover {
 	color: #f84d51;
 	font-weight: bold;
 }
 
-.gnb ul.gnb_li li a.on {
+.wrapper .gnb ul.gnb_li li a.on {
 	color: #f84d51 !important;
-	font-weight: bold;
+	font-weight: var(--Weight-700, 700);
 }
 
-.gnb ul.gnb_li li a p {
+.wrapper .gnb ul.gnb_li li a p {
 	height: 16px;
 	padding: 8px 0 4px 0;
 	width: 90%;
@@ -258,30 +264,54 @@ button span,
 	height:34px;
 	border-bottom: 4px solid #e30202;
 }*/
-.gnb ul.gnb_li li a.on p {
+.wrapper .gnb ul.gnb_li li a.on p {
 	/*background-color: #e30202 !important;
 	border-radius: 20px;
 	color: #fff;*/
 	color: #e30202;
 }
 
+.wrapper .gnb ul.gnb_li li.usa-stock a {
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+	gap: 4px 4px;
+	padding: 3px 8px 3px 4px;
+	border-radius: var(--Radius-r-07, 100px);
+	border: 1px solid var(--Blue-blue200, #BFD1FE);
+	background: var(--Blue-blue100, #ECF0FF);
+	color: var(--Blue-blue700, #1D2FD8);
+	font-family: var(--Title, Pretendard);
+	font-size: var(--Size-md-15, 15px);
+	font-style: normal;
+	font-weight: var(--Weight-500, 500);
+	line-height: var(--Line-height-md-15, 20px); /* 133.333% */
+	letter-spacing: var(--Tracking-md, -0.2px);
+}
+.wrapper .gnb ul.gnb_li li.usa-stock a i {
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url('../img/us/old_glory.svg') no-repeat center center;
+}
+
 /*gnb_st2*/
-.gnb.st2 {
+.wrapper .gnb.st2 {
 	background-color: #ce3030;
 	border-bottom: 4px solid #ce3030;
 }
 
-.gnb.st2 ul.gnb_li li a,
-.gnb.st2 ul.gnb_li li a:hover {
+.wrapper .gnb.st2 ul.gnb_li li a,
+.wrapper .gnb.st2 ul.gnb_li li a:hover {
 	color: #ffe7e7 !important;
 }
 
-.gnb.st2 ul.gnb_li li a.on {
+.wrapper .gnb.st2 ul.gnb_li li a.on {
 	color: #fffb90 !important;
 }
 
 /* nav */
-.nav {
+.wrapper .nav {
 	padding: 0 10px;
 	position: relative;
 	height: 34px;
@@ -291,12 +321,12 @@ button span,
 	text-align: center;
 }
 
-.nav h2 {
+.wrapper .nav h2 {
 	font-size: 16px;
 	padding-top: 12px;
 }
 
-.nav button.btn_back {
+.wrapper .nav button.btn_back {
 	background-image: url(../img/common/btn_nav_back.png);
 	background-size: 24px;
 	position: absolute;

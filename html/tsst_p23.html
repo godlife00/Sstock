@@ -40,33 +40,19 @@
 	<!-- Swiper -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
-
-
-	<!-- css -->
-	<link rel="stylesheet" type="text/css" href="/css/common.css?v=1.3" media="all">
-	<link rel="stylesheet" type="text/css" href="/css/t-sst.css" media="all">
-
-	<!-- js -->
-	<script type="text/javascript" src="/js/add_design.js"></script>
-
-
-
-
 	<!-- css -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />    
-    <link rel="stylesheet" type="text/css" href="../css/scss/super_stock.css?v=1323" />    
-	<!-- js -->
-	<script type="text/javascript" src="../css/add_design.js"></script>
-	<script src="../css/ss_chartjs.js"></script>
-    <script src="../css/chartjs_quant.js"></script>    
-    <script src="../css/quantup.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />        
+    <link rel="stylesheet" type="text/css" href="../css/scss/superStock_us.css?v=123" />    
+    <!-- <link rel="canonical" href="현재주소"> canonical 는 스크립트 canonicalURL로 생성 -->
+	<!-- js -->        
+    <script type="text/javascript" src="/js/add_design.js"></script>
+    <script src="../js/chart_dev_us.js"></script>            
     <!-- 이 아래는 로컬에서만 사용되는 파일 -->
-    <script src="../css/local.js"></script>
+    <script src="../js/superstock_us.js"></script>
     <!-- 로컬에서만 사용되는 파일 종료  -->
-	
-	<!-- //swiper -->
+	<!-- swiper -->
 	<script>
 		$(document).ready(function () {
 			var swiper = new Swiper('.maingameSwiper', {
@@ -79,6 +65,11 @@
 		});
 	</script>
 </head>
+<!-- 달려라 미국주식 추가 된 파일
+     css/scss/superStock_us.css,
+     js/chart_dev_us.js
+     js/superstock_us.js
+-->
 
 <body oncontextmenu="return false;">
 	<div class="wrapper" id="topwrpperID">
@@ -122,11 +113,11 @@
 				<nav class="gnb">
 					<ul class="gnb_li">
 						<li><a href="/" title="HOME" class="on">홈</a></li>
-						<li><a href="/stock/portone" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+						<li><a href="/stock/portone" title="슈퍼스탁 1호" class="on">슈퍼스탁1호</a></li>
 						<li><a href="/stock/recommend" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>						
 						<li><a href="/stock/score" title="투자점수">투자점수</a></li>
 						<li><a href="/stock/theme" title="업종/테마">업종/테마</a></li>
-						<li><a href="">미국주식</a></li>
+						<li class="usa-stock"><a href="sstock_us.html"><i></i> 미국주식</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -307,8 +298,8 @@
 
 			<div class="index_section">
 				<!-- 달려라 미국주식 -->
-				<h3 class="bdr_title"><a href="">달려라 미국주식</a></h3>
-				<p class="btn_more"><a href="#">더보기 +</a></p>
+				<h3 class="bdr_title"><a href="sstock_us.html">달려라 미국주식</a></h3>
+				<p class="btn_more"><a href="sstock_us.html">더보기 +</a></p>
 
 				<div class="strategy_list usa_stock">
 					<ul class="list" onclick="location.href =''">
@@ -363,7 +354,7 @@
 
 							// rocket.svg가 선택된 경우에만 blue 클래스 추가
 							if (randomLogo.includes('rocket')) {
-								$(this).addClass('blue');
+								$(this).addClass('rocketImg');
 							}
 						});
 					});

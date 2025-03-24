@@ -211,29 +211,49 @@ $default-fontfamily:  "Pretendard Variable", Pretendard, -apple-system, BlinkMac
         margin: 0 auto;
         padding: 0;
         box-sizing: border-box;
-        border: 1px solid #edeeef;
-        text-align: center;
-        border-radius: 8px;
+        text-align: center;        
         background-color: var(--col1a1);
         b {
             font-size: $font15;            
             color: $col7f8;
         }
-        a {
-            display: block;
-            padding: 11px 0;
-            font-size: $font15;            
-            line-height: 1.2;            
-            color: $col6A7;
-        }
-        &:active {
-            opacity: 0.95;
-            background-color: var(--col040);
-        }
-        a:active {            
-            top: 0;
-            left: 0;
-            opacity: 1;
+        a, button {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 13px 8px;            
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+            background: none;
+            color: var(--Font-sccondary-body, #4E5866);
+            font-family: var(--Body, Pretendard);
+            font-size: var(--Size-md-15, 15px);            
+            font-weight: var(--Weight-600, 600);
+            line-height: var(--Line-height-sm, 18px); /* 120% */
+            i {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                
+            }
+            &.active {
+                i {
+                    transform: rotate(180deg);                    
+                }
+            }
+            transition: transform 0.1s ease-in-out;
+            &:active, &:focus, &:hover {
+                background-color: transparent;                         
+            }
+            &:active {                
+                transform: translate(2px, 2px);                            
+            }
+            &:not(:active) {
+                transition: transform 0.1s ease-out;
+            }
         }        
     }
 }
@@ -318,3 +338,201 @@ $default-fontfamily:  "Pretendard Variable", Pretendard, -apple-system, BlinkMac
 
 }
 
+
+// 검색바, 검색 자동완성
+@mixin searchArea {
+    .main_searching .searchArea {
+        margin: 0 auto;
+        position: relative;
+        text-align: right;
+        fieldset {
+            display: flex;
+        }
+    }
+
+    .main_searching .searchArea.keydown form {
+        margin-left: 0;
+        
+    }
+
+    .main_searching .searchArea.keydown .searchInput {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .main_searching .searchArea .sch_title {
+        color: #333;
+        font-size: 1.25rem;
+        font-weight: $f_sizeB;
+        text-align: left;
+        display: inline-block;
+        width: 45px;
+        line-height: 33px;
+    }
+
+    .main_searching .searchArea .sch_title.keydown {
+        display: none;
+    }
+
+    .main_searching .searchArea .searchInput {        
+        border-radius: var(--Radius-r-04, 16px);
+        border: 1px solid var(--Border-dark-border, #1F242B);
+        background: #FFF;
+        width: 100%;
+        padding: 14px 52px 14px 16px;
+        box-sizing: border-box;
+        color: var(--Font-primary-body, #24282C);
+        font-family: var(--Body, Pretendard);
+        font-size: var(--Size-md-16, 16px);        
+        font-weight: var(--Weight-600, 600);        
+        line-height: var(--Line-height-lg, 21px); /* 140% */
+        letter-spacing: var(--Tracking-md, -0.2px);
+        
+        &::placeholder {
+            color: var(--Gray-gray500, #8C98A7);        
+            font-size: var(--Size-md-16, 16px);        
+            font-weight: var(--Weight-400, 400);           
+        }
+        &:hover, &:focus {
+            
+        }
+    }
+
+    .main_searching .searchArea .searchInput.keydown {        
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;        
+    }
+
+    .main_searching .searchArea .searchBtn {
+        display: inline-block;
+        width: 24px;
+        height: auto;
+        position: absolute;
+        right: 16px;
+        top: 13px;
+    }
+
+    .main_searching .sch_autocomplete {                        
+        opacity: 0;
+        height: 0;
+        display: none;
+        // overflow: auto;
+        // height: 100%;
+        margin: 0 auto;
+        background-color: $colfff;
+    }
+
+    .main_searching .sch_autocomplete.focus_on {
+        // display: block;
+        opacity: 1;
+        height: auto;
+        transition: all 0.3s;
+    }
+
+    .main_searching .sch_autocomplete._show {
+        display: block;
+        opacity: 1;
+        height: auto;
+        transition: all 0.3s;
+    }
+
+    .main_searching .sch_autocomplete ul {
+        display: flex;
+        align-items: flex-start;        
+        flex-direction: column;
+        gap: 12px 6px;
+        width: 100%;
+        padding: 16px 0 32px;
+        box-sizing: border-box;
+        border: 1px solid var(--Border-dark-border, #1F242B);
+        border-top: 0;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    .main_searching .sch_autocomplete ul li {
+        width: 100%;
+        padding: 0 16px;
+        // border: 1px solid var(--Border-dark-border, #1F242B);
+        border-top: none;
+        border-bottom: none;
+        box-sizing: border-box;
+        &:first-child {
+            // padding-top: 15px;
+        }
+    }
+
+    .main_searching .sch_autocomplete ul li:last-child {        
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .main_searching .sch_autocomplete ul li a {        
+        display: flex;
+        align-items: flex-start;        
+        flex-direction: column;
+        gap: 2px 2px;
+        font-size: $font20;
+        font-weight: $f_sizeB;
+        line-height: 1.05;
+        color: $col181;
+    }
+
+    .main_searching .sch_autocomplete ul li a._on {
+        border: none;
+        padding: 0;
+    }
+
+    .main_searching .sch_autocomplete ul li a .schCode {
+        // width: 65px;
+        color: var(--Font-primary-body, #24282C);
+        font-family: var(--Body, Pretendard);
+        font-size: var(--Size-md-15, 15px);
+        font-style: normal;
+        font-weight: var(--Weight-600, 600);
+        line-height: var(--Line-height-md-15, 20px); /* 133.333% */
+        letter-spacing: var(--Tracking-md, -0.2px);
+        
+    }
+
+    .main_searching .sch_autocomplete ul li a .schList {
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--Font-sccondary-body, #4E5866);
+        font-family: var(--Body, Pretendard);
+        font-size: var(--Size-xs-13, 13px);
+        font-style: normal;
+        font-weight: var(--Weight-500, 500);
+        line-height: var(--Line-height-xs-13, 16px); /* 123.077% */
+        letter-spacing: var(--Tracking-md, -0.2px);
+
+    }
+
+    .main_searching .sch_autocomplete ul li a .schList strong {        
+        font-weight: $f_sizeB;
+    }
+
+    .main_searching .no_result {
+        border: 1px solid var(--Border-dark-border, #1F242B);
+        border-top: none;
+        padding: 40px 15px;
+        text-align: center;
+        border-bottom-left-radius: 8px;        
+        border-bottom-right-radius: 8px;        
+    }
+
+    .main_searching .no_result p,
+    .main_searching .no_result p strong {
+        color: var(--Font-sccondary-body, #4E5866);
+        font-family: var(--Body, Pretendard);
+        font-size: var(--Size-md-15, 15px);
+        font-style: normal;
+        font-weight: var(--Weight-500, 500);
+        line-height: var(--Line-height-lg, 21px); /* 140% */
+        letter-spacing: var(--Tracking-md, -0.2px);
+    }
+
+}

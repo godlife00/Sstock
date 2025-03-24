@@ -11,6 +11,9 @@ body, #wrap {
 	flex-direction: column;
 	min-height: -webkit-fill-available;
 	min-height: 100vh;	
+    &.sstock_us {
+        background-color: #fff
+    }
 }
 
 #wrap {
@@ -39,7 +42,7 @@ body, #wrap {
 
     .mainBox {
         position: relative;
-        padding: 0 16px;
+        padding: 0 20px;
     }
 }
 
