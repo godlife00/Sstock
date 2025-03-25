@@ -43,12 +43,12 @@
     <!-- css -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />        
-    <link rel="stylesheet" type="text/css" href="../css/scss/superStock_us.css?v=13232" />    
+    <link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/scss/superStock_us.css?v=5d2" />
     <!-- <link rel="canonical" href="현재주소"> canonical 는 스크립트 canonicalURL로 생성 -->
-    <!-- js -->        
+    <!-- js -->
     <!-- <script type="text/javascript" src="/js/add_design.js"></script> -->
-    <script src="../js/chart_dev_us.js"></script>            
+    <script src="../js/chart_dev_us.js"></script>
     <!-- 이 아래는 로컬에서만 사용되는 파일 -->
     <script src="../js/superstock_us.js"></script>
     <!-- 로컬에서만 사용되는 파일 종료  -->
@@ -59,16 +59,33 @@
      js/superstock_us.js
 -->
 <!-- 달려라 미국주식은 <body class="sstock_us"> -->
+
 <body class="sstock_us">
 
     <div id="wrap">
+        <div id="header" class="main_hdr">
+            <div id="menu">
+                <nav class="gnb">
+                    <ul class="gnb_li">
+                        <li><a href="tsst_p23.html" title="HOME">홈</a></li>
+                        <li><a href="/stock/portone" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+                        <li><a href="/stock/recommend" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+                        <li><a href="/stock/score" title="투자점수">투자점수</a></li>
+                        <li><a href="/stock/theme" title="업종/테마">업종/테마</a></li>
+                        <li class="usa-stock"><a href="sstock_us.html"><i></i> 미국주식</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- //메인해더 main_hdr -->
 
         <div id="header" class="sub_hdr">
             <div class="bgWrap">
                 <div class="left_box">
                     <a href="javascript:history.back();" class="go_back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M1 8L15 8M1 8L8 1M1 8L8 15" stroke="#1F242B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1 8L15 8M1 8L8 1M1 8L8 15" stroke="#1F242B" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
                     <!--  들어가면 히스토리백  -->
@@ -80,9 +97,9 @@
                 <!-- //cen_box -->
                 <div class="r_menu">
                     <!-- <a href="member/mypage_mod.html">MY</a> -->
-                    <!-- <a href="search.html"><img src="../img/us/hdr_sch.svg" alt="검색"></a> -->
+                    <a href="search.html"><img src="../img/us/hdr_sch.svg" alt="검색"></a>
                 </div>
-                <!-- //r_menu -->                
+                <!-- //r_menu -->
             </div>
             <!-- //header_bgWrap -->
         </div>
@@ -95,49 +112,124 @@
 
                 <!-- 슈퍼픽 종목 개요 -->
                 <div class="mainBox superpick_overview">
-                    <!-- 검색 종목 -->
-                    <div class="recom_company">
-                        <ul class="list">
-                            <li class="ticker">AAPL</li>
-                            <li class="company_nm">마이크로소프트마이크로소프트</li>                        
-                            
-                            <!-- 정규장 -->
+                    <div class="search_item">
+                        <ul class="list" onclick="location.href ='pick_view.html'" style="cursor:pointer;">
+                            <li class="title_logo">
+                                <span class="logo"><img src="https://uslogo.datahero.co.kr/img/logo/us/mvl/MSFT.svg"
+                                        alt=""></span>
+                            </li>
                             <li class="detail">
-                                <div class="num">
-                                    <span><b>898.</b>00</span>
+                                <div class="title">
+                                    <a href="pick_view.html" class="name">마이크로소프트</a>
+                                    <span class="ticker">HSBC</span>
                                 </div>
-                                <div class="per">
-                                    <span class="increase"><b>+89.</b>89</span>
-                                    <span class="increase">(<b>+89.</b>89%)</span>
-                                    <!-- increase 증가, decrease 감소, 보합은 same -->
-                                    <span class="day">1/23, 장마감</span>
+                                <div class="num_per">
+                                    <div class="num">
+                                        <span><b>898.</b>00</span>
+                                    </div>
+                                    <div class="per">
+                                        <span class="increase"><i class="up"><svg xmlns="http://www.w3.org/2000/svg"
+                                                    width="9" height="10" viewBox="0 0 9 10" fill="none">
+                                                    <path
+                                                        d="M5.3 2.56667C4.9 2.03333 4.1 2.03333 3.7 2.56667L1.2 5.9C0.705573 6.55924 1.17595 7.5 2 7.5L7 7.5C7.82405 7.5 8.29443 6.55924 7.8 5.9L5.3 2.56667Z"
+                                                        fill="#FF0000" />
+                                                </svg></i>
+                                            <b>89.</b>89%
+                                        </span>
+                                        <!-- increase 증가, decrease 감소, 보합은 same -->
+                                    </div>
                                 </div>
-                            </li>                        
+                                <!-- //num_per  -->
+                            </li>
                         </ul>
                     </div>
-                    <!-- //recom_company -->
-
-                    <div class="mainBox outline">
-                        <div class="summary">
-                            <div class="view_box">
-                                <p class="txt">
-                                    <strong>애플</strong>은 스마트폰(아이폰), PC(맥), 태블릿(아이패드), 웨어러블, 기타 악세사리와 디지털 컨텐츠 스토어, 스트리밍 서비스,
-                                    애플케어 등 다양한 제품과 컨텐츠를 동시에 제공하는 회사
-                                </p>
-                            </div>
-                            <!-- //view_box -->
-                        </div>
+                    <!-- //search_item -->
+                    <div class="summary">
+                        <p class="txt">
+                            <strong>애플</strong>은 스마트폰(아이폰), PC(맥), 테블릿(아이패드),웨어러블, 기타 악세사리와 디지털 컨텐츠 스토어,스트리밍 서비스, 애플케어,
+                            아이클라우드, 애플 아케이드 등 다양한 관련 서비스를 제공하는 대규모 회사입니다.
+                        </p>
                     </div>
+                    <!-- //summary -->
                 </div>
 
                 <!-- 투자 포인트 -->
                 <div class="mainBox investment_points">
-                    투자 포인트 
-                </div>
+                    <div class="document_box">
+                        <h3 class="c_title">투자포인트</h3>
 
+                        <div class="dataBox">
+                            <div class="bg_box">
+                                <div class="data_opinion">
+                                    <div class="line">
+                                        <div class="th">편입가</div>
+                                        <div class="td">
+                                            <b>216.98~220.01</b>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="th">손절가</div>
+                                        <div class="td">
+                                            <b>331.50</b>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="th">목표가 <i><img src="../img/us/graph-up.svg" alt=""></i></div>
+                                        <div class="td">
+                                            <b>331.50</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //bg_box -->
+                        </div>
+
+                        <ul class="ai_pointList">
+                            <li class="txt_ai">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M7 2C5.67392 2 4.40215 2.52678 3.46447 3.46447C2.52678 4.40215 2 5.67392 2 7V17C2 18.3261 2.52678 19.5979 3.46447 20.5355C4.40215 21.4732 5.67392 22 7 22H17C18.3261 22 19.5979 21.4732 20.5355 20.5355C21.4732 19.5979 22 18.3261 22 17V7C22 5.67392 21.4732 4.40215 20.5355 3.46447C19.5979 2.52678 18.3261 2 17 2H7ZM15.73 10.684C15.8198 10.5881 15.8899 10.4755 15.9362 10.3526C15.9825 10.2296 16.0041 10.0988 15.9998 9.96747C15.9956 9.83617 15.9655 9.707 15.9113 9.58732C15.8571 9.46765 15.7799 9.35982 15.684 9.27C15.5881 9.18018 15.4755 9.11011 15.3526 9.06381C15.2296 9.01751 15.0988 8.99588 14.9675 9.00015C14.8362 9.00442 14.707 9.03451 14.5873 9.08871C14.4677 9.1429 14.3598 9.22014 14.27 9.316L11.187 12.606L9.664 11.253C9.46446 11.0871 9.20825 11.0053 8.9495 11.0248C8.69075 11.0443 8.44972 11.1637 8.27732 11.3576C8.10493 11.5516 8.01467 11.8049 8.02562 12.0642C8.03657 12.3234 8.14787 12.5683 8.336 12.747L10.586 14.747C10.7807 14.9199 11.0352 15.0101 11.2953 14.9983C11.5554 14.9866 11.8007 14.8738 11.979 14.684L15.73 10.684Z"
+                                            fill="#4168F6" />
+                                    </svg>
+                                </span>AI 종목 진단 점수 99점으로 상위 99.9%에 속함 동일업종 내 상위 99.9%
+                            </li>
+                            <ul class="list">
+                                <li class="txt_ai">특허받은 AI투자 알고리즘에 매일 우량주를 발굴합니다. 특허받은 AI투자 알고리즘에 매일 우량주를 발굴합니다. </li>
+                                <li class="txt_ai">특허받은 AI투자 알고리즘에 매일 우량주를 발굴합니다. 특허받은 AI투자 알고리즘에 매일 우량주를 발굴합니다. </li>
+                                <li class="txt_ai">특허받은 AI투자 알고리즘에 매일 우량주를 발굴합니다. 특허받은 AI투자 알고리즘에 매일 우량주를 발굴합니다. </li>
+                            </ul>
+                            <li class="txt_ai">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M7 2C5.67392 2 4.40215 2.52678 3.46447 3.46447C2.52678 4.40215 2 5.67392 2 7V17C2 18.3261 2.52678 19.5979 3.46447 20.5355C4.40215 21.4732 5.67392 22 7 22H17C18.3261 22 19.5979 21.4732 20.5355 20.5355C21.4732 19.5979 22 18.3261 22 17V7C22 5.67392 21.4732 4.40215 20.5355 3.46447C19.5979 2.52678 18.3261 2 17 2H7ZM15.73 10.684C15.8198 10.5881 15.8899 10.4755 15.9362 10.3526C15.9825 10.2296 16.0041 10.0988 15.9998 9.96747C15.9956 9.83617 15.9655 9.707 15.9113 9.58732C15.8571 9.46765 15.7799 9.35982 15.684 9.27C15.5881 9.18018 15.4755 9.11011 15.3526 9.06381C15.2296 9.01751 15.0988 8.99588 14.9675 9.00015C14.8362 9.00442 14.707 9.03451 14.5873 9.08871C14.4677 9.1429 14.3598 9.22014 14.27 9.316L11.187 12.606L9.664 11.253C9.46446 11.0871 9.20825 11.0053 8.9495 11.0248C8.69075 11.0443 8.44972 11.1637 8.27732 11.3576C8.10493 11.5516 8.01467 11.8049 8.02562 12.0642C8.03657 12.3234 8.14787 12.5683 8.336 12.747L10.586 14.747C10.7807 14.9199 11.0352 15.0101 11.2953 14.9983C11.5554 14.9866 11.8007 14.8738 11.979 14.684L15.73 10.684Z"
+                                            fill="#4168F6" />
+                                    </svg>
+                                </span>AI 종목 진단 점수 99점으로 상위 99.9%에 속함 동일업종 내 상위 99.9%
+                            </li>
+                            <li class="txt_ai">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M7 2C5.67392 2 4.40215 2.52678 3.46447 3.46447C2.52678 4.40215 2 5.67392 2 7V17C2 18.3261 2.52678 19.5979 3.46447 20.5355C4.40215 21.4732 5.67392 22 7 22H17C18.3261 22 19.5979 21.4732 20.5355 20.5355C21.4732 19.5979 22 18.3261 22 17V7C22 5.67392 21.4732 4.40215 20.5355 3.46447C19.5979 2.52678 18.3261 2 17 2H7ZM15.73 10.684C15.8198 10.5881 15.8899 10.4755 15.9362 10.3526C15.9825 10.2296 16.0041 10.0988 15.9998 9.96747C15.9956 9.83617 15.9655 9.707 15.9113 9.58732C15.8571 9.46765 15.7799 9.35982 15.684 9.27C15.5881 9.18018 15.4755 9.11011 15.3526 9.06381C15.2296 9.01751 15.0988 8.99588 14.9675 9.00015C14.8362 9.00442 14.707 9.03451 14.5873 9.08871C14.4677 9.1429 14.3598 9.22014 14.27 9.316L11.187 12.606L9.664 11.253C9.46446 11.0871 9.20825 11.0053 8.9495 11.0248C8.69075 11.0443 8.44972 11.1637 8.27732 11.3576C8.10493 11.5516 8.01467 11.8049 8.02562 12.0642C8.03657 12.3234 8.14787 12.5683 8.336 12.747L10.586 14.747C10.7807 14.9199 11.0352 15.0101 11.2953 14.9983C11.5554 14.9866 11.8007 14.8738 11.979 14.684L15.73 10.684Z"
+                                            fill="#4168F6" />
+                                    </svg>
+                                </span>AI 종목 진단 점수 99점으로 상위 99.9%에 속함 동일업종 내 상위 99.9%
+                            </li>
+                        </ul>
+                        <!-- //ai_pointList -->
+
+                    </div>
+
+                </div>
 
                 <!-- 매출액, 영업이익, 주당순이익(EPS) 막대 차트 -->
                 <div class="mainBox financials">
+                    <h3 class="c_title bdr">주요 투자지표</h3>
                     <div class="dataBox">
                         <span class="reg_day">*기준 : 22 01/22</span>
                         <div class="bg_box">
@@ -200,22 +292,24 @@
                     <div class="chart_box">
                         <h3 class="c_title">시가배당률</h3>
                         <span class="unit">* 단위 : %</span>
-                        <div id="containerfinancials1_5" class="financials_style"></div>                        
+                        <div id="containerfinancials1_5" class="financials_style"></div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- //container -->
 
-        <footer id="footer">	
-			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
-			<div class="cs">
-				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
-			</div>
-			<address>
-				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
-			</address>
-		</footer>
+        <footer id="footer">
+            <p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+            <div class="cs">
+                <strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+            </div>
+            <address>
+                ㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+                12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+                Hecto Innovation. All rights reserved.
+            </address>
+        </footer>
 
         <!-- modal 팝업 뭉치. 전페이지 공통으로 들어갑니다. -->
         <div class="modalBox">
@@ -261,7 +355,7 @@
                     </span>
                 </div>
                 <div class="pop_con">
-                    <p>퀀트분석으로 투자매력이 높은 최고의 주식을 확인하세요.</p>                    
+                    <p>퀀트분석으로 투자매력이 높은 최고의 주식을 확인하세요.</p>
                     <p>20년 이상의 금융 빅데이터와 알고리즘과 스마트스코어, 밸류에이션, 수급분석을 종합하여 퀀트종목분석 결과를 제시합니다.</p>
                     <p>퀀트종목분석 결과는 <b>매수-보유-매도-관망</b>으로 제공하며, 3개 조건을 모두 만족 할 때 매수 및 보유로 분석결과가 표시됩니다</p>
                     <p>퀀트 종목분석은 ‘밸류에이션과 수급분석'이 반영된 단기분석으로, 장기데이터 분석을 기반으로 하는 ‘퀀트전략 편입종목'과 의견이 다를 수 있습니다.</p>
@@ -319,7 +413,8 @@
                     <p class="txt">10년 이상의 금융 빅데이터에서 우량주 발굴을 위해 22개 요인(Factor)을 종목별로 분석하고, 동종업종내 경쟁사와 비교합니다.</p>
                     <ul>
                         <li class="list_txt">스마트 스코어는 높을수록 매력적인 기업이며, 65점(상위 20%) 이상이면 우량 기업으로 판단합니다.</li>
-                        <li class="list_txt">스마트 스코어 세부 항목인 독점력, 수익성, 안전성, 현금창출력, 미래성장성은 60점 이상이면 각 항목을 통과한 것으로 판단합니다.</li>
+                        <li class="list_txt">스마트 스코어 세부 항목인 독점력, 수익성, 안전성, 현금창출력, 미래성장성은 60점 이상이면 각 항목을 통과한 것으로 판단합니다.
+                        </li>
                         <li class="list_txt">세부 항목 평가에서 0~20점을 받았다면 위험 요인으로, 투자 판단시 유의해서 봐야 합니다.</li>
                         <li class="list_txt">우량주 여부를 판단한 후에는 밸류에이션으로 저평가 여부를 확인하세요.</li>
                     </ul>
@@ -336,19 +431,23 @@
                     </span>
                 </div>
                 <div class="pop_con">
-                    <p class="sum_txt">주가 및 EPS(주당순이익) 차트는 기업의 주가와 주당순이익 사이의 관계를 시각화한 것입니다. 이 차트를 통해 투자자는 주당순이익 변화가 주가에 어떤 영향을 미치는지 살펴보고, 앞으로의 주가 변동을
+                    <p class="sum_txt">주가 및 EPS(주당순이익) 차트는 기업의 주가와 주당순이익 사이의 관계를 시각화한 것입니다. 이 차트를 통해 투자자는 주당순이익 변화가 주가에
+                        어떤 영향을 미치는지 살펴보고, 앞으로의 주가 변동을
                         예측할 수 있게 됩니다.</p>
                     <p class="txt">주가는 예상(추정) 주당순이익의 방향을 따라갑니다.</p>
                     <p class="txt">예상 주당순이익의 증가 폭이 클수록 미래 주가 상승률도 높습니다.</p>
                     <p class="txt">예상 주당순이익 상승률이 전년대비 하락하면 주가도 상승 탄력이 떨어집니다.</p>
-                    <p class="txt">차트 왼쪽(주가)과 오른쪽(주당순이익)값을 연결한 선은 PER(주가/주당순이익)을 의미하며, 주가가 주당순이익 차트보다 아래에 있으면 저평가로 판단합니다. 초이스스탁의 밸류에이션
+                    <p class="txt">차트 왼쪽(주가)과 오른쪽(주당순이익)값을 연결한 선은 PER(주가/주당순이익)을 의미하며, 주가가 주당순이익 차트보다 아래에 있으면 저평가로
+                        판단합니다. 초이스스탁의 밸류에이션
                         차트와 함께 보면 더욱 유용합니다.</p>
                     <p class="sum_txt">
-                        주가(Price): 주가는 주식이 시장에서 거래되는 가격을 나타냅니다. 차트에서 주가는 주식 시장에서의 가격 변동을 보여줍니다. 주가가 상승하면 주식 시장에서의 수요가 높아진 것으로 해석되고, 주가가
+                        주가(Price): 주가는 주식이 시장에서 거래되는 가격을 나타냅니다. 차트에서 주가는 주식 시장에서의 가격 변동을 보여줍니다. 주가가 상승하면 주식 시장에서의 수요가
+                        높아진 것으로 해석되고, 주가가
                         하락하면 수요가 감소했다고 해석합니다.
                     </p>
-                    <p class="sum_txt">                        
-                        EPS(Earnings Per Share): EPS는 기업의 순이익을 발행된 주식 수로 나눈 값으로, 주당순이익을 의미합니다. EPS는 기업의 수익성을 나타내는 지표로 활용됩니다. EPS가 높을수록
+                    <p class="sum_txt">
+                        EPS(Earnings Per Share): EPS는 기업의 순이익을 발행된 주식 수로 나눈 값으로, 주당순이익을 의미합니다. EPS는 기업의 수익성을 나타내는 지표로
+                        활용됩니다. EPS가 높을수록
                         기업이 순이익을 주주들과 나눠갖는 비율이 높다는 것을 의미하며, 투자자들은 높은 EPS를 선호합니다.
                     </p>
                 </div>

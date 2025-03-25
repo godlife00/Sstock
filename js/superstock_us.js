@@ -121,10 +121,10 @@ $(document).ready(function () {
                     slidesPerView: 1.5,
                 },
                 360: {
-                    slidesPerView: 2.3,
+                    slidesPerView: 2,
                 },
                 425: {
-                    slidesPerView: 2.3,
+                    slidesPerView: 2.1,
                 },
                 680: {
                     slidesPerView: 2.3,

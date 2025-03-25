@@ -8,10 +8,11 @@
 #wrap #header.main_hdr,
 #wrap #header.sub_hdr,
 #wrap #header.view_hdr {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    // position: sticky;
+    // top: 0;
+    // left: 0;
+    // right: 0;
     width: 100%;
     padding: 0 16px;
     z-index: 82;
@@ -229,7 +230,7 @@
                 color: var(--Font-primary-title, #1F242B);
                 text-overflow: ellipsis;
                 font-family: var(--Title, Pretendard);
-                font-size: var(--Size-xl, 18px);                
+                font-size: var(--Size-lg, 17px);
                 font-weight: var(--Weight-500, 500);
                 line-height: var(--Line-height-xl, 22px); /* 122.222% */
                 letter-spacing: var(--Tracking-md, -0.3px);
