@@ -1,0 +1,404 @@
+@charset "utf-8";
+
+@import url('base.css?pp=010'); /* 기본설정 */
+@import url('layout.css?pp=019'); /* 사이트 레이아웃설정 */
+
+body { height: 100%; line-height: 14px; font-size: 12px; 	font-family: "malgun gothic", "맑은 고딕", "nanum gothic", "나눔 고딕", "Apple SD Gothic Neo", "apple gothic", dotum, "돋움", sans-serif;
+ color: #000; 	background-color:#e2e1e1;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, th, td, p { margin: 0px; padding:0px; -webkit-text-size-adjust:none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+fieldset, img, abbr, acronym { border: 0px; }
+legend { position: absolute; *margin-left: -7px; height: 0; line-height: 0; font-size: 0; overflow: hidden; }
+address, caption, cite, code, dfn, em, var { font-style: normal; font-weight: normal; }
+ol,ul { list-style: none; }
+caption { height: 0; line-height: 0; font-size: 0; overflow: hidden; text-indent: -10000px; }
+q:before, q:after { content:''; }
+a { color: inherit; text-decoration: none; }
+hr { display: none; }
+button { padding: 0; border: 0 none; background: none; }
+label { cursor: pointer; }
+
+header, footer, article, section, aside, details, figure, figcaption, nav, hgroup { display: block; margin: 0; padding: 0; }
+audio[controls], canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+button, input, select, textarea { margin: 0; font-size: 100%; vertical-align: baseline; *vertical-align: middle; }
+button, input { line-height: normal; *overflow: visible; }
+table button, table input { *overflow: auto; }
+button, html input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
+input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+textarea { overflow: auto; vertical-align: top; }
+
+#skip_nav { width: 100%; height: 0; text-align: center; overflow: hidden; }
+#skip_nav a { color: #005aab; line-height: 20px; font-size: 14px; font-weight: bold; float: left; }
+#skip_nav a:focus, 
+#skip_nav a:hover, 
+#skip_nav a:active { position: absolute; top: 0; left: 0; width: 100%; height: 20px; text-decoration: underline; background: #fff; overflow: visible; z-index: 100; }
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-container-android .swiper-slide {
+    padding: 20px 0 60px;
+}
+.swiper-pagination {
+    background-color: #646464;    
+    padding: 20px 0;
+}
+.swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: 0 !important;
+}
+.swiper-pagination .swiper-pagination-bullet {
+    background-color: #fff;            
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #000;
+}
+
+/* 슈퍼스탁 2호 본문에 추가되는 스타일 */
+.cont_wrap > .주가차트 .오른쪽차트영역 {
+  padding-top: 60px;    
+}
+#ss_wrap .cont_bottom_wrap .inbox .bdr_title {
+  margin-top: 60px;
+}
+
+.주가차트 .오른쪽차트영역 {
+  padding-top: 20px;  
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 {
+  border: solid 1px #e7eaf2;
+  background-color: #fff;
+  border-radius: 0 !important;  
+  margin-top: 0 !important;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box {
+  position: relative;
+  display: flex;
+  gap: 0 11px;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;  
+  background-color: #f4f6fa;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .day {
+  font-size: 12px;
+  color: #b1b9cb;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .title {
+  width: auto;
+  cursor: text;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .title::after {
+  display: none;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .txt_guide {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  display: inline-block;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .tooltip {
+  display: none;
+  position: absolute;
+  right: 5px;
+  top: 20px;
+  padding: 20px;
+  width: 280px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(101, 109, 126, 0.08);
+  border: solid 1px #222;
+  background-color: #fff;
+  z-index: 1;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .tooltip .t_title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .tooltip .t_txt {
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 1.62;
+  color: #656d7e;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .tooltip .clse_tooltip {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 0;
+  width: 24px;
+  height: 24px;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .tooltip .clse_tooltip::before {
+  content: "";
+  height: 18px;
+  border-left: 2px solid #bfc6d9;
+  position: absolute;
+  transform: rotate(-45deg);
+  top: 5px;
+  left: 12px;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .box .tooltip .clse_tooltip::after {
+  content: "";
+  height: 18px;
+  border-left: 2px solid #bfc6d9;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 5px;
+  left: 12px;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .sum_topchart_band_nodata {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .sum_topchart_band_nodata .img {
+  display: block;
+  width: 100%;
+  height: 121px;
+  background: url("/img/bandchart_nodata.jpg") no-repeat center top;
+  background-size: auto;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .chart_layout {
+  margin-top: 10px;
+  width: 100%;
+  height: 100px;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .chart_layout .highcharts-grid-line {
+  display: none;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .chart_layout .highcharts-label text,
+.주가차트 .오른쪽차트영역 .AI주가예측 .chart_layout .highcharts-label tspan {
+  font-size: 11px !important;
+  color: #656d7e !important;
+  fill: #656d7e !important;
+  font-weight: normal !important;
+  text-shadow: none;
+  stroke-width: 0;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 {
+  display: flex;
+  margin-top: 10px;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .주가추세,
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .기간상승률 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px 0;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .주가추세 {
+  width: 50%;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .기간상승률 {
+  gap: 3px 0;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .sub_title {
+  font-size: 11px;
+  letter-spacing: -0.28px;
+  color: #656d7e;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .상승,
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .하락,
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .보합 {
+  display: inline-block;
+  padding: 4px 6px;
+  width: 36px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: #ff545b;
+  font-size: 11px;
+  font-weight: 300;
+  text-align: center;
+  color: #fff;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .하락 {
+  background-color: #3655d6;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .보합 {
+  background-color: #bdc8d8;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .거래정지종목 {
+  font-size: 0.75rem;
+  font-weight: 300;
+  font-weight: 500;
+  color: #222;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .increase,
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .decrease {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #ff545b;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .decrease {
+  color: #3655d6;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .same {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #bdc8d8;
+}
+
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .기간상승률 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px 0;
+}
+
+.주가차트 .오른쪽차트영역 .박스레이아웃 {
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 19px 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #f4f6fa;
+}
+.주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .주가추세, .주가차트 .오른쪽차트영역 .AI주가예측 .주가추세_기간상승률 .기간상승률 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px 0;
+}
+
+
+.수급분석 {  
+  margin-top: 60px;
+  padding-top: 0;
+}
+.수급분석 .box {
+  position: relative;
+  gap: 0 11px;
+  padding: 19px 20px !important;
+  margin: 0 !important;
+  align-items: stretch;
+  justify-content: flex-start;
+  align-items: center;
+}
+.수급분석 .box .star_area {
+  display: inline-block;
+}
+.수급분석 .title {
+  width: auto;
+  cursor: text;
+}
+.수급분석 .txt {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #656d7e;
+}
+.수급분석 .수급분석_신호 {
+  display: flex;
+  align-items: center;
+  gap: 0 2px;
+  width: 100%;
+  margin: 15px 0;
+  background-color: #fff;
+  user-select: none;
+  -moz-user-select: none; /* Firefox 지원 */
+  -webkit-user-select: none; /* Chrome, Safari, Edge 등 지원 */
+}
+.수급분석 .수급분석_신호 .시그널 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc((100% - 30px) / 5);
+  width: 54px;
+  height: 3px;
+  background: #dbdfed;
+  font-size: 11px;
+  line-height: 1.27;
+  letter-spacing: -0.55px;
+  color: #fff;
+  text-indent: -999px;
+}
+.수급분석 .수급분석_신호 .시그널.active {
+  text-indent: 0;
+  padding: 10px 10px;
+  border-radius: 20px;
+}
+.수급분석 .chart_box {
+  /* display: flex; */
+  gap: 15px 25px;
+  margin-top: 25px;
+}
+.수급분석 .chart_box div {
+  flex: 1 1 40%;
+  width: 100%;
+}
+.수급분석 .chart_box .supplychart_style {
+  width: 100%;
+  height: 240px;
+  margin-top: 15px;
+}
+.수급분석 .chart_box .supplychart_style .highcharts-axis-line {
+  display: none !important;
+}
+.수급분석 .chart_box .supplychart_style .highcharts-title {
+  font-family: "Pretendard Variable", Pretendard, "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  line-height: normal;
+  font-weight: bold !important;
+  font-size: 13px !important;
+  color: #222 !important;
+  fill: #222 !important;
+}
+.수급분석 .chart_box .supplychart_style rect.highcharts-point, .수급분석 .chart_box .supplychart_style path.highcharts-point {
+  fill: #FF545B !important;
+  background: #FF545B !important;
+  stroke-width: 0;  
+}
+@media only screen and (max-width: 376px) {
+  .수급분석 .chart_box .supplychart_style rect.highcharts-point, 
+  .수급분석 .chart_box .supplychart_style path.highcharts-point {    
+    width: 26px;
+  }
+}
+
+.수급분석 .chart_box .supplychart_style rect.highcharts-point.highcharts-negative, .수급분석 .chart_box .supplychart_style path.highcharts-point.highcharts-negative {
+  fill: #3655D6 !important;
+  background: #3655D6 !important;
+}
+.수급분석 .chart_box .supplychart_style .highcharts-label text,
+.수급분석 .chart_box .supplychart_style .highcharts-label tspan {
+  font-size: 11px !important;
+  color: #656D7E !important;
+  fill: #656D7E !important;
+  text-shadow: none;
+  stroke-width: 0;
+  font-weight: 400 !important;
+}
+.수급분석 .chart_box .supplychart_style .highcharts-axis-labels text {
+  font-size: 12px !important;
+  color: #656d7e !important;
+  fill: #656d7e !important;
+  font-weight: 400 !important;
+}
+.수급분석 .chart_box .차트설명주석 {
+  display: block;
+  text-align: right;
+  width: 100%;
+  font-size: 11px;
+  font-weight: 400;
+  color: #b1b9cb;
+}
+
+#sum_topchart_band svg > g.highcharts-label.highcharts-series-label.highcharts-series-label-1.highcharts-color-none > text
+{
+    display: none;
+}
+#sum_topchart_band svg > g.highcharts-label.highcharts-series-label.highcharts-series-label-0.highcharts-color-0 > text
+{
+    display: none;
+}
