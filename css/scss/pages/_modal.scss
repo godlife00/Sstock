@@ -1351,7 +1351,8 @@
 		gap: 3px 0;
         padding: 0 16px;		
 		margin-bottom: 30px;
-		overflow-y: auto;				
+		overflow-y: auto;	
+        max-height: 70vh;			
 		.sum_txt {
 			font-size: 0.9375rem;
 			line-height: 1.43;

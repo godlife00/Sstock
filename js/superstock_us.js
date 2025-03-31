@@ -1,10 +1,22 @@
 $(document).ready(function () {
 
+    // 초기화: 모든 탭에서 active 클래스 제거
+    $("ul.tabs li").removeClass("active");
     $(".tabsArea .tab_content").hide();
-    $(".tabsArea .tab_content:first").show();
+    
+    // URL 해시값이 있으면 해당 탭을 보여주고, 없으면 첫 번째 탭을 보여줍니다
+    var hash = window.location.hash;
+    if (hash) {
+        var activeTab = hash.substring(1); // '#' 제거
+        $("#" + activeTab).fadeIn();
+        $("ul.tabs li[rel='" + activeTab + "']").addClass("active");
+    } else {
+        $(".tabsArea .tab_content:first").show();
+        $("ul.tabs li:first").addClass("active");
+    }
 
     $("ul.tabs li").click(function (e) {
-        e.preventDefault(); // 클릭 이벤트의 기본 동작인 스크롤 이동을 막습니다.
+        e.preventDefault();
         $("ul.tabs li").removeClass("active");
         $(this).addClass("active");
         $(".tabsArea .tab_content").hide();
@@ -145,7 +157,7 @@ function historyHome() {
 		history.back();
 	}                            
 	else {                                 
-		location.href = "https://hdev.choicestock.co.kr";
+		location.href = "/main/us";
 	}
 } 
 
@@ -161,10 +173,11 @@ $(function() {
     });
     
     //검색
-    $('.searchArea .searchInput').on("keydown", function (e) {
+    $('.searchArea .searchInput').on("keydown", function (e) {        
         var _this = $(this);
+        
         $('.searchArea').addClass('keydown');
-        $('.sch_autocomplete').addClass('focus_on');
+        $('.sch_autocomplete').addClass('focus_on _show');
 
         if(e.keyCode === 13) {
             e.preventDefault();
@@ -198,7 +211,7 @@ $(function() {
         }, 10);
     });
 
-    $('.mainBox .main_searching .searchArea .searchInput').on("focusin", function () {
+    $('.mainBox .main_searching .searchArea .searchInput').on("change", function () {        
         $('.searchArea').addClass('keydown');
         $('.sch_autocomplete').addClass('focus_on _show');
         if(tId) { 
@@ -217,7 +230,7 @@ function onSearchTicker(ticker) {
     $('.searchArea .searchInput').val('');
 	$('.searchArea').removeClass('keydown');                
 	$('.sch_autocomplete').removeClass('focus_on');
-	location.href = '/search/search_view/' + ticker;
+	location.href = '/us/view/' + ticker;
 }
 
 /**
@@ -309,3 +322,125 @@ function genSearchTickerResult(data, keyword, $elem) {
     $elem.children('ul').html(html.join(''));
 }
 // end of - 종목 검색 자동완성 결과 노출
+
+// 사용자가 스크롤할 때 .search_item 요소를 .clone()으로 복사하고 .search_item.fix_data를 생성해 그 안에 삽입하는 스크립트
+function toggleSearchItemVisibility() {
+    const searchItem = document.querySelector('.search_item');
+    if (!searchItem) return; // .search_item이 없는 경우 예외처리 추가
+
+    const clonedItem = document.querySelector('.search_item.fix_data');
+
+    const rect = searchItem.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+    if (clonedItem) {
+        clonedItem.style.display = isVisible ? 'none' : 'block';
+    }
+}
+
+function copySearchItemHTML() {
+    const searchItem = document.querySelector('.search_item');
+    if (!searchItem) return; // .search_item이 없는 경우 예외처리 추가
+
+    let clonedItem = document.querySelector('.search_item.fix_data');
+
+    if (!clonedItem) {
+        clonedItem = searchItem.cloneNode(true);
+        // 클론된 코드에서 특정 요소들 제거
+        const elementsToRemove = ['.title_logo', '.ticker'];
+        elementsToRemove.forEach(selector => {
+            const element = clonedItem.querySelector(selector);
+            if (element) element.remove();
+        });
+
+        clonedItem.classList.add('fix_data');
+        document.body.appendChild(clonedItem);
+    }
+
+    toggleSearchItemVisibility();
+}
+
+window.addEventListener('scroll', toggleSearchItemVisibility);
+window.addEventListener('load', () => {
+    copySearchItemHTML();
+    toggleSearchItemVisibility();
+});
+
+// recom_company .list 클론 및 고정 관련 코드
+function toggleRecomCompanyVisibility() {
+    const recomItem = document.querySelector('.recom_company .list');
+    if (!recomItem) return; // .search_item이 없는 경우 예외처리 추가
+
+    const recomCompany = document.querySelector('.recom_company .list');
+    const clonedRecom = document.querySelector('.list.fix_data');
+
+    const rect = recomCompany.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+    if (clonedRecom) {
+        clonedRecom.style.display = isVisible ? 'none' : 'flex';
+    }
+}
+
+function copyRecomCompanyHTML() {
+    const recomCompany = document.querySelector('.recom_company .list');
+    if (!recomCompany) return;
+
+    let clonedRecom = document.querySelector('.recom_company .list.fix_data');
+
+    if (!clonedRecom) {
+        clonedRecom = recomCompany.cloneNode(true);
+        // 클론된 코드에서 특정 요소들 제거
+        const elementsToRemove = ['.day', '.ticker'];
+        elementsToRemove.forEach(selector => {
+            const element = clonedRecom.querySelector(selector);
+            if (element) element.remove();
+        });
+
+        // 회사 이름에 span 태그 추가
+        const companyName = clonedRecom.querySelector('.company_nm');
+        if (companyName) {
+            const span = document.createElement('span');
+            span.textContent = companyName.textContent;
+            companyName.textContent = '';
+            companyName.appendChild(span);
+        }
+        // 클론 후 코드에서 괄호가 있는 span 요소를 찾아 괄호를 제거
+        const spanElements = clonedRecom.querySelectorAll('.per span');
+        spanElements.forEach(span => {
+            span.textContent = span.textContent.replace(/\(|\)/g, '');
+        });
+
+        clonedRecom.classList.add('fix_data');
+        document.body.appendChild(clonedRecom);
+    }
+
+    toggleRecomCompanyVisibility();
+}
+
+// 이벤트 등록
+window.addEventListener('scroll', toggleRecomCompanyVisibility);
+window.addEventListener('load', () => {
+    copyRecomCompanyHTML();
+    toggleRecomCompanyVisibility();
+});
+
+// .sstock_us 요소가 있는지 확인 후 있는 경우 gnb 우측 끝으로 이동
+window.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.sstock_us')) {
+        const menu = document.querySelector('#menu');
+
+        if (menu) {
+            // 일단 숨김 (CSS에서 opacity 0으로 되어 있어야 함)
+            menu.scrollTo({
+                left: menu.scrollWidth,
+                behavior: 'auto' // 부드럽게 하고 싶으면 'smooth'도 가능
+            });
+
+            // 잠깐 후에 표시
+            setTimeout(() => {
+                menu.style.opacity = '1';
+            }, 100); // 시간은 스크롤 타이밍에 맞춰 조정 가능
+        }
+    }
+});

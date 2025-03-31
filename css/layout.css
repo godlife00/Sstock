@@ -194,6 +194,7 @@ button span,
 	background-color: #fff;
 	border-bottom: 1px solid #D8D8D8;
 	width: 100%;
+	box-sizing: border-box;
 	overflow-x: scroll;
 }
 

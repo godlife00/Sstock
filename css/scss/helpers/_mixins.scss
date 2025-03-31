@@ -231,7 +231,7 @@ $default-fontfamily:  "Pretendard Variable", Pretendard, -apple-system, BlinkMac
             color: var(--Font-sccondary-body, #4E5866);
             font-family: var(--Body, Pretendard);
             font-size: var(--Size-md-15, 15px);            
-            font-weight: var(--Weight-600, 600);
+            font-weight: var(--Weight-500, 500);
             line-height: var(--Line-height-sm, 18px); /* 120% */
             i {
                 display: inline-flex;
@@ -423,10 +423,10 @@ $default-fontfamily:  "Pretendard Variable", Pretendard, -apple-system, BlinkMac
     }
 
     .main_searching .sch_autocomplete.focus_on {
-        // display: block;
+        display: block;
         opacity: 1;
-        height: auto;
-        transition: all 0.3s;
+        height: auto;        
+        transition: all 0.3s;                
     }
 
     .main_searching .sch_autocomplete._show {
@@ -520,8 +520,8 @@ $default-fontfamily:  "Pretendard Variable", Pretendard, -apple-system, BlinkMac
         border-top: none;
         padding: 40px 15px;
         text-align: center;
-        border-bottom-left-radius: 8px;        
-        border-bottom-right-radius: 8px;        
+        border-bottom-left-radius: 16px;        
+        border-bottom-right-radius: 16px;        
     }
 
     .main_searching .no_result p,

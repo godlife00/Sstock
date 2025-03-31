@@ -1308,7 +1308,7 @@
                         line-height: 1.33;
                         letter-spacing: -0.75px;
                         text-align: center;
-                        color: var(--colfff);
+                        color: var(--colfff);                        
 
                         &::after {
                             @include go_back;
@@ -1478,6 +1478,10 @@
                 margin-top: 15px;
                 height: 280px;
                 width: 100%;
+
+                .highcharts-label.highcharts-series-label {
+                    display: none !important;
+                }
 
                 .highcharts-legend text {
                     font-size: 12px !important;
@@ -1988,7 +1992,7 @@
                         font-size: 14px !important;
                         color: #6a727b !important;
                         fill: #6a727b !important;
-                        font-weight: 400 !important;
+                        font-weight: 400 !important;                                                
                     }
 
                     .highcharts-xaxis {
@@ -2006,6 +2010,11 @@
                     margin-top: 10px;
                     width: 100%;
                     height: 220px;
+
+                    .highcharts-label.highcharts-series-label {
+                        display: none;
+                        opacity: 0;
+                    }
 
                     @media (min-width: 376px) and (max-width: 425px) {
                         // height: 360px;                        

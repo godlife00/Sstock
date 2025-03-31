@@ -394,7 +394,7 @@
         width: 100%;
         box-sizing: border-box;
         overflow: auto;
-        overflow-y: hidden;                
+        overflow-y: hidden;                        
         
         // scrollbar-width: none; /* Firefox용 */
         // -ms-overflow-style: none; /* IE/Edge용 */
@@ -456,5 +456,10 @@
 
         
         
+    }
+}
+.sstock_us {
+    #wrap #header.main_hdr #menu {
+        opacity: 0;
     }
 }
