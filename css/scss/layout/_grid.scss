@@ -7,10 +7,10 @@ html {
 }
 
 body, #wrap {
-	display: flex;
-	flex-direction: column;
-	min-height: -webkit-fill-available;
-	min-height: 100vh;	
+	// display: flex;
+	// flex-direction: column;
+	// min-height: -webkit-fill-available;
+	// min-height: 100vh;	
     &.sstock_us {
         background-color: #fff
     }
