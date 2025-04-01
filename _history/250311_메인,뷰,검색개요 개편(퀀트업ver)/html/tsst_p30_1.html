@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		// 포트폴리오 매매전략 스크롤
+		$(document).ready(function () {
+			var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);
+			var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;
+			console.log(scrollWidth * scrolllength);
+			$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
+
+			function showGradient() {
+				if ($(this).scrollLeft() == 0) {
+					// 시작				
+				} else if (Math.ceil($(this).scrollLeft() + $(this).width()) >= $('.scrollcontent').width() - 200) {
+					//스크롤이 끝에 왔을 때
+					console.log("오른쪽끝");
+					$('#ss_wrap .index_section .li_wrap ul li').clone().appendTo('#ss_wrap .index_section .li_wrap ul');
+
+					var scrollWidth = $('#ss_wrap .index_section .li_wrap ul li').outerWidth(true);
+					var scrolllength = $('#ss_wrap .index_section .li_wrap ul li').length;
+					console.log(scrollWidth * scrolllength);
+					$('#ss_wrap .index_section .li_wrap ul, .scrollcontent').css('width', (scrollWidth * scrolllength) + 15)
+				} else {
+					// 중간
+				}
+			}
+
+			$(function () {
+				showGradient();
+				$('.scrollwrap').on('scroll', showGradient);
+			});
+		});
+	</script>
+</head>
+
+<body oncontextmenu="return false;">
+	<div class="wrapper" id="topwrpperID">
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+
+			<!--헤더-->
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<!--메뉴-->
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="tsst_p23.html" title="HOME">HOME</a></li>
+						<li><a href="tsst_p26_1.html" title="종목추천">종목추천</a></li>
+						<li><a href="tsst_p28_1.html" class="on" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+						<li><a href="tsst_p30_1.html" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+						<li><a href="#" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="#" title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div id="ss_wrap" class="tsst_ver">
+			<!--추천 포트폴리오-->
+			<div class="sub_wrap" style="position:relative;">
+				<!--포트메뉴 : 선택된 메뉴 a에 클래스 focus 부여-->
+				<div class="port_box">
+					<h2 class="port_tit"> <img src="../img/cont/tit_img_port1.png" alt="슈퍼스탁 1호 - 월 1회 매매"> </h2>
+					<div class="port_data">
+						<p class="floatleft txt_right" style="width: 35%;"><img src="../img/cont/tit_port_rate2.png"
+								alt="수익률" style="height: 18px; padding-top: 2px;"></p>
+						<p class="floatleft bold txt_center" style="width: 65%;"><span class="num increase"
+								style="line-height: 26px; font-size: 26px;">110.2</span><span>%</span></p>
+						<p class="clear pdt_5"><img src="../img/cont/txt_img_port1_date.png" alt="12년 6월 7일 이후"
+								style="height: 19px;"></p>
+					</div>
+					<p class="port_info"><img src="../img/cont/txt_img_port1_info.png" alt="적극 수익 추구형 투자자를 위한 최선의 포트폴리오"> </p>
+				</div>
+
+				<!--매매전략-->
+				<div class="scrollwrap cont_box index_section">
+					<h5><img src="/img/cont/h5_port01.png" alt="매매전략 (월 1회 매매)"></h5>
+					<div class="scrollwrap">
+						<div class="scrollcontent">
+							<div class="li_wrap">
+								<ul id="trade_list" class="list_li2 scrollul">
+									<li><a href="/stock/trade_view/688">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 8월 매매</p>
+										</a>
+										<p class="time">09/21 14:45</p>
+									</li>
+									<li><a href="/stock/trade_view/678">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 7월 매매</p>
+										</a>
+										<p class="time">07/08 19:09</p>
+									</li>
+									<li><a href="/stock/trade_view/667">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 6월 매매</p>
+										</a>
+										<p class="time">06/09 18:47</p>
+									</li>
+									<li><a href="/stock/trade_view/656">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 5월 매매</p>
+										</a>
+										<p class="time">05/09 19:28</p>
+									</li>
+									<li><a href="/stock/trade_view/646">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 4월 매매</p>
+										</a>
+										<p class="time">04/08 18:53</p>
+									</li>
+									<li><a href="/stock/trade_view/628">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 2월 매매</p>
+										</a>
+										<p class="time">02/09 19:15</p>
+									</li>
+									<li><a href="/stock/trade_view/618">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2022년 1월 매매</p>
+										</a>
+										<p class="time">01/07 20:04</p>
+									</li>
+									<li><a href="/stock/trade_view/607">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2021년 12월 매매</p>
+										</a>
+										<p class="time">12/09 19:50</p>
+									</li>
+									<li><a href="/stock/trade_view/596">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2021년 11월 매매</p>
+										</a>
+										<p class="time">11/09 19:27</p>
+									</li>
+									<li><a href="/stock/trade_view/586">
+											<p class="logo_img"><img onerror="this.src='/img/common/empty_logo.jpg';"
+													src="/img/cont/ico_port1.jpg"></p>
+											<p class="title" style="height: 42px;">포트 1호, 2021년 10월 매매 예정</p>
+										</a>
+										<p class="time">10/08 19:26</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 탭메뉴 : 선택된 메뉴 li에 클래스 focus 부여-->
+				<div class="tab_menu tab02">
+					<ul>
+						<li class="t3 li01 focus"><a href="javascript:ClickTab( 'li01' );">포트폴리오</a></li>
+						<li class="t3 li02"><a href="javascript:ClickTab( 'li02' );">수익률</a></li>
+						<li class="t3 li03"><a href="javascript:ClickTab( 'li03' );">운영원칙</a></li>
+					</ul>
+				</div>
+
+				<!--포트폴리오-->
+				<!--선택된 메뉴의 컨텐츠 경우 display: none; 제거-->
+				<div id="id_li01" style="margin: 10px 15px;">
+					<div style="position:relative; margin-bottom:10px;">
+						<p><img src="../img/cont/tit_port1.png" alt="스토봇 포트 1호" style="height:22px;" /></p>
+						<p style="position:absolute; right:10px; top: 2px;"><span><img
+									src="../img/cont/tit_port_date.png" alt="스토봇 포트 1호"
+									style="height:20px; vertical-align:middle; margin-right:5px;" /></span><span
+								style="font-weight:bold; font-size:13px; color: #2A3373; padding-top:3px;">4월
+								5일(수)</span></p>
+					</div>
+					<div class="tbl_wrap" style="border:none; clear:left;">
+						<table cellspacing="0" cellpadding="0"
+							style="width:100%; margin-bottom: 20px; border-bottom: 2px solid #ccc;">
+							<colgroup>
+								<col width="10%">
+								<col width="25%">
+								<col width="25%">
+								<col width="15%">
+								<col width="15%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="nonebg"><img alt="번호" src="../img/index/th_index_tbl_01.png"></th>
+									<th><img alt="종목명" src="../img/index/th_index_tbl_02.png"></th>
+									<th><img alt="현재가" src="../img/index/th_index_tbl_03.png"></th>
+									<th><img alt="비중" src="../img/index/th_index_tbl_04.png"></th>
+									<th><img alt="수익률" src="../img/index/th_index_tbl_05.png"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="num"><img alt="0" src="../img/index/ico_num_01.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=007700">F&F</a></td>
+									<td class="price">26,100</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">53.5%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="1" src="../img/index/ico_num_02.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=036000">예림당</a></td>
+									<td class="price">6,690</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">38.9%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="2" src="../img/index/ico_num_03.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=096770">SK이노베이션</a></td>
+									<td class="price">167,500</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">8.4%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="3" src="../img/index/ico_num_04.png"></td>
+									<td class="name"><a href="/minsstockbot/search.php?sn=069260">TKG휴켐스</a></td>
+									<td class="price">21,600</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 decrease">-3.4%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="4" src="../img/index/ico_num_05.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=131220">대한과학</a></td>
+									<td class="price">7,130</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">4.9%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="5" src="../img/index/ico_num_06.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=042700">한미반도체</a></td>
+									<td class="price">15,900</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">2.9%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="6" src="../img/index/ico_num_07.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=033290">코웰패션</a></td>
+									<td class="price">3,145</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">2.1%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="7" src="../img/index/ico_num_08.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=022220">정산애강</a></td>
+									<td class="price">2,450</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">1.2%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="8" src="../img/index/ico_num_09.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=036010">아비코전자</a></td>
+									<td class="price">7,300</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">1.1%</td>
+								</tr>
+								<tr>
+									<td class="num"><img alt="9" src="../img/index/ico_num_10.png"></td>
+									<td class="name"><a href="/stockbot/search.php?sn=122990">와이솔</a></td>
+									<td class="price">15,600</td>
+									<td class="per1">5.0%</td>
+									<td class="per2 increase">0.6%</td>
+								</tr>
+								<tr>
+									<td style="background-color: #737fae; color: #fff; padding: 10px 0;" colspan="2">
+										현금보유비중</td>
+									<td colspan="3" style="background-color: #f5f4e2;">0.0%</td>
+								</tr>
+							</tbody>
+						</table>
+						<p style="padding-bottom: 20px; line-height: 1.3; font-weight: 400; font-size: 0.8rem; color: #010101;">본 포트폴리오 추천 상승률은 최초 설정일자 기준 포트폴리오 원칙대로 투자 시 수익률을 의미합니다.<br>
+							본 포트폴리오 추천 상승률은 증권거래비용 등 제세금비용이 포함되지 않은 수치입니다.<br>
+							본 보트폴리오 추천 상승률의 벤치마크 지수는 코스닥 지수입니다. 과거의 운용실적이 미래 수익률을 보장하지 않습니다.</p>
+					</div>
+				</div>
+
+				<!--수익률-->
+				<!--선택된 메뉴의 컨텐츠 경우 display: none; 제거-->
+				<div id="id_li02" class="port_rate" style="display: none;">
+					<ul>
+						<li> <span class="img"><img src="../img/cont/tit_port1_02.png"
+									style="width: 140px; border:none; margin-top: 10px;" alt="스톡봇 1호" /></span> <span
+								class="txt"><img src="../img/cont/img_port1.png" style="width: 140px;"
+									alt="적극수익추구형" /></span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_rate.png" alt="누적수익률" /></span> <span
+								class="num increase">118.4%</span> </li>
+						</li>
+						<li> <span class="img"><img src="../img/cont/tit_port_3m.png" alt="최근 3개월" /></span> <span
+								class="num increase">2.8%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_6m.png" alt="최근 6개월" /></span> <span
+								class="num increase">0.3%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_9m.png" alt="최근 9개월" /></span> <span
+								class="num increase">2.5%</span> </li>
+						<li> <span class="img"><img src="../img/cont/tit_port_1y.png" alt="최근 1년" /></span> <span
+								class="num increase">4.1%</span> </li>
+					</ul>
+				</div>
+
+				<!--운영원칙-->
+				<!--선택된 메뉴의 컨텐츠 경우 display: none; 제거-->
+				<div id="id_li03" class="rule_wrap" style="margin: 10px 15px; display: none;">
+					<p class="tit"><img src="../img/cont/txt_rule_port1.png" alt="확실한 턴 어라운드 기업을 포트로 구성" /></p>
+					<div>
+						<h5><img src="../img/cont/tit_rule_port_1.png" alt="포트폴리오 특징" />
+						</h5>
+						<ul>
+							<li>턴 어라운드 종목을 초기에 발굴, 포트에 편입</li>
+							<li>재무 안전성이 보장된 기업에 투자</li>
+							<li>퀀트 기반으로 전체 상장기업을 분석, 상대적으로 턴 어라운드 투자매력이 가장 높은 기업을 선별</li>
+						</ul>
+					</div>
+					<div>
+						<h5><img src="../img/cont/tit_rule_port_2.png" alt="포트 운영 원칙" />
+						</h5>
+						<ul>
+							<li>매월 1회만 매매합니다. 매매예정일을 확인하고, 해당 날짜에 매매전략에 제시된대로 그대로 매매하시면 됩니다.</li>
+							<li>바쁜 직장인을 위한 최고의 주식투자 전략입니다.</li>
+							<li>포트는 20개 종목, 동일 비중(5%)으로 투자합니다.</li>
+							<li>종목별 주가 등락엔 신경쓰지 마시고, 장기적인 포트폴리오 수익률에 집중하시기 바랍니다.</li>
+							<li>연평균 15~20% 수익률을 목표로 합니다.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--푸터-->
+		<footer id="footer">
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+				12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+				Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
+	</div>
+</body>
+
+</html>

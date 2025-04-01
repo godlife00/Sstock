@@ -1,0 +1,1386 @@
+// 모달팝업
+@mixin font-family {
+    font-family: $default-fontfamily;
+    line-height: normal;
+}
+.modal {
+    * {
+        @include font-family;              
+    }  
+    @at-root .blocker {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        z-index: 98;
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: #000;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        display: none;
+    }
+    // 가로사이즈 제한
+    // max-width: 480px;
+    max-width: 720px;
+    margin: 0 auto;
+    position: fixed;
+    top: 20%;
+    z-index: 99;
+    width: 94%;    
+    box-sizing: border-box;
+    margin-left: 3%;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.44);
+    background-color: var(--col1f3);
+    display: none;
+
+    &.slideUp {
+        animation: fadeIn 0.8s, slideIn .4s linear;
+        margin: 0 auto;
+        margin-left: 3%;
+    }
+    &.slideInRight {
+        animation: fadeIn 0.4s, slideInRight .2s linear;
+        margin: 0 auto;
+        margin-left: 3%;
+    }
+    // 모달팝업 아래에서 위로 슬라이드
+    @keyframes slideIn {
+        0% {
+            transform: translateY(400px);
+            animation-timing-function: ease-out;
+        }
+
+        60% {
+            transform: translateY(-30px);
+            animation-timing-function: ease-in;
+        }
+
+        80% {
+            transform: translateY(10px);
+            animation-timing-function: ease-out;
+        }
+
+        100% {
+            transform: translateY(0px);
+            animation-timing-function: ease-in;
+        }
+    }
+    // 모달팝업 우측에서 좌착으로 슬라이드
+    @keyframes slideInRight {
+        0% {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      
+        100% {
+          transform: translateX(0%);
+          opacity: 1;
+        }
+      }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+.modal .pop_header .clse {
+    cursor: pointer;
+    position: absolute;
+    display: inline-block;
+    padding: 4px;
+    width: 17px;
+    height: 17px;
+    right: 4px;
+    top: 10px;
+}
+
+.modal .pop_header .clse::before,
+.modal .pop_header .clse::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 0;
+    height: 18px;
+    width: 2px;
+    background-color: $col181;
+}
+
+.modal .pop_header .clse::before {
+    transform: rotate(45deg);
+}
+
+.modal .pop_header .clse::after {
+    transform: rotate(-45deg);
+}
+
+.modal .close-modal {
+    display: none;
+    visibility: hidden;
+}
+@mixin modal_layout {
+    .pop_header {
+        padding: 24px 15px;        
+    
+        .pop_title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding-right: 20px;
+            box-sizing: border-box;
+            font-size: $font20;
+            font-weight: $f_sizeB;            
+            line-height: 1.2;                        
+            color: #181f29;            
+            word-wrap: break-word;
+            word-break: break-all;
+    
+            i {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+    
+                img {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;                    
+                }
+    
+            }
+        }
+    }
+    .pop_con {
+        padding: 20px 15px 40px;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        color: var(--colfff);
+    
+        p {
+            font-size: $font15;
+            font-weight: $f_sizeB;            
+            line-height: 1.4;            
+            color: $col6A7;
+        }       
+        .formBox {
+            .name,
+            .invest {
+                font-size: $font15;
+                font-weight: $f_sizeB;
+                line-height: 1.4;
+                color: $col6A7;                
+            }
+    
+            input.name_input,
+            input.invest_input {
+                margin-top: 4px;
+                width: 100%;
+                border-bottom: 2px solid $colEDE;
+                color: $col181;
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                line-height: 1.05;
+                padding: 13px 0;
+    
+                &::placeholder {
+                    color: $colC7C;
+                }
+            }
+            .guide_txt {
+                display: block;
+                margin-top: 12px;
+                font-size: $font12;                
+                line-height: 1.58;                
+                color: $col969;
+            }
+        } 
+    }
+    .pop_ftr {
+        background-color: $col4D6;
+        .btn_submit {
+            display: flex;            
+            align-items: center;
+            justify-content: center;
+            padding: 18px 16px;
+            font-size: $font16;
+            font-weight: $f_sizeB;            
+            line-height: 1.19;            
+            color: $colfff;
+            cursor: pointer;
+        }
+    }
+}
+@mixin modal_tooltip {    
+    box-shadow: none;
+    .pop_header {
+        padding: 24px 15px;        
+        border-bottom: 1px solid $colF5F5F5;
+    
+        .pop_title {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            font-size: $font20;
+            font-weight: $f_sizeB;            
+            line-height: 1.2;                        
+            color: $col181;
+    
+            i {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+    
+                img {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;                    
+                }
+    
+            }
+        }
+    }
+    .pop_con {
+        display: flex;
+        flex-direction: column;
+        gap: 8px 0;    
+        padding: 24px 15px;
+        font-size: $font15;            
+        line-height: 1.4;            
+        color: $col6A7;
+    
+        p {
+            font-size: $font15;            
+            line-height: 1.4;            
+            color: $col6A7;
+            word-break: break-all;
+            word-wrap: break-word;
+            b {
+                color: $col6A7;
+            }
+        }    
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 4px 8px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+        ul li.list_txt {
+            position: relative;
+            padding-left: 9px;
+            font-size: 0.9375rem;
+            line-height: 1.4;
+            color: $col6A7;
+            word-break: break-all;
+            word-wrap: break-word;
+            &::before {
+                content: "";
+                width: 5px;
+                height: 1px;
+                position: absolute;
+                left: 0;
+                top: 10px;
+                background-color: $col6A7;
+            }
+            b {
+                color: $col6A7;
+            }
+        }
+    }
+}
+
+
+// AI매매신호
+.modal.signal_pop01 {    
+    @include modal_tooltip;
+}
+
+// 오늘의 퀀트 UP
+.modal.todayQuantUP_pop {    
+    @include modal_tooltip;
+    .pop_con {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 6px 6px;
+        .txt {
+            position: relative;
+            font-size: $font15;
+            line-height: 1.4;            
+            color: $col6A7;
+            padding-left: 12px;
+            &::before {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                top: 9px;
+                height: 1px;
+                width: 5px;
+                background-color: $col6A7;
+            }
+        }
+    }
+}
+// 퀀트 수익률 TOP
+.modal.topReturns_pop {    
+    @include modal_tooltip;
+    .pop_con {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 6px 6px;
+        .txt {
+            position: relative;
+            font-size: $font15;
+            line-height: 1.4;            
+            color: $col6A7;
+            padding-left: 12px;
+            &::before {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                top: 9px;
+                height: 1px;
+                width: 5px;
+                background-color: $col6A7;
+            }
+        }
+    }
+}
+
+// 증권사 투자의견
+.modal.signal_pop02 {    
+    @include modal_tooltip;
+}
+// 스마트스코어
+.modal.signal_diagnosis {    
+    @include modal_tooltip;
+    p.txt {
+        padding-bottom: 8px;        
+        word-break: break-all;
+        word-wrap: break-word;
+        strong {
+            color: $col6A7;
+        }        
+    }
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 4px 8px;
+    }
+    ul li {
+        position: relative;
+        padding-left: 9px;
+        font-size: 0.9375rem;
+        line-height: 1.4;
+        color: $col6A7;
+        word-break: break-all;
+        word-wrap: break-word;
+        &::before {
+            content: "";
+            width: 5px;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            top: 10px;
+            background-color: $col6A7;
+        }
+    }
+}
+
+// my퀀트전략 저장하기
+.modal.myquant_save {    
+    @include modal_layout;
+    .pop_header {
+        padding-top: 10px;
+    }
+    .pop_con {
+        padding-top: 0;
+    }
+    .pop_con .title {
+        text-align: center;
+        font-size: $font20;
+        font-weight: $f_sizeB;        
+        line-height: 1.2;
+        color: $col181;
+        &::before {
+            content: '';
+            display: block;
+            background: url('/img/bookmark_large.svg') no-repeat center top;
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 12px;            
+        }
+    }
+    .pop_con p {
+        margin-top: 12px;
+        text-align: center;
+        font-size: $font15;        
+        line-height: 1.33;        
+        color: $col6A7;
+    }
+}
+
+// my퀀트전략 제목 수정
+.modal.myquant_nameEdt {    
+    @include modal_layout;
+}
+
+
+// 관심종목 지정 저장하기
+.modal.signal_guest {    
+    @include modal_tooltip;
+    .pop_ftr {
+        background-color: $col4D6;
+        .btn_submit {
+            display: flex;            
+            align-items: center;
+            justify-content: center;
+            padding: 18px 16px;
+            font-size: $font16;
+            font-weight: $f_sizeB;            
+            line-height: 1.19;            
+            color: $colfff;
+            cursor: pointer;
+        }
+    }
+}
+
+
+// 종목추천 운영안내
+.modal.recom_pop01 {
+    .pop_header {
+        padding: 25px 15px 13px;
+        border-bottom: 1px solid var(--col748);
+
+        .pop_title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: $font18;
+            font-weight: normal;
+            letter-spacing: -0.45px;
+            color: var(--colfff);
+
+            i {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+
+                img {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+            }
+        }
+    }
+
+    .pop_con {
+        padding: 20px 15px 45px;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        color: var(--colfff);
+
+        p {
+            font-size: $font15;
+            letter-spacing: -0.38px;
+            color: var(--colfff);
+        }
+
+        .list_txt {            
+            font-size: $font13;
+            padding-top: 7px;            
+        }
+
+    }
+}
+
+// 종목진단 - 진단점수
+.modal.signal_pop03 {    
+    .pop_header {
+        padding: 25px 15px 13px;
+        border-bottom: 1px solid var(--col748);
+
+        .pop_title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: $font18;
+            font-weight: normal;
+            letter-spacing: -0.45px;
+            color: var(--colfff);
+
+            i {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+
+                img {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+            }
+        }
+    }
+
+    .pop_con {
+        padding: 20px 15px 45px;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        color: var(--colfff);
+
+        p {
+            font-size: $font15;
+            letter-spacing: -0.38px;
+            color: var(--colfff);
+        }
+
+        .list_txt {            
+            font-size: $font13;
+            padding-top: 7px;            
+        }
+
+    }
+}
+
+// 최고수익률, 누적수익률 툴팁 팝업
+.modal.tooltip_pop01 {    
+    .pop_header {
+        padding: 25px 15px 13px;
+        border-bottom: 1px solid var(--col748);
+
+        .pop_title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: $font18;
+            font-weight: normal;
+            letter-spacing: -0.45px;
+            color: var(--colfff);
+
+            i {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+
+                img {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+            }
+        }
+    }
+
+    .pop_con {
+        padding: 20px 15px 45px;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        color: var(--colfff);
+
+        th,
+        td {
+            padding: 2px 3px;
+            font-size: $font15;
+            letter-spacing: -0.38px;
+            color: var(--colfff);
+        }
+
+        td {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+}
+
+// 결제 취소 (월자동)
+.payCncl_month,
+.payCncl_period {
+    top: 7% !important;
+    background-color: #464f5d;
+
+    .pop_header {
+        padding: 25px 15px 13px;
+
+        .clse::before,
+        .clse::after {
+            background-color: var(--col7f8);
+        }
+
+        .pop_title {
+            display: flex;
+            align-items: baseline;
+            gap: 0 28px;
+            font-size: $font18;
+            font-weight: $f_sizeB;
+            line-height: 1.47;
+            letter-spacing: -0.8px;
+            text-align: left;
+            color: var(--colfff);
+
+            span {
+                font-size: $font13;
+            }
+        }
+
+        .period {
+            margin-top: 4px;
+            font-size: $font14;
+            line-height: 1.29;
+            letter-spacing: -0.43px;
+            color: #8a9098;
+        }
+    }
+
+    .pop_con {
+        padding: 20px 0 45px;
+        width: calc(100% - 30px);
+        margin: 0 auto;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        color: var(--colfff);
+        border-top: 1px solid var(--col748);
+
+        .mapage_form {
+            .form_table {
+
+                th,
+                td {
+                    padding: 5px 2px;
+                    text-align: left;
+                    font-size: $font13;
+                    letter-spacing: -0.65px;
+                    color: var(--cold9e);
+                }
+
+                th {
+                    padding-right: 15px;
+                    font-size: $font13;
+                    letter-spacing: -0.65px;
+                    color: var(--cold9e);
+                }
+
+                td {
+                    font-size: $font14;
+                    letter-spacing: -0.75px;
+                    color: #222;
+
+                    .item {
+                        display: inline-block;
+                    }
+
+                    .i_dsc,
+                    .i_guide {
+                        position: relative;
+                        margin-top: 5px;
+                        font-size: $font12;
+                        line-height: 1.5;
+                        letter-spacing: -0.6px;
+                        color: #FF4E4E;
+                        word-break: break-all;
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 2px;
+                            width: 12px;
+                            height: 12px;
+                            // background: url('/img/icon_awesome.svg') no-repeat center center;
+                        }
+                    }
+
+                    .certification_area {
+                        margin: 12px 5px 5px;
+                        padding: 15px 15px;
+                        background-color: var(--colgray);
+                        margin-left: -60px;
+                        box-sizing: border-box;
+                        max-height: 120px;
+                        overflow: auto;
+
+                        .service_title {
+                            padding-bottom: 15px;
+                        }
+
+                        .service_title strong {
+                            font-size: $font15;
+                            color: var(--colpry);
+                        }
+
+                        p {
+                            position: relative;
+                            padding-left: 15px;
+                            font-size: $font13;
+                            color: var(--cold9e);
+                            line-height: 1.5;
+                            padding-bottom: 10px;
+
+                            &::before {
+                                content: '';
+                                display: inline-block;
+                                position: absolute;
+                                left: 3px;
+                                top: 7px;
+                                width: 4px;
+                                height: 1px;
+                                background-color: var(--cold9e);
+                            }
+                        }
+
+                        .refund_termsGuide {
+                            display: block;
+                            text-decoration: underline;                
+                            color: #6AA9FF;                                
+                            text-align: right;
+                        }
+
+                        .go_link {
+                            display: block;
+                            text-decoration: underline;
+                            font-size: 0.82rem;
+                            color: $colpry;
+                            text-align: right;
+                            margin-top: 12px;
+                        }
+                    }
+
+                    .txt_info {
+                        display: inline-block;
+
+                        strong {
+                            color: #6AA9FF;
+                            padding-right: 3px;
+                        }
+                    }
+
+                    .mod_btn {
+                        cursor: pointer;
+                        display: inline-block;
+                        margin-left: 3px;
+                        border-radius: 3px;
+                        border: solid 1px #6AA9FF;
+                        padding: 3px 5px;
+                        font-size: 11px;
+                        color: #6AA9FF;
+                        font-weight: $f_sizeB;
+
+                        a {
+                            display: inline-block;
+                            font-size: 11px;
+                            letter-spacing: -0.6px;
+                            text-align: center;
+                            color: var(--colpry);
+                        }
+                    }
+
+                    .mod_phone {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: 5px;
+
+                        .phone_mod {
+                            width: 120px;
+                        }
+                    }
+
+                    .certifi_btn {
+                        cursor: pointer;
+                        display: inline-block;
+                        min-width: 80px;
+                        height: 28px;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        padding: 5px 5px;
+                        font-size: $font12;
+                        letter-spacing: -0.6px;
+                        text-align: center;
+                        color: var(--colfff);
+                        border-radius: 3px;
+                        background-color: #c22e06;
+                        border: none;
+                        vertical-align: middle;
+                    }
+
+                    .i_guide,
+                    .i_dsc {
+                        width: 100%;
+                    }
+
+                    &.phonePin_form {
+                        display: none;
+
+                        // background-color: var(--colfff);
+                        .box {
+                            display: block;
+                            // background: var(--colfff);
+                            position: relative;
+                        }
+
+                        .box:first-child {
+                            margin-top: 0;
+                        }
+
+                        .box:last-child {
+                            display: none;
+                        }
+
+                        .pinInput,
+                        .pinInput_out {
+                            color: var(--cold9e);
+                            font-weight: $f_sizeB;
+                            font-size: 0.875rem;
+                            letter-spacing: -0.8px;
+                            padding: 9px 13px;
+                            width: 100%;
+                            box-sizing: border-box;
+                            border-radius: 5px;
+                            background-color: var(--col1a1);
+                            border: 1px solid var(--colpry);
+                        }
+
+                        .pinInput {
+                            color: var(--cold9e);
+                        }
+
+                        .pinInput:focus {
+                            outline: none;
+                        }
+
+                        .pinInput:focus::-webkit-input-placeholder {
+                            color: transparent;
+                        }
+
+                        .dsc_error {
+                            text-align: right;
+                            margin-top: 6px;
+                            font-size: $font12;
+                            line-height: 1.3;
+                            color: #FF4E4E;
+                        }
+
+                        .pinBtn {
+                            cursor: pointer;
+                            position: absolute;
+                            right: 9px;
+                            top: 6px;
+                            width: 70px;
+                            height: 25px;
+                            font-size: $font12;
+                            font-weight: normal;
+                            letter-spacing: -0.6px;
+                            text-align: center;
+                            color: var(--colpry);
+                            outline: none;
+                            padding: 4px 8px;
+                            border-radius: 3px;
+                            border: solid 1px var(--colpry);
+                            background-color: var(--colfff);
+
+                            &.pin_req {
+                                display: block;
+                                color: var(--colfff);
+                                border: solid 1px var(--colpry);
+                                background-color: var(--colpry);
+                            }
+
+                            &.pin_reqAgain {
+                                display: none;
+                                color: var(--colpry);
+                                border: solid 1px var(--colpry);
+                                background-color: var(--colfff);
+                            }
+                        }
+
+                        .pinInput_out {
+                            font-size: $font16;
+                            font-weight: bold;
+                            letter-spacing: 1.6px;
+                            color: var(--cold9e);
+                        }
+
+                        .pinInput_out:focus {
+                            outline: none;
+                        }
+
+                        .pinInput::placeholder,
+                        .pinInput_out::placeholder {
+                            font-size: $font16;
+                            font-weight: normal;
+                            color: #82929f;
+                            letter-spacing: -0.8px;
+                        }
+
+                        .pinInput_out:focus::-webkit-input-placeholder {
+                            color: transparent;
+                        }
+
+                        .pin_countDown {
+                            font-size: $font12;
+                            letter-spacing: -0.8px;
+                            color: #549ef4;
+                            text-align: center;
+                            width: calc(100% - 20px);
+                            margin-left: 20px;
+                            margin-top: 6px;
+                        }
+
+                        .pin_countDown span {
+                            font-size: $font12;
+                            letter-spacing: -0.8px;
+                            color: #549ef4;
+                        }
+
+                        .pin_completion {
+                            cursor: pointer;
+                            position: absolute;
+                            right: 9px;
+                            top: 6px;
+                            width: 70px;
+                            height: 25px;
+                            box-sizing: border-box;
+                            font-size: $font12;
+                            font-weight: normal;
+                            letter-spacing: -0.6px;
+                            text-align: center;
+                            color: var(--colfff);
+                            outline: none;
+                            padding: 4px 8px;
+                            border-radius: 3px;
+                            border: solid 1px var(--colpry);
+                            background-color: var(--colpry);
+                        }
+                    }
+
+                    .txt_reject {
+                        text-align: right;
+                        color: var(--cold9e);
+                        font-size: $font12;
+                        line-height: 14px;
+                        margin-top: 7px;
+                    }
+                }
+
+                .label_chk {
+                    margin-top: 5px;
+                    font-size: $font13;
+                    letter-spacing: -0.65px;
+                    color: var(--cold9e);
+
+                    input.chk_label+label:before {
+                        border-radius: 50%;
+                    }
+                }
+
+                .selectbox {
+                    background-color: var(--col1a1);
+
+                    label {
+                        z-index: 1;
+                    }
+                }
+
+                .tr_num {
+                    font-weight: $f_sizeB;
+                    font-size: $font14;
+                    color: var(--cold9e);
+                    letter-spacing: -0.8px;
+                    padding: 9px 8px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border-radius: 5px;
+                    background-color: var(--col1a1);
+                    border: 1px solid var(--colpry);
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &::placeholder {
+                        font-size: $font14;
+                        color: #8a9098;
+                    }
+                }
+
+            }
+        }
+
+        .btn_payment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 14px 15px;
+            border-radius: 8px;
+            background: var(--colbtnbg);
+
+            div {
+                display: inline-block;
+                font-size: $font15;
+                line-height: 1.47;
+                letter-spacing: -0.38px;
+                color: var(--colfff);
+
+                b {
+                    font-size: $font18;
+                    line-height: 1.47;
+                    letter-spacing: -0.38px;
+                    color: var(--colfff);
+                }
+            }
+        }
+    }
+
+}
+
+// 진행중인 결제 취소
+.paymentCancel {
+    background-color: #464f5d;
+
+    .pop_header {
+        padding: 25px 15px 13px;
+
+        .clse::before,
+        .clse::after {
+            background-color: var(--col7f8);
+        }
+
+        .pop_title {
+            display: flex;
+            align-items: baseline;
+            gap: 0 28px;
+            font-size: $font18;
+            font-weight: $f_sizeB;
+            line-height: 1.47;
+            letter-spacing: -1px;
+            text-align: left;
+            color: var(--colfff);
+
+            span {
+                font-size: $font13;
+            }
+        }
+
+        .period {
+            margin-top: 4px;
+            font-size: $font14;
+            line-height: 1.29;
+            letter-spacing: -0.43px;
+            color: #8a9098;
+        }
+    }
+
+    .pop_con {
+        padding: 20px 0 25px;
+        width: calc(100% - 30px);
+        margin: 0 auto;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        border-top: 1px solid var(--col748);
+
+        .txt {
+            font-size: $font15;
+            letter-spacing: -0.38px;
+            color: var(--cold9e);
+            word-break: break-all;
+            text-align: center;
+            padding: 10px 15px;
+        }
+
+        .btnArea.edtBtn {
+            margin: 25px 15px 0;
+            @include two_btn;
+
+            a {
+                position: relative;
+                font-size: $font18;
+                font-weight: $f_sizeB;
+                letter-spacing: -0.9px;
+                color: var(--colfff);
+
+                &.btn_save {
+                    &.close {
+                        color: var(--colfff);
+                        background-color: var(--col1a1);
+                        border: 1px solid var(--col7f8);
+                    }
+
+                    background-color: var(--colbtnbg);
+                }
+            }
+
+
+        }
+    }
+
+}
+
+// 이용약관 - (필수)전자금융거래 약관 동의
+.agreePopBox {
+    top: 10%;
+    background-color: #464f5d;
+
+    .pop_header {
+        padding: 25px 15px 13px;
+
+        .clse::before,
+        .clse::after {
+            background-color: var(--col7f8);
+        }
+
+        .pop_title {
+            display: flex;
+            align-items: baseline;
+            gap: 0 28px;
+            font-size: $font18;
+            font-weight: $f_sizeB;
+            line-height: 1.47;
+            letter-spacing: -1px;
+            text-align: left;
+            color: var(--colfff);
+
+            span {
+                font-size: $font13;
+            }
+        }
+
+        .period {
+            margin-top: 4px;
+            font-size: $font14;
+            line-height: 1.29;
+            letter-spacing: -0.43px;
+            color: #8a9098;
+        }
+    }
+
+    .pop_con {
+        padding: 20px 0 25px;
+        width: calc(100% - 30px);
+        margin: 0 auto;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        border-top: 1px solid var(--col748);
+
+        .txt {
+            overflow: auto;
+            height: 400px;
+            padding: 0;
+            font-size: $font15;
+            letter-spacing: -0.38px;
+            color: var(--cold9e);
+            word-break: break-all;
+        }
+
+        .agree {
+
+            dt,
+            dd,
+            li {
+                font-size: $font14;
+                letter-spacing: -0.38px;
+                line-height: 1.5;
+            }
+
+            dt {
+                &:first-child {
+                    padding-top: 0;
+                }
+
+                padding: 20px 0 20px;
+                font-weight: $f_sizeB;
+            }
+        }
+
+        .btn_payment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 14px 15px;
+            border-radius: 8px;
+            background: var(--colpry);
+
+            div {
+                display: inline-block;
+                font-size: $font15;
+                line-height: 1.47;
+                letter-spacing: -0.38px;
+                color: var(--colfff);
+
+                b {
+                    font-size: $font18;
+                    line-height: 1.47;
+                    letter-spacing: -0.38px;
+                    color: var(--colfff);
+                }
+            }
+        }
+    }
+
+}
+
+// 환불정책 자세히보기 
+.modal.refund_pop01 {
+    top: 15%;
+    .pop_header {
+        padding: 25px 15px 13px;
+        border-bottom: 1px solid var(--col748);
+
+        .pop_title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: $font18;
+            font-weight: normal;
+            letter-spacing: -0.45px;
+            color: var(--colfff);
+
+            i {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+
+                img {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+            }
+        }
+    }
+
+    .pop_con {
+        padding: 20px 15px 45px;
+        font-size: $font15;
+        letter-spacing: -0.38px;
+        color: var(--colfff);
+
+        ul {
+            &:first-child {
+                margin-bottom: 15px;
+            }
+            li {
+                padding: 2px 3px;
+                font-size: $font15;
+                letter-spacing: -0.38px;
+                text-align: left;
+                color: rgba(255, 255, 255, 0.6);
+
+                strong {
+                    color: var(--colfff);
+                }
+
+            }
+        }
+    }
+}
+
+// 주가&EPS 모달 팝업
+.modal.slideUp.eps_pop01 {			
+	// max-width: 480px;
+	margin: 0 auto;
+	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	top: auto;
+    background: #fff;    
+    transition: all 0s ease-in-out;
+    .pop_header {
+        background-color: #fff;
+        padding: 24px 15px;
+        border: none;
+        .pop_title {
+            justify-content: flex-start !important;
+            font-size: 1.25rem;
+            line-height: 1.14;
+            font-weight: bold;
+            color: #333;
+            box-sizing: border-box;
+        }
+        .clse {
+            cursor: pointer;
+            position: absolute;
+            display: inline-block;
+            padding: 4px;
+            width: 17px;
+            height: 17px;
+            right: 14px;
+            top: 14px;
+            &::before, &::after {
+                height: 22px;;
+            }
+        }
+    }
+	.pop_con {		
+		display: flex;		
+		flex-direction: column;
+		flex-wrap: nowrap;
+		gap: 3px 0;
+        padding: 0 16px;		
+		margin-bottom: 30px;
+		overflow-y: auto;	
+        max-height: 70vh;			
+		.sum_txt {
+			font-size: 0.9375rem;
+			line-height: 1.43;
+			color: #6A727B;
+			letter-spacing: normal;			
+			margin: 10px 0;
+			word-wrap: break-word;
+			word-break: break-all;			
+		}
+		.txt {			
+			position: relative;
+			font-size: 0.9375rem;
+			line-height: 1.43;
+			color: #656d7e;
+			letter-spacing: normal;						
+			padding-left: 9px;
+			word-wrap: break-word;
+			word-break: break-all;			
+			&::before {
+				content: '';
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				top: 9px;
+				background-color: #898989;
+				width: 2px;
+				height: 2px;				
+			}
+		}
+	}
+}

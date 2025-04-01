@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/series-label.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper('.maingameSwiper', {
+				autoHeight: true,
+				slidesPerView: "auto",
+				pagination: {
+					el: ".swiper-pagination",
+				},
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+	<body oncontextmenu="return false;">
+		<div class="wrapper" id="topwrpperID">
+			<!--헤더/gnb 영역-->
+			<div class="top-wrap">
+				<!--헤더-->
+
+				<!-- 191111 검색기능 추가 -->
+				<div class="rcv">
+					<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+					<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+					<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+						<input type="hidden" id="seCode" name="cn" value="">
+						<fieldset>
+							<input type="text" onkeydown="hitEnterKey(event);"
+								onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+								placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+								id="seName" name="sn" class="input_txt input_txt_fcs"
+								onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+								onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+							<span class="searchclear" style="display: none;"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+									alt="검색어지우기"></span>
+							<a href="javascript:SearchIt(document.sch_form, '1');"
+								onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png"
+									alt="검색" class="searchBtn"></a>
+						</fieldset>
+					</form>
+					<div style="display: none;" id="schdispDIV" class="ly_rcv">
+						<ul id="schdispUL" class="lst_ctt">
+						</ul>
+						<div class="sch_clse">
+							<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+						</div>
+					</div>
+				</div>
+				<!-- // 191111 검색기능 추가 끝 -->
+
+				<div id="menu">
+					<nav class="gnb">
+						<ul class="gnb_li">
+							<li><a href="https://m.itooza.com/minsstockbot/m_index.php" title="HOME">HOME</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" title="종목추천">종목추천</a>
+							</li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1"
+									title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2"
+									title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+							<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+									title="업종/테마">업종/테마</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<!--메뉴-->
+
+				<!--네비게이션-->
+				<div class="sub_menu">
+					<nav class="nav">
+						<h2><span class="item">삼성전자</span></h2>
+						<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
+					</nav>
+				</div>
+			</div>
+			<div id="ss_wrap">
+				<!--기사 영역-->
+				<div class="cont_wrap">
+					<div class="item_wrap">
+						<p class="desc">
+							<span>반도체·스마트폰·가전제품·디스플레이를 만드는 우리나라 대표 글로벌 기업반도체·스마트폰·가전제품·디스플레이를 만드는 우리나라 대표 글로벌 기업반도체·스마트폰·가전제품·디스플레이를 만드는 우리나라 대표
+								글로벌 기업반도체·스마트폰·가전제품·디스플레이를 만드는 우리나라 대표 글로벌 기업</span>
+						</p>
+						<div class="price_wrap">
+							<p class="stock_price"> <span>61,600</span> 원</p>
+							<div class="gap_wrap">
+								<p class="gap_price increase mgr_5"><span class="en">▲ 1,100</span></p>
+								<p class="gap_rate increase"><span class="en">▲ 1.82%</span></p>
+							</div>
+							<p class="total_price">시총 : <span>3,611,718억원</span></p>
+							<p class="time">07/21 14:48 현재</p>
+						</div>
+						<!--투자매력도
+						<div class="inbox score_charm_wrap">
+							<div class="left">
+								<h1><img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/tit_score_charm.png" alt="투자 매력도" /></h1>
+								<p> <span class="txt">상위</span><span class="num increase">29.7</span><span class="per">%</span> </p>
+							</div>
+							<div class="right">
+		<img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/txt_search_comment_02.png" alt="분할 매수를 검토할 시점입니다." /> 
+							</div>
+						</div>-->
+						<!--종합분석결과-->
+						<div class="inbox score_wrap">
+							<h5 style="padding-left: 5px;"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/minwise/t-sst/cont/h4_tit_stobot.png"
+									style=" height: 36px !important;" alt="스토봇 종합 분석 결과"></h5>
+							<p class="total_score"
+								style="background:url('//menu.itooza.com/stobot/mobile/index/img_score_flag2.png') no-repeat scroll 10px 0 / 115px auto">
+								<span class="score" style="margin-left:55px;">65</span><span class="txt">점</span>
+							</p>
+							<ul class="instrument_wrap">
+								<li>
+									<p class="tit"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/txt_score_type3.png"
+											alt="수급분석"></p>
+									<img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/score/img_score_instrument_026.png"
+										class="img_instrument" alt="점수이미지">
+									<p class="score"><span>26</span>점</p>
+								</li>
+								<li>
+									<p class="tit"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/txt_score_type2.png"
+											alt="밸류에이션"></p>
+									<img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/score/img_score_instrument_090.png"
+										class="img_instrument" alt="점수이미지">
+									<p class="score"><span>90</span>점</p>
+								</li>
+								<li>
+									<p class="tit"><img
+											src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/txt_score_type1.png"
+											alt="펀더멘탈"></p>
+									<img src="https://nimaqe002.commutil.kr/itoozamenu/superstocks/mobile/cont/score/img_score_instrument_080.png"
+										class="img_instrument" alt="점수이미지">
+									<p class="score"><span>80</span>점</p>
+								</li>
+							</ul>
+							<p class="clear"
+								style="background-color: #eee; margin:10px 5px 0 ; padding: 10px 0; text-align: center;">
+								<img src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/cont/txt_search_bot_info.png"
+									alt="종합점수(100점 만점) = 기업분석 + 수급분석" style="height:18px; ">
+							</p>
+						</div>
+
+						<!-- 이미지차트   -->
+						<!-- <div class="ainfo_com" style="padding:10px;">
+							<img src="/cmpg.png?md=0&cd=005930" alt="005930" style=" width: 100%; height:auto;" />
+						</div> -->
+						<style>
+							.canvasjs-chart-credit {
+								display: none;
+							}
+
+							.canvasjs-chart-toolbar {
+								display: none;
+							}
+
+							.canvasjs-chart-tooltip div {
+								background: rgba(255, 255, 255, 0.9) none repeat scroll 0 0 !important;
+								border: 2px solid #dd3853 !important;
+								border-radius: 0 !important;
+								color: #333 !important;
+								font-family: "malgun gothic", "맑은 고딕", "nanum gothic", "나눔 고딕", "apple gothic", dotum, "돋움", sans-serif !important;
+								font-size: 12px !important;
+								font-weight: normal !important;
+								font-style: normal !important;
+								height: auto !important;
+								margin: 0 !important;
+								min-width: 50px !important;
+								padding: 5px !important;
+								text-align: left !important;
+								text-indent: 0 !important;
+								text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) !important;
+								white-space: nowrap !important;
+								width: auto !important;
+							}
+
+							hr {
+								display: block;
+							}
+						</style>
+						<div id="containeroutline1_2" class="outline_style"></div>
+						<script
+							src="https://nimaqe002.commutil.kr/itoozamobile/jquery/jquery.number.js?pp=001"></script>
+						<script src="https://nimaqe002.commutil.kr/itoozamobile/chartjs/canvasjs.min.js"></script>						
+
+						<div class="ss_wrap" style="background-color: #E8E8E8; padding-top:16px;">
+							<div class="sch_ss_wrap">
+								<div class="box">
+									<h4>종목분석</h4>									
+									<div class="analysis"><img src="../img/cont/sch_analysis_empty.png" alt="해당종목의 최신 추천내역이 없습니다" style="width: 160px ; height:auto;"></div>									
+								</div>
+								<div class="box" style="overflow:hidden; float:left;">
+									<h4 style="color: #B40000;">오늘의 추천주</h4>
+									<div class="analysis"><a
+											href="https://m.itooza.com/minsstockbot/ss_view.php?scv=SVRPT1pCQVNFPSZzYz0wMjMxNjAmc3Q9MiZzZHQ9MjAyMjA3MjExNDQ4MTY%3D">
+											<p class="logo"><img alt="삼성전자" src="https://nimaqe002.commutil.kr/itoozamenu/sic/cominfo/A023160.jpg">
+											</p>
+											<p class="date">07/21</p>
+											<p style="height: 49px;overflow:hidden;" class="tit">태광, 수익성 상승+저평가+연기금 매수
+											</p>
+											<ul class="analysis_type">
+												<li class="li01 ">우량주</li>
+												<li class="li02 ">성장주</li>
+												<li class="li03  on">턴</li>
+											</ul>
+											<p class="target"><span>13,600</span>원</p>
+										</a></div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="head">
+							<h3>주요 투자지표</h3>
+						</div>
+						<ul class="total_info">
+							<li>
+								<p class="title">EPS<span>주당순이익</span></p>
+								<p class="data"><span>6,372</span>원</p>
+							</li>
+							<li>
+								<p class="title">BPS<span>주당순자산</span></p>
+								<p class="data"><span>45,106</span>원</p>
+							</li>
+							<li>
+								<p class="title">시가배당률<span></span></p>
+								<p class="data"><span>1.84%</span></p>
+							</li>
+							<li>
+								<p class="title">PER<br><span>주가수익배수</span></p>
+								<p class="data"><span>8.34</span>배</p>
+							</li>
+							<li>
+								<p class="title">PBR<br><span>주가순자산배수</span></p>
+								<p class="data"><span>1.18</span>배</p>
+							</li>
+							<li>
+								<p class="title">ROE<br><span>자기자본이익률</span></p>
+								<p class="data"><span>14.13</span>%</p>
+							</li>
+						</ul>
+					</div>
+					<div id="article-body">
+						<div class="ainfo_com">
+							<div class="head">
+								<h3>최근 분석 보고서</h3>
+							</div>
+							<ul class="li_article">
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022070708421219010"><span
+											class="tit">삼성전자, 2Q 연결 영업이익 14조..기대치 ...</span><span class="date">07/07
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022051618482244860"><span
+											class="tit">삼성전자, 1Q 영업이익 14조1214억원.. PER...</span><span class="date">05/16
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022042808395317407"><span
+											class="tit">삼성전자, 1Q 영업이익 14.12조원...3분기 ...</span><span class="date">04/28
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022042809234888959"><span
+											class="tit">삼성전자, 주당 361원 분기 배당...시가배당...</span><span class="date">04/28
+										</span></a></li>
+
+								<li><a href="https://m.itooza.com/minsstockbot/view.php?ud=2022041803373824077"><span
+											class="tit">[투자 키워드] ‘자사주 매입’이 주가를 끌...</span><span class="date">04/18
+										</span></a></li>
+							</ul>
+						</div>						
+						
+						<!-- 한 눈에 보는 투자지표 -->
+						<div class="ainfo_invest" style="margin:20px auto;">
+							<div class="head">
+								<h3><span class="sname">[삼성전자]</span> 한 눈에 보는 투자지표</h3>
+							</div>
+							<div class="body">
+								<table border="0" class="tbl_ainfo02">
+									<colgroup>
+										<col width="25%">
+										<col width="25%">
+										<col width="25%">
+										<col width="25%">
+									</colgroup>
+									<caption style="font-size:11px;color:#666;margin:0 0 1px;text-align:right;">
+										(단위: 억원)
+									</caption>
+									<thead>
+										<tr>
+											<th scope="col">손익계산서</th>
+											<th scope="col">2022.3</th>
+											<th scope="col">2021.12</th>
+											<th scope="col" class="end">2020.12</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">매출액</th>
+											<td>567,243</td>
+											<td>1,997,447</td>
+											<td class="end">1,663,112</td>
+										</tr>
+										<tr>
+											<th scope="row">영업이익</th>
+											<td>91,518</td>
+											<td>319,932</td>
+											<td class="end">205,190</td>
+										</tr>
+										<tr>
+											<th scope="row">영업이익률<span>(%)</span></th>
+											<td>16.1%</td>
+											<td>16%</td>
+											<td class="end">12.3%</td>
+										</tr>
+										<tr>
+											<th scope="row">순이익<span>(연결지배)</span></th>
+											<td>111,291</td>
+											<td>392,438</td>
+											<td class="end">260,908</td>
+										</tr>
+										<tr>
+											<th scope="row">순이익률<span>(%)</span></th>
+											<td>19.6%</td>
+											<td>19.6%</td>
+											<td class="end">15.7%</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="update">
+									<p>(자료 : 매출액,영업이익은 K-IFRS 개별, 순이익은 K-IFRS 연결지배)</p>
+								</div>
+							</div>
+						</div>
+						<!-- 한 눈에 보는 투자지표 -->
+					</div>
+				</div>
+			</div>
+
+			<!--푸터-->
+			<footer id="footer">	
+				<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+				<div class="cs">
+					<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+				</div>
+				<address>
+					㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
+				</address>
+			</footer>
+		</div>
+	</body>
+
+</html>

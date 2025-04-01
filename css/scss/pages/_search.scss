@@ -1,0 +1,2991 @@
+// 검색결과
+#wrap #container.sub_search {        
+    * {
+        font-family: var(--Title, Pretendard);
+    }  
+    
+    .searching {
+        margin-top: 0;
+        padding: 24px 16px;
+        background-color: $colfff;
+    }
+
+    &.ifrm_view {
+        padding-top: 20px;
+    }
+
+    .iframe100 {
+        display: block;
+        border: none;
+        min-height: 800px;
+        width: 100%;
+        height: 100vw;
+    }
+
+    .tab-pane {
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .schBox {
+        position: relative;
+        padding: 0 16px;
+
+        // 인기종목
+        &.area_hot {
+            padding: 16px 16px 32px;
+            position: relative;
+            background-color: $colfff;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                right: 0;
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-color: var(--background-base);
+                z-index: 1;
+            }
+
+            &>.dayBox {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+
+                .title {
+                    font-size: $font20;
+                    font-weight: $f_sizeB;
+                    line-height: 1.2;
+                    color: $col181;
+                }
+
+                .day {
+                    padding-bottom: 3px;
+                }
+            }
+
+            .day {
+                font-size: $font12;
+                line-height: 1.75;
+                color: $col969;
+                text-align: right;
+            }
+
+            .signal_list {
+                display: flex;
+                gap: 25px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin-top: 20px;
+
+                ul {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+                    width: 100%;
+
+                    li,
+                    #re_price0 {
+                        flex: 2;
+                        text-align: center;
+
+                        &.company_nm {
+                            @include white-space;
+                            flex: 3;
+                            text-align: left;
+
+                            a {
+                                font-size: $font16;
+                                font-weight: $f_sizeB;
+                                line-height: 1.19;
+                                color: $col363;
+                            }
+                        }
+
+                        &.signal {
+                            font-size: $font14;
+                            letter-spacing: -0.35px;
+                            color: var(--cold9e);
+                        }
+
+                        &.num {
+                            font-size: $font16;
+                            font-weight: $f_sizeN;
+                            line-height: 1.19;
+                            color: $col363;
+                            text-align: right;
+
+                            b {
+                                font-weight: $f_sizeN;
+                            }
+                        }
+
+                        &.increase,
+                        &.decrease,
+                        &.same {
+                            font-size: $font13;
+                            font-weight: 400;
+                            letter-spacing: -0.33px;
+                            text-align: left;
+                            color: $colup;
+
+                            b {
+                                font-weight: 400;
+                                color: $colup;
+                            }
+                        }
+
+                        &.decrease {
+                            color: $coldown;
+
+                            b {
+                                color: $coldown;
+                            }
+                        }
+
+                        &.same {
+                            color: $col363;
+
+                            b {
+                                color: $col363;
+                            }
+                        }
+
+                        &.opinion {
+                            flex: 1;
+                            text-align: right;
+
+                            span {
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 0.8125rem;
+                                font-weight: 300;
+                                letter-spacing: -0.33px !important;
+                                color: $colfff;
+                                padding: 3px 9px;
+                                border-radius: 16px;
+
+                                &.buy {
+                                    background-color: $colup;
+                                }
+
+                                &.hold {
+                                    background-color: var(--signalhold);
+                                }
+
+                                &.sell {
+                                    background-color: $coldown;
+                                }
+
+                                &.waitting {
+                                    background: $colC7C;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // 테마
+        &.area_theme {
+            margin: 24px 16px 32px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            border-radius: 16px;
+            background-color: $colfff;
+
+            .title {
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                color: $col181;
+            }
+
+            .strategy_list {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                gap: 32px 0;
+                margin-top: 20px;
+                width: 100%;
+
+                .list {
+                    position: relative;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 16px;
+                    width: 100%;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        right: 0;
+                        display: inline-block;
+                        width: 8px;
+                        height: 8px;
+                        border-top: 2px solid $colC7C;
+                        border-right: 2px solid $colC7C;
+                        transform: rotate(45deg);
+                    }
+
+                    .title_logo {
+                        .logo {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 56px;
+                            height: 56px;
+                            border-radius: 50%;
+                            background-color: $colF5F;
+
+                            img {
+                                display: inline-block;
+                                width: 80%;
+                            }
+                        }
+                    }
+
+                    .detail {
+                        .txt {
+                            display: block;
+                            font-size: $font16;
+                            font-weight: $f_sizeB;
+                            line-height: 1.19;
+                            color: $col363;
+                            padding-right: 20px;
+                        }
+
+                        .tag {
+                            font-size: $font13;
+                            line-height: 1.46;
+                            color: $col6A7;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    // 검색결과 뷰        
+    .mainBox {
+        &.view {
+            padding: 0;
+
+            .list {
+                position: relative;
+            }
+
+            .recom_company {
+                position: relative;
+                padding: 16px 16px 34px;
+                background-color: $colfff;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -8px;
+                    left: 0;
+                    right: 0;
+                    display: block;
+                    width: 100%;
+                    height: 8px;
+                    background-color: var(--background-base);
+                    z-index: 1;
+                }
+
+                .ticker {
+                    display: block;
+                    font-size: $font12;
+                    line-height: 1.75;
+                    color: $col969;
+                }
+
+                .att {
+                    position: absolute;
+                    right: 16px;
+                    top: 32px;
+
+                    .attention {
+                        @include attention;
+                    }
+                }
+
+                .company_nm {
+                    margin-top: 2px;
+                    max-width: 90%;
+
+                    &,
+                    a {
+                        display: block;
+                        font-size: 22px;
+                        font-weight: $f_sizeB;
+                        line-height: 1.23;
+                        color: $col181;
+                    }
+                }
+
+                .detail {
+                    margin-top: 4.5px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 4px 4px;
+                    align-items: center;
+
+                    // 종목검색 주가 마켓 상태 구분
+                    &.market_status {
+                        .after_market {
+                            display: flex;
+                            padding: 4px 6px;
+                            align-items: center;
+                            gap: 10px;
+                            border-radius: 6px;
+                            background: #EFF0FE;
+                            color: #7983D5;
+                            font-size: 10px;
+                            font-weight: 400;
+
+                        }
+
+                        .pre_market {
+                            display: flex;
+                            padding: 4px 6px;
+                            align-items: center;
+                            gap: 10px;
+                            border-radius: 6px;
+                            background: #FFF5E6;
+                            color: #FFAA64;
+                            font-size: 10px;
+                            font-weight: 400;
+
+                        }
+
+                        .num {
+                            font-size: 13px !important;
+
+                            span,
+                            span b {
+                                color: #333;
+                                font-size: 13px !important;
+                                font-weight: 400 !important;
+                                line-height: normal !important;
+                            }
+                        }
+
+                        .per {                            
+                            margin-top: 0;
+                            align-items: center;                            
+                            span,
+                            span b {
+                                font-size: 13px !important;
+                                font-weight: 400 !important;
+                                letter-spacing: -0.26px !important;
+                            }
+
+                            .day {
+                                font-size: 12px !important;
+                                line-height: normal !important;
+                            }
+                        }
+                    }
+
+                    .num {
+                        font-size: 34px;
+                        width: 100%;
+
+                        span {
+                            font-size: 30px;
+                            font-weight: $f_sizeB;
+                            line-height: 0.77;
+                            color: $col181;
+                        }
+                    }
+
+                    .per {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        gap: 4px;                      
+                        width: 100%;  
+
+                        .increase,
+                        .decrease,
+                        .same {
+                            font-size: $font15;
+                            color: $colup;
+                            font-weight: $f_sizeN;
+
+                            b {
+                                color: $colup;
+                                font-weight: $f_sizeN;
+                            }
+                        }
+
+                        .decrease {
+                            color: $coldown;
+
+                            b {
+                                color: $coldown;
+                            }
+                        }
+
+                        .same {
+                            color: $col363;
+
+                            b {
+                                color: $col363;
+                            }
+                        }
+
+                        .day {
+                            flex: 4;
+                            text-align: right;
+                            font-size: $font12;
+                            font-weight: $f_sizeN;                            
+                            line-height: 1.42;
+                            letter-spacing: normal;                            
+                            color: $col969;
+                            margin-left: auto;
+                        }
+                    }
+                }
+            }
+
+            .search_tabsList .tab {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                gap: 0 5px;
+                margin-top: 19px;
+                box-sizing: border-box;
+                border-bottom: 1px solid var(--col324);
+
+                li {
+                    padding: 0;
+                    box-sizing: border-box;
+                    flex: 2;
+                    text-align: center;
+                    position: relative;
+                    top: 1px;
+
+                    &:last-of-type {
+                        flex: 1;
+                    }
+
+                    span {
+                        display: inline-block;
+                        padding: 5px 10px 7px;
+                        box-sizing: border-box;
+                        font-size: $font16;
+                        // font-weight: $f_sizeB;
+                        letter-spacing: -1.45px;
+                        text-align: center;
+                        color: #8e939b;
+                    }
+
+                    &.active {
+                        border-bottom: 3px solid var(--col326);
+
+                        span {
+                            font-weight: $f_sizeB;
+                            color: var(--col326);
+                            padding-bottom: 5px;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 종목검색 데이타 없는 경우 ex> goog
+        .nondata {
+            margin-top: 23px;
+            padding-top: 40px;
+
+            .nodata_guide {
+                margin: 0 15px;
+                padding: 30px 30px;
+                box-sizing: border-box;
+                border-radius: 8px;
+                background-color: var(--col1f3);
+
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        // 추천가, 목표가, AI매매신호
+        &.attr {
+            background-color: $colfff;
+
+            .bg_box {
+                position: relative;
+                margin-top: 15px;
+                width: 100%;
+                border-radius: 16px;
+                background-color: var(--background-base);
+
+                .data_opinion {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 15px 13px 19px;
+                    gap: 10px;
+
+                    .line {
+                        .th {
+                            font-size: $font13;
+                            letter-spacing: -0.33px;
+                            color: #8e939b;
+
+                            .regday {
+                                padding-left: 3px;
+                                font-size: 10px;
+                                font-weight: normal;
+                                letter-spacing: -0.25px;
+                                color: var(--col445);
+                            }
+                        }
+
+                        .td {
+                            margin-top: 5px;
+
+                            b {
+                                font-weight: $f_sizeB;
+                                color: var(--cold9e);
+                            }
+
+                            .increase {
+                                color: rgba(255, 78, 78, 0.7);
+
+                                b {
+                                    font-weight: normal;
+                                    color: $colup;
+                                    opacity: 1;
+                                }
+                            }
+
+                            .decrease {
+                                color: rgba(0, 147, 255, 0.7);
+
+                                b {
+                                    font-weight: normal;
+                                    color: $coldown;
+                                    opacity: 1;
+                                }
+                            }
+
+                            .same {
+                                color: var(--cold9e);
+
+                                b {
+                                    font-weight: normal;
+                                    color: var(--cold9e);
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+
+                    &.signal {
+                        position: relative;
+                        text-align: center;
+                        justify-content: space-around;
+
+                        .line .th {
+                            font-size: $font13;
+                            letter-spacing: -0.33px;
+                            color: var(--cold9e);
+                        }
+
+                        .line .td .increase,
+                        .line .td .decrease,
+                        .line .td .same {
+                            font-size: $font20;
+                        }
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            width: 1px;
+                            height: 85px;
+                            top: 0;
+                            left: 50%;
+                            background-color: var(--colbar);
+                        }
+                    }
+                }
+
+                .task_tooltip {
+                    position: absolute;
+                    right: 15px;
+                    top: 10px;
+
+                    img {
+                        filter: opacity(0.5);
+                    }
+                }
+            }
+
+            .adequateArea {
+                padding-top: 32px;
+
+                .title {
+                    font-size: $font20;
+                    font-weight: $f_sizeB;
+                    line-height: 1.2;
+                    color: $col181;
+                }
+
+                .listWrap {
+                    .mid {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        gap: 10px;
+                        margin-top: 16px;
+                        padding: 20px 20px;
+                        box-sizing: border-box;
+                        border-radius: 16px;
+                        background-color: $colF5F;
+
+                        .charm_num {
+                            flex: 1;
+                            position: relative;
+
+                            @media (min-width: 426px) {
+                                flex: 2;
+                            }
+
+                            .signal {
+                                flex: 1;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50%;
+                                margin: 0 auto;
+                                flex-basis: 65px;
+                                width: 65px;
+                                height: 65px;
+                                box-sizing: border-box;
+                                font-size: $font20;
+                                font-weight: $f_sizeB;
+                                line-height: 1.25;
+                                color: $col181;
+                                background-color: $colfff;
+
+                                &.hold {
+                                    /* 보유 */
+                                    color: #333;
+                                }
+
+                                &.buy {
+                                    /* 매수 */
+                                    color: #E1305A;
+                                }
+
+                                &.sell {
+                                    /* 매도 */
+                                    color: #404FC3;
+                                }
+
+                                &.waitting {
+                                    /* 관망 */
+                                    color: #6A727B;
+                                }
+                            }
+
+                            .signal_guide {
+                                cursor: pointer;
+                                position: absolute;
+                                right: -5px;
+                                top: -5px;
+                                padding: 5px;
+                                display: inline-block;
+                                border-radius: 50%;
+
+                                img {
+                                    display: block;
+                                }
+                            }
+                        }
+
+                        .num_bar {
+                            flex: 2;
+                            flex-basis: calc(100% - 85px);
+                            display: flex;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                            gap: 7px;
+
+                            @media (min-width: 426px) {
+                                flex: 2;
+                                flex-basis: calc(100% - 185px);
+                            }
+
+                            .line {
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                gap: 10px;
+
+                                .th {
+                                    flex: 1.5;
+                                    display: inline-block;
+                                    font-size: 11px;
+                                    line-height: 1.42;
+                                    letter-spacing: -0.05rem !important;
+                                    text-align: right;
+                                    color: $col6A7;
+                                }
+
+                                .barArea {
+                                    flex: 2;
+                                    width: 100%;
+
+                                    .barline {
+                                        position: relative;
+                                        width: 100%;
+                                        height: 10px;
+                                        border-radius: 10px;
+                                        background-color: $colfff;
+
+                                        .position {
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            display: inline-block;
+                                            background-color: #ffc05c;
+                                            border-radius: 10px;
+                                            height: 100%;
+                                            width: 0;
+                                            max-width: 100%;
+                                        }
+                                    }
+                                }
+
+                                .td {
+                                    font-size: $font13;
+                                    font-weight: normal;
+                                    letter-spacing: -0.3px;
+                                    color: rgba(51, 51, 51, 0.6);
+
+                                    b {
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                &:nth-child(1) {
+                                    .barArea .barline .position {
+                                        background-color: #4D6EE4;
+                                    }
+                                }
+
+                                &:nth-child(2) {
+                                    .barArea .barline .position {
+                                        background-color: #909DDB;
+                                    }
+                                }
+
+                                &:nth-child(3) {
+                                    .barArea .barline .position {
+                                        background-color: #A1B8D8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 비회원, 베이직-한도초과시 
+                .premiumLock_area {
+                    margin-top: 10px;
+                    background: var(--colbar) url('/img/premiumLock_area.png') no-repeat 0 0;
+                    background-size: cover;
+
+                    .transbox {
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 31px;
+                        min-height: 104px;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 16px;
+                        padding: 25px 7%;
+                        box-sizing: border-box;
+                        background-color: $colboxbgopacity;
+
+                        @-moz-document url-prefix() {
+                            background-color: $colboxbgopacity;
+                        }
+
+                        -webkit-backdrop-filter: blur(5px);
+                        backdrop-filter: blur(5px);
+
+                        .free_title {
+                            text-shadow: 0 2px 0 rgba(59, 31, 31, 0.36);
+                            font-size: $font18;
+                            font-weight: $f_sizeB;
+                            letter-spacing: normal;
+                            color: $colfff;
+                        }
+
+                        .sum {
+                            font-size: 11px;
+                            display: block;
+                            margin-top: 7px;
+                            font-weight: normal;
+                            letter-spacing: normal;
+                            color: $colfff;
+                        }
+
+                        .more {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                            padding: 5px 9px;
+                            border-radius: 10px;
+                            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+                            background-color: var(--colpry);
+                            font-size: 10px;
+                            font-weight: normal;
+                            line-height: 1.3;
+                            letter-spacing: -0.5px;
+                            text-align: center;
+                            color: var(--colfff);
+
+                            &::after {
+                                @include go_back;
+                                width: 4px;
+                                height: 4px;
+                                transform: rotate(45deg);
+                                border-color: var(--coldae);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // outline 
+        &.outline {
+            padding-top: 24px;            
+            background-color: $colfff;
+
+            .title {
+                margin-top: 40px;
+                padding: 0 16px;
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                letter-spacing: -0.5px;
+                color: var(--cold9e);
+
+                span {
+                    font-size: $font16;
+                    font-weight: normal;
+                    letter-spacing: -0.4px;
+                    color: var(--col7f8);
+                }
+            }
+
+            .outline_style {
+                height: 100%;
+                width: 100%;
+
+                .highcharts-navigator-xaxis {
+                    font-size: 0;
+                    opacity: 0;
+                }
+
+                .highcharts-input-group,
+                .highcharts-range-selector-group,
+                .highcharts-navigator {
+                    display: none;
+                }
+
+                .highcharts-point-up {
+                    fill: #dd5257;
+                    stroke: #dd5257;
+                }
+
+                .highcharts-point-down,
+                .highcharts-point-down-bearish-up {
+                    fill: #4d6ee4;
+                    stroke: #4d6ee4;
+                }
+            }
+
+            .tableBox {
+                .table_data {
+                    @include table;
+                    width: calc(100% - 32px);
+
+                    .opinion {
+
+                        span {
+                            padding: 1px 8px;
+                            border-radius: 3px;
+                            font-size: $font13;
+                            letter-spacing: -0.33px;
+                            text-align: center;
+                            color: $colfff;
+
+                            &.buy {
+                                background-color: var(--signalbuy);
+                            }
+
+                            &.sell {
+                                background-color: var(--signalsell);
+                            }
+
+                            &.hold {
+                                background-color: var(--signalhold);
+                            }
+
+                            &.waitting {
+                                background-color: var(--signalwaitting);
+                            }
+                        }
+                    }
+
+                    .num {
+                        font-size: $font16;
+                        letter-spacing: -0.4px;
+                        color: rgba(51, 51, 51, 0.65);
+
+                        b {
+                            font-weight: normal;
+                            color: var(--cold9e);
+                        }
+                    }
+
+                    .revenue {
+                        .dod {
+                            display: inline-block;
+                            margin-top: 3px;
+                            padding: 2px 5px;
+                            min-width: 56px;
+                            border-radius: 3px;
+                            background-color: var(--signalbuy);
+                            box-sizing: border-box;
+                            font-size: $font14;
+                            letter-spacing: -0.35px;
+                            color: rgba(255, 255, 255, 0.6);
+
+                            b {
+                                color: $colfff;
+                                font-weight: normal;
+                            }
+
+                            &.decrease {
+                                color: $colfff;
+                                background-color: var(--signalsell);
+                                color: rgba(255, 255, 255, 0.6);
+
+                                b {
+                                    color: $colfff;
+                                    font-weight: normal;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                @include btn_more;
+
+                .btn_more {
+                    cursor: pointer;
+                    display: block;
+                    padding: 11px 0;
+                    font-size: 0.9375rem;
+                    letter-spacing: -0.38px;
+                    color: var(--col7f8);
+                    margin-top: 10px;
+                    width: calc(100% - 32px);
+
+                    span {
+                        font-size: 0.9375rem;
+                        letter-spacing: -0.38px;
+                        color: var(--col7f8);
+                    }
+                }
+            }
+
+            .bg_box {
+                box-sizing: border-box;
+                border-radius: 16px;
+                background-color: #f4f4f5;
+
+
+                .data_opinion {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    padding: 20px 20px 15px;
+                    gap: 10px;
+
+                    .line {
+                        .th {
+                            font-size: $font13;
+                            line-height: 1.42;
+                            color: $col6A7;
+
+                            .regday {
+                                font-size: 10px;
+                                line-height: 1.42;
+                                color: $col6A7;
+                            }
+                        }
+
+                        .td {
+                            margin-top: 5px;
+                            position: relative;
+                            font-size: $font16;
+                            font-weight: $f_sizeB;
+                            letter-spacing: -0.02rem !important;
+                            line-height: 1.19;
+                            color: $col363;
+
+                            b {
+                                font-weight: $f_sizeB;
+                                color: $col363;
+                            }
+
+                            .unit {
+                                display: block;
+                                font-size: 10px;
+                                line-height: 1.7;
+                                color: #c7ccd1;
+
+                            }
+
+                            .ibox {
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: $font13;
+                                font-weight: $f_sizeS;
+                                letter-spacing: -0.33px !important;
+                                color: $colfff;
+                                padding: 3px 9px;
+                                border-radius: 16px;
+
+                                &.str {
+                                    background-color: #e41c39;
+                                }
+
+                                &.bas {
+                                    background: $colC7C;
+                                }
+
+                                &.weak {
+                                    background-color: #404fc3;
+                                }
+
+                            }
+
+                            .increase {
+                                font-weight: $f_sizeN;
+                                color: $colup;
+
+                                b {
+                                    font-weight: $f_sizeN;
+                                    color: $colup;
+                                }
+                            }
+
+                            .decrease {
+                                font-weight: $f_sizeN;
+                                color: $coldown;
+
+                                b {
+                                    font-weight: $f_sizeN;
+                                    color: $coldown;
+                                }
+                            }
+
+                            .same {
+                                font-weight: $f_sizeN;
+                                color: $col363;
+
+                                b {
+                                    font-weight: $f_sizeN;
+                                    color: $col363;
+                                }
+                            }
+                        }
+                    }
+
+                    &.signal {
+                        position: relative;
+                        text-align: center;
+                        justify-content: space-around;
+
+                        .line .th {
+                            font-size: $font13;
+                            letter-spacing: -0.33px;
+                            color: var(--cold9e);
+                        }
+
+                        .line .td .increase,
+                        .line .td .decrease {
+                            font-size: $font20;
+                        }
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            width: 1px;
+                            height: 85px;
+                            top: 0;
+                            left: 50%;
+                            background-color: var(--colbar);
+                        }
+                    }
+                }
+            }
+
+            .summary {
+                position: relative;
+                width: 100%;
+                margin-top: 25px;
+                margin-left: -16px;
+                margin-right: -16px;
+                // margin-top: 30px;
+                padding: 24px 16px;
+                background-color: #f4f4f5;
+
+                .view_box {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+                }
+
+                p {
+                    word-break: break-all;
+                    width: 100%;
+                    font-size: $font14;                    
+                    color: $col6A7;                    
+                    font-weight: normal;                    
+                    line-height: 1.36;
+                    letter-spacing: normal;                    
+                    strong {
+                        color: #363f4b;
+                        font-weight: bold;
+                    }
+                }
+
+                &.active {
+                    p {
+                        -webkit-line-clamp: initial;
+
+                        &.txt_line01 {
+                            height: 0;
+                            visibility: hidden;
+                            opacity: 0;
+                            transition: visibility 0s, opacity 0.5s linear;
+                        }
+
+                        &.txt_line02 {
+                            visibility: visible;
+                            opacity: 1;
+                            height: 100%;
+                        }
+                    }
+
+                    .link_btn span::after {
+                        transform: rotate(-45deg);
+                    }
+                }
+
+                .link_btn {
+                    display: inline-block;
+                    // position: absolute;
+                    // right: 16px;
+                    // bottom: 11px;
+                    margin-top: 15px;
+
+                    span {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 5px 9px;
+                        font-size: 10px;
+                        font-weight: normal;
+                        line-height: 1.3;
+                        letter-spacing: -0.5px;
+                        color: var(--colfff);
+                        border-radius: 10px;
+                        background-color: var(--col1f3);
+
+                        &::after {
+                            @include go_back;
+                            width: 4px;
+                            height: 4px;
+                            transform: rotate(135deg);
+                            border-color: var(--coldae);
+                        }
+                    }
+                }
+            }
+
+            // 비회원, 베이직-한도초과시
+            .premiumLock_area {
+                margin: 10px auto;
+                width: calc(100% - 32px);
+                background: var(--colbar) url('/img/premiumLock_area_ch.png') no-repeat 0 0;
+                background-size: cover;
+
+                .transbox {
+                    cursor: pointer;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    align-content: center;
+                    justify-content: center;
+                    gap: 15px;
+                    min-height: 320px;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 16px;
+                    padding: 25px 8%;
+                    box-sizing: border-box;
+                    background-color: $colboxbgopacity;
+
+                    @-moz-document url-prefix() {
+                        background-color: $colboxbgopacity;
+                    }
+
+                    -webkit-backdrop-filter: blur(5px);
+                    backdrop-filter: blur(5px);
+
+                    .free_title {
+                        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.36);
+                        font-size: $font18;
+                        font-weight: $f_sizeB;
+                        letter-spacing: normal;
+                        color: $colfff;
+                    }
+
+                    .sum {
+                        font-size: 11px;
+                        display: block;
+                        margin-top: 7px;
+                        font-weight: normal;
+                        letter-spacing: normal;
+                        color: $colfff;
+                    }
+
+                    .more {
+                        display: block;
+                        width: 140px;
+                        box-sizing: border-box;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                        padding: 5px 9px;
+                        border-radius: 16px;
+                        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+                        background-color: var(--colpry);
+                        font-size: $font15;
+                        line-height: 1.33;
+                        letter-spacing: -0.75px;
+                        text-align: center;
+                        color: var(--colfff);                        
+
+                        &::after {
+                            @include go_back;
+                            width: 6px;
+                            height: 6px;
+                            transform: rotate(45deg);
+                            border-color: var(--coldae);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        // 종목진단
+
+
+        // 증권사 투자의견
+        &.inve_opinion {
+            background-color: $colfff;
+            padding: 48px 16px 22px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                right: 0;
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-color: var(--background-base);
+                z-index: 1;
+            }
+
+            .l_box {
+                display: flex;                
+                align-items: center;
+                align-content: center;
+                justify-content: flex-start;
+                gap: 7px;
+            }
+
+            .reg_day {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                margin-top: 32px;
+                padding-top: 38px;
+                border-top: 1px solid $colF5F5F5;
+
+                .s_title {
+                    font-size: $font16;
+                    font-weight: $f_sizeB;
+                    line-height: 1.31;
+                    color: $col181;
+                }
+
+                .day {
+                    font-size: $font12;
+                    font-weight: 400;
+                    line-height: 1.42;
+                    color: $col969;
+                }
+            }
+
+            .bg_box {
+                margin-top: 14px;
+                box-sizing: border-box;
+                border-radius: 16px;
+                background-color: #f4f4f5;
+
+                .data_opinion {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    padding: 16px 0;
+                    gap: 5px;
+
+                    .line {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0 2px;
+
+                        &:first-child {
+                            .td {
+                                display: flex;
+                                flex-direction: column;
+                                font-size: $font18;
+                                font-weight: $f_sizeB;
+
+                                .unit {
+                                    display: block;
+                                    font-size: 10px;
+                                    line-height: 1.7;
+                                    color: $col969;
+                                }
+                            }
+                        }
+
+                        .th {
+                            font-size: $font13;
+                            line-height: 1.42;
+                            letter-spacing: -0.3px;
+                            color: $col6A7;
+                        }
+
+                        .td {
+                            font-size: $font13;
+                            font-weight: $f_sizeN;
+                            line-height: 1.42;
+                            color: $col181;
+                        }
+                    }
+                }
+            }
+
+            .title {
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                line-height: 1.2;
+                color: $col181;
+            }
+
+            .total {
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                line-height: 1.2;
+                color: $col181;
+                strong {
+                    color: $col969;
+                }
+            }
+            .signal_guide {                
+                display: inline-flex;                
+            }
+
+            .signal {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 6.5px 12px;
+                margin-left: 10px;
+                border-radius: 8px;
+                font-size: $font13;
+                font-weight: $f_sizeN;
+                color: $colfff;
+
+                &.buy {
+                    background-color: #e41c39;
+                }
+
+                &.hold {
+                    background-color: var(--signalhold);
+                }
+
+                &.sell {
+                    background-color: #404fc3;
+                }
+
+                &.waitting {
+                    background: $colC7C;
+                }
+            }
+
+            .chart_layout {
+                margin-top: 15px;
+                height: 280px;
+                width: 100%;
+
+                .highcharts-label.highcharts-series-label {
+                    display: none !important;
+                }
+
+                .highcharts-legend text {
+                    font-size: 12px !important;
+                    color: #969ea7 !important;
+                    fill: #969ea7 !important;
+                    font-weight: 400 !important;
+                }
+
+                .highcharts-axis-labels text {
+                    font-size: 12px !important;
+                    color: #969ea7 !important;
+                    fill: #969ea7 !important;
+                    font-weight: 400 !important;
+
+                }
+            }
+
+            .no_data {
+                width: 100%;
+
+                p {
+                    padding: 4em 0 5em;
+                    font-size: $font16;
+                    font-weight: $f_sizeB;
+                    line-height: 1.31;
+                    letter-spacing: -0.4px !important;
+                    color: #c7ccd1;
+                    text-align: center;
+                }
+            }
+
+            .total_cunt {
+                display: block;
+                text-align: right;
+                margin-top: 10px;
+                font-size: $font12;
+                font-weight: 400;
+                line-height: 1.42;
+                color: $col969;
+            }
+        }
+
+        // 퀀트전략
+        &.area_allo {
+            // display: flex;  
+            // flex-wrap: wrap;
+            // justify-content: space-between;
+            // align-items: center;
+            // gap: 16px 0;            
+            background-color: $colfff;
+            padding: 32px 0;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                right: 0;
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-color: var(--background-base);
+                z-index: 1;
+            }
+
+            .title {
+                width: 100%;
+                box-sizing: border-box;
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                line-height: 1.2;
+                color: $col181;
+                padding-left: 16px;
+            }
+
+            .swiper-slide {
+                display: block;
+                width: auto;
+                padding-left: 16px;
+            }
+
+            .list_area {
+                margin-top: 16px;
+                width: 100px;
+                padding: 0 7px;
+            }
+
+            .list_area .area {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 90px;
+                height: 90px;
+                padding: 12px;
+                margin: 0 auto;
+                box-sizing: border-box;
+                border-radius: 50%;
+                background-color: $colF5F;
+                font-size: $font15;
+                font-weight: $f_sizeB;
+                line-height: 1.19;
+                color: $col363;
+                text-align: center;
+            }
+
+            .allo_txt {
+                margin-top: 10px;
+                font-size: $font13;
+                letter-spacing: -1px !important;
+                line-height: 1.46;
+                text-align: center;
+                color: $col6A7;
+
+                span {
+                    font-weight: $f_sizeB;
+
+                    &.increase,
+                    &.decrease,
+                    &.same {
+                        color: $colup;
+                        font-weight: 400;
+
+                        b {
+                            color: $colup;
+                            font-weight: 400;
+                        }
+                    }
+
+                    &.decrease {
+                        color: $coldown;
+
+                        b {
+                            color: $coldown;
+                        }
+                    }
+
+                    &.same {
+                        color: $col363;
+
+                        b {
+                            color: $col363;
+                        }
+                    }
+                }
+            }
+
+            .no_data {
+                width: 100%;
+
+                p {
+                    padding: 4em 0 3em;
+                    font-size: $font16;
+                    font-weight: $f_sizeB;
+                    line-height: 1.31;
+                    letter-spacing: -0.4px !important;
+                    color: $colC7C;
+                    text-align: center;
+                }
+
+                .link_basic {
+                    position: relative;
+                    display: inline-block;
+                    padding: 15px 16px 15px 0;
+                    font-size: $font14;
+                    font-weight: $f_sizeN;
+                    line-height: 1.31;
+                    letter-spacing: -0.4px !important;
+                    color: $col4D6;
+                    text-align: center;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 21px;
+                        right: 0;
+                        display: inline-block;
+                        width: 6px;
+                        height: 6px;
+                        border-top: 1px solid $col4D6;
+                        border-right: 1px solid $col4D6;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+
+            .more {
+                text-align: right;
+                margin-top: 18px;
+                display: flex;
+                justify-content: flex-end;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 9px;
+                    position: relative;
+                    padding: 5px 16px;
+                    border-radius: 16px;
+                    border: solid 1px #28426e;
+                    font-weight: normal;
+                    font-size: $font15;
+
+                    color: #8796a7;
+
+                    &::after {
+                        @include go_back;
+                        width: 6px;
+                        height: 6px;
+                        transform: rotate(45deg);
+                        border-color: #818ca1;
+                    }
+                }
+
+            }
+        }
+
+        // 매출액, 영업이익, 주당순이익(EPS) 막대 차트
+        &.financials {
+            background-color: $colfff;
+            padding: 40px 16px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                right: 0;
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-color: var(--background-base);
+                z-index: 1;
+            }
+
+            &:last-of-type::after {
+                display: none;
+            }
+
+            .title {
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                line-height: 1.2;
+                color: $col181;
+            }
+
+            .no_data {
+                width: 100%;
+
+                p {
+                    padding: 4em 0 5em;
+                    font-size: $font16;
+                    font-weight: $f_sizeB;
+                    line-height: 1.31;
+                    letter-spacing: -0.4px !important;
+                    color: #c7ccd1;
+                    text-align: center;
+
+                    .link_basic {
+                        position: relative;
+                        display: inline-block;
+                        padding: 15px 16px 15px 0;
+                        font-size: $font14;
+                        font-weight: $f_sizeN;
+                        line-height: 1.31;
+                        letter-spacing: -0.4px !important;
+                        color: $col4D6;
+                        text-align: center;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 21px;
+                            right: 0;
+                            display: inline-block;
+                            width: 6px;
+                            height: 6px;
+                            border-top: 1px solid $col4D6;
+                            border-right: 1px solid $col4D6;
+                            transform: rotate(45deg);
+                        }
+                    }
+                }
+            }
+
+            // 투자노트
+            .area_note {
+                .note_list {
+                    display: flex;
+                    gap: 7px;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    margin-top: 4px;
+                    width: 100%;
+                    box-sizing: border-box;
+
+                    ul {
+                        width: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        align-items: stretch;
+                        gap: 15px 15px;
+                        padding: 22px 0;
+                        box-sizing: border-box;
+                        border-bottom: 1px solid $colF5F5F5;
+                    }
+
+                    .note_nm {
+                        flex: 2;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: stretch;
+                        align-content: space-between;
+                    }
+
+                    .note_nm a {
+                        font-size: $font16;
+                        ;
+                        font-weight: $f_sizeB;
+                        line-height: 1.19;
+                        color: $col363;
+                        min-width: calc(100% - 40px);
+                        overflow: hidden;
+                        white-space: normal;
+                        text-overflow: ellipsis;
+                        display: -webkit-box !important;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        word-wrap: break-word;
+                        word-break: break-all;
+                    }
+
+                    .sume_img {
+                        height: 60px;
+                        flex-basis: 79px;
+                        border: 1px solid #E0E4E9;
+                        box-sizing: border-box;
+                        border-radius: 8px;
+                        overflow: hidden;
+                    }
+
+                    .sume_img .img {
+                        display: inline-block;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .day {
+                        margin-top: 3px;
+                        font-size: $font13;
+                        line-height: 1.46;
+                        color: $col6A7;
+                    }
+
+                    #btn_free_list,
+                    .freeView_list {
+                        .note_nm {
+                            background: url('/img/lokimg.svg') no-repeat 0 2px;
+                            background-size: 12px;
+
+                            a {
+                                text-indent: 20px;
+                            }
+                        }
+                    }
+                }
+
+                @include btn_more;
+
+                .btn_more {
+                    margin-top: 10px;
+                }
+            }
+
+            .dataBox {
+                margin-bottom: 32px;
+
+                .reg_day {
+                    display: block;
+                    font-size: $font12;
+                    font-weight: 500;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1.75;
+                    color: $col969;
+                    text-align: right;
+                }
+
+                .bg_box {
+                    margin-top: 7px;
+                    box-sizing: border-box;
+                    border-radius: 16px;
+                    background-color: #f4f4f5;
+
+                    .data_opinion {
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: space-between;
+                        padding: 20px 20px;
+                        gap: 5px;
+
+                        .line {
+                            .th {
+                                font-size: $font13;
+                                line-height: 1.46;
+                                color: $col6A7;
+                            }
+
+                            .td {
+                                // margin-top: 5px;
+                                font-size: $font16;
+                                line-height: 1.19;
+                                color: $col363;
+
+                                b {
+                                    font-weight: $f_sizeB;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .chart_box {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0 12px;
+                border-bottom: 1px solid $colF5F5F5;
+                padding-bottom: 15px;
+                margin-bottom: 32px;
+
+                &:last-of-type {
+                    border-bottom: none;
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                }
+
+                .c_title {
+                    font-size: $font18;
+                    font-weight: 600;
+                    line-height: 1.2;
+                    color: $col181;
+                }
+                .signal_guide {
+                    display: inline-flex;
+                }
+
+                .unit {
+                    font-size: $font12;
+                    font-weight: 500;                    
+                    line-height: 1.42;
+                    letter-spacing: normal;                   
+                    color: $col969;
+                    margin-left: auto;
+                }
+
+                .financials_style {
+                    width: 100%;
+                    height: 180px;
+                    margin-top: 15px;
+
+                    @media (min-width: 376px) and (max-width: 425px) {
+                        height: 220px;
+                    }
+
+                    @media (min-width: 426px) {
+                        height: 260px;
+                    }
+
+                    rect.highcharts-point {
+                        fill: $col4D6 !important;
+                        background: $col4D6 !important;
+                        stroke-width: 0;
+
+                        &.point_color {
+                            fill: $colEDE !important;
+                            background: $colEDE !important;
+                        }
+
+                        &.decrease_color {
+                            fill: $colD2D !important;
+                            background: $colD2D !important;
+                        }
+                    }
+
+                    // 마이나스 데이터인 경우                    
+                    .highcharts-point.highcharts-negative.highcharts-color-0 {
+                        fill: #26ABFF;
+                        background: #26ABFF;
+                    }
+
+                    .highcharts-label {
+
+                        text,
+                        tspan {
+                            font-size: 12px !important;
+                            color: $col6A7 !important;
+                            fill: $col6A7 !important;
+                            text-shadow: none;
+                            stroke-width: 0;
+                            font-weight: $f_sizeN !important;
+                        }
+                    }
+
+                    .highcharts-axis-labels text {
+                        font-size: 14px !important;
+                        color: #6a727b !important;
+                        fill: #6a727b !important;
+                        font-weight: 400 !important;                                                
+                    }
+
+                    .highcharts-xaxis {
+                        .highcharts-axis-line {
+                            stroke: var(--colbar);
+                        }
+                    }
+
+                    .highcharts-crosshair-category {
+                        stroke: rgba(255, 255, 255, 0.0);
+                    }
+                }
+
+                .financialsLine_style {
+                    margin-top: 10px;
+                    width: 100%;
+                    height: 220px;
+
+                    .highcharts-label.highcharts-series-label {
+                        display: none;
+                        opacity: 0;
+                    }
+
+                    @media (min-width: 376px) and (max-width: 425px) {
+                        // height: 360px;                        
+                    }
+
+                    @media (min-width: 426px) {
+                        height: 260px;
+                    }
+
+                    .highcharts-xaxis {
+                        .highcharts-axis-line {
+                            stroke: var(--col2f3) !important;
+                        }
+                    }
+
+                    .highcharts-legend-item {
+
+                        text,
+                        tspan {
+                            font-size: 12px !important;
+                            color: #969ea7 !important;
+                            fill: #969ea7 !important;
+                            font-weight: 400 !important;
+                            text-shadow: none;
+                            stroke-width: 0;
+                        }
+                    }
+                }
+
+                .premiumLock_area {
+                    width: 100%;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.96);
+                    border: solid 1px var(--col6AA);
+                    background-color: var(--col326);
+                    // position: relative;
+                    // top: -60px;
+                    position: sticky;
+
+                    .transbox {
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px;
+                        padding: 10px 10px;
+
+                        .free_title {
+                            font-size: $font15;
+                            font-weight: normal;
+                            letter-spacing: -0.38px;
+                            color: var(--cold9e);
+
+                            b {
+                                font-weight: $f_sizeB;
+                            }
+                        }
+
+                        .more {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                            padding: 5px 9px;
+                            border-radius: 10px;
+                            background-color: var(--col1f3);
+                            font-size: 10px;
+                            font-weight: normal;
+                            line-height: 1.3;
+                            letter-spacing: -0.5px;
+                            text-align: center;
+                            color: var(--colfff);
+
+                            &::after {
+                                @include go_back;
+                                width: 4px;
+                                height: 4px;
+                                transform: rotate(45deg);
+                                border-color: var(--coldae);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .chart_area.diagnosis {
+            border-radius: 16px;
+            background-color: var(--col1f3);
+            width: calc(100% - 30px);
+            margin: 23px auto 0;
+            box-sizing: border-box;
+            padding: 12px 10px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 110px auto;
+            grid-column: 1 / 2;
+            grid-row: 2 / 1;
+
+            &.mkSearch {
+                // mk시그널 검색결과 화면 스마트스코어(진단점수), 스파이더 차트 추가되는 여기에 추가                
+                margin-top: 0;
+            }
+
+            .chartData {
+                display: inline-block;
+                border-right: 1px solid var(--col324);
+                vertical-align: top;
+                text-align: center;
+                padding: 12px 0;
+                min-height: 103px;
+                box-sizing: border-box;
+
+                .charm {
+                    font-size: $font12;
+                    letter-spacing: normal;
+                    text-align: center;
+                    color: var(--col7f8);
+                    position: relative;
+
+                    .signal_guide {
+                        cursor: pointer;
+                        position: absolute;
+                        right: 1px;
+                        top: -12px;
+                        padding: 5px;
+                        display: inline-block;
+                        border-radius: 50%;
+
+                        img {
+                            display: block;
+                            filter: opacity(0.5);
+                        }
+                    }
+                }
+
+                .charm strong {
+                    color: var(--cold9e);
+                }
+
+                .charm_num {
+                    font-size: 32px;
+                    font-weight: bold;
+                    letter-spacing: normal;
+                    text-align: center;
+                    color: var(--cold9e);
+                }
+
+            }
+
+            .difference {
+                box-sizing: border-box;
+                padding: 5px 10px 10px;
+                display: grid;
+
+                .dt {
+                    font-size: $font18;
+                    letter-spacing: normal;
+                    color: var(--cold9e);
+                    align-items: center;
+                }
+
+                .dt:nth-child(3) {
+                    font-size: $font12;
+                    color: var(--col7f8);
+                    margin-top: 10px;
+                }
+
+                .dt strong {
+                    color: var(--col326);
+                }
+
+                .dd {
+                    font-size: 10px;
+                    letter-spacing: normal;
+                    color: var(--col7f8);
+                }
+            }
+
+            .data_attainment {
+                border-top: 1px solid var(--col324);
+                padding: 12px 5px 0;
+                position: relative;
+                grid-area: 2 / 1 / span 2 / span 2;
+
+                ul {
+                    display: flex;
+                    justify-content: space-between;
+
+                    li {
+                        display: inline-block;
+                        font-size: $font12;
+                        color: var(--col7f8);
+                        text-align: center;
+
+                        span {
+                            color: var(--cold9e);
+                            font-weight: 500;
+                            padding-left: 7px;
+                        }
+
+                        b {
+                            color: var(--cold9e);
+                            font-weight: 300;
+                            padding-left: 1px;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 종목진단
+        .investCharm_area {
+            background-color: #fff;
+            padding: 35px 16px;
+
+            .l_box {
+                display: flex;
+                align-items: flex-end;
+                align-content: center;
+                justify-content: flex-start;
+                gap: 7px;
+            }
+
+            .title {
+                font-size: $font20;
+                font-weight: $f_sizeB;
+                line-height: 1.2;
+                color: $col181;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                right: 0;
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-color: var(--background-base);
+                z-index: 1;
+            }
+
+            // 종목진단 스파이더 차트
+            .containercharm1 {
+                width: 100%;
+                margin: 20px auto 0;
+                height: 260px;
+
+                .highcharts-axis-labels.highcharts-radial-axis-labels {
+                    span {
+                        color: #6a727b !important;
+                        font-weight: 400;
+                    }
+
+                    strong {
+                        display: inline-block;
+                        padding-top: 5px;
+                        font-weight: 500;
+                        color: #6a727b !important;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .charm_num {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 7px 7px;
+                // min-width: calc(100% - 130px);
+                max-width: calc(100% - 190px);
+                margin: 6px auto 0;
+                padding: 11px 24px;
+                border-radius: 24px;
+                border: solid 1px #edeeef;
+
+                @media (min-width: 426px) {
+                    max-width: auto;
+                    width: 340px
+                }
+
+                .exce {
+                    font-size: 0.8125rem;
+                    color: $col4D6;
+                    font-weight: 700;
+                }
+
+                .total {
+                    font-size: 0.8125rem;
+                    color: $col969;
+                    font-weight: 500;
+                }
+            }
+
+        }
+
+        // 재무제표, 재무차트
+        .searchTabsBox {
+            padding-top: 23px;
+            padding-left: 0;
+            padding-right: 0;
+
+            .table_title {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                padding-left: 16px;
+                padding-right: 16px;
+                font-size: 1.25rem;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                color: var(--cold9e);
+
+                .unit {
+                    font-size: 10px;
+                    letter-spacing: -0.25px;
+                    color: $col7f8;
+                }
+            }
+
+            .scroll_table_wrap {
+                margin-top: 15px;
+
+                .scroll_table {
+                    width: 100%;
+                    overflow: auto;
+                    overflow-y: hidden;
+                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+
+                    .table_data {
+                        width: 100%;
+                        margin-top: 15px;
+
+                        tr.tr_emphasis {
+
+                            th,
+                            td {
+                                background-color: var(--col1f3);
+                            }
+
+                            td:first-child {
+                                color: var(--cold9e);
+                            }
+                        }
+
+                        th,
+                        td {
+                            padding: 8px 10px;
+                            font-size: $font14;
+                            letter-spacing: 0;
+                            text-align: center;
+                            color: var(--cold9e);
+                            background-color: var(--colbar);
+                            border-bottom: 1px solid var(--col324);
+                        }
+
+                        th {
+                            font-size: $font14;
+                            font-weight: normal;
+                            letter-spacing: 0;
+
+                            span {
+                                color: $col7f8;
+                            }
+
+                            &:first-child {
+                                position: sticky;
+                                left: 0;
+                            }
+                        }
+
+                        td {
+                            &:first-child {
+                                position: sticky;
+                                left: 0;
+                                padding-left: 16px;
+                                padding-right: 20px;
+                                width: 120px;
+                                box-sizing: border-box;
+                                font-size: $font14;
+                                letter-spacing: 0;
+                                text-align: left;
+                                color: $col7f8;
+
+                                &::after {
+                                    content: '';
+                                    display: inline-block;
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    width: 1px;
+                                    height: 100%;
+                                    background-color: var(--col324);
+                                }
+
+                                &::before {
+                                    content: '';
+                                    display: inline-block;
+                                    position: absolute;
+                                    left: 0;
+                                    right: 0;
+                                    bottom: -1px;
+                                    border-bottom: none;
+                                    width: 100%;
+                                    height: 1px;
+                                    background-color: var(--col324);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .scroll_table_wrap .table_guide {
+                padding-left: 16px;
+                padding-right: 16px;
+                padding-bottom: 50px;
+                font-size: $font12;
+                text-align: right;
+                letter-spacing: -0.38px;
+                color: $col7f8;
+            }
+
+            .financecachart_area {
+                .tabs_list {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 8px;
+                    padding-bottom: 5px;
+                    padding-right: 16px;
+
+                    li {
+                        cursor: pointer;
+                        position: relative;
+                        font-size: $font13;
+                        font-weight: normal;
+                        letter-spacing: -0.3px;
+                        color: $col7f8;
+
+                        &.active {
+                            color: $colpry;
+                            font-weight: $f_sizeB;
+                        }
+
+                        &::after {
+                            content: "";
+                            display: inline-block;
+                            width: 1px;
+                            height: 10px;
+                            margin-left: 8px;
+                            background-color: #4e565e;
+                        }
+
+                        &:last-child::after {
+                            display: none;
+                        }
+                    }
+                }
+
+                .chart_area {
+                    display: flex;
+                    gap: 15px 0;
+                    flex-direction: column;
+                    padding-bottom: 50px;
+
+                    .box {
+                        padding: 15px 0;
+
+                        .title {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+                            padding-left: 16px;
+                            padding-right: 16px;
+                            font-size: 1.25rem;
+                            font-weight: 700;
+                            letter-spacing: -0.5px;
+                            color: var(--cold9e);
+
+                            .unit {
+                                font-size: 10px;
+                                letter-spacing: -0.25px;
+                                color: $col7f8;
+                            }
+                        }
+
+                        .summary {
+                            position: relative;
+                            margin-top: 50px;
+                            padding: 18px 16px;
+                            background-color: var(--col343);
+
+                            .view_box {
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: flex-end;
+                            }
+
+                            p {
+                                font-size: $font14;
+                                color: var(--cold9e);
+                                min-width: calc(100% - 40px);
+                                word-wrap: break-word;
+                                word-break: break-all;
+                            }
+
+                            &.active {
+                                p {
+                                    overflow: hidden;
+                                    white-space: normal;
+                                    text-overflow: ellipsis;
+                                    display: -webkit-box !important;
+                                    -webkit-line-clamp: 2;
+                                    -webkit-box-orient: vertical;
+                                }
+
+                                .link_btn span::after {
+                                    transform: rotate(135deg);
+                                }
+                            }
+
+                            .link_btn {
+                                display: inline-block;
+                                margin-top: 15px;
+
+                                span {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    padding: 5px 9px;
+                                    font-size: 10px;
+                                    font-weight: normal;
+                                    line-height: 1.3;
+                                    letter-spacing: -0.5px;
+                                    color: var(--cold9e);
+                                    border-radius: 10px;
+                                    background-color: var(--col1f3);
+
+                                    &::after {
+                                        @include go_back;
+                                        width: 4px;
+                                        height: 4px;
+                                        transform: rotate(-45deg);
+                                        border-color: var(--coldae);
+                                    }
+                                }
+                            }
+                        }
+
+                        .containerfinance1 {
+                            margin-top: 20px;
+                            height: 300px;
+
+                            rect.highcharts-point {
+                                stroke-width: 0;
+                            }
+
+                            .highcharts-legend-box {
+                                fill: rgba(255, 255, 255, 0.25);
+                            }
+
+                            .highcharts-grid-line {
+                                stroke: rgb(230, 230, 230) !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 배당
+        .alloca_wrap {
+            padding-top: 23px;
+
+            &.na_box {
+                .title {
+                    display: inline-block;
+                    padding-left: 15px;
+                }
+            }
+
+            .alloca_star {
+                // border-bottom:1px solid #E0E4E9;
+                // padding-bottom:20px;
+
+                .charm_num {
+                    margin-top: 5px;
+                    font-size: 28px;
+                    letter-spacing: normal;
+                    text-align: center;
+                    color: var(--cold9e);
+
+                    strong {
+                        color: var(--colfff);
+                        font-size: 32px;
+                        font-weight: bold;
+                    }
+                }
+
+                .title {
+                    font-size: $font15;
+                    font-weight: bold;
+                    text-align: center;
+                    color: var(--colfff);
+                }
+
+                .star_ranking {
+                    color: var(--cold9e);
+                    font-size: $font12;
+                    margin-top: 13px;
+                    text-align: center;
+
+                    a {
+                        font-size: $font12;
+                        letter-spacing: normal;
+                        text-align: center;
+                        color: var(--cold9e);
+                        border-bottom: 1px dotted #85929e;
+                        padding-bottom: 2px;
+                        padding-right: 10px;
+                        position: relative;
+
+                        &::after {
+                            content: "";
+                            width: 4px;
+                            height: 4px;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            top: -1px;
+                            right: 0;
+                            left: auto;
+                            display: inline-block;
+                            border-top: 1px solid var(--colfff);
+                            border-right: 1px solid var(--colfff);
+                            transform: rotate(45deg);
+                        }
+                    }
+                }
+
+                .star_area {
+                    margin-top: 25px;
+                    text-align: center;
+                    display: inline-block;
+                    width: 100%;
+                    box-sizing: border-box;
+
+                    .starRev {
+                        margin-bottom: 10px;
+
+                        .starR {
+                            background-position: -45px 0;
+                            background-size: auto 30px;
+                            width: 30px;
+                            height: 30px;
+
+                            &.on {
+                                background-position: 0 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .alloca_info {
+                .info {
+                    border-top: 1px solid var(--col324);
+                    border-bottom: 1px solid var(--col324);
+                    margin: 20px auto 0;
+                    padding: 20px 10px;
+                    width: calc(100% - 30px);
+                    box-sizing: border-box;
+
+                    p {
+                        font-size: $font13;
+                        line-height: 1.64;
+                        letter-spacing: normal;
+                        color: var(--cold9e);
+                    }
+                }
+
+                .term {
+                    margin-bottom: 20px;
+                    padding: 40px 15px 0;
+                    color: var(--cold9e);
+                    text-align: center;
+                    font-size: $font15;
+                    line-height: normal;
+
+                    strong {
+                        color: var(--col326);
+                    }
+                }
+
+                .alloca_starArea {
+                    // background: #f6f7fa;
+                    // border-radius: 10px;
+                    padding: 0 20px;
+                    width: calc(100% - 20%);
+                    box-sizing: border-box;
+                    margin: 20px auto 0;
+
+                    .tableRanking.table_alloca {
+                        margin: 0 auto;
+                        width: 100%;
+
+                        tr {
+                            border-bottom: 1px solid var(--col324);
+
+                            &:last-child {
+                                border-bottom: none;
+                            }
+                        }
+
+                        td {
+                            padding: 8px 5px;
+                            vertical-align: top;
+                        }
+
+                        .title {
+                            span {
+                                font-size: $font13;
+                                color: var(--colfff);
+                            }
+                        }
+
+                        .star_area {
+                            padding-top: 2px;
+                        }
+
+                        .star_area .starRev {
+                            text-align: right;
+                        }
+
+                        .num {
+                            span {
+                                font-size: $font12;
+                                letter-spacing: normal;
+                                color: var(--cold9e);
+                            }
+                        }
+                    }
+                }
+
+                .table_area {
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: flex-start;
+                    border-radius: 16px;
+                    background-color: var(--col1f3);
+                    margin: 0 15px;
+                    padding: 5px 1%;
+                    box-sizing: border-box;
+
+                    .tableRanking.table_alloca {
+                        flex: 1;
+                        border-top: none;
+                        margin: 3px 0;
+                        border-bottom: none;
+                        vertical-align: top;
+
+                        &:last-child {
+                            margin-left: 8px;
+                        }
+                    }
+
+                    .tableRanking.table_alloca tr {
+                        border-bottom: 1px solid var(--col324);
+
+                        &:last-child {
+                            border-bottom: 0;
+                        }
+                    }
+
+                    .tableRanking.table_alloca th,
+                    .tableRanking.table_alloca td {
+                        padding: 10px 5px;
+                    }
+
+                    .tableRanking.table_alloca th {
+                        font-size: $font13;
+                        font-weight: normal;
+                        color: var(--cold9e);
+                        text-align: left;
+                    }
+
+                    .tableRanking.table_alloca td {
+                        font-size: $font15;
+                        font-weight: normal;
+                        letter-spacing: normal;
+                        text-align: right;
+                        color: var(--colfff);
+
+                        b {
+                            color: var(--colfff);
+                            font-weight: 300;
+                        }
+                    }
+                }
+
+                .allocachart_area {
+                    margin-top: 30px;
+                    padding: 0 15px;
+
+                    .title {
+                        border-bottom: 1px solid var(--col324);
+                        color: var(--colfff);
+                        margin-top: 15px;
+                        padding-bottom: 8px;
+                        font-size: $font15;
+                    }
+
+                    .title .unit {
+                        float: right;
+                        color: var(--cold9e);
+                        font-size: 11px;
+                        font-weight: normal;
+                        margin-top: 4px;
+                    }
+
+                    .containeralloca1 {
+                        margin: 10px 0;
+                        height: 240px;
+
+                        .highcharts-axis-labels text {
+                            font-family: $default-fontfamily;
+                            font-weight: 300;
+                            font-size: 11px;
+                            fill: rgb(102, 102, 102) !important;
+                        }
+
+                        rect.highcharts-color-0 {
+                            fill: var(--col326) !important;
+                            background: var(--col326) !important;
+                            stroke-width: 0;
+                        }
+
+                        .highcharts-label.highcharts-data-label text {
+                            font-size: 10px !important;
+                            color: var(--col7f8) !important;
+                            fill: var(--col7f8) !important;
+                            text-shadow: none;
+                            stroke-width: 0;
+                        }
+
+                        .highcharts-text-outline {
+                            stroke-width: 0px;
+                        }
+
+                        .highcharts-plot-line {
+                            stroke: rgb(204, 214, 235);
+                        }
+                    }
+
+                    .containeralloca1 .highcharts-data-label:nth-child(8),
+                    .containeralloca1 .highcharts-data-label:nth-child(9),
+                    .containeralloca1 .highcharts-data-label:nth-child(10) {
+                        opacity: 1;
+                    }
+
+                    .containeralloca1 .highcharts-data-label:nth-child(9) {
+                        position: relative;
+                        top: -10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .premiumLock_cunt {
+        width: calc(100% - 32px);
+        margin: 0 auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.76);
+        border: solid 1px var(--col6AA);
+        background-color: var(--col326);
+        position: sticky;
+        bottom: 15px;
+
+        .transbox {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 10px;
+
+            .free_title {
+                font-size: $font15;
+                font-weight: normal;
+                letter-spacing: -0.38px;
+                color: $colfff;
+
+                b {
+                    font-weight: $f_sizeB;
+                    color: $colfff;
+                }
+
+                span {
+                    opacity: 0.85;
+                    color: $colfff;
+                }
+            }
+
+            .more {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 5px 9px;
+                border-radius: 10px;
+                background-color: var(--col1f3);
+                font-size: 10px;
+                font-weight: normal;
+                line-height: 1.3;
+                letter-spacing: -0.5px;
+                text-align: center;
+                color: var(--colfff);
+
+                &::after {
+                    @include go_back;
+                    width: 4px;
+                    height: 4px;
+                    transform: rotate(45deg);
+                    border-color: var(--coldae);
+                }
+            }
+        }
+
+        &.slideUp {
+            animation: fadeIn 0.1s, slideIn .6s linear;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(400px);
+                animation-timing-function: ease-out;
+            }
+
+            60% {
+                transform: translateY(-30px);
+                animation-timing-function: ease-in;
+            }
+
+            80% {
+                transform: translateY(10px);
+                animation-timing-function: ease-out;
+            }
+
+            100% {
+                transform: translateY(0px);
+                animation-timing-function: ease-in;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+    }
+
+}

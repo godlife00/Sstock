@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer="" src="https://code.highcharts.com/stock/10.0/highstock.js"></script>
+	<script defer="" src="https://code.highcharts.com/stock/10.0/modules/series-label.js"></script>
+	<script defer="" src="https://code.highcharts.com/stock/10.0/modules/data.js"></script>
+	<script defer="" src="https://code.highcharts.com/stock/10.0/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper('.maingameSwiper', {
+				autoHeight: true,
+				slidesPerView: "auto",
+				pagination: {
+					el: ".swiper-pagination",
+				},
+			});
+
+			//재무제표 연간,분기 탭메뉴			
+			$('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(1)').on('click', function () {
+				$(this).parent('div').children('span').removeClass("active");
+				$("ul.tabs li").removeClass("active");
+				$(this).addClass("active");
+				$(".tableetabs_wrap .tabletabs_content").hide();
+				$('.tabletabs_content.tabs_01').fadeIn();
+			});
+
+			$('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(2)').on('click', function () {
+				$(this).parent('div').children('span').removeClass("active");
+				$("ul.tabs li").removeClass("active");
+				$(this).addClass("active");
+				$(".tableetabs_wrap .tabletabs_content").hide();
+				$('.tabletabs_content.tabs_02').fadeIn();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="wrapper" id="topwrpperID">
+
+		<!--헤더/gnb 영역-->
+		<div class="top-wrap">
+
+			<!--헤더-->
+			<!-- 191111 검색기능 추가 -->
+			<div class="rcv">
+				<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+				<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+				<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+					<input type="hidden" id="seCode" name="cn" value="">
+					<fieldset>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png" alt="검색"
+								class="searchBtn"></a>
+					</fieldset>
+				</form>
+				<div style="display: none;" id="schdispDIV" class="ly_rcv">
+					<ul id="schdispUL" class="lst_ctt">
+					</ul>
+					<div class="sch_clse">
+						<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+					</div>
+				</div>
+			</div>
+			<!-- // 191111 검색기능 추가 끝 -->
+
+			<!--메뉴-->
+			<div id="menu">
+				<nav class="gnb">
+					<ul class="gnb_li">
+						<li><a href="tsst_p23.html" title="HOME">HOME</a></li>
+						<li><a href="tsst_p26_1.html" class="on" title="종목추천">종목추천</a></li>
+						<li><a href="tsst_p28_1.html" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+						<li><a href="tsst_p30_1.html" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+						<li><a href="#" title="투자점수">투자점수</a></li>
+						<li style="padding-right: 30px;"><a href="#" title="업종/테마">업종/테마</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<!--2depth 메뉴-->
+			<div class="sub_menu">
+				<nav class="nav">
+					<h2><span class="item">우량주 종목분석</span></h2>
+					<button class="btn_back" type="button" onclick="history.back();"> <span>뒤로</span> </button>
+				</nav>
+			</div>
+		</div>
+		<div id="ss_wrap" class="tsst_ver">
+			<div class="cont_top_wrap">
+				<div style="position: relative;">
+					<div class="item">
+						<p class="logo"><a href="/stockbot/search.php?sn=122900"><img
+									src="https://kimg.choicestock.co.kr/img/logo/122900.jpg" alt="회사로고"
+									onerror='this.src="../img/common//empty_logo.jpg";' /></a></p>
+						<p class="name" style="width: 150px;"><a href="/stockbot/search.php?sn=122900">아이마켓코리아</a></p>
+					</div>
+					<p class="type"><a href="/stockbot/ss_blist.php?nst=1"><img src="../img/cont/ico_txt_blue_chip.png"
+								alt="우량주" /></a>
+					</p>
+					<p class="desc">음악 콘텐츠를 제작 및 서비스하는 회사로 레이블(Label) 영역, 솔루션(Solution) 영역, 플랫폼(Platform) 영역으로 나눠져 있습니다.
+					</p>
+				</div>
+				<div class="tbl_wrap02">
+					<table cellpadding="0" cellspacing="0" class="tbl_analysis">
+						<colgroup>
+							<col width="25%" />
+							<col width="25%" />
+							<col width="25%" />
+							<!-- <col width="25%" /> -->
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="th01"><img src="../img/cont/add/txt_analysis_tbl_01.png" class="pdl_10"
+										alt="투자의견" />
+								</th>
+								<th class="th02"><img src="../img/cont/add/txt_analysis_tbl_02.png" class="pdl_10"
+										alt="목표가" />
+								</th>
+								<th class="th03"><img src="../img/cont/add/txt_target_tbl_01.png" class="pdl_10"
+										alt="추천가" />
+								</th>
+								<!-- <th class="th04"><img src="../img/cont/add/txt_analysis_tbl_04.png" style="height: 17px;"
+										class="pdl_15" alt="기대수익률" /></th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="td04 txt" style="font-size:18px;">매수</td>
+								<td class="td02"><span class=" price2">14,500</span><span class="mgr_5">원</span></td>
+								<td class="td03"><span class=" price2">11,500</span><span class="mgr_5">원</span></td>
+								<!-- <td class="td04 txt nonebg"><span class="f22 increase">26.0</span><span>%</span></td> -->
+							</tr>
+							<tr>
+								<th class="th05" colspan=2><img src="../img/cont/add/txt_recommend_tbl_add1.png"
+										class="pdl_10" alt="상승시 분할 매도가" /></th>
+								<th class="th06" colspan=2><img src="../img/cont/add/txt_recommend_tbl_add2.png"
+										class="pdl_10" alt="하락시 손절 매도가" /></th>
+							</tr>
+							<tr>
+								<td class="td05 txt" colspan=2><span class=" price2"
+										style=" font-size: 16px;">14,000</span><span class="mgr_5">원</span> ~ <span
+										class=" price2" style=" font-size: 16px;">15,000</span><span
+										class="mgr_5">원</span></td>
+								<td class="td06 txt nonebg" colspan=2 style=" font-size: 17px; font-weight: bold; ">
+									10,700</span><span class="mgr_5" style="font-size:13px;">원</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--신규매수, 비중확대 하단 컨텐츠-->
+			<div class="inbox score_wrap">
+				<h5><img src="../img/cont/h4_tit_01.png" alt="종합 분석 결과"></h5>
+				<p class="total_score"
+					style="background:url('/img/index/img_score_flag2.png') no-repeat scroll 10px 0 / 115px auto">
+					<span class="score" style="margin-left:55px;">71</span><span class="txt">점</span>
+				</p>
+				<ul class="instrument_wrap">
+					<li>
+						<p class="tit"><img alt="수급분석" src="../img/cont/txt_score_type3.png"></p>
+						<img class="img_instrument" src="../img/cont/score/img_score_instrument_072.png">
+						<p class="score"><span>72</span>점</p>
+					</li>
+					<li>
+						<p class="tit"><img alt="밸류에이션" src="../img/cont/txt_score_type2.png"></p>
+						<img class="img_instrument" src="../img/cont/score/img_score_instrument_080.png">
+						<p class="score"><span>80</span>점</p>
+					</li>
+					<li>
+						<p class="tit"><img alt="펀더멘탈" src="../img/cont/txt_score_type1.png"></p>
+						<img class="img_instrument" src="../img/cont/score/img_score_instrument_062.png">
+						<p class="score"><span>62</span>점</p>
+					</li>
+				</ul>
+				<p class="clear"
+					style="background-color: #eee; margin:10px 5px 0 ; padding: 10px 0; text-align: center;">
+					<img src="../img/cont/txt_search_bot_info.png" alt="종합점수(100점 만점) = 기업분석 + 수급분석"
+						style="height:18px; ">
+				</p>
+			</div>
+
+
+
+			<div class="cont_bottom_wrap">
+				<!--타이틀-->
+				<div class="inbox" style="padding-top: 17px">
+					<div class="tit_wrap"> 아이마켓코리아, ‘실적 개선 & 배당 매력’ </div>
+				</div>
+
+				<!--투자포인트-->
+				<div class="inbox">
+					<h5><img src="../img/cont/h4_tit_02.png?pp=001" alt="투자 포인트" /></h5>
+					<ul class="investment_point">
+						<li>2016년 4분기 연결 실적: 매출액 1조800억원(전년 동기비 +24%), 영업이익 237억원(+89%), 순이익(지배) 72억원(+4%) ※
+							매출액과 영업이익, 시장 컨센서스(최근 1개월간 추정치 평균)를 각각 15%와 90% 상회</li>
+						<li>PBR 1.08배로 5년 평균 대비 -56% ※ 2016년 말 순현금자산 984억원(현재 시총의 24%) ※ 순현금자산 = 현금및현금성자산 +
+							단기금융자산 - 총 금융부채</li>
+						<li>2016년 주당배당금(450원) 기준 시가배당률 3.93%..국고채 3년물 시장금리(1.68%)의 2.3배</li>
+						<li>외국인, 기관 동반 매수..1개월 순매수량: 외국인 +20.8만주(지분 0.6%), 기관 +12.3만주(0.3%)</li>
+					</ul>
+				</div>
+
+
+
+				<!--주요 투자지표-->
+				<div class="inbox ofh">
+					<h5><img src="../img/cont/h4_tit_03.png?pp=001" alt="주요 투자지표" /></h5>
+					<ul class="total_info">
+						<li>
+							<p class="title">EPS<span>주당순이익</span></p>
+							<p class="data"><span>720</span>원</p>
+						</li>
+						<li>
+							<p class="title">BPS<span>주당순자산</span></p>
+							<p class="data"><span>10,664</span>원</p>
+						</li>
+						<li>
+							<p class="title">시가배당률<span></span></p>
+							<p class="data"><span>1.98%</span></p>
+						</li>
+						<li>
+							<p class="title">PER<br />
+								<span>주가수익배수</span>
+							</p>
+							<p class="data"><span>15.90</span>배</p>
+						</li>
+						<li>
+							<p class="title">PBR<br />
+								<span>주가순자산배수</span>
+							</p>
+							<p class="data"><span>1.07</span>배</p>
+						</li>
+						<li>
+							<p class="title">ROE<br />
+								<span>자기자본이익률</span>
+							</p>
+							<p class="data"><span>6.75%</span></p>
+						</li>
+					</ul>
+				</div>
+
+				<!-- 25.02.25 AI주가예측, 수급분석 추가 -->
+				<div class="cont_wrap">
+					<div class="주가차트">
+						<div class="summary_Box">
+							<div class="오른쪽차트영역">
+								<div class="박스레이아웃 AI주가예측">
+									<div class="box">
+										<h2 class="title">실시간 AI주가예측</h2>
+										<span class="day">02.25 ~ 03.11</span>
+										<span class="txt_guide"><img src="../img/txt_guide.svg" alt="실시간 AI주가예측"></span>
+										<div class="tooltip">
+											<strong class="t_title">실시간 AI주가예측</strong>
+											<span class="clse_tooltip">닫기</span>
+											<br>
+											<p class="t_txt">
+												인공지능 AI가 향후 10일 간 미래주가를 예측해 알려 드립니다. <br>
+												예상주가는 당일 현재가를 반영해 한 시간 단위로 실시간 업데이트 됩니다.
+												빅 데이터 분석과 주가 예측 알고리즘, ARIMA모델을 활용해 계산합니다. <br>
+												주가추세는 상승 - 하락 으로 표시되며, 기간 상승률은 10일간의 주가변동률을 표시합니다
+											</p>
+										</div>
+									</div>
+									<script>
+										var ai_data = [57700, 58200, 57900, 58300, 58300, 58600, 58900, 59100, 59000, 59500];
+										var ai_date = ['02.25', '02.26', '02.27', '02.28', '03.04', '03.05', '03.06', '03.07', '03.10', '03.11',];
+										var ai_yap = "Y";
+
+										// 툴팁
+										$(".txt_guide").click(function (e) {
+											e.stopPropagation();
+											$(this).siblings(".tooltip").toggle();
+										});
+										$(".clse_tooltip").click(function (e) {
+											e.stopPropagation();
+											$(this).parent().toggle();
+										});
+									</script>
+									<div id="sum_topchart_band" class="chart_layout" data-highcharts-chart="0"
+										style="overflow: hidden;">
+										<div id="highcharts-xsi448j-0" dir="ltr" class="highcharts-container "
+											style="position: relative; overflow: hidden; width: 383px; height: 100px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none; touch-action: manipulation; outline: none;">
+											<svg version="1.1" class="highcharts-root"
+												style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 12px;"
+												xmlns="http://www.w3.org/2000/svg" width="383" height="100"
+												viewBox="0 0 383 100">
+												<desc>Created with Highcharts 10.0.0</desc>
+												<defs>
+													<clipPath id="highcharts-xsi448j-1-">
+														<rect x="0" y="0" width="383" height="100" fill="none"></rect>
+													</clipPath>
+													<clipPath id="highcharts-xsi448j-12-">
+														<rect x="0" y="0" width="383" height="100" fill="none"></rect>
+													</clipPath>
+												</defs>
+												<rect fill="none" class="highcharts-background" x="0" y="0" width="383"
+													height="100" rx="0" ry="0"></rect>
+												<rect fill="none" class="highcharts-plot-background" x="0" y="0"
+													width="383" height="100"></rect>
+												<g class="highcharts-grid highcharts-xaxis-grid" data-z-index="1">
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 37.5 0 L 37.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 191.5 0 L 191.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 344.5 0 L 344.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 76.5 0 L 76.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 114.5 0 L 114.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 152.5 0 L 152.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 229.5 0 L 229.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 267.5 0 L 267.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 305.5 0 L 305.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 382.5 0 L 382.5 100"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M -0.5 0 L -0.5 100"
+														opacity="1">
+													</path>
+												</g>
+												<g class="highcharts-grid highcharts-yaxis-grid" data-z-index="1">
+													<path fill="none" stroke="#e6e6e6" stroke-width="1"
+														stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 0 67.5 L 383 67.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke="#e6e6e6" stroke-width="1"
+														stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 0 -0.5 L 383 -0.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke="#e6e6e6" stroke-width="1"
+														stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 0 100.5 L 383 100.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke="#e6e6e6" stroke-width="1"
+														stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 0 33.5 L 383 33.5"
+														opacity="1">
+													</path>
+												</g>
+												<rect fill="none" class="highcharts-plot-border" data-z-index="1" x="0"
+													y="0" width="383" height="100"></rect>
+												<g class="highcharts-axis highcharts-xaxis" data-z-index="2">
+													<path fill="none" class="highcharts-axis-line" stroke="#ccd6eb"
+														stroke-width="1" data-z-index="7" d="M 0 100.5 L 383 100.5">
+													</path>
+												</g>
+												<g class="highcharts-axis highcharts-yaxis" data-z-index="2"><text
+														x="-47.9111328125" data-z-index="7" text-anchor="middle"
+														transform="translate(0,0) rotate(270 -47.9111328125 50)"
+														class="highcharts-axis-title"
+														style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+														y="50">Values</text>
+													<path fill="none" class="highcharts-axis-line" data-z-index="7"
+														d="M 0 0 L 0 100"></path>
+												</g>
+												<g class="highcharts-series-group" data-z-index="3">
+													<g class="highcharts-series highcharts-series-1 highcharts-line-series"
+														data-z-index="0.1" opacity="1"
+														transform="translate(0,0) scale(1 1)"
+														clip-path="url(#highcharts-xsi448j-12-)">
+														<path fill="none"
+															d="M 19.15 75.515151515151 L 57.45 69.474747474747 L 95.75 63.434343434343 L 134.05 57.393939393939 L 172.35 51.353535353535 L 210.65 45.313131313131 L 248.95 39.272727272727 L 287.25 33.232323232323 L 325.55 27.191919191919 L 363.85 21.151515151515"
+															class="highcharts-graph" data-z-index="1" stroke="#dbdfed"
+															stroke-width="2" stroke-linejoin="round"
+															stroke-linecap="round">
+														</path>
+													</g>
+													<g class="highcharts-markers highcharts-series-1 highcharts-line-series"
+														data-z-index="0.1" opacity="1"
+														transform="translate(0,0) scale(1 1)" clip-path="none"></g>
+													<g class="highcharts-series highcharts-series-0 highcharts-spline-series highcharts-color-0"
+														data-z-index="3" opacity="1"
+														transform="translate(0,0) scale(1 1)"
+														clip-path="url(#highcharts-xsi448j-12-)">
+														<path fill="none"
+															d="M 19.15 76.666666666667 C 19.15 76.666666666667 42.13000000000001 60 57.45 60 C 72.77000000000001 60 80.42999999999999 70 95.75 70 C 111.07000000000001 70 118.73000000000002 56.666666666667 134.05 56.666666666667 C 149.37 56.666666666667 157.03 56.666666666667 172.35 56.666666666667 C 187.67 56.666666666667 195.33 50.666666666667 210.65 46.666666666667 C 225.96999999999997 42.666666666667 233.62999999999997 40.0000000000004 248.95 36.666666666667 C 264.27 33.3333333333336 271.93 30 287.25 30 C 302.57 30 310.23 33.333333333333 325.55 33.333333333333 C 340.87 33.333333333333 363.85 16.666666666667 363.85 16.666666666667"
+															class="highcharts-graph" data-z-index="1" stroke="#ff545b"
+															stroke-width="2" stroke-linejoin="round"
+															stroke-linecap="round">
+														</path>
+														<path fill="none"
+															d="M 19.15 76.666666666667 C 19.15 76.666666666667 42.13000000000001 60 57.45 60 C 72.77000000000001 60 80.42999999999999 70 95.75 70 C 111.07000000000001 70 118.73000000000002 56.666666666667 134.05 56.666666666667 C 149.37 56.666666666667 157.03 56.666666666667 172.35 56.666666666667 C 187.67 56.666666666667 195.33 50.666666666667 210.65 46.666666666667 C 225.96999999999997 42.666666666667 233.62999999999997 40.0000000000004 248.95 36.666666666667 C 264.27 33.3333333333336 271.93 30 287.25 30 C 302.57 30 310.23 33.333333333333 325.55 33.333333333333 C 340.87 33.333333333333 363.85 16.666666666667 363.85 16.666666666667"
+															visibility="visible" data-z-index="2"
+															class="highcharts-tracker-line" stroke-linecap="round"
+															stroke-linejoin="round" stroke="rgba(192,192,192,0.0001)"
+															stroke-width="52"></path>
+													</g>
+													<g class="highcharts-markers highcharts-series-0 highcharts-spline-series highcharts-color-0 highcharts-tracker"
+														data-z-index="3" opacity="1"
+														transform="translate(0,0) scale(1 1)" clip-path="none"></g>
+												</g>
+												<g class="highcharts-label highcharts-series-label highcharts-series-label-0 highcharts-color-0"
+													opacity="1" data-z-index="3" transform="translate(50,59)">
+													<path fill="none" class="highcharts-label-box" d="M 0 0"
+														stroke="#ff545b" stroke-width="1"></path><text x="0"
+														data-z-index="1" y="11"
+														style="color: rgb(255, 84, 91); font-weight: bold; fill: rgb(255, 84, 91);">예상주가</text>
+												</g>
+												<g class="highcharts-label highcharts-series-label highcharts-series-label-1 highcharts-color-none"
+													opacity="1" data-z-index="3" transform="translate(367,18)">
+													<path fill="none" class="highcharts-label-box" d="M 0 0"
+														stroke="#dbdfed" stroke-width="1"></path><text x="0"
+														data-z-index="1" y="11"
+														style="color: rgb(219, 223, 237); font-weight: bold; fill: rgb(219, 223, 237);">주가추세</text>
+												</g><text x="192" text-anchor="middle" class="highcharts-title"
+													data-z-index="4"
+													style="color: rgb(51, 51, 51); font-size: 18px; fill: rgb(51, 51, 51);"
+													y="24"></text><text x="192" text-anchor="middle"
+													class="highcharts-subtitle" data-z-index="4"
+													style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+													y="24"></text><text x="10" text-anchor="start"
+													class="highcharts-caption" data-z-index="4"
+													style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+													y="97"></text>
+												<g class="highcharts-data-labels highcharts-series-0 highcharts-spline-series highcharts-color-0 highcharts-tracker"
+													data-z-index="6" opacity="1" transform="translate(0,0) scale(1 1)">
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(339,-5)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(0, 0, 0); font-size: 11px; font-weight: bold; fill: rgb(0, 0, 0);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">59,500<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>59,500
+														</text></g>
+												</g>
+												<g class="highcharts-axis-labels highcharts-xaxis-labels"
+													data-z-index="7">
+													<text x="21.74272486435067" text-anchor="end"
+														transform="translate(0,0) rotate(-45 21.74272486435067 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">
+														<title>02.25</title>02.…
+													</text><text x="174.94272486435068" text-anchor="end"
+														transform="translate(0,0) rotate(-45 174.94272486435068 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">03.04</text><text x="328.14272486435067"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 328.14272486435067 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">03.10</text><text x="60.04272486435067"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 60.04272486435067 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">02.26</text><text x="98.34272486435069"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 98.34272486435069 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">02.27</text><text x="136.64272486435067"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 136.64272486435067 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">02.28</text><text x="213.2427248643507"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 213.2427248643507 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">03.05</text><text x="251.54272486435067"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 251.54272486435067 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">03.06</text><text x="289.84272486435066"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 289.84272486435066 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">03.07</text><text x="366.4427248643507"
+														text-anchor="end"
+														transform="translate(0,0) rotate(-45 366.4427248643507 116)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="116" opacity="1">03.11</text>
+												</g>
+												<g class="highcharts-axis-labels highcharts-yaxis-labels"
+													data-z-index="7">
+													<text x="-15" text-anchor="end" transform="translate(0,0)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="71" opacity="1">58k</text><text x="-15" text-anchor="end"
+														transform="translate(0,0)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="4" opacity="1">60k</text><text x="-15" text-anchor="end"
+														transform="translate(0,0)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="104" opacity="1">57k</text><text x="-15" text-anchor="end"
+														transform="translate(0,0)"
+														style="color: rgb(102, 102, 102); cursor: default; font-size: 11px; fill: rgb(102, 102, 102);"
+														y="37" opacity="1">59k</text>
+												</g>
+											</svg>
+										</div>
+									</div>
+									<div class="주가추세_기간상승률">
+										<div class="주가추세">
+											<h3 class="sub_title">주가추세</h3>
+											<span class="상승">상승</span>
+										</div>
+										<div class="기간상승률">
+											<h3 class="sub_title">기간 상승률</h3>
+											<span class="increase">+3.12%</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="수급분석">
+						<div class="box">
+							<h2 class="title">AI 수급분석</h2>
+							<div class="수급분석_신호">
+								<div class="시그널 매우약함" style="background-color: rgb(255, 84, 91);">매우약함</div>
+								<div class="시그널 약함" style="background-color: rgb(255, 84, 91);">약함</div>
+								<div class="시그널 보통" style="background-color: rgb(255, 84, 91);">보통</div>
+								<div class="시그널 강함" style="background-color: rgb(255, 84, 91);">강함</div>
+								<div class="시그널 매우강함 active" style="background-color: rgb(255, 84, 91);">매우강함</div>
+							</div>
+						</div>
+						<div class="box">
+							<p class="txt">외국인, 기관 투자자의 매매 동향과 주가 추세 데이터로 분석합니다.
+								<br>수급 신호는 매우약함-약함-보통-강함-매우강함의 단계로 신호가 강할수록 주가 상승 모멘텀이 좋습니다
+							</p>
+							<div class="chart_box">
+								<div>
+									<div id="supply_chart1" class="supplychart_style" data-highcharts-chart="1"
+										style="overflow: hidden;">
+										<div id="highcharts-l92mn64-25" dir="ltr" class="highcharts-container "
+											style="position: relative; overflow: hidden; width: 385px; height: 240px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none; touch-action: manipulation; outline: none;">
+											<svg version="1.1" class="highcharts-root"
+												style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 12px;"
+												xmlns="http://www.w3.org/2000/svg" width="385" height="240"
+												viewBox="0 0 385 240">
+												<desc>Created with Highcharts 10.0.0</desc>
+												<defs>
+													<clipPath id="highcharts-l92mn64-26-">
+														<rect x="0" y="0" width="365" height="185" fill="none"></rect>
+													</clipPath>
+													<clipPath id="highcharts-l92mn64-37-">
+														<rect x="0" y="0" width="365" height="185" fill="none"></rect>
+													</clipPath>
+												</defs>
+												<rect fill="none" class="highcharts-background" x="0" y="0" width="385"
+													height="240" rx="0" ry="0"></rect>
+												<rect fill="none" class="highcharts-plot-background" x="10" y="40"
+													width="365" height="185"></rect>
+												<g class="highcharts-plot-lines-0" data-z-index="0">
+													<path fill="none" class="highcharts-plot-line " stroke="#DBDFED"
+														stroke-width="1" d="M 10 179.5 L 375 179.5"></path>
+												</g>
+												<g class="highcharts-grid highcharts-xaxis-grid" data-z-index="1">
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 64.5 40 L 64.5 225"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 210.5 40 L 210.5 225"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 356.5 40 L 356.5 225"
+														opacity="1">
+													</path>
+												</g>
+												<g class="highcharts-grid highcharts-yaxis-grid" data-z-index="1">
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 225.5 L 375 225.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 179.5 L 375 179.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 133.5 L 375 133.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 86.5 L 375 86.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 40.5 L 375 40.5"
+														opacity="1">
+													</path>
+												</g>
+												<rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10"
+													y="40" width="365" height="185"></rect>
+												<g class="highcharts-axis highcharts-xaxis" data-z-index="2">
+													<path fill="none" class="highcharts-axis-line" stroke="#ccd6eb"
+														stroke-width="1" data-z-index="7" d="M 10 225.5 L 375 225.5">
+													</path>
+												</g>
+												<g class="highcharts-axis highcharts-yaxis" data-z-index="2">
+													<path fill="none" class="highcharts-axis-line" data-z-index="7"
+														d="M 10 40 L 10 225"></path>
+												</g>
+												<g class="highcharts-series-group" data-z-index="3">
+													<g class="highcharts-series highcharts-series-0 highcharts-column-series highcharts-color-0 highcharts-tracker"
+														data-z-index="0.1" opacity="1"
+														transform="translate(10,40) scale(1 1)"
+														clip-path="url(#highcharts-l92mn64-37-)">
+														<rect x="1.5" y="129.5" width="32" height="10" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="38.5" y="50.5" width="32" height="89" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="74.5" y="139.5" width="32" height="26" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="111.5" y="139.5" width="32" height="12" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="147.5" y="139.5" width="32" height="16" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="184.5" y="108.5" width="32" height="31" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="220.5" y="113.5" width="32" height="26" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="257.5" y="134.5" width="32" height="5" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="293.5" y="139.5" width="32" height="13" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="330.5" y="134.5" width="32" height="5" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+													</g>
+													<g class="highcharts-markers highcharts-series-0 highcharts-column-series highcharts-color-0"
+														data-z-index="0.1" opacity="1"
+														transform="translate(10,40) scale(1 1)" clip-path="none"></g>
+												</g><text x="10" text-anchor="start" class="highcharts-title"
+													data-z-index="4"
+													style="color: rgb(51, 51, 51); font-size: 18px; fill: rgb(51, 51, 51);"
+													y="24">외국인</text><text x="193" text-anchor="middle"
+													class="highcharts-subtitle" data-z-index="4"
+													style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+													y="39"></text><text x="10" text-anchor="start"
+													class="highcharts-caption" data-z-index="4"
+													style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+													y="237"></text>
+												<g class="highcharts-data-labels highcharts-series-0 highcharts-column-series highcharts-color-0 highcharts-tracker"
+													data-z-index="6" opacity="1"
+													transform="translate(10,40) scale(1 1)">
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(-7,106)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">40,037<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>40,037
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(27,27)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">381,647<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>381,647
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(60,166)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">-114,257<tspan x="5"
+																	y="16">&ZeroWidthSpace;
+																</tspan>
+															</tspan>-114,257
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 highcharts-data-label-hidden"
+														data-z-index="1" transform="translate(100,152)" opacity="0"
+														style="pointer-events: none;"><text x="5" data-z-index="1"
+															y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">-51,178<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>-51,178
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(136,156)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																-71,416<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>-71,416
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(173,85)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																133,144<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>133,144
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 highcharts-data-label-hidden"
+														data-z-index="1" transform="translate(209,90)" opacity="0"
+														style="pointer-events: none;"><text x="5" data-z-index="1"
+															y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																110,647<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>110,647
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(249,111)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																14,482<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>14,482
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(282,153)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																-56,217<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>-56,217
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(322,111)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																10,769<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>10,769
+														</text></g>
+												</g>
+												<g class="highcharts-axis-labels highcharts-xaxis-labels"
+													data-z-index="7">
+												</g>
+												<g class="highcharts-axis-labels highcharts-yaxis-labels"
+													data-z-index="7">
+												</g>
+											</svg>
+										</div>
+									</div>
+									<p class="차트설명주석">* 거래금액 : 백만원 | 비율 : 시가총액대비</p>
+								</div>
+								<div>
+									<div id="supply_chart2" class="supplychart_style" data-highcharts-chart="2"
+										style="overflow: hidden;">
+										<div id="highcharts-l92mn64-38" dir="ltr" class="highcharts-container "
+											style="position: relative; overflow: hidden; width: 385px; height: 240px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none; touch-action: manipulation; outline: none;">
+											<svg version="1.1" class="highcharts-root"
+												style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 12px;"
+												xmlns="http://www.w3.org/2000/svg" width="385" height="240"
+												viewBox="0 0 385 240">
+												<desc>Created with Highcharts 10.0.0</desc>
+												<defs>
+													<clipPath id="highcharts-l92mn64-39-">
+														<rect x="0" y="0" width="365" height="185" fill="none"></rect>
+													</clipPath>
+													<clipPath id="highcharts-l92mn64-50-">
+														<rect x="0" y="0" width="365" height="185" fill="none"></rect>
+													</clipPath>
+												</defs>
+												<rect fill="none" class="highcharts-background" x="0" y="0" width="385"
+													height="240" rx="0" ry="0"></rect>
+												<rect fill="none" class="highcharts-plot-background" x="10" y="40"
+													width="365" height="185"></rect>
+												<g class="highcharts-plot-lines-0" data-z-index="0">
+													<path fill="none" class="highcharts-plot-line " stroke="#DBDFED"
+														stroke-width="1" d="M 10 133.5 L 375 133.5"></path>
+												</g>
+												<g class="highcharts-grid highcharts-xaxis-grid" data-z-index="1">
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 64.5 40 L 64.5 225"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 210.5 40 L 210.5 225"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 356.5 40 L 356.5 225"
+														opacity="1">
+													</path>
+												</g>
+												<g class="highcharts-grid highcharts-yaxis-grid" data-z-index="1">
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 225.5 L 375 225.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 179.5 L 375 179.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 133.5 L 375 133.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 86.5 L 375 86.5"
+														opacity="1">
+													</path>
+													<path fill="none" stroke-dasharray="none" data-z-index="1"
+														class="highcharts-grid-line" d="M 10 40.5 L 375 40.5"
+														opacity="1">
+													</path>
+												</g>
+												<rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10"
+													y="40" width="365" height="185"></rect>
+												<g class="highcharts-axis highcharts-xaxis" data-z-index="2">
+													<path fill="none" class="highcharts-axis-line" stroke="#ccd6eb"
+														stroke-width="1" data-z-index="7" d="M 10 225.5 L 375 225.5">
+													</path>
+												</g>
+												<g class="highcharts-axis highcharts-yaxis" data-z-index="2">
+													<path fill="none" class="highcharts-axis-line" data-z-index="7"
+														d="M 10 40 L 10 225"></path>
+												</g>
+												<g class="highcharts-series-group" data-z-index="3">
+													<g class="highcharts-series highcharts-series-0 highcharts-column-series highcharts-color-0 highcharts-tracker"
+														data-z-index="0.1" opacity="1"
+														transform="translate(10,40) scale(1 1)"
+														clip-path="url(#highcharts-l92mn64-50-)">
+														<rect x="1.5" y="64.5" width="32" height="29" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="38.5" y="93.5" width="32" height="65" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="74.5" y="72.5" width="32" height="21" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="111.5" y="62.5" width="32" height="31" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="147.5" y="83.5" width="32" height="10" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="184.5" y="82.5" width="32" height="11" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="220.5" y="38.5" width="32" height="55" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-color-0"></rect>
+														<rect x="257.5" y="93.5" width="32" height="5" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="293.5" y="93.5" width="32" height="5" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+														<rect x="330.5" y="93.5" width="32" height="16" fill="#7cb5ec"
+															stroke="#ffffff" stroke-width="1" opacity="1"
+															class="highcharts-point highcharts-negative highcharts-color-0">
+														</rect>
+													</g>
+													<g class="highcharts-markers highcharts-series-0 highcharts-column-series highcharts-color-0"
+														data-z-index="0.1" opacity="1"
+														transform="translate(10,40) scale(1 1)" clip-path="none"></g>
+												</g><text x="10" text-anchor="start" class="highcharts-title"
+													data-z-index="4"
+													style="color: rgb(51, 51, 51); font-size: 18px; fill: rgb(51, 51, 51);"
+													y="24">기관</text><text x="193" text-anchor="middle"
+													class="highcharts-subtitle" data-z-index="4"
+													style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+													y="39"></text><text x="10" text-anchor="start"
+													class="highcharts-caption" data-z-index="4"
+													style="color: rgb(102, 102, 102); fill: rgb(102, 102, 102);"
+													y="237"></text>
+												<g class="highcharts-data-labels highcharts-series-0 highcharts-column-series highcharts-color-0 highcharts-tracker"
+													data-z-index="6" opacity="1"
+													transform="translate(10,40) scale(1 1)">
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(-10,41)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">151,465<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>151,465
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(24,159)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">-356,134<tspan x="5"
+																	y="16">&ZeroWidthSpace;
+																</tspan>
+															</tspan>-356,134
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 highcharts-data-label-hidden"
+														data-z-index="1" transform="translate(63,49)" opacity="0"
+														style="pointer-events: none;"><text x="5" data-z-index="1"
+															y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																108,353<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>108,353
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(100,39)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																163,619<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>163,619
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 highcharts-data-label-hidden"
+														data-z-index="1" transform="translate(139,60)" opacity="0"
+														style="pointer-events: none;"><text x="5" data-z-index="1"
+															y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">49,244<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>49,244
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(176,59)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																56,477<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>56,477
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(209,15)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																296,426<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>296,426
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(246,99)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round" style="">-16,938<tspan x="5"
+																	y="16">&ZeroWidthSpace;</tspan>
+															</tspan>-16,938
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0 highcharts-data-label-hidden"
+														data-z-index="1" transform="translate(282,99)" opacity="0"
+														style="pointer-events: none;"><text x="5" data-z-index="1"
+															y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																-26,376<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>-26,376
+														</text></g>
+													<g class="highcharts-label highcharts-data-label highcharts-data-label-color-0"
+														data-z-index="1" transform="translate(319,110)"><text x="5"
+															data-z-index="1" y="16"
+															style="color: rgb(147, 147, 147); font-size: 11px; font-weight: bold; fill: rgb(147, 147, 147);">
+															<tspan class="highcharts-text-outline" fill="#FFFFFF"
+																stroke="#FFFFFF" stroke-width="2px"
+																stroke-linejoin="round">
+																-89,755<tspan x="5" y="16">&ZeroWidthSpace;</tspan>
+															</tspan>-89,755
+														</text></g>
+												</g>
+												<g class="highcharts-axis-labels highcharts-xaxis-labels"
+													data-z-index="7">
+												</g>
+												<g class="highcharts-axis-labels highcharts-yaxis-labels"
+													data-z-index="7">
+												</g>
+											</svg>
+										</div>
+									</div>
+									<p class="차트설명주석">* 거래금액 : 백만원 | 비율 : 시가총액대비</p>
+								</div>
+							</div>
+						</div>
+						<script>
+							$(function () {
+								var supply_value1 = [{ x: 1739232000000, y: 40037, 비율: 0.01 }, { x: 1739318400000, y: 381647, 비율: 0.11 }, { x: 1739404800000, y: -114257, 비율: -0.03 }, { x: 1739491200000, y: -51178, 비율: -0.01 }, { x: 1739750400000, y: -71416, 비율: -0.02 }, { x: 1739836800000, y: 133144, 비율: 0.04 }, { x: 1739923200000, y: 110647, 비율: 0.03 }, { x: 1740009600000, y: 14482, 비율: 0.00 }, { x: 1740096000000, y: -56217, 비율: -0.02 }, { x: 1740355200000, y: 10769, 비율: 0.00 },];
+								var supply_value2 = [{ x: 1739232000000, y: 151465, 비율: 0.04 }, { x: 1739318400000, y: -356134, 비율: -0.10 }, { x: 1739404800000, y: 108353, 비율: 0.03 }, { x: 1739491200000, y: 163619, 비율: 0.05 }, { x: 1739750400000, y: 49244, 비율: 0.01 }, { x: 1739836800000, y: 56477, 비율: 0.02 }, { x: 1739923200000, y: 296426, 비율: 0.09 }, { x: 1740009600000, y: -16938, 비율: -0.00 }, { x: 1740096000000, y: -26376, 비율: -0.01 }, { x: 1740355200000, y: -89755, 비율: -0.03 },];
+								FiSdChart('supply_chart1', '외국인', supply_value1);
+								FiSdChart('supply_chart2', '기관', supply_value2);
+							});
+						</script>
+					</div>
+				</div>
+
+				<!--v차트 분석 (특허출원)-->
+				<div class="inbox">
+					<div class="bdr_title">
+						<h4 class="title">재무제표</h4>
+						<div class="tabs_menu">
+							<span class="active">연간</span>
+							<span>분기</span>
+							<strong class="unit">* 기준 : 억원</strong>
+						</div>
+						<!-- //tabs_menu -->
+					</div>
+
+					<div class="tableetabs_wrap">
+
+						<!-- 재무제표 > 연간 -->
+						<div class="tabletabs_content tabs_01" style="display: none;">
+							<div class="chart_box">
+								<div id="containerfinancials1_1" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>매출액</span></li>
+									<li><span><i></i>영업이익</span></li>
+									<li><span><i></i>지배순이익</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials1_2" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>자산총계</span></li>
+									<li><span><i></i>부채총계</span></li>
+									<li><span><i></i>자본총계</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials1_3" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>영업활동</span></li>
+									<li><span><i></i>투자활동</span></li>
+									<li><span><i></i>재무활동</span></li>
+								</ul>
+							</div>
+						</div>
+						<!-- //tabletabs_content -->
+
+						<!-- 재무제표 > 분기 -->
+						<div class="tabletabs_content tabs_02">
+							<div class="chart_box">
+								<div id="containerfinancials2_1" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>매출액</span></li>
+									<li><span><i></i>영업이익</span></li>
+									<li><span><i></i>지배순이익</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials2_2" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>자산총계</span></li>
+									<li><span><i></i>부채총계</span></li>
+									<li><span><i></i>자본총계</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials2_3" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>영업활동</span></li>
+									<li><span><i></i>투자활동</span></li>
+									<li><span><i></i>재무활동</span></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<!-- //tabletabs_wrap -->
+				</div>
+
+			</div>
+			<!-- //cont_bottom_wrap -->
+		</div>
+		<!-- //tsst_ver -->
+
+		<!--푸터-->
+		<footer id="footer">
+			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+			<div class="cs">
+				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+			</div>
+			<address>
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+				12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+				Hecto Innovation. All rights reserved.
+			</address>
+		</footer>
+	</div>
+</body>
+
+</html>

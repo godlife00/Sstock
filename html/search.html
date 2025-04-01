@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no" />
+    <title>마이크로소프트 (MSFT) - 매매신호 | 인베스팅 플러스 - 미국주식</title>
+    <meta name="robots" content="인베스팅 플러스 | 종목분석, 매매신호, 배당투자까지 미국주식 투자의 답을 알려드립니다.">
+    <meta name="description" content="인베스팅 플러스 | 종목분석, 매매신호, 배당투자까지 미국주식 투자의 답을 알려드립니다.">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: dark)">
+
+    <!-- 오픈 그래프 -->
+    <meta property="og:title" content="마이크로소프트 (MSFT) - 매매신호 | 인베스팅 플러스" />
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="미국주식, 종목분석, 종목토론, 매매신호, 적정주가, 배당주투자, 재무제표, 투자지표, 투자매력, 데이터히어로">
+    <!-- <meta property="og:image" content="http://godlife.ivyro.net/test/img/choicestockus_thumb.png"> -->
+    <meta property="og:image:width" content="410" />
+    <meta property="og:image:height" content="210" />
+    <meta property="og:url" content="url">
+    <!-- 파비콘 favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- highstock -->
+    <script src="http://godlife.ivyro.net/highcharts/stock/highstock.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/data.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/hollowcandlestick.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/no-data-to-display.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/treemap.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/highcharts-more.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/exporting.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/export-data.js"></script>
+    <script src="http://godlife.ivyro.net/highcharts/stock/modules/accessibility.js"></script>
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/scss/superStock_us.css?v=3222233" />
+    <!-- <link rel="canonical" href="현재주소"> canonical 는 스크립트 canonicalURL로 생성 -->
+    <!-- js -->
+    <!-- <script type="text/javascript" src="/js/add_design.js"></script> -->
+    <script src="../js/chart_dev_us.js?v=3"></script>
+    <!-- 이 아래는 로컬에서만 사용되는 파일 -->
+    <script src="../js/superstock_us.js?v=3"></script>
+    <!-- 로컬에서만 사용되는 파일 종료  -->
+</head>
+<!-- 달려라 미국주식 추가 된 파일
+     css/scss/superStock_us.css,
+     js/chart_dev_us.js
+     js/superstock_us.js
+-->
+<!-- 달려라 미국주식은 <body class="sstock_us"> -->
+
+<body class="sstock_us">
+    <div id="wrap">
+        
+        <div id="header" class="main_hdr">
+            <div id="menu">
+                <nav class="gnb">
+                    <ul class="gnb_li">
+                        <li><a href="tsst_p23.html" title="HOME">홈</a></li>
+                        <li><a href="/stock/portone" title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+                        <li><a href="/stock/recommend" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>                        
+                        <li><a href="/stock/score" title="투자점수">투자점수</a></li>
+                        <li><a href="/stock/theme" title="업종/테마">업종/테마</a></li>
+                        <li class="usa-stock"><a href="sstock_us.html"><i></i> 미국주식</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- //메인해더 main_hdr -->
+         
+        <div id="container">
+            <!-- 종목 검색 -->
+            <div class="mainBox searching search_page">
+                <!-- 검색 페이지에서는 기존 코드에 search_page 클래스 추가, 이하 동일 -->
+                <div class="main_searching">
+                    <!-- 종목명 검색창 -->
+                    <div class="searchArea">                        
+                        <a href="javascript:history.back();" class="go_back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12L19 12M5 12L12 5M5 12L12 19" stroke="#1F242B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <!--  들어가면 히스토리백  -->                        
+                        <form action="">
+                            <fieldset>
+                                <input type="text" placeholder="종목명 또는 심볼을 입력하세요." class="searchInput">
+                                <!-- <input type="text" placeholder="종목명 또는 심볼을 입력하세요." class="searchInput keydown"> -->
+                                <!-- 입력 시 keydown 추가 -->
+
+                                <input type="image" src="../img/us/hdr_sch.svg" alt="검색" class="searchBtn">
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- //종목명 검색창 -->
+
+                    <!-- 검색어 입력시 자동완성 -->
+                    <div class="sch_autocomplete">
+                        <!-- //자동완성 결과 노출 class : _show -->
+                        <!-- 검색결과 있을경우 -->
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <span class="schCode"><strong>Ap</strong>PL</span>
+                                    <span class="schList"><strong>Ap</strong>ple Inc 애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="_on">
+                                    <span class="schCode"><strong>Ap</strong></span>
+                                    <span class="schList">AmpcoPittsburgh Corporation 애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="_on">
+                                    <span class="schCode"><strong>Ap</strong>LT</span>
+                                    <span class="schList"><strong>Ap</strong>plied Ther<strong>ap</strong>eutics, Inc.
+                                        애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="schCode"><strong>Ap</strong>PL</span>
+                                    <span class="schList"><strong>Ap</strong>ple Inc 애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="_on">
+                                    <span class="schCode"><strong>Ap</strong></span>
+                                    <span class="schList">AmpcoPittsburgh Corporation 애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="_on">
+                                    <span class="schCode"><strong>Ap</strong>LT</span>
+                                    <span class="schList"><strong>Ap</strong>plied Ther<strong>ap</strong>eutics, Inc.
+                                        애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="schCode"><strong>Ap</strong>PL</span>
+                                    <span class="schList"><strong>Ap</strong>ple Inc 애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="_on">
+                                    <span class="schCode"><strong>Ap</strong></span>
+                                    <span class="schList">AmpcoPittsburgh Corporation 애플</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="_on">
+                                    <span class="schCode"><strong>Ap</strong>LT</span>
+                                    <span class="schList"><strong>Ap</strong>plied Ther<strong>ap</strong>eutics, Inc.
+                                        애플</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- 검색결과 없을경우 -->
+                        <div class="no_result">
+                            <p><strong>sdyfsd</strong>에 대한 검색결과가 없습니다.</p>
+                        </div>
+                        <!-- //no_result -->
+                    </div>
+                    <!-- //sch_autocomplete -->
+                </div>
+            </div>
+            <!-- //mainBox searching -->
+
+        </div>
+        <!-- //container -->
+
+        <!--푸터-->
+        <footer id="footer">
+            <p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+            <div class="cs">
+                <strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+            </div>
+            <address>
+                ㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+                12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+                Hecto Innovation. All rights reserved.
+            </address>
+        </footer>
+
+    </div>
+    <!-- //wrap -->
+</body>
+
+</html>

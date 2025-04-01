@@ -1,0 +1,40 @@
+// 알림
+#wrap #container.sub_alarm {    
+    .alarmArea {
+        padding: 35px 15px;	
+        .alarmList li {        
+            a {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 15px;
+                padding: 15px 0;          
+            }
+            span.title {
+                display:inline-block;                
+                font-size: $font15;
+                
+                color: var(--cold9e);
+            }
+            span.day {
+                width: 100%;
+                font-size: $font13;
+                
+                text-align: right;
+                color: var(--col7f8);
+            }
+            span.sum {
+                width: 100%;
+                font-size: $font13;            
+                line-height: 1.47;
+                            
+                color: var(--col7f8);
+                word-break: break-all;
+            }
+            span.sum span {
+                color: var(--col7f8);
+            }
+        }
+    }    
+    
+}

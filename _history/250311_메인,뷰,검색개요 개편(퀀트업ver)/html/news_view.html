@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no" />
+	<title>슈퍼스탁</title>
+	<meta name="robots" content="슈퍼스탁">
+	<meta name="description" content="슈퍼스탁.">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="#e57828">
+	<!-- 오픈 그래프 -->
+	<meta property="og:title" content="슈퍼스탁" />
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="슈퍼스탁">
+	<meta property="og:image" content="http://godlife.ivyro.net/SStokes/img/SStokes_thumb.png">
+	<meta property="og:image:width" content="410" />
+	<meta property="og:image:height" content="210" />
+	<meta property="og:url" content="">
+	<!-- 파비콘 favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<!-- jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<!-- highstock -->
+	<script defer src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/series-label.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/data.js"></script>
+	<script defer src="https://code.highcharts.com/stock/modules/hollowcandlestick.js"></script>
+	<script src="../css/ss_chartjs.js"></script>
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/t-sst.css" media="all" />
+	<!-- js -->
+	<script type="text/javascript" src="../css/add_design.js"></script>
+	<!-- //swiper -->
+	<script>
+		$(document).ready(function () {
+			var swiper = new Swiper('.maingameSwiper', {
+				autoHeight: true,
+				slidesPerView: "auto",
+				pagination: {
+					el: ".swiper-pagination",
+				},
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+	<body oncontextmenu="return false;">
+		<div class="wrapper" id="topwrpperID">
+			<!--헤더/gnb 영역-->
+			<div class="top-wrap">
+				<!--헤더-->
+
+				<!-- 191111 검색기능 추가 -->
+				<div class="rcv">
+					<button class="btn_hback" type="button"><span>페이지 뒤로가기</span> </button>
+					<button class="btn_thome" type="button"><span>검색결과 전체보기</span></button>
+					<form action="https://m.itooza.com/minsstockbot/search_itz.php" method="get" name="sch_form">
+						<input type="hidden" id="seCode" name="cn" value="">
+						<fieldset>
+							<input type="text" onkeydown="hitEnterKey(event);"
+								onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+								placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+								id="seName" name="sn" class="input_txt input_txt_fcs"
+								onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+								onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+							<span class="searchclear" style="display: none;"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/common/searchclear.png"
+									alt="검색어지우기"></span>
+							<a href="javascript:SearchIt(document.sch_form, '1');"
+								onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+									src="https://nimaqe002.commutil.kr/itoozamenu/stobot/mobile/images/sch_btn.png"
+									alt="검색" class="searchBtn"></a>
+						</fieldset>
+					</form>
+					<div style="display: none;" id="schdispDIV" class="ly_rcv">
+						<ul id="schdispUL" class="lst_ctt">
+						</ul>
+						<div class="sch_clse">
+							<span class="clse"><a href="javascript:ly_close();" style="cursor:hand;">닫기</a></span>
+						</div>
+					</div>
+				</div>
+				<!-- // 191111 검색기능 추가 끝 -->
+
+				<div id="menu">
+					<nav class="gnb">
+						<ul class="gnb_li">
+							<li><a href="https://m.itooza.com/minsstockbot/m_index.php" title="HOME">HOME</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_blist.php?nst=999" title="종목추천">종목추천</a>
+							</li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=1"
+									title="슈퍼스탁 1호">슈퍼스탁1호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/ss_portmng.php?no=2"
+									title="슈퍼스탁 2호">슈퍼스탁2호</a></li>
+							<li><a href="https://m.itooza.com/minsstockbot/m_invgood.php" title="투자점수">투자점수</a></li>
+							<li style="padding-right: 30px;"><a href="https://m.itooza.com/minsstockbot/ss_tmlist.php"
+									title="업종/테마">업종/테마</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<!--메뉴-->
+
+				<!--네비게이션-->
+				<div class="sub_menu">
+					<nav class="nav">
+						<h2><span class="item">스몰캡 종목 뉴스</span></h2>
+						<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
+					</nav>
+				</div>
+			</div>
+			<div id="ss_wrap">
+				<!--기사 영역-->
+				<div class="cont_wrap">
+					<div class="cont_header">
+						<div id="article-head">
+							<h1>[실적점검] 인탑스, '21. 4Q 영업이익 195억원.. PER 8배</h1>							
+						</div>
+						<div class="article-option">
+							<div id="btn_fontsize">
+								<a href="Javascript:resize(-0.1)" class="btn_font_s" title="작게">-</a>
+								<a href="Javascript:resize(0.1)" class="btn_font_b" title="크게">+</a>
+							</div>
+							<div class="article-info acover">
+								<div class="meta al">
+									<span class="date">03/22 21:50 </span><span class="author">| 데이터센터</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="article-body">
+						<div id="article">
+							[아이투자 데이터센터]<a href="/minsstockbot/search.php?sn=%EC%9D%B8%ED%83%91%EC%8A%A4"
+								style="color:blue;">인탑스</a>는 22일 사업보고서를 통해 '21년 4분기 매출액 2528억원(전년비 +6.2%), 영업이익
+							195억원(-37.6%), 순이익 134억원(-31.8%)을 각각 기록했다고 공시했다.<br><br>가치투자 포털 아이투자는 지난해 사업보고서를 바탕으로 지난 4분기
+							실적만을 추려내 전년 동기와 비교했다. 이번 4분기 실적을 반영한 PER은 8배로 나타났다.<br><img class="bodyaddimage"
+								src="https://menu.itooza.com/cmsupload/2022/03/22/20220322193619__0_fd_image_210_182_38__9214.png"
+								title="%EC%9D%B8%ED%83%91%EC%8A%A41.PNG%7C985%2C2181%7C20220322193619__0_fd_image_210_182_38__9214.png%7CC%7C2%7C"
+								style="width: 100%;"><br> <br><br>
+						</div>
+
+						<div id="article">
+							7일 배당락이 예정된 기업을 소개합니다<br>
+							<br>
+							<strong>1월 배당매력주</strong><br>
+							- <a href="https://www.choicestock.co.kr/stock/vod_view/194">배당 공격수 : 아폴로 커머셜 리얼이스테이트 파이낸스
+								(ARI)</a><br>
+							<strong>- 배당 미드필더 : 메디패스트 (MED)</strong><br>
+							- 배당 골키퍼 : 시티즌스 홀딩컴퍼니 (CIZN)<br>
+							<img alt=""
+								src="http://kapi.choicestock.co.kr/webdata/attach_data/explore/202112/1474d35824cd3801fb10bfccf91d38b3.jpg">
+							<strong>[배당 미드필더 주식의 특징]</strong>
+							<ul>
+								<li>플렉스 LNG(FLNG) : 주당배당금 0.75 달러, 배당수익률 8.95%</li>
+								<li>뉴몬트 골드코프(NEM) : 주당배당금 0.55 달러, 배당수익률 5.27%</li>
+							</ul>
+							<strong>볼드</strong><br>
+							<em>이텔릭</em><br>
+							<s>취소선</s><br>
+							&nbsp;
+							<ol>
+								<li>숫자목차</li>
+								<li>숫자목차</li>
+								<li>숫자목차</li>
+							</ol>
+						
+							<ul>
+								<li>숫자목차</li>
+								<li>숫자목차</li>
+								<li>숫자목차</li>
+							</ul>
+						
+							<p>&nbsp;</p>
+						
+							<blockquote>
+								<p>인용구처리인용구처리<br>
+									인용구처리<br>
+									인용구처리<br>
+									인용구처리</p>
+							</blockquote>
+						
+							<p>&nbsp;</p>
+						
+							<div style="background:#eeeeee;border:1px solid #cccccc;padding:5px 10px;">블록스타일</div>
+						
+						
+							<div class="iframe_video"><iframe allowfullscreen="" frameborder="0" height="100%"
+									src="https://www.youtube.com/embed/K8gUxJB9jJc" width="100%"></iframe></div>
+						
+						</div>
+						<p style="padding: 13px; font-size:15px; line-height:18px;">&lt;저작권자 ⓒ데이터히어로(<a href="https://www.datahero.co.kr" target="_blank">/www.datahero.co.kr</a>) 무단전재 및 재배포 금지&gt;</p>
+
+						<!-- 최신 분석 보고서 -->
+						<div class="ainfo_com bg_fff" style="margin:20px auto;">
+							<div class="head">
+								<h3><span class="sname">[인탑스]</span> 최신 분석 보고서</h3>
+								<p class="btn_all_view"><a href="http://search.itooza.com/index.htm?seName=049070">전체</a></p>
+							</div>
+							<div class="body">
+								<ul class="li_article">
+									<li>
+										<a href="/minsstockbot/view.php?ud=2022091611102028348">
+											<span class="tit">[랭킹스탁] 금리 부담 낮으면서 3분기 실적 개선되는 기업은?</span>
+											<span class="date">09/16 </span>
+										</a>
+									</li>
+									<li>
+										<a href="/minsstockbot/view.php?ud=2022091611102028348">
+											<span class="tit">“인탑스, 대기업 서비스로봇 산업 진출 수혜 기...</span>
+											<span class="date">09/16 </span>
+										</a>
+									</li>
+									<li>
+										<a href="/minsstockbot/view.php?ud=2022091611102028348">
+											<span class="tit">“인탑스, 대기업 서비스로봇 산업 진출 수혜 기...</span>
+											<span class="date">09/16 </span>
+										</a>
+									</li>
+									<li>
+										<a href="/minsstockbot/view.php?ud=2022091611102028348">
+											<span class="tit">“인탑스, 대기업 서비스로봇 산업 진출 수혜 기...</span>
+											<span class="date">09/16 </span>
+										</a>
+									</li>
+									<li>
+										<a href="/minsstockbot/view.php?ud=2022091611102028348">
+											<span class="tit">“인탑스, 대기업 서비스로봇 산업 진출 수혜 기...</span>
+											<span class="date">09/16 </span>
+										</a>
+									</li>
+								</ul>
+								<div class="update">
+									<p>&lt;저작권자 ⓒ아이투자(www.itooza.com) 무단전재 및 재배포 금지&gt;</p>
+								</div>
+							</div>
+						</div>
+						<!-- // 최신 분석 보고서 -->
+						<!-- 투자 체크 포인트(기업개요) -->
+						<div class="ainfo_com bg_fff" style="margin: 0 auto 20px auto;">
+							<div class="head">
+								<h3><span class="sname">[인탑스]</span> 투자 체크 포인트</h3>
+							</div>
+							<div class="body">
+								<table border="0" class="tbl_ainfo01">
+									<colgroup>
+										<col width="25%">
+										<col width="*">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row">기업개요</th>
+											<td>국내 1위 스마트폰 케이스 제조업체</td>
+										</tr>
+										<tr>
+											<th scope="row">사업환경</th>
+											<td>▷ 삼성전자는 글로벌 스마트폰 시장점유율 1위 달성. 이에 따라 관련 부품업체 수혜 전망 <br>▷ 휴대폰 케이스 업체는 신제품
+												디자인 보안 문제로 하나의 완성품 업체와 거래하는 것이 일반적<br>▷ 삼성전자의 베트남 생산 강화로 해당 지역 법인을 둔
+												부품업체 수혜 전망</td>
+										</tr>
+										<tr>
+											<th scope="row">경기변동</th>
+											<td>▷ 삼성전자 스마트폰 판매량에 영향을 받음</td>
+										</tr>
+										<tr>
+											<th scope="row">주요제품</th>
+											<td>IT디바이스 61.99%<br>기타 21.16%<br>자동차부품 9.39%<br>가전제품ASS'Y 7.08%<br>유통및서비스
+												0.39%<br>* 수치는 매출 비중</td>
+										</tr>
+										<tr>
+											<th scope="row">원재료</th>
+											<td>▷ 휴대폰 및 프린터 : RESIN (33.3%), WINDOW 등 (62.8%), RESIN 등 상품 (3.9%)<br>▷
+												생활가전 : RESIN 등 (65.1%), BRACKET 등 (34.9%)<br>▷ 자동차 : RESIN (19.1%), LED
+												(78.1%)<br>* 괄호 안은 매입 비중</td>
+										</tr>
+										<tr>
+											<th scope="row">실적변수</th>
+											<td>▷ 삼성전자의 스마트폰 판매 호조시 수혜<br>▷ 환율 상승 시 수혜<br>▷ 매출처 다각화시 수혜</td>
+										</tr>
+										<tr>
+											<th scope="row">리스크</th>
+											<td>재무건전성 ★★★★★<br>- 부채비율 45.22%<br>- 유동비율 221.81%<br>- 당좌비율 177.14%<br>-
+												이자보상배율 924.82%<br>- 금융비용부담률 0.02%<br>- 자본유보율 6,819.56%</td>
+										</tr>
+										<tr>
+											<th scope="row">신규사업</th>
+											<td>▷ 진행중인 신규사업 없음</td>
+										</tr>
+									</tbody>
+									<!-- 재무분석 항목은 투자지표로 따로 보여줌 -->
+								</table>
+								<div class="update">
+									<p>인탑스의 정보는 <strong>2022년 06월 30일</strong>에 최종 업데이트 됐습니다.</p>
+									<p class="pdt_10">(자료 : 아이투자 www.itooza.com)</p>
+								</div>
+							</div>
+						</div>
+						<!-- // 투자 체크 포인트(기업개요) -->
+						<!-- 한 눈에 보는 투자지표 -->
+						<div class="ainfo_invest" style="margin:20px auto;">
+							<div class="head">
+								<h3><span class="sname">[인탑스]</span> 한 눈에 보는 투자지표</h3>
+							</div>
+							<div class="body">
+								<table border="0" class="tbl_ainfo02">
+									<colgroup>
+										<col width="25%">
+										<col width="25%">
+										<col width="25%">
+										<col width="25%">
+									</colgroup>
+									<caption style="font-size:11px;color:#666;margin:0 0 1px;text-align:right;">
+										(단위: 억원)
+									</caption>
+									<thead>
+										<tr>
+											<th scope="col">손익계산서</th>
+											<th scope="col">2022.6</th>
+											<th scope="col">2021.12</th>
+											<th scope="col" class="end">2020.12</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">매출액</th>
+											<td>7,019</td>
+											<td>10,520</td>
+											<td class="end">7,778</td>
+										</tr>
+										<tr>
+											<th scope="row">영업이익</th>
+											<td>1,057</td>
+											<td>876</td>
+											<td class="end">650</td>
+										</tr>
+										<tr>
+											<th scope="row">영업이익률<span>(%)</span></th>
+											<td>15.1%</td>
+											<td>8.3%</td>
+											<td class="end">8.4%</td>
+										</tr>
+										<tr>
+											<th scope="row">순이익<span>(연결지배)</span></th>
+											<td>849</td>
+											<td>752</td>
+											<td class="end">404</td>
+										</tr>
+										<tr>
+											<th scope="row">순이익률<span>(%)</span></th>
+											<td>12.1%</td>
+											<td>7.1%</td>
+											<td class="end">5.2%</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="update">
+									<p>(자료 : 매출액,영업이익은 K-IFRS 개별, 순이익은 K-IFRS 연결지배)</p>
+								</div>
+							</div>
+						</div>
+						<!-- 한 눈에 보는 투자지표 -->
+
+					</div>
+				</div>
+			</div>
+
+			<!--푸터-->
+			<footer id="footer">
+				<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
+				<div class="cs">
+					<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
+				</div>
+				<address>
+					㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6
+					태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright ©
+					2022 Hecto Innovation. All rights reserved.
+				</address>
+			</footer>
+		</div>
+	</body>
+
+</html>
