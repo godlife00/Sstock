@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    Highcharts.setOptions({
+        chart: {
+            style: {
+                fontFamily: 'Pretendard Variable, Pretendard'
+            }
+        }
+    });
+
     // 검색결과 일봉 + 선3개 차트
     
 
