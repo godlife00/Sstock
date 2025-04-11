@@ -1439,6 +1439,19 @@ a:active {
 .stockwrapper .tabsArea .pick_list .list .detail .per b.same b {
   color: #363F4B;
 }
+.stockwrapper .tabsArea .pick_list .list .detail .day {
+  margin-left: auto;
+}
+.stockwrapper .tabsArea .pick_list .list .detail .day span {
+  color: var(--Gray-gray500, #8C98A7);
+  text-align: right;
+  font-family: var(--Body, Pretendard);
+  font-size: var(--Size-xs-12, 12px);
+  font-style: normal;
+  font-weight: var(--Weight-500, 500);
+  line-height: var(--Line-height-xs-12, 14px); /* 116.667% */
+  letter-spacing: var(--Tracking-md, -0.3px);
+}
 .stockwrapper .tabsArea .pick_list .list .data {
   display: inline-flex;
   align-items: center;
