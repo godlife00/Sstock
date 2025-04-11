@@ -117,7 +117,7 @@
 						<li><a href="/stock/recommend" title="슈퍼스탁 2호">슈퍼스탁2호</a></li>						
 						<li><a href="/stock/score" title="투자점수">투자점수</a></li>
 						<li><a href="/stock/theme" title="업종/테마">업종/테마</a></li>
-						<li class="usa-stock"><a href="sstock_us.html"><i></i> 미국주식</a></li>
+						<li class="usa-stock"><a href="iframe_us.html"><i></i> 미국주식</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -1075,6 +1075,135 @@
 			</address>
 		</footer>
 	</div>
+	<script language="javascript">
+		function LiScrollProcFunc($elem) {
+			var $offsetWidth = $elem.prop('offsetWidth');
+			var $scrollLeft = $elem.scrollLeft();
+			var $scrollWidth = $elem.prop('scrollWidth');
+
+			if (parseInt($offsetWidth) + parseInt($scrollLeft) < parseInt($scrollWidth)) {
+			} else {
+				var $strDKey = $elem.attr("data-key");
+				var $strDAddKey = $elem.attr("data-addkey");
+				var $strDPage = parseInt($elem.attr("data-page"));
+				var $strDEnd = $elem.attr("data-end");
+				var $strDOneWidth = $elem.attr("data-onewidth");
+				var $strDMaxWidth = $elem.attr("data-maxwidth");
+				var $strDLimit = $elem.attr("data-limit");
+
+				//console.log("$offsetWidth:"+$offsetWidth);
+				//console.log("$scrollLeft:"+$scrollLeft);
+				//console.log("$scrollWidth:"+$scrollWidth);
+
+
+				if ($strDEnd != '1') {
+					//alert("$strDKey:" + $strDKey + " $strDAddKey:" + $strDAddKey + " $strDPage:" + $strDPage + " $strDEnd:" + $strDEnd + " $strDOneWidth:" + $strDOneWidth + " $strDMaxWidth:" + $strDMaxWidth);
+					$strDPage++;
+
+					var $strAjaxUrl = '';
+					if ($strDKey == 'mm' || $strDKey == 'tm') {
+						//매매전략 더보기
+						$strAjaxUrl = '/stock/api_etclist?dk=' + $strDKey + '&dak=' + $strDAddKey + '&dp=' + $strDPage + '&dow=' + $strDOneWidth + '&dl=' + $strDLimit + '&sm=json';
+					}
+					else
+						$strAjaxUrl = '/stock/api_ssaddlist?dk=' + $strDKey + '&dak=' + $strDAddKey + '&dp=' + $strDPage + '&dow=' + $strDOneWidth + '&dl=' + $strDLimit + '&sm=json';
+					//alert("$strAjaxUrl:"+$strAjaxUrl);
+					$.getJSON($strAjaxUrl, function ($strArrData) {
+						if ($strArrData['status'] == 'OK') {
+							if ($strDPage == $elem.attr('data-page')) return;
+
+							var $nDMaxWidth = parseInt($strDMaxWidth) + parseInt($strArrData['addwidth'])
+							var $elemUL = $elem.find(".scrollul");
+
+
+							$elem.attr('data-page', $strDPage);
+							$elem.attr('data-maxwidth', $nDMaxWidth);
+							$elem.attr('data-end', $strArrData['endflag']);
+
+							$elemUL.css('width', $nDMaxWidth + 'px');
+							$elemUL.append($strArrData['dispHTML']);
+						}
+						else {
+							$strDPage--;
+							alert($strArrData['message']);
+						}
+					});
+				}
+			}
+		}
+
+		if ($(".li_wrap").length > 0) {
+			var $bEndScrollProc = false;
+			$(".li_wrap").scroll(function () {
+				if ($bEndScrollProc) return;
+				$bEndScrollProc = true;
+
+				var $elem = $(this);
+				LiScrollProcFunc($elem);
+
+				$bEndScrollProc = false;
+			});
+		}
+	</script>
+
+	<iframe src="about:blank" id="autoIframeHeightID" scrolling="no" frameborder="0" style="display:none;" width=1
+		height=1 allowTransparency="true"></iframe>
+	<script language="javascript">
+		var strIframeURL = "https://super.stockn.kr/stock/itooza/auto_size";
+		// <?php /*var strIframeURL = "https://super-dev.minwise.co.kr/stock/itooza/auto_size";*/?>
+		function fnAutoResize() {
+			console.log('fnAutoResize');
+			var nWidth = $(window).width();
+			var objIFrmaeBody = $('#topwrpperID');
+			var nHeight = 0;
+
+			if (objIFrmaeBody.length > 0) {
+				nHeight = objIFrmaeBody.height();
+				console.log('topwrpperID height:', nHeight);
+			} else {
+				nHeight = $('#wrap').height();
+				console.log('wrap height:', nHeight);
+			}
+
+			console.log('objIFrmaeBody height:', objIFrmaeBody.height());
+			console.log('objIFrmaeBody length:', objIFrmaeBody.length);
+
+			var strUrl = strIframeURL + '?aaa=1&height=' + nHeight + '&width=' + nWidth;
+
+			// iframe에 history가 쌓이지 않도록 설정
+			var iframe = document.getElementById('autoIframeHeightID');
+			if (iframe) {
+				// iframe에 sandbox 속성 추가하여 history 제어
+				iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+
+				// iframe 로드 전에 history 상태를 저장하지 않도록 설정
+				if (iframe.contentWindow) {
+					iframe.contentWindow.history.pushState = function () { };
+					iframe.contentWindow.history.replaceState = function () { };
+				}
+				if (nHeight != null) {
+					$("#autoIframeHeightID").attr("src", strUrl);
+				}
+			}
+		}
+		function fnAutoWidthResizeOne() {
+			/*
+			var nWidth = $(window).width();
+			var nObjOneList = $(".li_wrap");
+			if( $(".li_wrap").length > 0 )
+			{
+				nObjOneList.css("width", nWidth + "px");
+			}
+			*/
+		}
+		$(document).ready(function () {
+			fnAutoResize();
+			setTimeout("fnAutoResize()", 1000);
+			//fnAutoWidthResizeOne();
+		});
+		//fnAutoWidthResizeOne();
+	</script>
+
 </body>
 
 </html>

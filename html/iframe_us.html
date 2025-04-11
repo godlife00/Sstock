@@ -1,0 +1,235 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://resource.hectoinnovation.co.kr/super/resources/member/css/common.css">
+    <link rel="stylesheet" href="https://resource.hectoinnovation.co.kr/super/resources/member/css/site.css">
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" async=""
+        src="https://www.googletagmanager.com/gtag/js?id=G-2E2TDR9D8D&amp;l=dataLayer&amp;cx=c&amp;gtm=457e53v1za200&amp;tag_exp=102788824~102803279~102813109~102887799~102926062~102975949~102976415"></script>
+    <script type="text/javascript"
+        src="https://resource.hectoinnovation.co.kr/super/resources/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="https://resource.hectoinnovation.co.kr/super/resources/js/design.js"></script>
+    <script type="text/javascript" src="https://resource.hectoinnovation.co.kr/super/resources/js/default.js"></script>
+    <title>슈퍼스탁</title>
+    <script type="text/javascript">
+        function updateIFrame(height) {
+            var iframe = document.getElementById('myiframe');
+            //console.log("height : " + height);
+            iframe.setAttribute('height', height);
+
+            $('html').scrollTop(0);
+        }
+        function goLoginPage() {
+            location.href = "/stock/member/login";
+        }
+        $(document).ready(function () {
+            var search = '';
+            var searchType = '';
+
+            if ($("#target").val() == "guide") {  // 서비스 안내
+                $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/main/service?token=" + $("#token").val());
+
+            } else if ($("#target").val() == "report") { // 종목추천
+                $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/stock/recommend?nst=999&token=" + $("#token").val());
+
+            } else if ($("#target").val() == "port01") {  // 슈퍼스탁 1호
+                $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/stock/portone?no=1&token=" + $("#token").val());
+
+            } else if ($("#target").val() == "port02") { // 슈퍼스탁 2호
+                $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/stock/porttwo?no=2&token=" + $("#token").val());
+
+            } else if ($("#target").val() == "invgood") { // 투자점수
+                $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/stock/score?token=" + $("#token").val());
+
+            } else if ($("#target").val() == "tmlist") {// 업종/테마
+                $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/stock/theme?token=" + $("#token").val());
+
+            } else if (search != '') {
+                if (searchType != '') {
+                    $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/stock/theme_view?ud=&token=" + $("#token").val());
+                } else {
+                    $("#myiframe").attr('src', "https://sstock-hecto.choicestock.co.kr/search/view?sn=&token=" + $("#token").val());
+                }
+            }
+
+        });
+    </script>
+    <style type="text/css">
+        iframe {
+            width: 1px;
+            min-width: 100%;
+            width: 100%; /* ie7 이하 핵 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <input type="hidden" id="target" value="">
+
+        <div class="info_top">
+            <p><span class="point_txt">이동통신사 유료부가서비스</span> 슈퍼스탁</p>
+        </div>
+        <header id="header">
+            <h1 class="logo"><a href="/stock/member/main">슈퍼스탁</a></h1>
+
+            <button type="button" class="btn_nav" id="btnMenu"><span>메뉴</span></button>
+
+            <div id="banner01" class="banner_wrap" style="display:none">
+                <a
+                    href="https://m.tior.co.kr/event/getEventDetail?event_id=133&amp;utm_source=superstock&amp;utm_campaign=onlinesales2102&amp;utm_medium=headbanner&amp;utm_content=e">
+                    <img src="https://resource.hectoinnovation.co.kr/super/resources/member/images/banner01.png" alt="">
+                </a>
+            </div>
+        </header>
+        <!-- //header -->
+
+        <aside class="side_nav">
+            <input type="hidden" id="token" value="iZEu1QGYx4DTT2VsHOkK4yEkpStj9ARs">
+            <div class="inner"
+                style="transition: transform 300ms; transform: translate3d(0px, 0px, 0px); overflow-y: scroll; height: 1183px;">
+                <!-- 로그인 -->
+                <div class="nav_top">
+                    <!-- 170717 수정 -->
+                    <strong class="nav_title">
+
+
+                        010-****-9624님
+
+                    </strong>
+                </div>
+                <!--// 로그인 -->
+                <!-- 사이드 카테고리 메뉴 -->
+                <nav class="cate_nav" style="display: block;">
+                    <ul class="side_tab">
+                        <li><a href="#;" id="navInfo"><em></em>서비스안내<span></span></a> </li>
+                        <li><a href="#;" id="navStock"><em></em>종목추천<span></span></a></li>
+                        <li><a href="#;" id="navStockOne"><em></em>슈퍼스탁 1호<span></span></a></li>
+                        <li><a href="#;" id="navStocktwo"><em></em>슈퍼스탁 2호<span></span></a></li>
+                        <li><a href="#;" id="navStockGrade"><em></em>투자점수<span></span></a></li>
+                        <li><a href="#;" id="navStockTheme"><em></em>업종/테마<span></span></a></li>
+                    </ul>
+                </nav>
+                <div class="btn_close">
+                    <img src="https://resource.hectoinnovation.co.kr/super/resources/member/images/btn_nav_close.jpg"
+                        alt="닫기">
+                </div>
+                <!-- 사이드 카테고리 메뉴 -->
+                <div id="banner02" class="banner_wrap" style="display:none">
+                    <a
+                        href="https://m.tior.co.kr/event/getEventDetail?event_id=133&amp;utm_source=superstock&amp;utm_campaign=onlinesales2102&amp;utm_medium=menubanner&amp;utm_content=b">
+                        <img src="https://resource.hectoinnovation.co.kr/super/resources/member/images/banner02.png"
+                            alt="">
+                    </a>
+                </div>
+            </div>
+            <!-- 배경 막 -->
+            <div class="dim"></div>
+            <!--// 배경 막 -->
+        </aside>
+        <script src="https://resource.hectoinnovation.co.kr/super/resources/common/js/custom_func.js"></script>
+        <script>
+            $(function () {
+                if (stock_custom.isBeforeDate(2021, 1, 24)) {
+                    $("#banner01").show();
+                    $("#banner02").show();
+                }
+
+                $("#navInfo").click(function (e) { // 서비스 안내
+                    location.href = '/p/guide';
+                });
+                $("#navStock").click(function (e) { // 종목추천
+                    location.href = '/p/report';
+                });
+                $("#navStockOne").click(function (e) { // 슈퍼스탁 1호
+                    location.href = '/p/port01';
+                });
+                $("#navStocktwo").click(function (e) { // 슈퍼스탁 2호
+                    location.href = '/p/port02';
+                });
+                $("#navStockGrade").click(function (e) {  // 투자점수
+                    location.href = '/p/invgood';
+                });
+                $("#navStockTheme").click(function (e) { // 업종/테마
+                    location.href = '/p/tmlist';
+                });
+
+            });
+        </script>
+
+        <div id="ct">
+
+            <iframe id="myiframe" src="sstock_us.html" scrolling="no" frameborder="0"
+                style="background-color:#fff ;-webkit-overflow-scrolling: touch; overflow: scroll;" height=""></iframe>
+
+        </div>
+    </div>
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-160608217-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-160608217-1');
+    </script>
+
+    <script>
+        window.addEventListener('load', function() {
+            // iframe 내부 컨텐츠 높이에 맞게 자동 조절
+            const iframe = document.getElementById('myiframe');
+            const resizeIframe = () => {
+                try {
+                    const height = iframe.contentWindow.document.body.scrollHeight;
+                    iframe.style.height = height + 'px';
+                } catch(e) {
+                    console.error('iframe resize error:', e);
+                }
+            };
+            
+            // 초기 로딩시 높이 조절
+            resizeIframe();
+            
+            // 컨텐츠 변화 감지하여 높이 자동 조절 
+            const observer = new MutationObserver(resizeIframe);
+            if(iframe.contentWindow && iframe.contentWindow.document.body) {
+                observer.observe(iframe.contentWindow.document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+        });
+    </script>
+
+    <script>
+        // 히스토리 백 이벤트 감지
+        window.addEventListener('message', function(e) {
+            if(e.data.type === 'popstate') {
+                const iframe = document.getElementById('myiframe');
+                setTimeout(() => {
+                    const height = iframe.contentWindow.document.body.scrollHeight;
+                    iframe.style.height = height + 'px';
+                }, 100);
+            }
+        });
+    </script>
+    
+    <script>
+        // 탭 변경 이벤트 감지
+        window.addEventListener('message', function(e) {
+            if(e.data && e.data.type === 'tabChange') {
+                const iframe = document.getElementById('myiframe');
+                setTimeout(() => {
+                    const height = e.data.height || iframe.contentWindow.document.body.scrollHeight;
+                    iframe.style.height = height + 'px';
+                    console.log('iframe 높이 조정: ' + height + 'px (탭: ' + e.data.tabId + ')');
+                }, 200); // 탭 전환 애니메이션이 완료될 시간을 충분히 줌
+            }
+        });
+    </script>
+
+</body><!-- Global site tag (gtag.js) - Google Analytics -->
+
+</html>

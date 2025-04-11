@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -55,504 +54,809 @@
 		});
 	</script>
 
-<!-- 191111 검색기능 추가 -->	
-<style>		
-.blind{visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:0;height:0;font-size:0;line-height:0}
-.rcv{display:inline-block;position:relative;float:left;width:100%;text-align:left; background: #FECD57;}
-.rcv .input_txt{float:left;width:100%;height:42px;margin-top:2px;border:1px solid #FECD57;color:#999; font-size: 15px;}
-.rcv .search_select + .input_txt_fcs{width: calc(100% - 156px) ;}
-.rcv .input_txt_end{color:#333}
-.rcv::after { content: ''; dispaly: table; clear: both }
-outline: none; display: inline-block;}
-.rcv {background: #fff;}
-.rcv h1.logo_title {font-family: 'Lato', 'Noto Sans KR','notosans'; font-size: 1.2rem; line-height: 50px; font-weight: 500;}
-.rcv .input_txt_fcs{background:#ffffff;color:#333; border: 3px solid #FECD57; width: calc(100% - 46px); margin-left: 0; padding: 5px 40px 5px 15px; box-sizing: border-box;}
-.rcv .btn_thome {display: none;}
-.rcv .btn_hback {display: none;}
-.sub_menu {clear: both;}
-.sub_menu::after { content: ''; dispaly: table; clear: both }
-#ss_wrap {clear: both;}
-#ss_wrap::after { content: ''; dispaly: table; clear: both }
-.rcv .ctg{position:relative;width:100%;height:23px}
-.ly_rcv{position:absolute;width:100%; max-height: 389px; top:45px;left:0;z-index: 999; border-bottom: 1px solid #ccc; border-top: 1px solid #D6AA41; overflow: auto; display: none;}
-.ly_rcv li{position:relative;width:100%;border-top:1px solid #E8E9EA;line-height:14px;vertical-align:top}	
-.ly_rcv li input{position:absolute;top:0;left:0;width:100%}
-.ly_rcv li label{position:absolute;top:1px;left:1px;background:#f7f8f9;color:#333;cursor:pointer}
-.ly_rcv li.fst{border:none}
-.ly_rcv li.over,
-.ly_rcv li.over label{}
-.ly_rcv .sch_clse {background: #F7F7F7; padding: 10px 10px; box-sizing: border-box; text-align: right;}
-.ly_rcv .sch_clse .clse {color: #000;}
-.lst_ctt{background: #fff;}
-.lst_ctt li{display: inline-block; width: 100%;}
-.lst_ctt li a {padding: 12px 10px; width: 100%; box-sizing: border-box; display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-.lst_ctt li input{height:43px}
-.lst_ctt li label{width:166px;height:42px;padding:4px 0 0 4px}
-.lst_ctt li label:after{display:block;clear:both;content:''}
-.lst_ctt li .thmb{float:left;margin-right:5px}
-.lst_ctt li .cont{display:block;float:left;margin-top:3px;font-size:11px;color:#999}
-.lst_ctt li .cont strong{font-weight:400;color:#333}
-.lst_ctt li .cont em{font-weight:700;color:#333;text-decoration:underline}
-.lst_ctt li .cont strong,.lst_ctt li .cont span{display:block;overflow:hidden;width:120px}
-.lst_ctt li .schCode {color: #999; width: 50px; display: inline-block; padding-left: 7px; box-sizing: border-box;}
-.lst_ctt li .schList {color: #333;}
-.lst_ctt li .schList strong {color: #006DDE;}	
-.rcv .searchBtn {width: 46px; padding: 13px; box-sizing: border-box;}
-.rcv .search_select {width: 110px; height: 42px; margin-top: 1px; font-size: 15px; color: #333; display: inline-block; border: none; outline: none; float: left;
-	background:#fff;color:#333; border: 3px solid #FECD57; padding: 5px 10px; box-sizing: border-box; }
-/* 검색결과 다수일때 */
-.tsst_ver .box {background: #fff; margin: 10px 0px 10px; box-sizing: border-box; padding: 10px 0;}
-.tsst_ver .box .sch_title {color: #000; font-size: 17px; font-weight: bold; padding: 0 10px 10px; display: inline-block; width: calc(100% - 96px);}
-.tsst_ver .box .sch_title i {font-style: normal; color: #f84c50; font-size: 14px;}			
-.tsst_ver .box .more {display: none; width: 60px; margin-bottom: 3px; vertical-align: middle; text-align: right; color: #bababa; font-size: 14px; font-weight: bold;}
-.tsst_ver .box .lst_ctt {border-top: 1px solid #f3f3f3; overflow: hidden;}
-.tsst_ver .box .lst_ctt li .total {display: inline-block; vertical-align: top; color: #bababa; padding: 12px 10px;}			
-.tsst_ver .box .lst_ctt li .score {display: inline-block; vertical-align: top; color: #3ca57c; padding: 12px 0; position: relative;}			
-.tsst_ver .box .lst_ctt li .score.increase {color: #fa1508;}			
-.tsst_ver .box .lst_ctt li .score.decrease {color: #0033ff;}	
-.tsst_ver .box .lst_ctt li .score.increase .arrow {position: absolute; top: 12px; left: 0; border-color: transparent transparent #f8665d transparent; border-width:5px; border-style:solid; width:0px;height:0px;}
-.tsst_ver .box .lst_ctt li .score.decrease .arrow {position: absolute; top: 17px; left: 0; border-color: #599cf7 transparent transparent transparent; border-width:5px; border-style:solid; width:0px;height:0px;}
-.tsst_ver .box .lst_ctt li a {display: inline-block;}			
-.tsst_ver .box_top {margin: 50px 0px 10px;}
-.tsst_ver .box_top .lst_ctt li.result a {width: calc(100% - 87px);}			
-.tsst_ver .box_mid .lst_ctt li.result a {width: calc(100% - 142px);}		
-.tsst_ver .box_mid .lst_ctt li .score {padding: 12px 0 12px 16px;}								
-input[type=text]:-ms-clear{display: none;}
-.searchclear {display: none; position: absolute; right: 69px; top: -8px; bottom: 0; width: 10px; height: 14px; margin: auto; font-size: 12px; cursor: pointer;color: #ccc; background-color: #fff;	}
-.searchclear img {width: 20px;}
-</style>
+	<!-- 191111 검색기능 추가 -->
+	<style>
+		.blind {
+			visibility: hidden;
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0;
+			height: 0;
+			font-size: 0;
+			line-height: 0
+		}
 
-<script language=javascript>
-function checkLastWord(text) {
-	var last = text.substring(text.length - 1);
-	var check = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
-					"ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ", "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"];
-	for (var i = check.length - 1; i >= 0; i--) {
-		if (last == check[i])
-			return false;
-	}
-	return true;
-}
+		.rcv {
+			display: inline-block;
+			position: relative;
+			float: left;
+			width: 100%;
+			text-align: left;
+			background: #FECD57;
+		}
 
-var __strSchWord = '';
-function CheckJsonSearch( keyword )
-{
-	var keyword = $("#seName").val();
-	if( !keyword ) return;
-	if( !checkLastWord(keyword) ) return;
+		.rcv .input_txt {
+			float: left;
+			width: 100%;
+			height: 42px;
+			margin-top: 2px;
+			border: 1px solid #FECD57;
+			color: #999;
+			font-size: 15px;
+		}
 
-	if( keyword == __strSchWord ) return;
+		.rcv .search_select+.input_txt_fcs {
+			width: calc(100% - 156px);
+		}
 
-	var dataString = 'q='+ encodeURIComponent(keyword);
-	if(keyword=='')
-	{ 
-		$("#schdispUL").html('');
-		$("#schdispDIV").hide();
-	}
-	else
-	{
-		$("#schdispUL").html('<li class="fst"><a href="javascript:void(0);">...종목검색 중...</a></li>');
-		$.ajax({
-		type: "GET",
-		url: "/search/srhqry_itz",
-		data: dataString,
-		dataType: "json",
-		cache: false,
-		success: function(obj) {
-			if( obj.retcd == '00' )
-			{
-				__strSchWord = keyword;
-				$("#schdispUL").html(obj.dispHTML);
-				$("#schdispDIV").show();
+		.rcv .input_txt_end {
+			color: #333
+		}
+
+		.rcv::after {
+			content: '';
+			dispaly: table;
+			clear: both
+		}
+
+		/* outline: none; display: inline-block;} */
+		.rcv {
+			background: #fff;
+		}
+
+		.rcv h1.logo_title {
+			font-family: 'Lato', 'Noto Sans KR', 'notosans';
+			font-size: 1.2rem;
+			line-height: 50px;
+			font-weight: 500;
+		}
+
+		.rcv .input_txt_fcs {
+			background: #ffffff;
+			color: #333;
+			border: 3px solid #FECD57;
+			width: calc(100% - 46px);
+			margin-left: 0;
+			padding: 5px 40px 5px 15px;
+			box-sizing: border-box;
+		}
+
+		.rcv .btn_thome {
+			display: none;
+		}
+
+		.rcv .btn_hback {
+			display: none;
+		}
+
+		.sub_menu {
+			clear: both;
+		}
+
+		.sub_menu::after {
+			content: '';
+			dispaly: table;
+			clear: both
+		}
+
+		#ss_wrap {
+			clear: both;
+		}
+
+		#ss_wrap::after {
+			content: '';
+			dispaly: table;
+			clear: both
+		}
+
+		.rcv .ctg {
+			position: relative;
+			width: 100%;
+			height: 23px
+		}
+
+		.ly_rcv {
+			position: absolute;
+			width: 100%;
+			max-height: 389px;
+			top: 45px;
+			left: 0;
+			z-index: 999;
+			border-bottom: 1px solid #ccc;
+			border-top: 1px solid #D6AA41;
+			overflow: auto;
+			display: none;
+		}
+
+		.ly_rcv li {
+			position: relative;
+			width: 100%;
+			border-top: 1px solid #E8E9EA;
+			line-height: 14px;
+			vertical-align: top
+		}
+
+		.ly_rcv li input {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%
+		}
+
+		.ly_rcv li label {
+			position: absolute;
+			top: 1px;
+			left: 1px;
+			background: #f7f8f9;
+			color: #333;
+			cursor: pointer
+		}
+
+		.ly_rcv li.fst {
+			border: none
+		}
+
+		.ly_rcv li.over,
+		.ly_rcv li.over label {}
+
+		.ly_rcv .sch_clse {
+			background: #F7F7F7;
+			padding: 10px 10px;
+			box-sizing: border-box;
+			text-align: right;
+		}
+
+		.ly_rcv .sch_clse .clse {
+			color: #000;
+		}
+
+		.lst_ctt {
+			background: #fff;
+		}
+
+		.lst_ctt li {
+			display: inline-block;
+			width: 100%;
+		}
+
+		.lst_ctt li a {
+			padding: 12px 10px;
+			width: 100%;
+			box-sizing: border-box;
+			display: inline-block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.lst_ctt li input {
+			height: 43px
+		}
+
+		.lst_ctt li label {
+			width: 166px;
+			height: 42px;
+			padding: 4px 0 0 4px
+		}
+
+		.lst_ctt li label:after {
+			display: block;
+			clear: both;
+			content: ''
+		}
+
+		.lst_ctt li .thmb {
+			float: left;
+			margin-right: 5px
+		}
+
+		.lst_ctt li .cont {
+			display: block;
+			float: left;
+			margin-top: 3px;
+			font-size: 11px;
+			color: #999
+		}
+
+		.lst_ctt li .cont strong {
+			font-weight: 400;
+			color: #333
+		}
+
+		.lst_ctt li .cont em {
+			font-weight: 700;
+			color: #333;
+			text-decoration: underline
+		}
+
+		.lst_ctt li .cont strong,
+		.lst_ctt li .cont span {
+			display: block;
+			overflow: hidden;
+			width: 120px
+		}
+
+		.lst_ctt li .schCode {
+			color: #999;
+			width: 50px;
+			display: inline-block;
+			padding-left: 7px;
+			box-sizing: border-box;
+		}
+
+		.lst_ctt li .schList {
+			color: #333;
+		}
+
+		.lst_ctt li .schList strong {
+			color: #006DDE;
+		}
+
+		.rcv .searchBtn {
+			width: 46px;
+			padding: 13px;
+			box-sizing: border-box;
+		}
+
+		.rcv .search_select {
+			width: 110px;
+			height: 42px;
+			margin-top: 1px;
+			font-size: 15px;
+			color: #333;
+			display: inline-block;
+			border: none;
+			outline: none;
+			float: left;
+			background: #fff;
+			color: #333;
+			border: 3px solid #FECD57;
+			padding: 5px 10px;
+			box-sizing: border-box;
+		}
+
+		/* 검색결과 다수일때 */
+		.tsst_ver .box {
+			background: #fff;
+			margin: 10px 0px 10px;
+			box-sizing: border-box;
+			padding: 10px 0;
+		}
+
+		.tsst_ver .box .sch_title {
+			color: #000;
+			font-size: 17px;
+			font-weight: bold;
+			padding: 0 10px 10px;
+			display: inline-block;
+			width: calc(100% - 96px);
+		}
+
+		.tsst_ver .box .sch_title i {
+			font-style: normal;
+			color: #f84c50;
+			font-size: 14px;
+		}
+
+		.tsst_ver .box .more {
+			display: none;
+			width: 60px;
+			margin-bottom: 3px;
+			vertical-align: middle;
+			text-align: right;
+			color: #bababa;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.tsst_ver .box .lst_ctt {
+			border-top: 1px solid #f3f3f3;
+			overflow: hidden;
+		}
+
+		.tsst_ver .box .lst_ctt li .total {
+			display: inline-block;
+			vertical-align: top;
+			color: #bababa;
+			padding: 12px 10px;
+		}
+
+		.tsst_ver .box .lst_ctt li .score {
+			display: inline-block;
+			vertical-align: top;
+			color: #3ca57c;
+			padding: 12px 0;
+			position: relative;
+		}
+
+		.tsst_ver .box .lst_ctt li .score.increase {
+			color: #fa1508;
+		}
+
+		.tsst_ver .box .lst_ctt li .score.decrease {
+			color: #0033ff;
+		}
+
+		.tsst_ver .box .lst_ctt li .score.increase .arrow {
+			position: absolute;
+			top: 12px;
+			left: 0;
+			border-color: transparent transparent #f8665d transparent;
+			border-width: 5px;
+			border-style: solid;
+			width: 0px;
+			height: 0px;
+		}
+
+		.tsst_ver .box .lst_ctt li .score.decrease .arrow {
+			position: absolute;
+			top: 17px;
+			left: 0;
+			border-color: #599cf7 transparent transparent transparent;
+			border-width: 5px;
+			border-style: solid;
+			width: 0px;
+			height: 0px;
+		}
+
+		.tsst_ver .box .lst_ctt li a {
+			display: inline-block;
+		}
+
+		.tsst_ver .box_top {
+			margin: 50px 0px 10px;
+		}
+
+		.tsst_ver .box_top .lst_ctt li.result a {
+			width: calc(100% - 87px);
+		}
+
+		.tsst_ver .box_mid .lst_ctt li.result a {
+			width: calc(100% - 142px);
+		}
+
+		.tsst_ver .box_mid .lst_ctt li .score {
+			padding: 12px 0 12px 16px;
+		}
+
+		input[type=text]:-ms-clear {
+			display: none;
+		}
+
+		.searchclear {
+			display: none;
+			position: absolute;
+			right: 69px;
+			top: -8px;
+			bottom: 0;
+			width: 10px;
+			height: 14px;
+			margin: auto;
+			font-size: 12px;
+			cursor: pointer;
+			color: #ccc;
+			background-color: #fff;
+		}
+
+		.searchclear img {
+			width: 20px;
+		}
+	</style>
+
+	<script language=javascript>
+		function checkLastWord(text) {
+			var last = text.substring(text.length - 1);
+			var check = ["ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
+				"ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ", "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"];
+			for (var i = check.length - 1; i >= 0; i--) {
+				if (last == check[i])
+					return false;
+			}
+			return true;
+		}
+
+		var __strSchWord = '';
+		function CheckJsonSearch(keyword) {
+			var keyword = $("#seName").val();
+			if (!keyword) return;
+			if (!checkLastWord(keyword)) return;
+
+			if (keyword == __strSchWord) return;
+
+			var dataString = 'q=' + encodeURIComponent(keyword);
+			if (keyword == '') {
+				$("#schdispUL").html('');
+				$("#schdispDIV").hide();
+			}
+			else {
+				$("#schdispUL").html('<li class="fst"><a href="javascript:void(0);">...종목검색 중...</a></li>');
+				$.ajax({
+					type: "GET",
+					url: "/search/srhqry_itz",
+					data: dataString,
+					dataType: "json",
+					cache: false,
+					success: function (obj) {
+						if (obj.retcd == '00') {
+							__strSchWord = keyword;
+							$("#schdispUL").html(obj.dispHTML);
+							$("#schdispDIV").show();
+						}
+					}
+				});
 			}
 		}
+		var __nTimerInterId = -1;
+		function SetIntervalSearchWord() {
+			__nTimerInterId = setInterval(function () {
+				CheckJsonSearch();
+			}, 500);
+		}
+
+		function ClrIntervalSearchWord() {
+			if (__nTimerInterId != -1) {
+				clearInterval(__nTimerInterId);
+				__nTimerInterId = -1;
+			}
+		}
+
+		$(document).ready(function () {
+			$("#seName").keyup(function () {
+				CheckJsonSearch();
+				return false;
+			});
+
+			var nHeight = parseInt($(window).height()) - 40;
+			$("#mmenulistID").css('height', nHeight + 'px');
 		});
-	}
-}
-var __nTimerInterId = -1;
-function SetIntervalSearchWord()
-{
-	__nTimerInterId = setInterval( function() {
-		CheckJsonSearch();
-	}, 500);
-}
 
-function ClrIntervalSearchWord()
-{
-	if( __nTimerInterId != -1 )
-	{
-		clearInterval(__nTimerInterId);
-		__nTimerInterId = -1;
-	}
-}
+		$(window).resize(function () {
+			var nHeight = parseInt($(window).height()) - 40;
+			$("#mmenulistID").css('height', nHeight + 'px');
+		});
 
-$(document).ready(function () {
-	$("#seName").keyup(function()   {
-		CheckJsonSearch();
-		return false;
-	});
+		$(document).ready(function () {
+			var $ipt = $('.input_txt'),
+				$clearIpt = $('.searchclear');
+			$ipt.keyup(function () {
+				if ($('#seName').val() == '') {
+					$('.ly_rcv').hide();
+				}
 
-	var nHeight = parseInt($(window).height()) - 40;
-	$("#mmenulistID").css('height', nHeight+'px');
-});
+				$(".searchclear").toggle(Boolean($(this).val()));
+			});
+			$clearIpt.toggle(Boolean($ipt.val()));
+			$clearIpt.click(function () {
+				$(".input_txt").val('').focus();
+				$(this).hide();
+				$('.ly_rcv').hide();
+			});
 
-$(window).resize(function(){
-	var nHeight = parseInt($(window).height()) - 40;
-	$("#mmenulistID").css('height', nHeight+'px');
-});
+			//더보기
+			/* lst_total 종목검색결과, lst_theme 태마 검색결과, lst_sectors 업종 검색결과 */
+			var totalHeight = $('.lst_total li').height();
+			var lst_theme = $('.lst_theme li').height();
+			var lst_sectors = $('.lst_sectors li').height();
+			var lineblockCss = { display: 'inline-block' }
+			console.log(totalHeight, lst_theme, lst_sectors);
+			var heightTen01 = { overflow: 'hidden', height: totalHeight * 10 }
+			var heightTen02 = { overflow: 'hidden', height: lst_theme * 10 }
+			var heightTen03 = { overflow: 'hidden', height: lst_sectors * 10 }
+			var overflowAuto = { overflow: 'auto', height: 'auto' }
+			var marginTop55 = { margin: '50px 0px 10px' }
+			var marginTop10 = { margin: '10px 0 10px' }
+			function scrollMove() {
+				$('html, body').animate({
+					'scrollTop': 0
+				}, 400);
+			}
+			function btnShowHide() {
+				$('.rcv .btn_thome').show();
+				$('.rcv .btn_hback').hide();
+			}
+			if ($('.lst_total li').length > 10) {
+				console.log("전체" + heightTen01);
+				$('.lst_total .more').css(lineblockCss);
+				$('.lst_total .lst_ctt').css(heightTen01);
+			}
+			if ($('.lst_theme li').length > 10) {
+				console.log("테마" + heightTen02);
+				$('.lst_theme .more').css(lineblockCss);
+				$('.lst_theme .lst_ctt').css(heightTen02);
+			}
+			if ($('.lst_sectors li').length > 10) {
+				console.log("업종" + heightTen03);
+				$('.lst_sectors .more').css(lineblockCss);
+				$('.lst_sectors .lst_ctt').css(heightTen03);
+			}
+			$('.lst_total .more').on('click', function () {
+				btnShowHide();
+				$(this).hide();
+				$('.lst_total .lst_ctt').css(overflowAuto);
+				$('.lst_total').css(marginTop55);
+				$('.lst_theme, .lst_sectors').hide();
+				scrollMove();
+			});
+			$('.lst_theme .more').on('click', function () {
+				btnShowHide();
+				$(this).hide();
+				$('.lst_theme .lst_ctt').css(overflowAuto);
+				$('.lst_theme').css(marginTop55);
+				$('.lst_total, .lst_sectors').hide();
+				scrollMove();
+			});
 
-$(document).ready(function(){
-	var $ipt = $('.input_txt'),
-	$clearIpt = $('.searchclear');
-	$ipt.keyup(function(){
-		if($('#seName').val() == '') {
+			$('.lst_sectors .more').on('click', function () {
+				btnShowHide();
+				$(this).hide();
+				$('.lst_sectors .lst_ctt').css(overflowAuto);
+				$('.lst_sectors').css(marginTop55);
+				$('.lst_total, .lst_theme').hide();
+				scrollMove();
+			});
+			$('.btn_thome').on('click', function () {
+				$(this).hide();
+				$('.btn_hback').show();
+				if ($('.lst_total li').length > 10) {
+					$('.lst_total .more').css(lineblockCss);
+					$('.lst_total .lst_ctt').css(heightTen);
+				}
+				if ($('.lst_theme li').length > 10) {
+					$('.lst_theme').css(marginTop10);
+					$('.lst_theme .more').css(lineblockCss);
+					$('.lst_theme .lst_ctt').css(heightTen);
+				}
+				if ($('.lst_sectors li').length > 10) {
+					$('.lst_sectors').css(marginTop10);
+					$('.lst_sectors .more').css(lineblockCss);
+					$('.lst_sectors .lst_ctt').css(heightTen);
+				}
+				$('.lst_total, .lst_theme, .lst_sectors').show();
+			});
+			$('.btn_hback').on('click', function () {
+				history.back();
+			});
+
+			// menu 가 존재하는 경우
+			if ($('#menu').length) {
+				var marginTop5 = { margin: '5px 0 10px' }
+				$('.tsst_ver .box_top').css(marginTop5);
+
+				$('.lst_total .more').on('click', function () {
+					$('.lst_total').css(marginTop5);
+				});
+				$('.lst_theme .more').on('click', function () {
+					$('.lst_theme').css(marginTop5);
+				});
+				$('.lst_sectors .more').on('click', function () {
+					$('.lst_sectors').css(marginTop5);
+				});
+			}
+		});
+
+		function SearchSelCode(str1, str2) {
+			//alert(str);
+			if (str1 != '') {
+				$("#seCode").val(str1);
+			}
+			if (str2 != '') {
+				$("#seName").val(str2);
+			}
+			//$("#schdispUL").html('');
+			//$("#schdispDIV").hide();
+			SearchIt(document.sch_form, '');
+		}
+
+		function hitEnterKey(e) {
+			if (e.keyCode == 13) {
+				SearchIt(document.sch_form, '1');
+			} else {
+				e.keyCode == 0;
+				return;
+			}
+		}
+		function ly_close() {
 			$('.ly_rcv').hide();
+			return;
 		}
 
-		$(".searchclear").toggle(Boolean($(this).val()));
-	});
-	$clearIpt.toggle(Boolean($ipt.val()));
-	$clearIpt.click(function(){
-		$(".input_txt").val('').focus();
-		$(this).hide();
-		$('.ly_rcv').hide();
-	});
+		function SearchIt(frm, clk) {
+			/*
+			var strSN = $('#seName').val();
+			var strCN = $('#seCode').val();
+			if( !strSN )
+			{
+				alert("검색어를 입력해주세요.");
+				return;
+			}
+			*/
+			if (clk == '1') {
+				$("#seCode").val('');
+			}
 
-	//더보기
-	/* lst_total 종목검색결과, lst_theme 태마 검색결과, lst_sectors 업종 검색결과 */
-	var totalHeight = $('.lst_total li').height();
-	var lst_theme = $('.lst_theme li').height();
-	var lst_sectors = $('.lst_sectors li').height();
-	var lineblockCss = { display: 'inline-block' }
-	console.log(totalHeight, lst_theme, lst_sectors);
-	var heightTen01 = { overflow: 'hidden', height: totalHeight * 10 }
-	var heightTen02 = { overflow: 'hidden', height: lst_theme * 10 }
-	var heightTen03 = { overflow: 'hidden', height: lst_sectors * 10 }
-	var overflowAuto = { overflow: 'auto', height: 'auto' }
-	var marginTop55 = { margin: '50px 0px 10px' }
-	var marginTop10 = { margin: '10px 0 10px' }
-	function scrollMove() {
-		$('html, body').animate({
-			'scrollTop': 0
-		}, 400);
-	}
-	function btnShowHide() {
-		$('.rcv .btn_thome').show();
-		$('.rcv .btn_hback').hide();
-	}
-	if ($('.lst_total li').length > 10) {
-		console.log("전체" + heightTen01);
-		$('.lst_total .more').css(lineblockCss);
-		$('.lst_total .lst_ctt').css(heightTen01);
-	}
-	if ($('.lst_theme li').length > 10) {
-		console.log("테마" + heightTen02);
-		$('.lst_theme .more').css(lineblockCss);
-		$('.lst_theme .lst_ctt').css(heightTen02);
-	}
-	if ($('.lst_sectors li').length > 10) {
-		console.log("업종" + heightTen03);
-		$('.lst_sectors .more').css(lineblockCss);
-		$('.lst_sectors .lst_ctt').css(heightTen03);
-	}
-	$('.lst_total .more').on('click', function () {
-		btnShowHide();
-		$(this).hide();
-		$('.lst_total .lst_ctt').css(overflowAuto);
-		$('.lst_total').css(marginTop55);
-		$('.lst_theme, .lst_sectors').hide();
-		scrollMove();
-	});
-	$('.lst_theme .more').on('click', function () {
-		btnShowHide();
-		$(this).hide();
-		$('.lst_theme .lst_ctt').css(overflowAuto);
-		$('.lst_theme').css(marginTop55);
-		$('.lst_total, .lst_sectors').hide();
-		scrollMove();
-	});
-
-	$('.lst_sectors .more').on('click', function () {
-		btnShowHide();
-		$(this).hide();
-		$('.lst_sectors .lst_ctt').css(overflowAuto);
-		$('.lst_sectors').css(marginTop55);
-		$('.lst_total, .lst_theme').hide();
-		scrollMove();
-	});
-	$('.btn_thome').on('click', function () {
-		$(this).hide();
-		$('.btn_hback').show();
-		if ($('.lst_total li').length > 10) {
-			$('.lst_total .more').css(lineblockCss);
-			$('.lst_total .lst_ctt').css(heightTen);
+			frm.submit();
 		}
-		if ($('.lst_theme li').length > 10) {
-			$('.lst_theme').css(marginTop10);
-			$('.lst_theme .more').css(lineblockCss);
-			$('.lst_theme .lst_ctt').css(heightTen);
+	</script>
+	<script type="text/javascript">
+		function check_mobile() {
+			var x = navigator.userAgent;
+			index = x.indexOf('Android 4.1.2')
+			if (index < 0) {
+				//alert(x);
+			}
+			else {
+				//alert("Android 4.1.2");
+				return true;
+			}
+			return false;
 		}
-		if ($('.lst_sectors li').length > 10) {
-			$('.lst_sectors').css(marginTop10);
-			$('.lst_sectors .more').css(lineblockCss);
-			$('.lst_sectors .lst_ctt').css(heightTen);
+		function toggleIdShow(strId) {
+			var bAndCheck = check_mobile();
+			//$("#topwrpperID").css('position', 'fixed');
+			if (bAndCheck)
+				$("#" + strId).show();
+			else
+				$("#" + strId).show("slide", { direction: "left" }, 400);
 		}
-		$('.lst_total, .lst_theme, .lst_sectors').show();
-	});
-	$('.btn_hback').on('click', function () {
-		history.back();
-	});
 
-	// menu 가 존재하는 경우
-	if ($('#menu').length) {
-		var marginTop5 = { margin: '5px 0 10px' }
-		$('.tsst_ver .box_top').css(marginTop5);
+		function toggleIdHidden(strId) {
+			var bAndCheck = check_mobile();
+			//$("#topwrpperID").css('position', 'relative');
+			if (bAndCheck)
+				$("#" + strId).hide();
+			else
+				$("#" + strId).hide("slide", { direction: "left" }, 400);
+		}
 
-		$('.lst_total .more').on('click', function () {
-			$('.lst_total').css(marginTop5);
+		function createCookie(name, value, days) {
+			var expires;
+
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				expires = "; expires=" + date.toGMTString();
+			} else {
+				expires = "";
+			}
+			document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+		}
+
+		function readCookie(name) {
+			var nameEQ = encodeURIComponent(name) + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+				if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+			}
+			return "";
+		}
+
+		function eraseCookie(name) {
+			createCookie(name, "", -1);
+		}
+		function ClickAlertServiceNoMember() {
+			alert("T슈퍼스톡 서비스 신청 후 이용가능 합니다.");
+			return;
+			var agt = navigator.userAgent;
+			var agt = agt.toLowerCase();
+			var paraM = '{"Auth":{"type":2,"sCode":"A006"}}';
+			if (agt.indexOf("android") != -1)
+				window.tauthJs.requestPinAuth(paraM);
+			else
+				window.location = 'jscall://requestPinAuth?json=' + paraM;
+		}
+
+		function ClickServiceNoMember() {
+			return;
+			var agt = navigator.userAgent;
+			var agt = agt.toLowerCase();
+			var paraM = '{"Auth":{"type":2,"sCode":"A006"}}';
+			if (agt.indexOf("android") != -1)
+				window.tauthJs.requestPinAuth(paraM);
+			else
+				window.location = 'jscall://requestPinAuth?json=' + paraM;
+		}
+
+		function fnGoHome() {
+			var agt = navigator.userAgent;
+			var agt = agt.toLowerCase();
+			if (agt.indexOf("android") != -1)
+				window.tauthJs.goTauthHome();
+			else
+				window.location = "jscall://goTauthHome";
+		}
+
+		function ShowHideBtn() {
+			var strSeName = $('#seName').val();
+			if (strSeName.length > 0) {
+				$("#schbtndel").show();
+			}
+			else
+				$("#schbtndel").hide();
+		}
+		function DelPlaceholder() {
+			var strSeName = $('#seName').val();
+			$("#seName").attr("placeholder", "");
+		}
+		function ShowPlaceholder() {
+			var strSeName = $('#seName').val();
+			if (!strSeName.length)
+				$("#seName").attr("placeholder", "종목명 (종목코드) 혹은 키워드를 입력하세요.");
+		}
+
+		function fnHistoryCheck() {
+			if (document.referrer) {
+				history.back();
+			}
+			else if (history.length > 0) {
+				location.href = "/";
+				//history.go( -1 );
+			}
+			else {
+				location.href = "/";
+			}
+		}
+
+		$(document).ready(function () {
+
+			$('html').scrollTop(0);
 		});
-		$('.lst_theme .more').on('click', function () {
-			$('.lst_theme').css(marginTop5);
-		});
-		$('.lst_sectors .more').on('click', function () {
-			$('.lst_sectors').css(marginTop5);
-		});
-	}
-});
+	</script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-function SearchSelCode( str1, str2 )
-{
-	//alert(str);
-	if(str1!='') {
-		$("#seCode").val(str1);
-	}
-	if(str2!='') {
-		$("#seName").val(str2);
-	}
-	//$("#schdispUL").html('');
-	//$("#schdispDIV").hide();
-	SearchIt(document.sch_form, '');
-}
+		gtag('config', 'UA-160608217-1');
+	</script>
 
-function hitEnterKey(e)
-{
-	if (e.keyCode == 13) {
-		SearchIt(document.sch_form, '1');
-	} else {
-		e.keyCode == 0;
-		return;
-	}
-}
-function ly_close() {
-	$('.ly_rcv').hide();
-	return;
-}
+	<style>
+		.tabMenuUserAddClass {
+			top: 50px;
+			z-index: 300;
+		}
+	</style>
 
-function SearchIt( frm, clk )
-{
-	/*
-	var strSN = $('#seName').val();
-	var strCN = $('#seCode').val();
-	if( !strSN )
-	{
-		alert("검색어를 입력해주세요.");
-		return;
-	}
-	*/
-	if(clk=='1') {
-		$("#seCode").val('');
-	}
-	
-	frm.submit();
-}
-</script>
-<script type="text/javascript">
-function check_mobile()
-{
-	var x = navigator.userAgent;
-	index = x.indexOf('Android 4.1.2')
-	if( index < 0 )
-	{
-		//alert(x);
-	}
-	else
-	{
-		//alert("Android 4.1.2");
-		return true;
-	}
-	return false;
-}
-function toggleIdShow( strId )
-{
-	var bAndCheck = check_mobile();
-	//$("#topwrpperID").css('position', 'fixed');
-	if( bAndCheck )
-		$("#" + strId).show();
-	else
-		$("#" + strId).show("slide", { direction: "left" }, 400);
-}
-
-function toggleIdHidden( strId )
-{
-	var bAndCheck = check_mobile();
-	//$("#topwrpperID").css('position', 'relative');
-	if( bAndCheck )
-		$("#" + strId).hide();
-	else
-		$("#" + strId).hide("slide", { direction: "left" }, 400);
-}
-
-function createCookie(name, value, days) {
-	var expires;
-
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-		expires = "; expires=" + date.toGMTString();
-	} else {
-		expires = "";
-	}
-	document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
-}
-
-function readCookie(name) {
-	var nameEQ = encodeURIComponent(name) + "=";
-	var ca = document.cookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-		if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
-	}
-	return "";
-}
-
-function eraseCookie(name) {
-	createCookie(name, "", -1);
-}
-function ClickAlertServiceNoMember()
-{
-	alert("T슈퍼스톡 서비스 신청 후 이용가능 합니다.");
-	return;
-	var agt = navigator.userAgent;
-	var agt = agt.toLowerCase();
-	var paraM = '{"Auth":{"type":2,"sCode":"A006"}}';
-	if(agt.indexOf("android") != -1) 
-		window.tauthJs.requestPinAuth(paraM);
-	else
-		window.location='jscall://requestPinAuth?json=' + paraM;
-}
-
-function ClickServiceNoMember()
-{
-	return;
-	var agt = navigator.userAgent;
-	var agt = agt.toLowerCase();
-	var paraM = '{"Auth":{"type":2,"sCode":"A006"}}';
-	if(agt.indexOf("android") != -1) 
-		window.tauthJs.requestPinAuth(paraM);
-	else
-		window.location='jscall://requestPinAuth?json=' + paraM;
-}
-
-function fnGoHome()
-{
-	var agt = navigator.userAgent;
-	var agt = agt.toLowerCase();
-	if(agt.indexOf("android") != -1) 
-		window.tauthJs.goTauthHome();
-	else
-		window.location="jscall://goTauthHome";
-}
-
-function ShowHideBtn()
-{
-	var strSeName = $('#seName').val();
-	if( strSeName.length > 0 )
-	{
-		$("#schbtndel").show();
-	}
-	else
-		$("#schbtndel").hide();
-}
-function DelPlaceholder()
-{
-	var strSeName = $('#seName').val();
-	$("#seName").attr("placeholder", "");
-}
-function ShowPlaceholder()
-{
-	var strSeName = $('#seName').val();
-	if( !strSeName.length )
-		$("#seName").attr("placeholder", "종목명 (종목코드) 혹은 키워드를 입력하세요.");
-}
-
-function fnHistoryCheck()
-{
-	if( document.referrer )
-	{
-		history.back();
-	}
-	else if( history.length > 0 )
-	{
-		location.href="/";
-		//history.go( -1 );
-	}
-	else
-	{
-		location.href="/";
-	}
-}
-
-$(document).ready(function(){
-		
-	$('html').scrollTop(0);
-});
-</script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'UA-160608217-1');
-</script>
-
-<style>
-.tabMenuUserAddClass{top: 50px;z-index: 300;}
-</style>
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KPWM3QL');</script>
-<!-- End Google Tag Manager -->
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-KPWM3QL');</script>
+	<!-- End Google Tag Manager -->
 </head>
 
 <body>
-	<div class="wrapper" id="topwrpperID">    <script>
-        $(document).ready(function () {
-            //재무제표 연간,분기 탭메뉴
-            $('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(1)').on('click', function () {
-                $(this).parent('div').children('span').removeClass("active");
-                $("ul.tabs li").removeClass("active");
-                $(this).addClass("active");
-                $(".tableetabs_wrap .tabletabs_content").hide();
-                $('.tabletabs_content.tabs_01').fadeIn();
-            });
+	<div class="wrapper" id="topwrpperID">
+		<script>
+			$(document).ready(function () {
+				//재무제표 연간,분기 탭메뉴
+				$('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(1)').on('click', function () {
+					$(this).parent('div').children('span').removeClass("active");
+					$("ul.tabs li").removeClass("active");
+					$(this).addClass("active");
+					$(".tableetabs_wrap .tabletabs_content").hide();
+					$('.tabletabs_content.tabs_01').fadeIn();
+				});
 
-            $('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(2)').on('click', function () {
-                $(this).parent('div').children('span').removeClass("active");
-                $("ul.tabs li").removeClass("active");
-                $(this).addClass("active");
-                $(".tableetabs_wrap .tabletabs_content").hide();
-                $('.tabletabs_content.tabs_02').fadeIn();
-            });
-        });
-    </script>
+				$('#ss_wrap .cont_bottom_wrap .inbox .tabs_menu span:nth-child(2)').on('click', function () {
+					$(this).parent('div').children('span').removeClass("active");
+					$("ul.tabs li").removeClass("active");
+					$(this).addClass("active");
+					$(".tableetabs_wrap .tabletabs_content").hide();
+					$('.tabletabs_content.tabs_02').fadeIn();
+				});
+			});
+		</script>
 
-        <!-- 검색, 메뉴 -->
-        		<!--헤더/gnb 영역-->
+		<!-- 검색, 메뉴 -->
+		<!--헤더/gnb 영역-->
 		<div class="top-wrap">
 			<!--헤더-->
 			<!-- 191111 검색기능 추가 -->
@@ -562,9 +866,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				<form action="/search/list" method="get" name="sch_form">
 					<input type="hidden" id="seCode" name="cn" value="">
 					<fieldset>
-						<input type="text" onkeydown="hitEnterKey(event);" onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();" placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255" id="seName" name="sn" class="input_txt input_txt_fcs" onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();" onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
-						<span class="searchclear" style="display: none;"><img src="/img/common/searchclear.png" alt="검색어지우기"></span>
-						<a href="javascript:SearchIt(document.sch_form, '1');" onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img src="/img/common/sch_btn.png" alt="검색" class="searchBtn"></a>
+						<input type="text" onkeydown="hitEnterKey(event);"
+							onkeyup="hitEnterKey(event);ShowHideBtn();ShowPlaceholder();"
+							placeholder="종목명 (종목코드) 혹은 키워드를 입력하세요." value="" autocomplete="off" maxlength="255"
+							id="seName" name="sn" class="input_txt input_txt_fcs"
+							onfocus="DelPlaceholder();ShowHideBtn();SetIntervalSearchWord();"
+							onblur="ShowPlaceholder();ShowHideBtn();ClrIntervalSearchWord();">
+						<span class="searchclear" style="display: none;"><img src="/img/common/searchclear.png"
+								alt="검색어지우기"></span>
+						<a href="javascript:SearchIt(document.sch_form, '1');"
+							onclick="gtag('event', 'view_search', {'event_category' : 'btn_search'});"><img
+								src="/img/common/sch_btn.png" alt="검색" class="searchBtn"></a>
 					</fieldset>
 				</form>
 				<div style="display: none;" id="schdispDIV" class="ly_rcv">
@@ -590,97 +902,111 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				</nav>
 			</div>
 			<!--메뉴-->
-							<div class="sub_menu">
-					<nav class="nav">
-						<h2><span class="item">우량주 종목분석</span></h2>
-						<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
-					</nav>
-				</div>
-					</div>
+			<div class="sub_menu">
+				<nav class="nav">
+					<h2><span class="item">우량주 종목분석</span></h2>
+					<button class="btn_back" type="button" onclick="fnHistoryCheck();"> <span>뒤로</span> </button>
+				</nav>
+			</div>
+		</div>
 		<style>
 			#ss_wrap .index_section .li_wrap ul.type02 li {
 				margin-bottom: 0 !important;
 			}
-		</style>        <!-- //검색, 메뉴 -->
+		</style> <!-- //검색, 메뉴 -->
 
-        <div id="ss_wrap" class="tsst_ver">
-            <div class="cont_top_wrap">
-                <div style="position: relative;">
-                    <div class="item">
-                        <p class="logo"><a href="/search/view?sn=339950"><img src="https://kimg.choicestock.co.kr/img/logo/339950.jpg" onerror='this.src="/img/common/empty_logo.jpg";' /></a></p>
-                        <p class="name" style="width: 150px;"><a href="/search/view?sn=339950">아이비김영</a></p>
-                    </div>
-                    <p class="type">
-                                        <a href="/stock/recommend/bluechip"><img src="/img/cont/ico_txt_blue_chip.png" alt="우량주" /></a>
-                                        </p>
-                    <p class="desc">대학 편입학 입시교육 및 취업교육 컨텐츠를 제공하고 있습니다.편입사업부문과 취업사업부문을 운영하고 있습니다.</p>
+		<div id="ss_wrap" class="tsst_ver">
+			<div class="cont_top_wrap">
+				<div style="position: relative;">
+					<div class="item">
+						<p class="logo"><a href="/search/view?sn=339950"><img
+									src="https://kimg.choicestock.co.kr/img/logo/339950.jpg"
+									onerror='this.src="/img/common/empty_logo.jpg";' /></a></p>
+						<p class="name" style="width: 150px;"><a href="/search/view?sn=339950">아이비김영</a></p>
+					</div>
+					<p class="type">
+						<a href="/stock/recommend/bluechip"><img src="/img/cont/ico_txt_blue_chip.png" alt="우량주" /></a>
+					</p>
+					<p class="desc">대학 편입학 입시교육 및 취업교육 컨텐츠를 제공하고 있습니다.편입사업부문과 취업사업부문을 운영하고 있습니다.</p>
 
-                </div>
-                <div class="tbl_wrap02">
-                                        <table cellpadding="0" cellspacing="0" class="tbl_analysis">
-                        <colgroup>
-                            <col width="25%" />
-                            <col width="25%" />
-                            <col width="25%" />
-                            <!--<col width="25%" />-->
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th class="th01"><img src="/img/cont/add/txt_analysis_tbl_01.png" class="pdl_10" alt="투자의견" /></th>
-                                <th class="th02"><img src="/img/cont/add/txt_analysis_tbl_02.png" class="pdl_10" alt="목표가" /></th>
-                                <th class="th03"><img src="/img/cont/add/txt_target_tbl_01.png" class="pdl_10" alt="추천가" /></th>
-                                <!--<th class="th04"><img src="/img/cont/add/txt_analysis_tbl_04.png" style="height: 17px;" class="pdl_15" alt="상승 여력" /></th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="td04 txt" style="font-size:18px;">분할 매수</td>
-                                <td class="td02"><span class="price2">2,710</span><span class="mgr_5">원</span></td>
-                                <td class="td03"><span class="price2">2,355</span><span class="mgr_5">원</span></td>
-                                <!--<td class="td04 txt nonebg"><span class="f22 increase">15.0</span><span>%</span></td>-->
+				</div>
+				<div class="tbl_wrap02">
+					<table cellpadding="0" cellspacing="0" class="tbl_analysis">
+						<colgroup>
+							<col width="25%" />
+							<col width="25%" />
+							<col width="25%" />
+							<!--<col width="25%" />-->
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="th01"><img src="/img/cont/add/txt_analysis_tbl_01.png" class="pdl_10"
+										alt="투자의견" /></th>
+								<th class="th02"><img src="/img/cont/add/txt_analysis_tbl_02.png" class="pdl_10"
+										alt="목표가" /></th>
+								<th class="th03"><img src="/img/cont/add/txt_target_tbl_01.png" class="pdl_10"
+										alt="추천가" /></th>
+								<!--<th class="th04"><img src="/img/cont/add/txt_analysis_tbl_04.png" style="height: 17px;" class="pdl_15" alt="상승 여력" /></th>-->
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="td04 txt" style="font-size:18px;">분할 매수</td>
+								<td class="td02"><span class="price2">2,710</span><span class="mgr_5">원</span></td>
+								<td class="td03"><span class="price2">2,355</span><span class="mgr_5">원</span></td>
+								<!--<td class="td04 txt nonebg"><span class="f22 increase">15.0</span><span>%</span></td>-->
 
-                            </tr>
-                            <tr>
-                                <th class="th05" colspan=2><img src="/img/cont/add/txt_recommend_tbl_add1.png" class="pdl_10" alt="상승시 분할 매도가" /></th>
-                                <th class="th06" colspan=2><img src="/img/cont/add/txt_recommend_tbl_add2.png" class="pdl_10" alt="하락시 손절 매도가" /></th>
-                            </tr>
-                            <tr>
-                                <td class="td05 txt" colspan=2><span class=" price2"  style=" font-size: 16px;">2,680</span><span class="mgr_5">원</span> ~ <span class=" price2" style=" font-size: 16px;">2,735</span><span class="mgr_5">원</span></td>
-                                <td class="td06 txt nonebg" colspan=2 style=" font-size: 17px; font-weight: bold; ">2,190</span><span class="mgr_5" style="font-size:13px;">원</span></td>
+							</tr>
+							<tr>
+								<th class="th05" colspan=2><img src="/img/cont/add/txt_recommend_tbl_add1.png"
+										class="pdl_10" alt="상승시 분할 매도가" /></th>
+								<th class="th06" colspan=2><img src="/img/cont/add/txt_recommend_tbl_add2.png"
+										class="pdl_10" alt="하락시 손절 매도가" /></th>
+							</tr>
+							<tr>
+								<td class="td05 txt" colspan=2><span class=" price2"
+										style=" font-size: 16px;">2,680</span><span class="mgr_5">원</span> ~ <span
+										class=" price2" style=" font-size: 16px;">2,735</span><span
+										class="mgr_5">원</span></td>
+								<td class="td06 txt nonebg" colspan=2 style=" font-size: 17px; font-weight: bold; ">
+									2,190</span><span class="mgr_5" style="font-size:13px;">원</span></td>
 
-                            </tr>
-                        </tbody>
-                    </table>
-                                    </div>
-            </div>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 
-            <!--신규매수, 비중확대 하단 컨텐츠-->
-            <div class="inbox score_wrap">
-                <h5><img src="/img/cont/h4_tit_01.png" alt="종합 분석 결과" /></h5>
-                <p class="total_score" style="background:url('/img/index/img_score_flag2.png') no-repeat scroll 10px 0 / 115px auto">
-                    <span class="score" style="margin-left:55px;">48</span><span class="txt">점</span>
-                </p>
-                <ul class="instrument_wrap">
-                    <li>
-                        <p class="tit"><img alt="수급분석" src="/img/cont/txt_score_type3.png"></p>
-                        <img class="img_instrument" src="/img/cont/score/img_score_instrument_038.png">
-                        <p class="score"><span>38</span>점</p>
-                    </li>
-                    <li>
-                        <p class="tit"><img alt="밸류에이션" src="/img/cont/txt_score_type2.png"></p>
-                        <img class="img_instrument" src="/img/cont/score/img_score_instrument_060.png">
-                        <p class="score"><span>60</span>점</p>
-                    </li>
-                    <li>
-                        <p class="tit"><img alt="펀더멘탈" src="/img/cont/txt_score_type1.png"></p>
-                        <img class="img_instrument" src="/img/cont/score/img_score_instrument_046.png">
-                        <p class="score"><span>46</span>점</p>
-                    </li>
-                </ul>
-                <p class="clear" style="background-color: #eee; margin:10px 5px 0 ; padding: 10px 0; text-align: center;">
-                    <img src="/img/cont/txt_search_bot_info.png" alt="종합점수(100점 만점) = 기업분석 + 수급분석" style="height:18px; ">
-                </p>
-            </div>
+			<!--신규매수, 비중확대 하단 컨텐츠-->
+			<div class="inbox score_wrap">
+				<h5><img src="/img/cont/h4_tit_01.png" alt="종합 분석 결과" /></h5>
+				<p class="total_score"
+					style="background:url('/img/index/img_score_flag2.png') no-repeat scroll 10px 0 / 115px auto">
+					<span class="score" style="margin-left:55px;">48</span><span class="txt">점</span>
+				</p>
+				<ul class="instrument_wrap">
+					<li>
+						<p class="tit"><img alt="수급분석" src="/img/cont/txt_score_type3.png"></p>
+						<img class="img_instrument" src="/img/cont/score/img_score_instrument_038.png">
+						<p class="score"><span>38</span>점</p>
+					</li>
+					<li>
+						<p class="tit"><img alt="밸류에이션" src="/img/cont/txt_score_type2.png"></p>
+						<img class="img_instrument" src="/img/cont/score/img_score_instrument_060.png">
+						<p class="score"><span>60</span>점</p>
+					</li>
+					<li>
+						<p class="tit"><img alt="펀더멘탈" src="/img/cont/txt_score_type1.png"></p>
+						<img class="img_instrument" src="/img/cont/score/img_score_instrument_046.png">
+						<p class="score"><span>46</span>점</p>
+					</li>
+				</ul>
+				<p class="clear"
+					style="background-color: #eee; margin:10px 5px 0 ; padding: 10px 0; text-align: center;">
+					<img src="/img/cont/txt_search_bot_info.png" alt="종합점수(100점 만점) = 기업분석 + 수급분석"
+						style="height:18px; ">
+				</p>
+			</div>
 
 
 
@@ -1467,1064 +1793,1119 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-            <div class="cont_bottom_wrap">
-                <!--타이틀-->
-                <div class="inbox" style="padding-top: 17px">
-                    <div class="tit_wrap">아이비김영, 연간 실적호조+우량주+저평가</div>
-                </div>
-                <!--투자포인트-->
-                <div class="inbox">
-                    <h5><img src="/img/cont/h4_tit_02.png?pp=001" alt="투자 포인트" /></h5>
-                    <ul class="investment_point">
-<li>기업 개요 : 대학 편입학과 취업 교육 콘텐츠를 제공하는 교육 전문 기업.</li><li>2024년 예상 매출액 1,052 억원 (전년대비 ▲ 11.1%), 주당순이익 278원으로 60.8% 증가</li><li>AI 종목진단 점수 72점으로 상장사 중 상위 4%에 속하는 우량주</li><li>적정주가 2,845원 대비 저평가 상태로 실적 성장에 따른 높은 주가 상승률 예상</li>                    </ul>
-                </div>
-                <!--주요 투자지표-->
-                <div class="inbox ofh">
-                    <h5><img src="/img/cont/h4_tit_03.png?pp=001" alt="주요 투자지표" /></h5>
-                    <ul class="total_info">
-                        <li>
-                            <p class="title">EPS<span>주당순이익</span></p>
-                            <p class="data"><span>269</span>원</p>
-                        </li>
-                        <li>
-                            <p class="title">BPS<span>주당순자산</span></p>
-                            <p class="data"><span>1,144</span>원</p>
-                        </li>
-                        <li>
-                            <p class="title">시가배당률<span></span></p>
-                            <p class="data"><span>1.08%</span></p>
-                        </li>
-                        <li>
-                            <p class="title">PER<br><span>주가수익배수</span></p>
-                            <p class="data"><span>8.63</span>배</p>
-                        </li>
-                        <li>
-                            <p class="title">PBR<br><span>주가순자산배수</span></p>
-                            <p class="data"><span>2.03</span>배</p>
-                        </li>
-                        <li>
-                            <p class="title">ROE<br><span>자기자본이익률</span></p>
-                            <p class="data"><span>23.55</span>%</p>
-                        </li>
-                    </ul>
-                </div>
-                <!--v차트 분석 (특허출원)-->
-                <div class="inbox">
-                    <div class="bdr_title">
-                        <h4 class="title">재무제표</h4>
-                        <div class="tabs_menu">
-                            <span class="active">연간</span>
-                            <span>분기</span>
-                            <strong class="unit">* 기준 : 억원</strong>
-                        </div>
-                        <!-- //tabs_menu -->
-                    </div>
-
-                    <div class="tableetabs_wrap">
-                                            <script>
-                        var tooltip = 'na';
-                        var mry_title1 = ['2021','2022','2023',];
-                        var mry_title2 = ['2021','2022','2023',];
-                        var mry_title3 = ['2021','2022','2023',];
-                        var mry_value1 = [
-                            {'name': '매출액', 'data': [794,865,947,]},
-                            {'name': '영업이익', 'data': [78,31,89,]},
-                            {'name': '순이익', 'data': [51,3,78,]}
-                        ];
-                        var mry_value2 = [
-                            {'name': '자산총계', 'data': [749,756,801,]},
-                            {'name': '부채총계', 'data': [381,400,381,]},
-                            {'name': '자본총계', 'data': [368,357,420,]}
-                        ];
-                        var mry_value3 = [
-                            {'name': '영업활동', 'data': [213,146,210,]},
-                            {'name': '투자활동', 'data': [-169,-85,-141,]},
-                            {'name': '재무활동', 'data': [-30,-84,-77,]}
-                        ];
-                        </script>
-                        <!-- 재무제표 > 연간 -->
-                        <div class="tabletabs_content tabs_01">
-                            <div class="chart_box">
-                                <div id="containerfinancials1_1" class="outline_styleSL"></div>
-                                <ul class="chart_legend">
-                                    <li><span><i></i>매출액</span></li>
-                                    <li><span><i></i>영업이익</span></li>
-                                    <li><span><i></i>지배순이익</span></li>
-                                </ul>
-                            </div>
-                            <div class="chart_box">
-                                <div id="containerfinancials1_2" class="outline_styleSL"></div>
-                                <ul class="chart_legend">
-                                    <li><span><i></i>자산총계</span></li>
-                                    <li><span><i></i>부채총계</span></li>
-                                    <li><span><i></i>자본총계</span></li>
-                                </ul>
-                            </div>
-                            <div class="chart_box">
-                                <div id="containerfinancials1_3" class="outline_styleSL"></div>
-                                <ul class="chart_legend">
-                                    <li><span><i></i>영업활동</span></li>
-                                    <li><span><i></i>투자활동</span></li>
-                                    <li><span><i></i>재무활동</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- //tabletabs_content -->
-                                            <!-- 재무제표 > 분기 -->
-                        <script>
-                        var tooltip = 'na';
-                        var mrq_title1 = ['2024.03','2024.06','2024.09',];
-                        var mrq_title2 = ['2024.03','2024.06','2024.09',];
-                        var mrq_title3 = ['2024.03','2024.06','2024.09',];
-                        var mrq_value1 = [
-                            {'name': '매출액', 'data': [195,246,324,]},
-                            {'name': '영업이익', 'data': [-10,33,88,]},
-                            {'name': '순이익', 'data': [-8,16,78,]}
-                        ];
-                        var mrq_value2 = [
-                            {'name': '자산총계', 'data': [917,927,964,]},
-                            {'name': '부채총계', 'data': [512,506,471,]},
-                            {'name': '자본총계', 'data': [405,421,493,]}
-                        ];
-                        var mrq_value3 = [
-                            {'name': '영업활동', 'data': [80,109,79,]},
-                            {'name': '투자활동', 'data': [44,-185,-34,]},
-                            {'name': '재무활동', 'data': [-18,-29,-23,]}
-                        ];
-                        </script>
-                        <div class="tabletabs_content tabs_02" style="display: none;">
-                            <div class="chart_box">
-                                <div id="containerfinancials2_1" class="outline_styleSL"></div>
-                                <ul class="chart_legend">
-                                    <li><span><i></i>매출액</span></li>
-                                    <li><span><i></i>영업이익</span></li>
-                                    <li><span><i></i>지배순이익</span></li>
-                                </ul>
-                            </div>
-                            <div class="chart_box">
-                                <div id="containerfinancials2_2" class="outline_styleSL"></div>
-                                <ul class="chart_legend">
-                                    <li><span><i></i>자산총계</span></li>
-                                    <li><span><i></i>부채총계</span></li>
-                                    <li><span><i></i>자본총계</span></li>
-                                </ul>
-                            </div>
-                            <div class="chart_box">
-                                <div id="containerfinancials2_3" class="outline_styleSL"></div>
-                                <ul class="chart_legend">
-                                    <li><span><i></i>영업활동</span></li>
-                                    <li><span><i></i>투자활동</span></li>
-                                    <li><span><i></i>재무활동</span></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- //tabletabs_wrap -->
-                </div>
-            </div>
-            <!-- //maingameSwiper -->
-        </div>
-<style>
-/* PAGER */
-#ss_wrap .cont_bottom_wrap nav{ background-color: #646464; padding-top:20px; height: 30px;text-align: center;}
-#ss_wrap .cont_bottom_wrap nav ul{ width: 60px; margin: 0 auto;}
-#ss_wrap .cont_bottom_wrap nav li{ display:block; float:left; width: 15px; height: 15px; background: url(/img/cont/bullet_slide_0.png) no-repeat 0 0 / 15px auto; }
-#ss_wrap .cont_bottom_wrap nav li a{display:block;  width: 15px; height: 15px; margin-right: 5px; font-size:0; text-indent:-5000px;}
-#ss_wrap .cont_bottom_wrap nav li.on{ background: url(/img/cont/bullet_slide_1.png) no-repeat 0 0 / 15px auto;}
-</style>
-<script type="text/javascript" >
-function comma(str) {
-    str = String(str);
-    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-}
-$(document).ready(function () {
-    tooltip = tooltip || '';
-    Highcharts.setOptions({
-        lang: {
-            thousandsSep: ','
-        }
-    });
-    // 검색결과 일봉 + 선3개 차트
-    if ($('#containerfinancials1_1').length) {
-        Highcharts.chart('containerfinancials1_1', {
-
-            chart: {
-                type: 'column',
-            },
-
-            // 하단 네비게이션 제거
-            navigator: {
-                enabled: false,
-            },
-
-            // 스크롤바 제거
-            scrollbar: {
-                enabled: false
-            },
-
-            // 기간범위선택
-            rangeSelector: {
-                enabled: false
-            },
-
-            title: {
-                text: null
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            lang: {
-                noData: "해당 데이터가 없습니다",
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            exporting: {
-                enabled: false,
-            },
-
-            colors: ["#e57828", "#fcc983", "#ccd1d5"],
-
-            tooltip: {
-                shared: true,
-                useHTML: true,
-
-                formatter: function() {
-                    var s = this.x+'<br>';
-                    $.each(this.points, function(i, point) {
-                        s += '<span style="color:'+point.series.color+'">'+point.series.name+' : <b>'+comma(point.y)+'억원</b><br/>'
-                    });
-                    return s;
-                },
-                shared: true
-            },
-
-            xAxis: [{
-                categories: mry_title1,
-                crosshair: true,
-                labels: {
-                    style: {
-                        color: '#939393',
-                        fontSize: '0.85rem'
-                    }
-                }
-            }],
-
-            yAxis: {
-                title: {
-                    text: null
-                },
-                lineColor: null,
-                minorGridLineWidth: 1,
-                gridLineWidth: 0,
-                lineWidth: 1,
-                plotLines: [{
-                    color: '#c8c8c8',
-                    width: 1,
-                    value: 0
-                }],
-                alternateGridColor: null,
-                showFirstLabel: false,
-                labels: {
-                    enabled: false
-                }
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            exporting: {
-                enabled: false
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            series: mry_value1,
-
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false,
-                    }
-                },
-                column: {
-                    minPointLength: 5,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        format: '{point.y:,.0f}',
-                    }
-                }
-            },
-        });
-    }
-
-    if ($('#containerfinancials1_2').length) {
-        Highcharts.chart('containerfinancials1_2', {
-
-            chart: {
-                type: 'column',
-            },
-
-            // 하단 네비게이션 제거
-            navigator: {
-                enabled: false,
-            },
-
-            // 스크롤바 제거
-            scrollbar: {
-                enabled: false
-            },
-
-            // 기간범위선택
-            rangeSelector: {
-                enabled: false
-            },
-
-            title: {
-                text: null
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            lang: {
-                noData: "해당 데이터가 없습니다",
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            exporting: {
-                enabled: false,
-            },
-
-            colors: ["#e57828", "#fcc983", "#ccd1d5"],
-
-            tooltip: {
-                shared: true,
-                useHTML: true,
-
-                formatter: function() {
-                    var s = this.x+'<br>';
-                    $.each(this.points, function(i, point) {
-                        s += '<span style="color:'+point.series.color+'">'+point.series.name+' : <b>'+comma(point.y)+'억원</b><br/>'
-                    });
-                    return s;
-                },
-                shared: true
-            },
-
-            xAxis: [{
-                categories: mry_title2,
-                crosshair: true,
-                labels: {
-                    style: {
-                        color: '#939393',
-                        fontSize: '0.85rem'
-                    }
-                }
-            }],
-
-            yAxis: {
-                title: {
-                    text: null
-                },
-                lineColor: null,
-                minorGridLineWidth: 1,
-                gridLineWidth: 0,
-                lineWidth: 1,
-                plotLines: [{
-                    color: '#c8c8c8',
-                    width: 1,
-                    value: 0
-                }],
-                alternateGridColor: null,
-                showFirstLabel: false,
-                labels: {
-                    enabled: false
-                }
-            },
-
-
-            credits: {
-                enabled: false
-            },
-
-            exporting: {
-                enabled: false
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            series: mry_value2,
-
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false,
-                    }
-                },
-                column: {
-                    minPointLength: 5,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        format: '{point.y:,.0f}',
-                    }
-                }
-            },
-        });
-    }
-    if ($('#containerfinancials1_3').length) {
-        Highcharts.chart('containerfinancials1_3', {
-
-            chart: {
-                type: 'column',
-            },
-
-            // 하단 네비게이션 제거
-            navigator: {
-                enabled: false,
-            },
-
-            // 스크롤바 제거
-            scrollbar: {
-                enabled: false
-            },
-
-            // 기간범위선택
-            rangeSelector: {
-                enabled: false
-            },
-
-            title: {
-                text: null
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            lang: {
-                noData: "해당 데이터가 없습니다",
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            exporting: {
-                enabled: false,
-            },
-
-            colors: ["#e57828", "#fcc983", "#ccd1d5"],
-
-            tooltip: {
-                shared: true,
-                useHTML: true,
-
-                formatter: function() {
-                    var s = this.x+'<br>';
-                    $.each(this.points, function(i, point) {
-                        s += '<span style="color:'+point.series.color+'">'+point.series.name+' : <b>'+comma(point.y)+'억원</b><br/>'
-                    });
-                    return s;
-                },
-                shared: true
-            },
-
-            xAxis: [{
-                categories: mry_title3,
-                crosshair: true,
-                labels: {
-                    style: {
-                        color: '#939393',
-                        fontSize: '0.85rem'
-                    }
-                }
-            }],
-
-            yAxis: {
-                title: {
-                    text: null
-                },
-                lineColor: null,
-                minorGridLineWidth: 1,
-                gridLineWidth: 0,
-                lineWidth: 1,
-                plotLines: [{
-                    color: '#c8c8c8',
-                    width: 1,
-                    value: 0
-                }],
-                alternateGridColor: null,
-                showFirstLabel: false,
-                labels: {
-                    enabled: false
-                }
-            },
-
-
-            credits: {
-                enabled: false
-            },
-
-            exporting: {
-                enabled: false
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            series: mry_value3,
-
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false,
-                    }
-                },
-                column: {
-                    minPointLength: 5,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        format: '{point.y:,.0f}',
-                    }
-                }
-            },
-        });
-    }
-
-    if ($('#containerfinancials2_1').length) {
-        Highcharts.chart('containerfinancials2_1', {
-
-            chart: {
-                type: 'column',
-            },
-
-            // 하단 네비게이션 제거
-            navigator: {
-                enabled: false,
-            },
-
-            // 스크롤바 제거
-            scrollbar: {
-                enabled: false
-            },
-
-            // 기간범위선택
-            rangeSelector: {
-                enabled: false
-            },
-
-            title: {
-                text: null
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            lang: {
-                noData: "해당 데이터가 없습니다",
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            exporting: {
-                enabled: false,
-            },
-
-            colors: ["#e57828", "#fcc983", "#ccd1d5"],
-
-            tooltip: {
-                shared: true,
-                useHTML: true,
-
-                formatter: function() {
-                    var s = this.x+'<br>';
-                    $.each(this.points, function(i, point) {
-                        s += '<span style="color:'+point.series.color+'">'+point.series.name+' : <b>'+comma(point.y)+'억원</b><br/>'
-                    });
-                    return s;
-                },
-                shared: true
-            },
-
-            xAxis: [{
-                categories: mrq_title1,
-                crosshair: true,
-                labels: {
-                    style: {
-                        color: '#939393',
-                        fontSize: '0.85rem'
-                    }
-                }
-            }],
-
-            yAxis: {
-                title: {
-                    text: null
-                },
-                lineColor: null,
-                minorGridLineWidth: 1,
-                gridLineWidth: 0,
-                lineWidth: 1,
-                plotLines: [{
-                    color: '#c8c8c8',
-                    width: 1,
-                    value: 0
-                }],
-                alternateGridColor: null,
-                showFirstLabel: false,
-                labels: {
-                    enabled: false
-                }
-            },
-
-
-            credits: {
-                enabled: false
-            },
-
-            exporting: {
-                enabled: false
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            series: mrq_value1,
-
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false,
-                    }
-                },
-                column: {
-                    minPointLength: 5,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        format: '{point.y:,.0f}',
-                    }
-                }
-            },
-        });
-    }
-
-    if ($('#containerfinancials2_2').length) {
-        Highcharts.chart('containerfinancials2_2', {
-
-            chart: {
-                type: 'column',
-            },
-
-            // 하단 네비게이션 제거
-            navigator: {
-                enabled: false,
-            },
-
-            // 스크롤바 제거
-            scrollbar: {
-                enabled: false
-            },
-
-            // 기간범위선택
-            rangeSelector: {
-                enabled: false
-            },
-
-            title: {
-                text: null
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            lang: {
-                noData: "해당 데이터가 없습니다",
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            exporting: {
-                enabled: false,
-            },
-
-            colors: ["#e57828", "#fcc983", "#ccd1d5"],
-
-            tooltip: {
-                shared: true,
-                useHTML: true,
-
-                formatter: function() {
-                    var s = this.x+'<br>';
-                    $.each(this.points, function(i, point) {
-                        s += '<span style="color:'+point.series.color+'">'+point.series.name+' : <b>'+comma(point.y)+'억원</b><br/>'
-                    });
-                    return s;
-                },
-                shared: true
-            },
-
-            xAxis: [{
-                categories: mrq_title2,
-                crosshair: true,
-                labels: {
-                    style: {
-                        color: '#939393',
-                        fontSize: '0.85rem'
-                    }
-                }
-            }],
-
-            yAxis: {
-                title: {
-                    text: null
-                },
-                lineColor: null,
-                minorGridLineWidth: 1,
-                gridLineWidth: 0,
-                lineWidth: 1,
-                plotLines: [{
-                    color: '#c8c8c8',
-                    width: 1,
-                    value: 0
-                }],
-                alternateGridColor: null,
-                showFirstLabel: false,
-                labels: {
-                    enabled: false
-                }
-            },
-
-
-            credits: {
-                enabled: false
-            },
-
-            exporting: {
-                enabled: false
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            series: mrq_value2,
-
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false,
-                    }
-                },
-                column: {
-                    minPointLength: 5,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        format: '{point.y:,.0f}',
-                    }
-                }
-            },
-        });
-    }
-
-    if ($('#containerfinancials2_3').length) {
-        Highcharts.chart('containerfinancials2_3', {
-
-            chart: {
-                type: 'column',
-            },
-
-            // 하단 네비게이션 제거
-            navigator: {
-                enabled: false,
-            },
-
-            // 스크롤바 제거
-            scrollbar: {
-                enabled: false
-            },
-
-            // 기간범위선택
-            rangeSelector: {
-                enabled: false
-            },
-
-            title: {
-                text: null
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            credits: {
-                enabled: false
-            },
-
-            lang: {
-                noData: "해당 데이터가 없습니다",
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            exporting: {
-                enabled: false,
-            },
-
-            colors: ["#e57828", "#fcc983", "#ccd1d5"],
-
-            tooltip: {
-                shared: true,
-                useHTML: true,
-
-                formatter: function() {
-                    var s = this.x+'<br>';
-                    $.each(this.points, function(i, point) {
-                        s += '<span style="color:'+point.series.color+'">'+point.series.name+' : <b>'+comma(point.y)+'억원</b><br/>'
-                    });
-                    return s;
-                },
-                shared: true
-            },
-
-            xAxis: [{
-                categories: mrq_title3,
-                crosshair: true,
-                labels: {
-                    style: {
-                        color: '#939393',
-                        fontSize: '0.85rem'
-                    }
-                }
-            }],
-
-            yAxis: {
-                title: {
-                    text: null
-                },
-                lineColor: null,
-                minorGridLineWidth: 1,
-                gridLineWidth: 0,
-                lineWidth: 1,
-                plotLines: [{
-                    color: '#c8c8c8',
-                    width: 1,
-                    value: 0
-                }],
-                alternateGridColor: null,
-                showFirstLabel: false,
-                labels: {
-                    enabled: false
-                }
-            },
-
-
-            credits: {
-                enabled: false
-            },
-
-            exporting: {
-                enabled: false
-            },
-
-            legend: {
-                enabled: false,
-            },
-
-            series: mrq_value3,
-
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false,
-                    }
-                },
-                column: {
-                    minPointLength: 5,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        format: '{point.y:,.0f}',
-                    }
-                }
-            },
-        });
-    }
-});
-</script>		<!--푸터-->
-		<footer id="footer">	
+			<div class="cont_bottom_wrap">
+				<!--타이틀-->
+				<div class="inbox" style="padding-top: 17px">
+					<div class="tit_wrap">아이비김영, 연간 실적호조+우량주+저평가</div>
+				</div>
+				<!--투자포인트-->
+				<div class="inbox">
+					<h5><img src="/img/cont/h4_tit_02.png?pp=001" alt="투자 포인트" /></h5>
+					<ul class="investment_point">
+						<li>기업 개요 : 대학 편입학과 취업 교육 콘텐츠를 제공하는 교육 전문 기업.</li>
+						<li>2024년 예상 매출액 1,052 억원 (전년대비 ▲ 11.1%), 주당순이익 278원으로 60.8% 증가</li>
+						<li>AI 종목진단 점수 72점으로 상장사 중 상위 4%에 속하는 우량주</li>
+						<li>적정주가 2,845원 대비 저평가 상태로 실적 성장에 따른 높은 주가 상승률 예상</li>
+					</ul>
+				</div>
+				<!--주요 투자지표-->
+				<div class="inbox ofh">
+					<h5><img src="/img/cont/h4_tit_03.png?pp=001" alt="주요 투자지표" /></h5>
+					<ul class="total_info">
+						<li>
+							<p class="title">EPS<span>주당순이익</span></p>
+							<p class="data"><span>269</span>원</p>
+						</li>
+						<li>
+							<p class="title">BPS<span>주당순자산</span></p>
+							<p class="data"><span>1,144</span>원</p>
+						</li>
+						<li>
+							<p class="title">시가배당률<span></span></p>
+							<p class="data"><span>1.08%</span></p>
+						</li>
+						<li>
+							<p class="title">PER<br><span>주가수익배수</span></p>
+							<p class="data"><span>8.63</span>배</p>
+						</li>
+						<li>
+							<p class="title">PBR<br><span>주가순자산배수</span></p>
+							<p class="data"><span>2.03</span>배</p>
+						</li>
+						<li>
+							<p class="title">ROE<br><span>자기자본이익률</span></p>
+							<p class="data"><span>23.55</span>%</p>
+						</li>
+					</ul>
+				</div>
+				<!--v차트 분석 (특허출원)-->
+				<div class="inbox">
+					<div class="bdr_title">
+						<h4 class="title">재무제표</h4>
+						<div class="tabs_menu">
+							<span class="active">연간</span>
+							<span>분기</span>
+							<strong class="unit">* 기준 : 억원</strong>
+						</div>
+						<!-- //tabs_menu -->
+					</div>
+
+					<div class="tableetabs_wrap">
+						<script>
+							var tooltip = 'na';
+							var mry_title1 = ['2021', '2022', '2023',];
+							var mry_title2 = ['2021', '2022', '2023',];
+							var mry_title3 = ['2021', '2022', '2023',];
+							var mry_value1 = [
+								{ 'name': '매출액', 'data': [794, 865, 947,] },
+								{ 'name': '영업이익', 'data': [78, 31, 89,] },
+								{ 'name': '순이익', 'data': [51, 3, 78,] }
+							];
+							var mry_value2 = [
+								{ 'name': '자산총계', 'data': [749, 756, 801,] },
+								{ 'name': '부채총계', 'data': [381, 400, 381,] },
+								{ 'name': '자본총계', 'data': [368, 357, 420,] }
+							];
+							var mry_value3 = [
+								{ 'name': '영업활동', 'data': [213, 146, 210,] },
+								{ 'name': '투자활동', 'data': [-169, -85, -141,] },
+								{ 'name': '재무활동', 'data': [-30, -84, -77,] }
+							];
+						</script>
+						<!-- 재무제표 > 연간 -->
+						<div class="tabletabs_content tabs_01">
+							<div class="chart_box">
+								<div id="containerfinancials1_1" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>매출액</span></li>
+									<li><span><i></i>영업이익</span></li>
+									<li><span><i></i>지배순이익</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials1_2" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>자산총계</span></li>
+									<li><span><i></i>부채총계</span></li>
+									<li><span><i></i>자본총계</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials1_3" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>영업활동</span></li>
+									<li><span><i></i>투자활동</span></li>
+									<li><span><i></i>재무활동</span></li>
+								</ul>
+							</div>
+						</div>
+						<!-- //tabletabs_content -->
+						<!-- 재무제표 > 분기 -->
+						<script>
+							var tooltip = 'na';
+							var mrq_title1 = ['2024.03', '2024.06', '2024.09',];
+							var mrq_title2 = ['2024.03', '2024.06', '2024.09',];
+							var mrq_title3 = ['2024.03', '2024.06', '2024.09',];
+							var mrq_value1 = [
+								{ 'name': '매출액', 'data': [195, 246, 324,] },
+								{ 'name': '영업이익', 'data': [-10, 33, 88,] },
+								{ 'name': '순이익', 'data': [-8, 16, 78,] }
+							];
+							var mrq_value2 = [
+								{ 'name': '자산총계', 'data': [917, 927, 964,] },
+								{ 'name': '부채총계', 'data': [512, 506, 471,] },
+								{ 'name': '자본총계', 'data': [405, 421, 493,] }
+							];
+							var mrq_value3 = [
+								{ 'name': '영업활동', 'data': [80, 109, 79,] },
+								{ 'name': '투자활동', 'data': [44, -185, -34,] },
+								{ 'name': '재무활동', 'data': [-18, -29, -23,] }
+							];
+						</script>
+						<div class="tabletabs_content tabs_02" style="display: none;">
+							<div class="chart_box">
+								<div id="containerfinancials2_1" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>매출액</span></li>
+									<li><span><i></i>영업이익</span></li>
+									<li><span><i></i>지배순이익</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials2_2" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>자산총계</span></li>
+									<li><span><i></i>부채총계</span></li>
+									<li><span><i></i>자본총계</span></li>
+								</ul>
+							</div>
+							<div class="chart_box">
+								<div id="containerfinancials2_3" class="outline_styleSL"></div>
+								<ul class="chart_legend">
+									<li><span><i></i>영업활동</span></li>
+									<li><span><i></i>투자활동</span></li>
+									<li><span><i></i>재무활동</span></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<!-- //tabletabs_wrap -->
+				</div>
+			</div>
+			<!-- //maingameSwiper -->
+		</div>
+		<style>
+			/* PAGER */
+			#ss_wrap .cont_bottom_wrap nav {
+				background-color: #646464;
+				padding-top: 20px;
+				height: 30px;
+				text-align: center;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav ul {
+				width: 60px;
+				margin: 0 auto;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav li {
+				display: block;
+				float: left;
+				width: 15px;
+				height: 15px;
+				background: url(/img/cont/bullet_slide_0.png) no-repeat 0 0 / 15px auto;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav li a {
+				display: block;
+				width: 15px;
+				height: 15px;
+				margin-right: 5px;
+				font-size: 0;
+				text-indent: -5000px;
+			}
+
+			#ss_wrap .cont_bottom_wrap nav li.on {
+				background: url(/img/cont/bullet_slide_1.png) no-repeat 0 0 / 15px auto;
+			}
+		</style>
+		<script type="text/javascript">
+			function comma(str) {
+				str = String(str);
+				return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			}
+			$(document).ready(function () {
+				tooltip = tooltip || '';
+				Highcharts.setOptions({
+					lang: {
+						thousandsSep: ','
+					}
+				});
+				// 검색결과 일봉 + 선3개 차트
+				if ($('#containerfinancials1_1').length) {
+					Highcharts.chart('containerfinancials1_1', {
+
+						chart: {
+							type: 'column',
+						},
+
+						// 하단 네비게이션 제거
+						navigator: {
+							enabled: false,
+						},
+
+						// 스크롤바 제거
+						scrollbar: {
+							enabled: false
+						},
+
+						// 기간범위선택
+						rangeSelector: {
+							enabled: false
+						},
+
+						title: {
+							text: null
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						lang: {
+							noData: "해당 데이터가 없습니다",
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						exporting: {
+							enabled: false,
+						},
+
+						colors: ["#e57828", "#fcc983", "#ccd1d5"],
+
+						tooltip: {
+							shared: true,
+							useHTML: true,
+
+							formatter: function () {
+								var s = this.x + '<br>';
+								$.each(this.points, function (i, point) {
+									s += '<span style="color:' + point.series.color + '">' + point.series.name + ' : <b>' + comma(point.y) + '억원</b><br/>'
+								});
+								return s;
+							},
+							shared: true
+						},
+
+						xAxis: [{
+							categories: mry_title1,
+							crosshair: true,
+							labels: {
+								style: {
+									color: '#939393',
+									fontSize: '0.85rem'
+								}
+							}
+						}],
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							lineColor: null,
+							minorGridLineWidth: 1,
+							gridLineWidth: 0,
+							lineWidth: 1,
+							plotLines: [{
+								color: '#c8c8c8',
+								width: 1,
+								value: 0
+							}],
+							alternateGridColor: null,
+							showFirstLabel: false,
+							labels: {
+								enabled: false
+							}
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						exporting: {
+							enabled: false
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						series: mry_value1,
+
+						plotOptions: {
+							series: {
+								marker: {
+									enabled: false,
+								}
+							},
+							column: {
+								minPointLength: 5,
+								dataLabels: {
+									enabled: true,
+									crop: false,
+									overflow: 'none',
+									format: '{point.y:,.0f}',
+								}
+							}
+						},
+					});
+				}
+
+				if ($('#containerfinancials1_2').length) {
+					Highcharts.chart('containerfinancials1_2', {
+
+						chart: {
+							type: 'column',
+						},
+
+						// 하단 네비게이션 제거
+						navigator: {
+							enabled: false,
+						},
+
+						// 스크롤바 제거
+						scrollbar: {
+							enabled: false
+						},
+
+						// 기간범위선택
+						rangeSelector: {
+							enabled: false
+						},
+
+						title: {
+							text: null
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						lang: {
+							noData: "해당 데이터가 없습니다",
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						exporting: {
+							enabled: false,
+						},
+
+						colors: ["#e57828", "#fcc983", "#ccd1d5"],
+
+						tooltip: {
+							shared: true,
+							useHTML: true,
+
+							formatter: function () {
+								var s = this.x + '<br>';
+								$.each(this.points, function (i, point) {
+									s += '<span style="color:' + point.series.color + '">' + point.series.name + ' : <b>' + comma(point.y) + '억원</b><br/>'
+								});
+								return s;
+							},
+							shared: true
+						},
+
+						xAxis: [{
+							categories: mry_title2,
+							crosshair: true,
+							labels: {
+								style: {
+									color: '#939393',
+									fontSize: '0.85rem'
+								}
+							}
+						}],
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							lineColor: null,
+							minorGridLineWidth: 1,
+							gridLineWidth: 0,
+							lineWidth: 1,
+							plotLines: [{
+								color: '#c8c8c8',
+								width: 1,
+								value: 0
+							}],
+							alternateGridColor: null,
+							showFirstLabel: false,
+							labels: {
+								enabled: false
+							}
+						},
+
+
+						credits: {
+							enabled: false
+						},
+
+						exporting: {
+							enabled: false
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						series: mry_value2,
+
+						plotOptions: {
+							series: {
+								marker: {
+									enabled: false,
+								}
+							},
+							column: {
+								minPointLength: 5,
+								dataLabels: {
+									enabled: true,
+									crop: false,
+									overflow: 'none',
+									format: '{point.y:,.0f}',
+								}
+							}
+						},
+					});
+				}
+				if ($('#containerfinancials1_3').length) {
+					Highcharts.chart('containerfinancials1_3', {
+
+						chart: {
+							type: 'column',
+						},
+
+						// 하단 네비게이션 제거
+						navigator: {
+							enabled: false,
+						},
+
+						// 스크롤바 제거
+						scrollbar: {
+							enabled: false
+						},
+
+						// 기간범위선택
+						rangeSelector: {
+							enabled: false
+						},
+
+						title: {
+							text: null
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						lang: {
+							noData: "해당 데이터가 없습니다",
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						exporting: {
+							enabled: false,
+						},
+
+						colors: ["#e57828", "#fcc983", "#ccd1d5"],
+
+						tooltip: {
+							shared: true,
+							useHTML: true,
+
+							formatter: function () {
+								var s = this.x + '<br>';
+								$.each(this.points, function (i, point) {
+									s += '<span style="color:' + point.series.color + '">' + point.series.name + ' : <b>' + comma(point.y) + '억원</b><br/>'
+								});
+								return s;
+							},
+							shared: true
+						},
+
+						xAxis: [{
+							categories: mry_title3,
+							crosshair: true,
+							labels: {
+								style: {
+									color: '#939393',
+									fontSize: '0.85rem'
+								}
+							}
+						}],
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							lineColor: null,
+							minorGridLineWidth: 1,
+							gridLineWidth: 0,
+							lineWidth: 1,
+							plotLines: [{
+								color: '#c8c8c8',
+								width: 1,
+								value: 0
+							}],
+							alternateGridColor: null,
+							showFirstLabel: false,
+							labels: {
+								enabled: false
+							}
+						},
+
+
+						credits: {
+							enabled: false
+						},
+
+						exporting: {
+							enabled: false
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						series: mry_value3,
+
+						plotOptions: {
+							series: {
+								marker: {
+									enabled: false,
+								}
+							},
+							column: {
+								minPointLength: 5,
+								dataLabels: {
+									enabled: true,
+									crop: false,
+									overflow: 'none',
+									format: '{point.y:,.0f}',
+								}
+							}
+						},
+					});
+				}
+
+				if ($('#containerfinancials2_1').length) {
+					Highcharts.chart('containerfinancials2_1', {
+
+						chart: {
+							type: 'column',
+						},
+
+						// 하단 네비게이션 제거
+						navigator: {
+							enabled: false,
+						},
+
+						// 스크롤바 제거
+						scrollbar: {
+							enabled: false
+						},
+
+						// 기간범위선택
+						rangeSelector: {
+							enabled: false
+						},
+
+						title: {
+							text: null
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						lang: {
+							noData: "해당 데이터가 없습니다",
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						exporting: {
+							enabled: false,
+						},
+
+						colors: ["#e57828", "#fcc983", "#ccd1d5"],
+
+						tooltip: {
+							shared: true,
+							useHTML: true,
+
+							formatter: function () {
+								var s = this.x + '<br>';
+								$.each(this.points, function (i, point) {
+									s += '<span style="color:' + point.series.color + '">' + point.series.name + ' : <b>' + comma(point.y) + '억원</b><br/>'
+								});
+								return s;
+							},
+							shared: true
+						},
+
+						xAxis: [{
+							categories: mrq_title1,
+							crosshair: true,
+							labels: {
+								style: {
+									color: '#939393',
+									fontSize: '0.85rem'
+								}
+							}
+						}],
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							lineColor: null,
+							minorGridLineWidth: 1,
+							gridLineWidth: 0,
+							lineWidth: 1,
+							plotLines: [{
+								color: '#c8c8c8',
+								width: 1,
+								value: 0
+							}],
+							alternateGridColor: null,
+							showFirstLabel: false,
+							labels: {
+								enabled: false
+							}
+						},
+
+
+						credits: {
+							enabled: false
+						},
+
+						exporting: {
+							enabled: false
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						series: mrq_value1,
+
+						plotOptions: {
+							series: {
+								marker: {
+									enabled: false,
+								}
+							},
+							column: {
+								minPointLength: 5,
+								dataLabels: {
+									enabled: true,
+									crop: false,
+									overflow: 'none',
+									format: '{point.y:,.0f}',
+								}
+							}
+						},
+					});
+				}
+
+				if ($('#containerfinancials2_2').length) {
+					Highcharts.chart('containerfinancials2_2', {
+
+						chart: {
+							type: 'column',
+						},
+
+						// 하단 네비게이션 제거
+						navigator: {
+							enabled: false,
+						},
+
+						// 스크롤바 제거
+						scrollbar: {
+							enabled: false
+						},
+
+						// 기간범위선택
+						rangeSelector: {
+							enabled: false
+						},
+
+						title: {
+							text: null
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						lang: {
+							noData: "해당 데이터가 없습니다",
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						exporting: {
+							enabled: false,
+						},
+
+						colors: ["#e57828", "#fcc983", "#ccd1d5"],
+
+						tooltip: {
+							shared: true,
+							useHTML: true,
+
+							formatter: function () {
+								var s = this.x + '<br>';
+								$.each(this.points, function (i, point) {
+									s += '<span style="color:' + point.series.color + '">' + point.series.name + ' : <b>' + comma(point.y) + '억원</b><br/>'
+								});
+								return s;
+							},
+							shared: true
+						},
+
+						xAxis: [{
+							categories: mrq_title2,
+							crosshair: true,
+							labels: {
+								style: {
+									color: '#939393',
+									fontSize: '0.85rem'
+								}
+							}
+						}],
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							lineColor: null,
+							minorGridLineWidth: 1,
+							gridLineWidth: 0,
+							lineWidth: 1,
+							plotLines: [{
+								color: '#c8c8c8',
+								width: 1,
+								value: 0
+							}],
+							alternateGridColor: null,
+							showFirstLabel: false,
+							labels: {
+								enabled: false
+							}
+						},
+
+
+						credits: {
+							enabled: false
+						},
+
+						exporting: {
+							enabled: false
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						series: mrq_value2,
+
+						plotOptions: {
+							series: {
+								marker: {
+									enabled: false,
+								}
+							},
+							column: {
+								minPointLength: 5,
+								dataLabels: {
+									enabled: true,
+									crop: false,
+									overflow: 'none',
+									format: '{point.y:,.0f}',
+								}
+							}
+						},
+					});
+				}
+
+				if ($('#containerfinancials2_3').length) {
+					Highcharts.chart('containerfinancials2_3', {
+
+						chart: {
+							type: 'column',
+						},
+
+						// 하단 네비게이션 제거
+						navigator: {
+							enabled: false,
+						},
+
+						// 스크롤바 제거
+						scrollbar: {
+							enabled: false
+						},
+
+						// 기간범위선택
+						rangeSelector: {
+							enabled: false
+						},
+
+						title: {
+							text: null
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						credits: {
+							enabled: false
+						},
+
+						lang: {
+							noData: "해당 데이터가 없습니다",
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						exporting: {
+							enabled: false,
+						},
+
+						colors: ["#e57828", "#fcc983", "#ccd1d5"],
+
+						tooltip: {
+							shared: true,
+							useHTML: true,
+
+							formatter: function () {
+								var s = this.x + '<br>';
+								$.each(this.points, function (i, point) {
+									s += '<span style="color:' + point.series.color + '">' + point.series.name + ' : <b>' + comma(point.y) + '억원</b><br/>'
+								});
+								return s;
+							},
+							shared: true
+						},
+
+						xAxis: [{
+							categories: mrq_title3,
+							crosshair: true,
+							labels: {
+								style: {
+									color: '#939393',
+									fontSize: '0.85rem'
+								}
+							}
+						}],
+
+						yAxis: {
+							title: {
+								text: null
+							},
+							lineColor: null,
+							minorGridLineWidth: 1,
+							gridLineWidth: 0,
+							lineWidth: 1,
+							plotLines: [{
+								color: '#c8c8c8',
+								width: 1,
+								value: 0
+							}],
+							alternateGridColor: null,
+							showFirstLabel: false,
+							labels: {
+								enabled: false
+							}
+						},
+
+
+						credits: {
+							enabled: false
+						},
+
+						exporting: {
+							enabled: false
+						},
+
+						legend: {
+							enabled: false,
+						},
+
+						series: mrq_value3,
+
+						plotOptions: {
+							series: {
+								marker: {
+									enabled: false,
+								}
+							},
+							column: {
+								minPointLength: 5,
+								dataLabels: {
+									enabled: true,
+									crop: false,
+									overflow: 'none',
+									format: '{point.y:,.0f}',
+								}
+							}
+						},
+					});
+				}
+			});
+		</script> <!--푸터-->
+		<footer id="footer">
 			<p class="txt">슈퍼스탁은 데이터히어로와 제휴하여 ㈜헥토이노베이션이 <br>제공하는 <strong class="fc_red">프리미엄 주식서비스</strong>입니다.</p>
 			<div class="cs">
 				<strong>고객센터 1599-7084</strong><br>평일 09:00~18:00(주말, 공휴일 휴무)
 			</div>
 			<address>
-				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워 12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022 Hecto Innovation. All rights reserved.
+				㈜헥토이노베이션 대표이사: 이현철 사업자등록번호 : 214-88-39117<br>통신판매업신고 : 제2015 –서울강남 – 00012호<br>서울시 강남구 테헤란로 34길 6 태광타워
+				12층, 13층<br>Email: <a href="mailto:in.help@hecto.co.kr">in.help@hecto.co.kr</a><br>Copyright © 2022
+				Hecto Innovation. All rights reserved.
 			</address>
 		</footer>
 	</div>
 
-<script language="javascript">
-function LiScrollProcFunc( $elem )
-{
-	var $offsetWidth = $elem.prop('offsetWidth');
-	var $scrollLeft= $elem.scrollLeft();
-	var $scrollWidth= $elem.prop('scrollWidth');
+	<script language="javascript">
+		function LiScrollProcFunc($elem) {
+			var $offsetWidth = $elem.prop('offsetWidth');
+			var $scrollLeft = $elem.scrollLeft();
+			var $scrollWidth = $elem.prop('scrollWidth');
 
-	if( parseInt($offsetWidth) + parseInt($scrollLeft) <  parseInt($scrollWidth) )
-	{
-	}else{
-		var $strDKey = $elem.attr("data-key");
-		var $strDAddKey = $elem.attr("data-addkey");
-		var $strDPage = parseInt($elem.attr("data-page"));
-		var $strDEnd = $elem.attr("data-end");
-		var $strDOneWidth = $elem.attr("data-onewidth");
-		var $strDMaxWidth = $elem.attr("data-maxwidth");
-		var $strDLimit = $elem.attr("data-limit");
+			if (parseInt($offsetWidth) + parseInt($scrollLeft) < parseInt($scrollWidth)) {
+			} else {
+				var $strDKey = $elem.attr("data-key");
+				var $strDAddKey = $elem.attr("data-addkey");
+				var $strDPage = parseInt($elem.attr("data-page"));
+				var $strDEnd = $elem.attr("data-end");
+				var $strDOneWidth = $elem.attr("data-onewidth");
+				var $strDMaxWidth = $elem.attr("data-maxwidth");
+				var $strDLimit = $elem.attr("data-limit");
 
-//console.log("$offsetWidth:"+$offsetWidth);
-//console.log("$scrollLeft:"+$scrollLeft);
-//console.log("$scrollWidth:"+$scrollWidth);
+				//console.log("$offsetWidth:"+$offsetWidth);
+				//console.log("$scrollLeft:"+$scrollLeft);
+				//console.log("$scrollWidth:"+$scrollWidth);
 
 
-		if( $strDEnd != '1' )
-		{
-			//alert("$strDKey:" + $strDKey + " $strDAddKey:" + $strDAddKey + " $strDPage:" + $strDPage + " $strDEnd:" + $strDEnd + " $strDOneWidth:" + $strDOneWidth + " $strDMaxWidth:" + $strDMaxWidth);
-			$strDPage++;
-			
-			var $strAjaxUrl = '';
-			if( $strDKey == 'mm' || $strDKey == 'tm' )
-			{
-				//매매전략 더보기
-				$strAjaxUrl = '/stock/api_etclist?dk='+ $strDKey + '&dak='+ $strDAddKey + '&dp='+ $strDPage + '&dow='+ $strDOneWidth + '&dl='+ $strDLimit + '&sm=json';
+				if ($strDEnd != '1') {
+					//alert("$strDKey:" + $strDKey + " $strDAddKey:" + $strDAddKey + " $strDPage:" + $strDPage + " $strDEnd:" + $strDEnd + " $strDOneWidth:" + $strDOneWidth + " $strDMaxWidth:" + $strDMaxWidth);
+					$strDPage++;
+
+					var $strAjaxUrl = '';
+					if ($strDKey == 'mm' || $strDKey == 'tm') {
+						//매매전략 더보기
+						$strAjaxUrl = '/stock/api_etclist?dk=' + $strDKey + '&dak=' + $strDAddKey + '&dp=' + $strDPage + '&dow=' + $strDOneWidth + '&dl=' + $strDLimit + '&sm=json';
+					}
+					else
+						$strAjaxUrl = '/stock/api_ssaddlist?dk=' + $strDKey + '&dak=' + $strDAddKey + '&dp=' + $strDPage + '&dow=' + $strDOneWidth + '&dl=' + $strDLimit + '&sm=json';
+					//alert("$strAjaxUrl:"+$strAjaxUrl);
+					$.getJSON($strAjaxUrl, function ($strArrData) {
+						if ($strArrData['status'] == 'OK') {
+							if ($strDPage == $elem.attr('data-page')) return;
+
+							var $nDMaxWidth = parseInt($strDMaxWidth) + parseInt($strArrData['addwidth'])
+							var $elemUL = $elem.find(".scrollul");
+
+
+							$elem.attr('data-page', $strDPage);
+							$elem.attr('data-maxwidth', $nDMaxWidth);
+							$elem.attr('data-end', $strArrData['endflag']);
+
+							$elemUL.css('width', $nDMaxWidth + 'px');
+							$elemUL.append($strArrData['dispHTML']);
+						}
+						else {
+							$strDPage--;
+							alert($strArrData['message']);
+						}
+					});
+				}
 			}
-			else
-				$strAjaxUrl = '/stock/api_ssaddlist?dk='+ $strDKey + '&dak='+ $strDAddKey + '&dp='+ $strDPage + '&dow='+ $strDOneWidth + '&dl='+ $strDLimit + '&sm=json';
-//alert("$strAjaxUrl:"+$strAjaxUrl);
-			$.getJSON( $strAjaxUrl, function( $strArrData ){
-				if( $strArrData['status'] == 'OK' )
-				{
-					if( $strDPage == $elem.attr('data-page') ) return;
+		}
 
-					var $nDMaxWidth = parseInt($strDMaxWidth) + parseInt($strArrData['addwidth'])
-					var $elemUL = $elem.find(".scrollul");
+		if ($(".li_wrap").length > 0) {
+			var $bEndScrollProc = false;
+			$(".li_wrap").scroll(function () {
+				if ($bEndScrollProc) return;
+				$bEndScrollProc = true;
 
+				var $elem = $(this);
+				LiScrollProcFunc($elem);
 
-					$elem.attr('data-page', $strDPage);
-					$elem.attr('data-maxwidth', $nDMaxWidth);
-					$elem.attr('data-end', $strArrData['endflag']);
-
-					$elemUL.css('width', $nDMaxWidth + 'px');
-					$elemUL.append($strArrData['dispHTML']);
-				}
-				else
-				{
-					$strDPage--;
-					alert($strArrData['message']);
-				}
+				$bEndScrollProc = false;
 			});
 		}
-	}
-}
+	</script>
 
-if( $(".li_wrap").length > 0 ) {
-var $bEndScrollProc = false;
-$(".li_wrap").scroll( function() {
-	if( $bEndScrollProc ) return;
-	$bEndScrollProc = true;
+	<iframe src="about:blank" id="autoIframeHeightID" scrolling="no" frameborder="0" style="display:none;" width=1
+		height=1 allowTransparency="true"></iframe>
+	<script language="javascript">
+		var strIframeURL = "https://super.stockn.kr/stock/itooza/auto_size";
+		// <?php /*var strIframeURL = "https://super-dev.minwise.co.kr/stock/itooza/auto_size";*/?>
+		function fnAutoResize() {
+			console.log('fnAutoResize');
+			var nWidth = $(window).width();
+			var objIFrmaeBody = $('#topwrpperID');
+			var nHeight = 0;
 
-	var $elem = $(this);
-	LiScrollProcFunc( $elem );
+			if (objIFrmaeBody.length > 0) {
+				nHeight = objIFrmaeBody.height();
+				console.log('topwrpperID height:', nHeight);
+			} else {
+				nHeight = $('#wrap').height();
+				console.log('wrap height:', nHeight);
+			}
 
-	$bEndScrollProc = false;
-});
-}
-</script>
+			console.log('objIFrmaeBody height:', objIFrmaeBody.height());
+			console.log('objIFrmaeBody length:', objIFrmaeBody.length);
 
-<iframe src="about:blank" id="autoIframeHeightID" scrolling="no" frameborder="0" style="display:none;" width=1 height=1 allowTransparency="true"></iframe>
-<script language="javascript">
-var strIframeURL = "https://super.stockn.kr/stock/itooza/auto_size";
-function fnAutoResize()
-{
-	var nWidth = $(window).width();
-	var objIFrmaeBody = $('#topwrpperID');
-	var nHeight = objIFrmaeBody.height(); //$('#wrap').height();
-	var strUrl = strIframeURL + '?aaa=1&height=' + nHeight + '&width=' + nWidth;
+			var strUrl = strIframeURL + '?aaa=1&height=' + nHeight + '&width=' + nWidth;
 
-	$("#autoIframeHeightID").attr( "src", strUrl );
-}
-function fnAutoWidthResizeOne()
-{
-	/*
-	var nWidth = $(window).width();
-	var nObjOneList = $(".li_wrap");
-	if( $(".li_wrap").length > 0 )
-	{
-		nObjOneList.css("width", nWidth + "px");
-	}
-	*/
-}
-$(document).ready(function(){
-	fnAutoResize();
-	setTimeout("fnAutoResize()", 1000);
-	//fnAutoWidthResizeOne();
-});
-//fnAutoWidthResizeOne();
-</script>
+			// iframe에 history가 쌓이지 않도록 설정
+			var iframe = document.getElementById('autoIframeHeightID');
+			if (iframe) {
+				// iframe에 sandbox 속성 추가하여 history 제어
+				iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+
+				// iframe 로드 전에 history 상태를 저장하지 않도록 설정
+				if (iframe.contentWindow) {
+					iframe.contentWindow.history.pushState = function () { };
+					iframe.contentWindow.history.replaceState = function () { };
+				}
+				if (nHeight != null) {
+					$("#autoIframeHeightID").attr("src", strUrl);
+				}
+			}
+		}
+		function fnAutoWidthResizeOne() {
+			/*
+			var nWidth = $(window).width();
+			var nObjOneList = $(".li_wrap");
+			if( $(".li_wrap").length > 0 )
+			{
+				nObjOneList.css("width", nWidth + "px");
+			}
+			*/
+		}
+		$(document).ready(function () {
+			fnAutoResize();
+			setTimeout("fnAutoResize()", 1000);
+			//fnAutoWidthResizeOne();
+		});
+		//fnAutoWidthResizeOne();
+	</script>
 
 </body>
+
 </html>
